@@ -66,7 +66,7 @@ namespace FileManager
             }
         }
 
-        public bool ShowFolderTree(TreeView treeView, TreeNode currentNode)
+        public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
         {
             if(currentNode.Name!="This PC")
             {
@@ -88,6 +88,8 @@ namespace FileManager
                             TreeNode dirNode= new TreeNode(strName, 5,5);
                             currentNode.Nodes.Add(dirNode);
                         }
+
+                        ShowContent(listView, currentNode);
                     }
                     return true;
                 }
@@ -123,6 +125,58 @@ namespace FileManager
             return strPlit[maxIndex - 1];
         }
 
-        //Show
+        //Show content of directory selected in Tree View
+        public void ShowContent(ListView listView, TreeNode currentNode)
+        {
+            try
+            {
+                //Delete all items in List View
+                listView.Items.Clear();
+
+                DirectoryInfo directoryInfo = GetPathDir(currentNode);
+
+                //Information of directories
+                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())                  
+                    listView.Items.Add(GetLVItems(dir));
+
+                //Information of files
+                foreach (FileInfo file in directoryInfo.GetFiles())
+                    listView.Items.Add(GetLVItems(file));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        //Get directory of a Tree Node
+        public DirectoryInfo GetPathDir(TreeNode currentNode)
+        {
+            return new DirectoryInfo(GetFullPath(currentNode.FullPath));
+        }
+
+        //Get List View item having info from folder
+        public ListViewItem GetLVItems(DirectoryInfo folder)
+        {
+            string[] item = new string[4];
+            item[0] = folder.Name;
+            item[1] = folder.LastWriteTime.ToString();
+            item[2] = "File folder";
+            
+            ListViewItem listViewItem = new ListViewItem(item);
+            return listViewItem;
+        }
+
+        //Get List View item having info from file
+        public ListViewItem GetLVItems(FileInfo file)
+        {
+            string[] item = new string[4];
+            item[0] = file.Name;
+            item[1] = file.LastWriteTime.ToString();
+            item[2] = file.Extension;
+            item[3] = (file.Length / 1024).ToString() + " KB";
+
+            ListViewItem listViewItem = new ListViewItem(item);
+            return listViewItem;
+        }
     }
 }

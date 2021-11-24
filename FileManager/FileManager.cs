@@ -31,8 +31,8 @@ namespace FileManager
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode tn = e.Node;
-            if (tn.Text != "This PC") 
-            clsTreeListView.ShowFolderTree(treeView, e.Node);
+            if (tn.Text != "This PC")
+                clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
         }
     }
 }
