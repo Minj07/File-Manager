@@ -57,6 +57,8 @@
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
             this.NavigationTablePanel.SuspendLayout();
@@ -90,6 +92,7 @@
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainTablePanel.Size = new System.Drawing.Size(1200, 540);
             this.MainTablePanel.TabIndex = 0;
+            this.MainTablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainTablePanel_Paint);
             // 
             // DisplayTablePanel
             // 
@@ -117,13 +120,17 @@
             this.colSize});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.HideSelection = false;
+            this.listView.LargeImageList = this.imageListLarge;
             this.listView.Location = new System.Drawing.Point(217, 0);
             this.listView.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(983, 398);
+            this.listView.SmallImageList = this.imageListSmall;
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listView_KeyPress);
+            this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
             // 
             // colName
             // 
@@ -239,7 +246,7 @@
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBack.Image = global::FileManager.Properties.Resources.left_arrow;
             this.BtnBack.Location = new System.Drawing.Point(5, 5);
-            this.BtnBack.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.BtnBack.Margin = new System.Windows.Forms.Padding(5);
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Size = new System.Drawing.Size(43, 29);
             this.BtnBack.TabIndex = 0;
@@ -251,7 +258,7 @@
             this.BtnForward.FlatAppearance.BorderSize = 0;
             this.BtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnForward.Location = new System.Drawing.Point(58, 5);
-            this.BtnForward.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.BtnForward.Margin = new System.Windows.Forms.Padding(5);
             this.BtnForward.Name = "BtnForward";
             this.BtnForward.Size = new System.Drawing.Size(43, 29);
             this.BtnForward.TabIndex = 1;
@@ -263,7 +270,7 @@
             this.BtnRecent.FlatAppearance.BorderSize = 0;
             this.BtnRecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRecent.Location = new System.Drawing.Point(111, 5);
-            this.BtnRecent.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.BtnRecent.Margin = new System.Windows.Forms.Padding(5);
             this.BtnRecent.Name = "BtnRecent";
             this.BtnRecent.Size = new System.Drawing.Size(43, 29);
             this.BtnRecent.TabIndex = 2;
@@ -275,7 +282,7 @@
             this.BtnParentFolder.FlatAppearance.BorderSize = 0;
             this.BtnParentFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnParentFolder.Location = new System.Drawing.Point(164, 5);
-            this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(5);
             this.BtnParentFolder.Name = "BtnParentFolder";
             this.BtnParentFolder.Size = new System.Drawing.Size(44, 29);
             this.BtnParentFolder.TabIndex = 3;
@@ -352,7 +359,7 @@
             this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.ForeColor = System.Drawing.Color.Yellow;
             this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(32, 22);
             this.button1.TabIndex = 0;
@@ -404,6 +411,44 @@
             this.panel1.Size = new System.Drawing.Size(13, 100);
             this.panel1.TabIndex = 3;
             // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "tx");
+            this.imageListSmall.Images.SetKeyName(1, "pdf");
+            this.imageListSmall.Images.SetKeyName(2, "htm");
+            this.imageListSmall.Images.SetKeyName(3, "doc");
+            this.imageListSmall.Images.SetKeyName(4, "exe");
+            this.imageListSmall.Images.SetKeyName(5, "image");
+            this.imageListSmall.Images.SetKeyName(6, "music");
+            this.imageListSmall.Images.SetKeyName(7, "rar");
+            this.imageListSmall.Images.SetKeyName(8, "ppt");
+            this.imageListSmall.Images.SetKeyName(9, "xls");
+            this.imageListSmall.Images.SetKeyName(10, "md");
+            this.imageListSmall.Images.SetKeyName(11, "swf");
+            this.imageListSmall.Images.SetKeyName(12, "file");
+            this.imageListSmall.Images.SetKeyName(13, "folder");
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "txt.png");
+            this.imageListLarge.Images.SetKeyName(1, "pdf.png");
+            this.imageListLarge.Images.SetKeyName(2, "htm.png");
+            this.imageListLarge.Images.SetKeyName(3, "doc.png");
+            this.imageListLarge.Images.SetKeyName(4, "exe.png");
+            this.imageListLarge.Images.SetKeyName(5, "image.png");
+            this.imageListLarge.Images.SetKeyName(6, "music.png");
+            this.imageListLarge.Images.SetKeyName(7, "rar.png");
+            this.imageListLarge.Images.SetKeyName(8, "ppt.png");
+            this.imageListLarge.Images.SetKeyName(9, "xls.png");
+            this.imageListLarge.Images.SetKeyName(10, "md.png");
+            this.imageListLarge.Images.SetKeyName(11, "swf.png");
+            this.imageListLarge.Images.SetKeyName(12, "file.png");
+            this.imageListLarge.Images.SetKeyName(13, "folder.png");
+            // 
             // FileManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -414,7 +459,7 @@
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FileManager";
             this.Text = "File Manager";
             this.MainTablePanel.ResumeLayout(false);
@@ -459,6 +504,8 @@
         private System.Windows.Forms.ColumnHeader colDateModified;
         private System.Windows.Forms.ColumnHeader colType;
         private System.Windows.Forms.ColumnHeader colSize;
+        private System.Windows.Forms.ImageList imageListSmall;
+        private System.Windows.Forms.ImageList imageListLarge;
     }
 }
 

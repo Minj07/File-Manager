@@ -34,5 +34,20 @@ namespace FileManager
             if (tn.Text != "This PC")
                 clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
         }
+
+        private void MainTablePanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void listView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

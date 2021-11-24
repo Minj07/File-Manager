@@ -21,7 +21,7 @@ namespace FileManager
 
         private void FMIntialize()
         {
-            Theme dark = new Theme(Color.FromArgb(20, 20, 20));
+            Theme dark = new Theme(Color.White);
             currentTheme = dark;
             InitializeComponent();
             reloadTheme();
