@@ -54,7 +54,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LbStatus2 = new System.Windows.Forms.Label();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnExit = new System.Windows.Forms.Button();
+            this.BtnY = new System.Windows.Forms.Button();
+            this.BtnG = new System.Windows.Forms.Button();
             this.OuterTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
@@ -72,7 +74,6 @@
             // 
             this.MainTablePanel.ColumnCount = 1;
             this.MainTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainTablePanel.Controls.Add(this.DisplayTablePanel, 0, 3);
             this.MainTablePanel.Controls.Add(this.NavigationTablePanel, 0, 2);
             this.MainTablePanel.Controls.Add(this.StatusTablePanel, 0, 4);
@@ -80,34 +81,33 @@
             this.MainTablePanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.MainTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTablePanel.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.MainTablePanel.Location = new System.Drawing.Point(20, 0);
+            this.MainTablePanel.Location = new System.Drawing.Point(15, 0);
             this.MainTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.MainTablePanel.Name = "MainTablePanel";
             this.MainTablePanel.RowCount = 5;
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.MainTablePanel.Size = new System.Drawing.Size(1200, 540);
+            this.MainTablePanel.Size = new System.Drawing.Size(900, 439);
             this.MainTablePanel.TabIndex = 0;
             this.MainTablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainTablePanel_Paint);
             // 
             // DisplayTablePanel
             // 
             this.DisplayTablePanel.ColumnCount = 2;
-            this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
+            this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.DisplayTablePanel.Controls.Add(this.listView, 1, 0);
             this.DisplayTablePanel.Controls.Add(this.treeView, 0, 0);
             this.DisplayTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DisplayTablePanel.Location = new System.Drawing.Point(0, 112);
-            this.DisplayTablePanel.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.DisplayTablePanel.Location = new System.Drawing.Point(0, 113);
+            this.DisplayTablePanel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.DisplayTablePanel.Name = "DisplayTablePanel";
             this.DisplayTablePanel.RowCount = 1;
             this.DisplayTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.DisplayTablePanel.Size = new System.Drawing.Size(1200, 398);
+            this.DisplayTablePanel.Size = new System.Drawing.Size(900, 296);
             this.DisplayTablePanel.TabIndex = 2;
             // 
             // listView
@@ -121,10 +121,10 @@
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.HideSelection = false;
             this.listView.LargeImageList = this.imageListLarge;
-            this.listView.Location = new System.Drawing.Point(217, 0);
-            this.listView.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.listView.Location = new System.Drawing.Point(163, 0);
+            this.listView.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(983, 398);
+            this.listView.Size = new System.Drawing.Size(737, 296);
             this.listView.SmallImageList = this.imageListSmall;
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
@@ -200,7 +200,7 @@
             this.treeView.Margin = new System.Windows.Forms.Padding(0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(213, 398);
+            this.treeView.Size = new System.Drawing.Size(160, 296);
             this.treeView.TabIndex = 1;
             // 
             // imageListTreeView
@@ -217,30 +217,29 @@
             // NavigationTablePanel
             // 
             this.NavigationTablePanel.ColumnCount = 3;
-            this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
+            this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 400F));
+            this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.NavigationTablePanel.Controls.Add(this.TxtBxAddress, 1, 0);
             this.NavigationTablePanel.Controls.Add(this.TxtBxSearch, 2, 0);
             this.NavigationTablePanel.Controls.Add(this.NavigationButtonTablePanel, 0, 0);
             this.NavigationTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NavigationTablePanel.Location = new System.Drawing.Point(0, 69);
+            this.NavigationTablePanel.Location = new System.Drawing.Point(0, 70);
             this.NavigationTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.NavigationTablePanel.Name = "NavigationTablePanel";
             this.NavigationTablePanel.RowCount = 1;
             this.NavigationTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.NavigationTablePanel.Size = new System.Drawing.Size(1200, 39);
+            this.NavigationTablePanel.Size = new System.Drawing.Size(900, 40);
             this.NavigationTablePanel.TabIndex = 3;
             // 
             // TxtBxAddress
             // 
-            this.TxtBxAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtBxAddress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxAddress.Location = new System.Drawing.Point(214, 5);
-            this.TxtBxAddress.Margin = new System.Windows.Forms.Padding(1, 5, 3, 5);
+            this.TxtBxAddress.Location = new System.Drawing.Point(161, 4);
+            this.TxtBxAddress.Margin = new System.Windows.Forms.Padding(1, 4, 2, 4);
             this.TxtBxAddress.Name = "TxtBxAddress";
-            this.TxtBxAddress.Size = new System.Drawing.Size(583, 29);
+            this.TxtBxAddress.Size = new System.Drawing.Size(437, 30);
             this.TxtBxAddress.TabIndex = 1;
             // 
             // TxtBxSearch
@@ -248,10 +247,10 @@
             this.TxtBxSearch.BackColor = System.Drawing.SystemColors.Window;
             this.TxtBxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxSearch.Location = new System.Drawing.Point(803, 5);
-            this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(3, 5, 0, 5);
+            this.TxtBxSearch.Location = new System.Drawing.Point(602, 4);
+            this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(2, 4, 0, 4);
             this.TxtBxSearch.Name = "TxtBxSearch";
-            this.TxtBxSearch.Size = new System.Drawing.Size(397, 36);
+            this.TxtBxSearch.Size = new System.Drawing.Size(298, 30);
             this.TxtBxSearch.TabIndex = 2;
             // 
             // NavigationButtonTablePanel
@@ -265,12 +264,13 @@
             this.NavigationButtonTablePanel.Controls.Add(this.BtnForward, 1, 0);
             this.NavigationButtonTablePanel.Controls.Add(this.BtnRecent, 2, 0);
             this.NavigationButtonTablePanel.Controls.Add(this.BtnParentFolder, 3, 0);
+            this.NavigationButtonTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NavigationButtonTablePanel.Location = new System.Drawing.Point(0, 0);
             this.NavigationButtonTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.NavigationButtonTablePanel.Name = "NavigationButtonTablePanel";
             this.NavigationButtonTablePanel.RowCount = 1;
             this.NavigationButtonTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.NavigationButtonTablePanel.Size = new System.Drawing.Size(213, 39);
+            this.NavigationButtonTablePanel.Size = new System.Drawing.Size(160, 40);
             this.NavigationButtonTablePanel.TabIndex = 3;
             // 
             // BtnBack
@@ -283,10 +283,10 @@
             this.BtnBack.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBack.Image = global::FileManager.Properties.Resources.left_arrow;
-            this.BtnBack.Location = new System.Drawing.Point(5, 5);
-            this.BtnBack.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnBack.Location = new System.Drawing.Point(4, 4);
+            this.BtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBack.Name = "BtnBack";
-            this.BtnBack.Size = new System.Drawing.Size(43, 29);
+            this.BtnBack.Size = new System.Drawing.Size(32, 32);
             this.BtnBack.TabIndex = 0;
             this.BtnBack.UseVisualStyleBackColor = false;
             // 
@@ -295,10 +295,10 @@
             this.BtnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnForward.FlatAppearance.BorderSize = 0;
             this.BtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnForward.Location = new System.Drawing.Point(58, 5);
-            this.BtnForward.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnForward.Location = new System.Drawing.Point(44, 4);
+            this.BtnForward.Margin = new System.Windows.Forms.Padding(4);
             this.BtnForward.Name = "BtnForward";
-            this.BtnForward.Size = new System.Drawing.Size(43, 29);
+            this.BtnForward.Size = new System.Drawing.Size(32, 32);
             this.BtnForward.TabIndex = 1;
             this.BtnForward.UseVisualStyleBackColor = true;
             // 
@@ -307,10 +307,10 @@
             this.BtnRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRecent.FlatAppearance.BorderSize = 0;
             this.BtnRecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRecent.Location = new System.Drawing.Point(111, 5);
-            this.BtnRecent.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnRecent.Location = new System.Drawing.Point(84, 4);
+            this.BtnRecent.Margin = new System.Windows.Forms.Padding(4);
             this.BtnRecent.Name = "BtnRecent";
-            this.BtnRecent.Size = new System.Drawing.Size(43, 29);
+            this.BtnRecent.Size = new System.Drawing.Size(32, 32);
             this.BtnRecent.TabIndex = 2;
             this.BtnRecent.UseVisualStyleBackColor = true;
             // 
@@ -319,30 +319,30 @@
             this.BtnParentFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnParentFolder.FlatAppearance.BorderSize = 0;
             this.BtnParentFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnParentFolder.Location = new System.Drawing.Point(164, 5);
-            this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnParentFolder.Location = new System.Drawing.Point(124, 4);
+            this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(4);
             this.BtnParentFolder.Name = "BtnParentFolder";
-            this.BtnParentFolder.Size = new System.Drawing.Size(44, 29);
+            this.BtnParentFolder.Size = new System.Drawing.Size(32, 32);
             this.BtnParentFolder.TabIndex = 3;
             this.BtnParentFolder.UseVisualStyleBackColor = true;
             // 
             // StatusTablePanel
             // 
             this.StatusTablePanel.ColumnCount = 5;
-            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.StatusTablePanel.Controls.Add(this.label1, 0, 0);
             this.StatusTablePanel.Controls.Add(this.LbStatus2, 1, 0);
             this.StatusTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatusTablePanel.Location = new System.Drawing.Point(0, 510);
+            this.StatusTablePanel.Location = new System.Drawing.Point(0, 409);
             this.StatusTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.StatusTablePanel.Name = "StatusTablePanel";
             this.StatusTablePanel.RowCount = 1;
             this.StatusTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StatusTablePanel.Size = new System.Drawing.Size(1200, 30);
+            this.StatusTablePanel.Size = new System.Drawing.Size(900, 30);
             this.StatusTablePanel.TabIndex = 4;
             // 
             // label1
@@ -350,10 +350,9 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(4, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 30);
+            this.label1.Size = new System.Drawing.Size(64, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -363,10 +362,9 @@
             this.LbStatus2.AutoSize = true;
             this.LbStatus2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbStatus2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.LbStatus2.Location = new System.Drawing.Point(97, 0);
-            this.LbStatus2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LbStatus2.Location = new System.Drawing.Point(73, 0);
             this.LbStatus2.Name = "LbStatus2";
-            this.LbStatus2.Size = new System.Drawing.Size(125, 30);
+            this.LbStatus2.Size = new System.Drawing.Size(94, 30);
             this.LbStatus2.TabIndex = 1;
             this.LbStatus2.Text = "label2";
             this.LbStatus2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -374,53 +372,81 @@
             // HeaderTablePanel
             // 
             this.HeaderTablePanel.ColumnCount = 5;
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.HeaderTablePanel.Controls.Add(this.button1, 0, 0);
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.HeaderTablePanel.Controls.Add(this.BtnExit, 0, 0);
+            this.HeaderTablePanel.Controls.Add(this.BtnY, 1, 0);
+            this.HeaderTablePanel.Controls.Add(this.BtnG, 2, 0);
             this.HeaderTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeaderTablePanel.Location = new System.Drawing.Point(0, 0);
             this.HeaderTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.HeaderTablePanel.Name = "HeaderTablePanel";
             this.HeaderTablePanel.RowCount = 1;
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HeaderTablePanel.Size = new System.Drawing.Size(1200, 30);
+            this.HeaderTablePanel.Size = new System.Drawing.Size(900, 30);
             this.HeaderTablePanel.TabIndex = 5;
             this.HeaderTablePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseDown);
             this.HeaderTablePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseMove);
             // 
-            // button1
+            // BtnExit
             // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.ForeColor = System.Drawing.Color.Yellow;
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 22);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnExit.BackColor = System.Drawing.Color.Red;
+            this.BtnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnExit.FlatAppearance.BorderSize = 0;
+            this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnExit.ForeColor = System.Drawing.Color.Yellow;
+            this.BtnExit.Location = new System.Drawing.Point(3, 3);
+            this.BtnExit.Name = "BtnExit";
+            this.BtnExit.Size = new System.Drawing.Size(24, 24);
+            this.BtnExit.TabIndex = 0;
+            this.BtnExit.UseVisualStyleBackColor = false;
+            // 
+            // BtnY
+            // 
+            this.BtnY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.BtnY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnY.FlatAppearance.BorderSize = 0;
+            this.BtnY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnY.Location = new System.Drawing.Point(33, 3);
+            this.BtnY.Name = "BtnY";
+            this.BtnY.Size = new System.Drawing.Size(24, 24);
+            this.BtnY.TabIndex = 1;
+            this.BtnY.UseVisualStyleBackColor = false;
+            // 
+            // BtnG
+            // 
+            this.BtnG.BackColor = System.Drawing.Color.Lime;
+            this.BtnG.FlatAppearance.BorderSize = 0;
+            this.BtnG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnG.Location = new System.Drawing.Point(63, 3);
+            this.BtnG.Name = "BtnG";
+            this.BtnG.Size = new System.Drawing.Size(24, 23);
+            this.BtnG.TabIndex = 2;
+            this.BtnG.UseVisualStyleBackColor = false;
             // 
             // OuterTablePanel
             // 
             this.OuterTablePanel.ColumnCount = 3;
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.OuterTablePanel.Controls.Add(this.MainTablePanel, 1, 0);
             this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
             this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
             this.OuterTablePanel.Controls.Add(this.panel1, 2, 0);
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(2);
             this.OuterTablePanel.Name = "OuterTablePanel";
             this.OuterTablePanel.RowCount = 2;
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.OuterTablePanel.Size = new System.Drawing.Size(1240, 560);
+            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.OuterTablePanel.Size = new System.Drawing.Size(930, 455);
             this.OuterTablePanel.TabIndex = 1;
             // 
             // OuterLeftEdge
@@ -429,37 +455,36 @@
             this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
             this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterLeftEdge.Name = "OuterLeftEdge";
-            this.OuterLeftEdge.Size = new System.Drawing.Size(20, 540);
+            this.OuterLeftEdge.Size = new System.Drawing.Size(15, 439);
             this.OuterLeftEdge.TabIndex = 1;
             // 
             // OuterBottomEdge
             // 
             this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterBottomEdge.Location = new System.Drawing.Point(20, 540);
+            this.OuterBottomEdge.Location = new System.Drawing.Point(15, 439);
             this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterBottomEdge.Name = "OuterBottomEdge";
-            this.OuterBottomEdge.Size = new System.Drawing.Size(1200, 20);
+            this.OuterBottomEdge.Size = new System.Drawing.Size(900, 16);
             this.OuterBottomEdge.TabIndex = 2;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(1223, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(917, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(13, 100);
+            this.panel1.Size = new System.Drawing.Size(10, 81);
             this.panel1.TabIndex = 3;
             // 
             // FileManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1240, 560);
+            this.ClientSize = new System.Drawing.Size(930, 455);
             this.Controls.Add(this.OuterTablePanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FileManager";
             this.Text = "File Manager";
             this.MainTablePanel.ResumeLayout(false);
@@ -494,7 +519,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LbStatus2;
         private System.Windows.Forms.Button BtnMinimize;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnExit;
         private System.Windows.Forms.ImageList imageListTreeView;
         private System.Windows.Forms.TableLayoutPanel OuterTablePanel;
         private System.Windows.Forms.Panel OuterLeftEdge;
@@ -506,6 +531,8 @@
         private System.Windows.Forms.ColumnHeader colSize;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.Button BtnY;
+        private System.Windows.Forms.Button BtnG;
     }
 }
 
