@@ -163,6 +163,7 @@ namespace FileManager
             item[2] = "File folder";
             
             ListViewItem listViewItem = new ListViewItem(item);
+            listViewItem.ImageIndex = 13;
             return listViewItem;
         }
 
@@ -176,7 +177,59 @@ namespace FileManager
             item[3] = (file.Length / 1024).ToString() + " KB";
 
             ListViewItem listViewItem = new ListViewItem(item);
+            listViewItem.ImageIndex = GetImageIndex(file);
             return listViewItem;
+        }
+
+        //Get Image Index from file type
+        public int GetImageIndex(FileInfo file)
+        {
+            switch (file.Extension.ToUpper())
+            {
+                case ".TXT":
+                case ".DIZ":
+                case ".LOG":
+                    return 0;
+                case ".PDF":
+                    return 1;
+                case ".HTM":
+                case "HTML.":
+                    return 2;
+                case ".DOC":
+                case ".DOCX":
+                    return 3;
+                case ".EXE":
+                    return 4;
+                case ".JPG":
+                case ".PNG":
+                case ".BMP":
+                case ".GIF":
+                    return 5;
+                case ".MP3":
+                case ".WAV":
+                case ".WMV":
+                case ".ASF":
+                case ".MPEG":
+                case ".AVI":
+                    return 6;
+                case ".RAR":
+                case ".ZIP":
+                    return 7;
+                case ".PPT":
+                case ".PPTX":
+                    return 8;
+                case ".MDB":
+                    return 9;
+                case ".XLS":
+                case ".XLSX":
+                    return 10;
+                case ".SWF":
+                case ".FLV":
+                case ".FLA":
+                    return 11;
+                default:
+                    return 12;
+            }
         }
     }
 }
