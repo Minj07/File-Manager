@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.IO;
+using System.Diagnostics;
 
 namespace FileManager
 {
     internal class ClsTreeListView
     {
+        #region Create Tree View
         public void CreateTreeView(TreeView treeView)
         {
             TreeNode ThisPC;
@@ -37,8 +39,8 @@ namespace FileManager
                 const int CDDisk = 5;
 
                 int imageIndex;
-                //Assign icons to disks by using imageIndex and selectIndex
 
+                //Assign icons to disks by using imageIndex and selectIndex
                 switch(int.Parse(item["DriveType"].ToString()))
                 {
                     case RemovableDisk:
@@ -65,7 +67,9 @@ namespace FileManager
                 treeNodeCollection.Add(diskTreeNode);
             }
         }
+        #endregion
 
+        #region Show Folder Tree
         public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
         {
             if(currentNode.Name!="This PC")
@@ -124,7 +128,9 @@ namespace FileManager
             int maxIndex=strPlit.Length;
             return strPlit[maxIndex - 1];
         }
+        #endregion
 
+        #region Show Content
         //Show content of directory selected in Tree View
         public void ShowContent(ListView listView, TreeNode currentNode)
         {
@@ -157,11 +163,11 @@ namespace FileManager
         //Get List View item having info from folder
         public ListViewItem GetLVItems(DirectoryInfo folder)
         {
-            string[] item = new string[4];
+            string[] item = new string[5];
             item[0] = folder.Name;
             item[1] = folder.LastWriteTime.ToString();
             item[2] = "File folder";
-            
+            item[4]=folder.FullName;
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.ImageIndex = 13;
             return listViewItem;
@@ -170,11 +176,12 @@ namespace FileManager
         //Get List View item having info from file
         public ListViewItem GetLVItems(FileInfo file)
         {
-            string[] item = new string[4];
+            string[] item = new string[5];
             item[0] = file.Name;
             item[1] = file.LastWriteTime.ToString();
             item[2] = file.Extension;
-            item[3] = (file.Length / 1024).ToString() + " KB";
+            item[3] = (file.Length / 1024).ToString("###,###") + " KB";
+            item[4] = file.FullName;
 
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.ImageIndex = GetImageIndex(file);
@@ -229,6 +236,42 @@ namespace FileManager
                     return 11;
                 default:
                     return 12;
+            }
+        }
+        #endregion
+
+        public bool ClickItem(ListView listView, ListViewItem item)
+        {
+            try
+            {
+                string path = item.SubItems[4].Text;
+                FileInfo file = new FileInfo(path);
+                if (file.Exists)
+                {
+                    Process.Start(path);
+                }
+                else
+                {
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    if (!directoryInfo.Exists)
+                    {
+                        MessageBox.Show("'" + path + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+                    listView.Items.Clear();
+                    foreach (DirectoryInfo directoryInfoTemp in directoryInfo.GetDirectories())
+                        listView.Items.Add(GetLVItems(directoryInfoTemp));
+
+                    foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
+                        listView.Items.Add(GetLVItems(fileInfoTemp));
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
             }
         }
     }

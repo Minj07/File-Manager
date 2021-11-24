@@ -38,6 +38,8 @@
             this.colDateModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.NavigationTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -57,8 +59,6 @@
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
             this.NavigationTablePanel.SuspendLayout();
@@ -151,6 +151,44 @@
             // 
             this.colSize.Text = "Size";
             this.colSize.Width = 105;
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "txt.png");
+            this.imageListLarge.Images.SetKeyName(1, "pdf.png");
+            this.imageListLarge.Images.SetKeyName(2, "htm.png");
+            this.imageListLarge.Images.SetKeyName(3, "doc.png");
+            this.imageListLarge.Images.SetKeyName(4, "exe.png");
+            this.imageListLarge.Images.SetKeyName(5, "image.png");
+            this.imageListLarge.Images.SetKeyName(6, "music.png");
+            this.imageListLarge.Images.SetKeyName(7, "rar.png");
+            this.imageListLarge.Images.SetKeyName(8, "ppt.png");
+            this.imageListLarge.Images.SetKeyName(9, "xls.png");
+            this.imageListLarge.Images.SetKeyName(10, "md.png");
+            this.imageListLarge.Images.SetKeyName(11, "swf.png");
+            this.imageListLarge.Images.SetKeyName(12, "file.png");
+            this.imageListLarge.Images.SetKeyName(13, "folder.png");
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "tx");
+            this.imageListSmall.Images.SetKeyName(1, "pdf");
+            this.imageListSmall.Images.SetKeyName(2, "htm");
+            this.imageListSmall.Images.SetKeyName(3, "doc");
+            this.imageListSmall.Images.SetKeyName(4, "exe");
+            this.imageListSmall.Images.SetKeyName(5, "image");
+            this.imageListSmall.Images.SetKeyName(6, "music");
+            this.imageListSmall.Images.SetKeyName(7, "rar");
+            this.imageListSmall.Images.SetKeyName(8, "ppt");
+            this.imageListSmall.Images.SetKeyName(9, "xls");
+            this.imageListSmall.Images.SetKeyName(10, "md");
+            this.imageListSmall.Images.SetKeyName(11, "swf");
+            this.imageListSmall.Images.SetKeyName(12, "file");
+            this.imageListSmall.Images.SetKeyName(13, "folder");
             // 
             // treeView
             // 
@@ -410,44 +448,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(13, 100);
             this.panel1.TabIndex = 3;
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "tx");
-            this.imageListSmall.Images.SetKeyName(1, "pdf");
-            this.imageListSmall.Images.SetKeyName(2, "htm");
-            this.imageListSmall.Images.SetKeyName(3, "doc");
-            this.imageListSmall.Images.SetKeyName(4, "exe");
-            this.imageListSmall.Images.SetKeyName(5, "image");
-            this.imageListSmall.Images.SetKeyName(6, "music");
-            this.imageListSmall.Images.SetKeyName(7, "rar");
-            this.imageListSmall.Images.SetKeyName(8, "ppt");
-            this.imageListSmall.Images.SetKeyName(9, "xls");
-            this.imageListSmall.Images.SetKeyName(10, "md");
-            this.imageListSmall.Images.SetKeyName(11, "swf");
-            this.imageListSmall.Images.SetKeyName(12, "file");
-            this.imageListSmall.Images.SetKeyName(13, "folder");
-            // 
-            // imageListLarge
-            // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "txt.png");
-            this.imageListLarge.Images.SetKeyName(1, "pdf.png");
-            this.imageListLarge.Images.SetKeyName(2, "htm.png");
-            this.imageListLarge.Images.SetKeyName(3, "doc.png");
-            this.imageListLarge.Images.SetKeyName(4, "exe.png");
-            this.imageListLarge.Images.SetKeyName(5, "image.png");
-            this.imageListLarge.Images.SetKeyName(6, "music.png");
-            this.imageListLarge.Images.SetKeyName(7, "rar.png");
-            this.imageListLarge.Images.SetKeyName(8, "ppt.png");
-            this.imageListLarge.Images.SetKeyName(9, "xls.png");
-            this.imageListLarge.Images.SetKeyName(10, "md.png");
-            this.imageListLarge.Images.SetKeyName(11, "swf.png");
-            this.imageListLarge.Images.SetKeyName(12, "file.png");
-            this.imageListLarge.Images.SetKeyName(13, "folder.png");
             // 
             // FileManager
             // 

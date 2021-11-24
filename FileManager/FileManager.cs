@@ -42,12 +42,17 @@ namespace FileManager
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            ListViewItem item = this.listView.FocusedItem;
+            clsTreeListView.ClickItem(this.listView, item);
         }
 
         private void listView_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if(e.KeyChar ==(int)Keys.Enter)
+            {
+                ListViewItem item=this.listView.FocusedItem;
+                clsTreeListView.ClickItem(this.listView, item);
+            }
         }
     }
 }
