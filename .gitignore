@@ -1,0 +1,14 @@
+
+.vs/FileManager/v17/.suo
+<<<<<<< HEAD
+FileManager/bin/Debug/FileManager.exe
+*.pdb
+*.cache
+*.cache
+FileManager/obj/Debug/FileManager.exe
+=======
+*.cache
+*.cache
+FileManager/obj/Debug/FileManager.csproj.GenerateResource.cache
+*.exe
+>>>>>>> d56a2602896ac550d0226316cfbece07505fdeeb
