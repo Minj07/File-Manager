@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Management;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace FileManager
 {
@@ -25,7 +26,7 @@ namespace FileManager
             treeView.Nodes.Add(ThisPC);
 
             //Tree node collection of ThisPC
-            TreeNodeCollection treeNodeCollection= ThisPC.Nodes;
+            TreeNodeCollection treeNodeCollection = ThisPC.Nodes;
 
             //Get list of disk in ThisPC
             ManagementObjectSearcher query = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
@@ -41,7 +42,7 @@ namespace FileManager
                 int imageIndex;
 
                 //Assign icons to disks by using imageIndex and selectIndex
-                switch(int.Parse(item["DriveType"].ToString()))
+                switch (int.Parse(item["DriveType"].ToString()))
                 {
                     case RemovableDisk:
                         imageIndex = 1;
@@ -72,24 +73,24 @@ namespace FileManager
         #region Show Folder Tree
         public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
         {
-            if(currentNode.Name!="This PC")
+            if (currentNode.Name != "This PC")
             {
                 try
                 {
                     //Check the path
                     if (!Directory.Exists(GetFullPath(currentNode.FullPath)))
                     {
-                        MessageBox.Show("'" + GetFullPath(currentNode.FullPath) + "' doesn't exist.", "File Manager",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("'" + GetFullPath(currentNode.FullPath) + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     //Handle display folder
                     else
                     {
-                        string[] strDirectories= Directory.GetDirectories(GetFullPath(currentNode.FullPath));
+                        string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
                         foreach (string strDirectory in strDirectories)
                         {
-                            string strName=GetName(strDirectory);
-                            TreeNode dirNode= new TreeNode(strName, 5,5);
+                            string strName = GetName(strDirectory);
+                            TreeNode dirNode = new TreeNode(strName, 5, 5);
                             currentNode.Nodes.Add(dirNode);
                         }
 
@@ -97,7 +98,7 @@ namespace FileManager
                     }
                     return true;
                 }
-                catch(IOException)
+                catch (IOException)
                 {
                     MessageBox.Show("'" + GetFullPath(currentNode.FullPath) + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -125,7 +126,7 @@ namespace FileManager
         public string GetName(string strPath)
         {
             string[] strPlit = strPath.Split('\\');
-            int maxIndex=strPlit.Length;
+            int maxIndex = strPlit.Length;
             return strPlit[maxIndex - 1];
         }
         #endregion
@@ -142,12 +143,12 @@ namespace FileManager
                 DirectoryInfo directoryInfo = GetPathDir(currentNode);
 
                 //Information of directories
-                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())                  
+                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
                     listView.Items.Add(GetLVItems(dir));
 
                 //Information of files
                 foreach (FileInfo file in directoryInfo.GetFiles())
-                    listView.Items.Add(GetLVItems(file));
+                    listView.Items.Add(GetLVItems(file, listView));
             }
             catch (Exception ex)
             {
@@ -167,78 +168,50 @@ namespace FileManager
             item[0] = folder.Name;
             item[1] = folder.LastWriteTime.ToString();
             item[2] = "File folder";
-            item[4]=folder.FullName;
+            item[4] = folder.FullName;
             ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = 13;
+            listViewItem.ImageIndex = 0;
             return listViewItem;
         }
 
         //Get List View item having info from file
-        public ListViewItem GetLVItems(FileInfo file)
+        public ListViewItem GetLVItems(FileInfo file, ListView listView)
         {
             string[] item = new string[5];
             item[0] = file.Name;
             item[1] = file.LastWriteTime.ToString();
-            item[2] = file.Extension;
-            item[3] = (file.Length / 1024).ToString("###,###") + " KB";
+            item[2] = (file.Extension.Equals(""))?"File":file.Extension;
+            item[3] = Math.Ceiling(file.Length / (1024 * 1.0)).ToString("###,###") + " KB";
             item[4] = file.FullName;
 
-            ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = GetImageIndex(file);
+            //Set a default icon for the file
+            Icon iconForFile = SystemIcons.WinLogo;
+            ListViewItem listViewItem = new ListViewItem(item, 1);
+
+
+            string key = file.Extension;
+            if(key==".exe")
+                key = file.FullName;
+            else if(key=="")
+            {
+                listViewItem.ImageIndex = 1;
+                return listViewItem;
+            }
+
+            //Check to see if the image collection contains an image for this extension, using the extension as a key
+            if (!listView.SmallImageList.Images.ContainsKey(file.Extension))
+            {
+                //If not, add the image to the image list
+                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
+                listView.SmallImageList.Images.Add(key, iconForFile);
+                listView.LargeImageList.Images.Add(key, iconForFile);
+            }
+
+            listViewItem.ImageKey = key;
             return listViewItem;
         }
-
-        //Get Image Index from file type
-        public int GetImageIndex(FileInfo file)
-        {
-            switch (file.Extension.ToUpper())
-            {
-                case ".TXT":
-                case ".DIZ":
-                case ".LOG":
-                    return 0;
-                case ".PDF":
-                    return 1;
-                case ".HTM":
-                case "HTML.":
-                    return 2;
-                case ".DOC":
-                case ".DOCX":
-                    return 3;
-                case ".EXE":
-                    return 4;
-                case ".JPG":
-                case ".PNG":
-                case ".BMP":
-                case ".GIF":
-                    return 5;
-                case ".MP3":
-                case ".WAV":
-                case ".WMV":
-                case ".ASF":
-                case ".MPEG":
-                case ".AVI":
-                    return 6;
-                case ".RAR":
-                case ".ZIP":
-                    return 7;
-                case ".PPT":
-                case ".PPTX":
-                    return 8;
-                case ".MDB":
-                    return 9;
-                case ".XLS":
-                case ".XLSX":
-                    return 10;
-                case ".SWF":
-                case ".FLV":
-                case ".FLA":
-                    return 11;
-                default:
-                    return 12;
-            }
-        }
         #endregion
+
 
         public bool ClickItem(ListView listView, ListViewItem item)
         {
@@ -264,15 +237,21 @@ namespace FileManager
                         listView.Items.Add(GetLVItems(directoryInfoTemp));
 
                     foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(fileInfoTemp));
+                        listView.Items.Add(GetLVItems(fileInfoTemp, listView));
                 }
                 return true;
             }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("You don't currently have permission to access this folder.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                return false;
             }
+            return false;
         }
     }
 }
+
