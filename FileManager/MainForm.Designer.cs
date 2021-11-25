@@ -70,54 +70,6 @@
             this.HeaderTablePanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // imageListLarge
-            // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "folder.png");
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "folder");
-            // 
-            // imageListTreeView
-            // 
-            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
-            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
-            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
-            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
-            // 
-            // roundedTablePanel1
-            // 
-            this.OuterTablePanel.BackColor = System.Drawing.Color.Transparent;
-            this.OuterTablePanel.BorderColor = System.Drawing.Color.Empty;
-            this.OuterTablePanel.ColumnCount = 3;
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.OuterTablePanel.Controls.Add(this.MainTablePanel, 1, 0);
-            this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
-            this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
-            this.OuterTablePanel.Controls.Add(this.panel1, 2, 0);
-            this.OuterTablePanel.CornerRadius = 50;
-            this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.OuterTablePanel.Name = "roundedTablePanel1";
-            this.OuterTablePanel.RowCount = 2;
-            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.OuterTablePanel.Size = new System.Drawing.Size(1186, 560);
-            this.OuterTablePanel.TabIndex = 2;
-            this.OuterTablePanel.TrueBackColor = System.Drawing.Color.Red;
-            // 
             // MainTablePanel
             // 
             this.MainTablePanel.ColumnCount = 1;
@@ -389,8 +341,6 @@
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.HeaderTablePanel.Size = new System.Drawing.Size(1132, 37);
             this.HeaderTablePanel.TabIndex = 5;
-            this.HeaderTablePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseDown);
-            this.HeaderTablePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseMove);
             // 
             // BtnExit
             // 
@@ -464,12 +414,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1186, 560);
+            this.ClientSize = new System.Drawing.Size(930, 455);
             this.Controls.Add(this.OuterTablePanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "File Manager";
             this.OuterTablePanel.ResumeLayout(false);

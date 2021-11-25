@@ -13,8 +13,10 @@ namespace FileManager
 {
     public partial class MainForm : Form
     {
+        private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
         public MainForm()
         {
+
             FMIntialize();//Just like Initailize Components
             //Add event
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
@@ -55,24 +57,5 @@ namespace FileManager
             }
         }
 
-        //Functions For Dragging the Form (Open)
-        private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseLocation = new Point(-e.X, -e.Y);
-        }
-
-        private void HeaderTablePanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
-                Location = mousePose;
-                if (mouseLocation.Y < 100)
-                {
-
-                }
-            }
-        }
     }
 }
