@@ -43,7 +43,8 @@ namespace FileManager
             //Form
             this.BackColor = currentTheme.Unused;
             OuterTablePanel.BackColor = currentTheme.Unused;
-
+            this.TransparencyKey = currentTheme.Unused;
+            OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
             //Navigation
             this.NavigationTablePanel.BackColor = currentTheme.darkerMain;
             foreach (Button b in new Button[] {BtnBack, BtnForward, BtnRecent, BtnParentFolder}) {

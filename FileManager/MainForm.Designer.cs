@@ -131,7 +131,7 @@
             this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
             this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
             this.OuterTablePanel.Controls.Add(this.panel1, 2, 0);
-            this.OuterTablePanel.CornerRadius = 50;
+            this.OuterTablePanel.CornerRadius = 40;
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
@@ -141,7 +141,7 @@
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.OuterTablePanel.Size = new System.Drawing.Size(930, 455);
             this.OuterTablePanel.TabIndex = 2;
-            this.OuterTablePanel.TrueBackColor = System.Drawing.Color.Red;
+            this.OuterTablePanel.TrueBackColor = System.Drawing.SystemColors.Control;
             // 
             // MainTablePanel
             // 
