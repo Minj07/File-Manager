@@ -34,7 +34,7 @@
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
-            this.roundedTablePanel1 = new FileManager.RoundedTablePanel();
+            this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.listView = new System.Windows.Forms.ListView();
@@ -61,7 +61,7 @@
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.roundedTablePanel1.SuspendLayout();
+            this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
             this.NavigationTablePanel.SuspendLayout();
@@ -119,29 +119,29 @@
             this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
             this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
-            // roundedTablePanel1
+            // OuterTablePanel
             // 
-            this.roundedTablePanel1.BackColor = System.Drawing.Color.Transparent;
-            this.roundedTablePanel1.BorderColor = System.Drawing.Color.Empty;
-            this.roundedTablePanel1.ColumnCount = 3;
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.Controls.Add(this.MainTablePanel, 1, 0);
-            this.roundedTablePanel1.Controls.Add(this.OuterLeftEdge, 0, 0);
-            this.roundedTablePanel1.Controls.Add(this.OuterBottomEdge, 1, 1);
-            this.roundedTablePanel1.Controls.Add(this.panel1, 2, 0);
-            this.roundedTablePanel1.CornerRadius = 50;
-            this.roundedTablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.roundedTablePanel1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.roundedTablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.roundedTablePanel1.Name = "roundedTablePanel1";
-            this.roundedTablePanel1.RowCount = 2;
-            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.Size = new System.Drawing.Size(930, 455);
-            this.roundedTablePanel1.TabIndex = 2;
-            this.roundedTablePanel1.TrueBackColor = System.Drawing.Color.Red;
+            this.OuterTablePanel.BackColor = System.Drawing.Color.Transparent;
+            this.OuterTablePanel.BorderColor = System.Drawing.Color.Empty;
+            this.OuterTablePanel.ColumnCount = 3;
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OuterTablePanel.Controls.Add(this.MainTablePanel, 1, 0);
+            this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
+            this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
+            this.OuterTablePanel.Controls.Add(this.panel1, 2, 0);
+            this.OuterTablePanel.CornerRadius = 50;
+            this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
+            this.OuterTablePanel.Name = "OuterTablePanel";
+            this.OuterTablePanel.RowCount = 2;
+            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OuterTablePanel.Size = new System.Drawing.Size(930, 455);
+            this.OuterTablePanel.TabIndex = 2;
+            this.OuterTablePanel.TrueBackColor = System.Drawing.Color.Red;
             // 
             // MainTablePanel
             // 
@@ -483,13 +483,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(930, 455);
-            this.Controls.Add(this.roundedTablePanel1);
+            this.Controls.Add(this.OuterTablePanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "File Manager";
-            this.roundedTablePanel1.ResumeLayout(false);
+            this.OuterTablePanel.ResumeLayout(false);
             this.MainTablePanel.ResumeLayout(false);
             this.DisplayTablePanel.ResumeLayout(false);
             this.NavigationTablePanel.ResumeLayout(false);
@@ -534,7 +534,7 @@
         private System.Windows.Forms.ImageList imageListLarge;
         private System.Windows.Forms.Button BtnY;
         private System.Windows.Forms.Button BtnG;
-        private RoundedTablePanel roundedTablePanel1;
+        private RoundedTablePanel OuterTablePanel;
     }
 }
 

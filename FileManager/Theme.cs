@@ -14,12 +14,18 @@ namespace FileManager
         public Color lighterMain;
         public Color darkerMain;
         public Color text;
+        public Color Unused;
         public Theme(Color main)
         {
             this.main = main;
             lighterMain = Color.FromArgb(increase(main.R),increase(main.G),increase(main.B));
             darkerMain = Color.FromArgb(decrease(main.R),decrease(main.G),decrease(main.B));
             text = Color.FromArgb(255 - main.R, 255 - main.G, 255 - main.B);
+            Random random = new Random();
+            do
+            {
+                Unused = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+            } while ((new Color[] { main, lighterMain, darkerMain, text }).Contains(Unused));
         }
         public Theme(Theme theme)
         {
