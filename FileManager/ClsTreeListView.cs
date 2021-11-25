@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Management;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace FileManager
 {
@@ -147,7 +148,7 @@ namespace FileManager
 
                 //Information of files
                 foreach (FileInfo file in directoryInfo.GetFiles())
-                    listView.Items.Add(GetLVItems(file));
+                    listView.Items.Add(GetLVItems(file, listView));
             }
             catch (Exception ex)
             {
@@ -167,14 +168,14 @@ namespace FileManager
             item[0] = folder.Name;
             item[1] = folder.LastWriteTime.ToString();
             item[2] = "File folder";
-            item[4]=folder.FullName;
+            item[4] = folder.FullName;
             ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = 13;
+            listViewItem.ImageIndex = 0;
             return listViewItem;
         }
 
         //Get List View item having info from file
-        public ListViewItem GetLVItems(FileInfo file)
+        public ListViewItem GetLVItems(FileInfo file, ListView listView)
         {
             string[] item = new string[5];
             item[0] = file.Name;
@@ -183,61 +184,32 @@ namespace FileManager
             item[3] = (file.Length / 1024).ToString("###,###") + " KB";
             item[4] = file.FullName;
 
-            ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = GetImageIndex(file);
-            return listViewItem;
-        }
+            //Set a default icon for the file
+            Icon iconForFile = SystemIcons.WinLogo;
+            ListViewItem listViewItem = new ListViewItem(item,1);
 
-        //Get Image Index from file type
-        public int GetImageIndex(FileInfo file)
-        {
-            switch (file.Extension.ToUpper())
+            if (file.Extension.Equals(""))
             {
-                case ".TXT":
-                case ".DIZ":
-                case ".LOG":
-                    return 0;
-                case ".PDF":
-                    return 1;
-                case ".HTM":
-                case "HTML.":
-                    return 2;
-                case ".DOC":
-                case ".DOCX":
-                    return 3;
-                case ".EXE":
-                    return 4;
-                case ".JPG":
-                case ".PNG":
-                case ".BMP":
-                case ".GIF":
-                    return 5;
-                case ".MP3":
-                case ".WAV":
-                case ".WMV":
-                case ".ASF":
-                case ".MPEG":
-                case ".AVI":
-                    return 6;
-                case ".RAR":
-                case ".ZIP":
-                    return 7;
-                case ".PPT":
-                case ".PPTX":
-                    return 8;
-                case ".MDB":
-                    return 9;
-                case ".XLS":
-                case ".XLSX":
-                    return 10;
-                case ".SWF":
-                case ".FLV":
-                case ".FLA":
-                    return 11;
-                default:
-                    return 12;
+                listViewItem.ImageKey = ".tmp";
+                return listViewItem;
             }
-        }
+            string key = file.Extension;
+
+            //Check to see if the image collection contains an image for this extension, using the extension as a key
+            if (!listView.SmallImageList.Images.ContainsKey(file.Extension))
+            {
+                //If not, add the image to the image list
+                iconForFile= Icon.ExtractAssociatedIcon(file.FullName);
+                if (key.Equals(".exe"))
+                    key = file.FullName;
+                listView.SmallImageList.Images.Add(key,iconForFile);
+                listView.LargeImageList.Images.Add(key, iconForFile);
+            }
+            
+            listViewItem.ImageKey=file.Extension;
+
+            return listViewItem;
+        }      
         #endregion
 
         public bool ClickItem(ListView listView, ListViewItem item)
@@ -264,7 +236,7 @@ namespace FileManager
                         listView.Items.Add(GetLVItems(directoryInfoTemp));
 
                     foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(fileInfoTemp));
+                        listView.Items.Add(GetLVItems(fileInfoTemp,listView));
                 }
                 return true;
             }

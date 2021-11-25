@@ -54,5 +54,25 @@ namespace FileManager
                 clsTreeListView.ClickItem(this.listView, item);
             }
         }
+
+        //Functions For Dragging the Form (Open)
+        private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseLocation = new Point(-e.X, -e.Y);
+        }
+
+        private void HeaderTablePanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePose = Control.MousePosition;
+                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                Location = mousePose;
+                if (mouseLocation.Y < 100)
+                {
+
+                }
+            }
+        }
     }
 }
