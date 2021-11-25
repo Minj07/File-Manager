@@ -31,6 +31,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
+            this.roundedTablePanel1 = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.listView = new System.Windows.Forms.ListView();
@@ -38,10 +42,7 @@
             this.colDateModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
-            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.NavigationTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.TxtBxAddress = new System.Windows.Forms.TextBox();
             this.TxtBxSearch = new System.Windows.Forms.TextBox();
@@ -60,15 +61,87 @@
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.roundedTablePanel1 = new RoundedTablePanel();
+            this.roundedTablePanel1.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
             this.NavigationTablePanel.SuspendLayout();
             this.NavigationButtonTablePanel.SuspendLayout();
             this.StatusTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
-            this.roundedTablePanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "txt.png");
+            this.imageListLarge.Images.SetKeyName(1, "pdf.png");
+            this.imageListLarge.Images.SetKeyName(2, "htm.png");
+            this.imageListLarge.Images.SetKeyName(3, "doc.png");
+            this.imageListLarge.Images.SetKeyName(4, "exe.png");
+            this.imageListLarge.Images.SetKeyName(5, "image.png");
+            this.imageListLarge.Images.SetKeyName(6, "music.png");
+            this.imageListLarge.Images.SetKeyName(7, "rar.png");
+            this.imageListLarge.Images.SetKeyName(8, "ppt.png");
+            this.imageListLarge.Images.SetKeyName(9, "xls.png");
+            this.imageListLarge.Images.SetKeyName(10, "md.png");
+            this.imageListLarge.Images.SetKeyName(11, "swf.png");
+            this.imageListLarge.Images.SetKeyName(12, "file.png");
+            this.imageListLarge.Images.SetKeyName(13, "folder.png");
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "tx");
+            this.imageListSmall.Images.SetKeyName(1, "pdf");
+            this.imageListSmall.Images.SetKeyName(2, "htm");
+            this.imageListSmall.Images.SetKeyName(3, "doc");
+            this.imageListSmall.Images.SetKeyName(4, "exe");
+            this.imageListSmall.Images.SetKeyName(5, "image");
+            this.imageListSmall.Images.SetKeyName(6, "music");
+            this.imageListSmall.Images.SetKeyName(7, "rar");
+            this.imageListSmall.Images.SetKeyName(8, "ppt");
+            this.imageListSmall.Images.SetKeyName(9, "xls");
+            this.imageListSmall.Images.SetKeyName(10, "md");
+            this.imageListSmall.Images.SetKeyName(11, "swf");
+            this.imageListSmall.Images.SetKeyName(12, "file");
+            this.imageListSmall.Images.SetKeyName(13, "folder");
+            // 
+            // imageListTreeView
+            // 
+            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
+            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
+            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
+            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
+            // 
+            // roundedTablePanel1
+            // 
+            this.roundedTablePanel1.BackColor = System.Drawing.Color.Transparent;
+            this.roundedTablePanel1.BorderColor = System.Drawing.Color.Empty;
+            this.roundedTablePanel1.ColumnCount = 3;
+            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.roundedTablePanel1.Controls.Add(this.MainTablePanel, 1, 0);
+            this.roundedTablePanel1.Controls.Add(this.OuterLeftEdge, 0, 0);
+            this.roundedTablePanel1.Controls.Add(this.OuterBottomEdge, 1, 1);
+            this.roundedTablePanel1.Controls.Add(this.panel1, 2, 0);
+            this.roundedTablePanel1.CornerRadius = 50;
+            this.roundedTablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roundedTablePanel1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.roundedTablePanel1.Location = new System.Drawing.Point(0, 0);
+            this.roundedTablePanel1.Name = "roundedTablePanel1";
+            this.roundedTablePanel1.RowCount = 2;
+            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.roundedTablePanel1.Size = new System.Drawing.Size(930, 455);
+            this.roundedTablePanel1.TabIndex = 2;
+            this.roundedTablePanel1.TrueBackColor = System.Drawing.Color.Red;
             // 
             // MainTablePanel
             // 
@@ -151,44 +224,6 @@
             this.colSize.Text = "Size";
             this.colSize.Width = 105;
             // 
-            // imageListLarge
-            // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "txt.png");
-            this.imageListLarge.Images.SetKeyName(1, "pdf.png");
-            this.imageListLarge.Images.SetKeyName(2, "htm.png");
-            this.imageListLarge.Images.SetKeyName(3, "doc.png");
-            this.imageListLarge.Images.SetKeyName(4, "exe.png");
-            this.imageListLarge.Images.SetKeyName(5, "image.png");
-            this.imageListLarge.Images.SetKeyName(6, "music.png");
-            this.imageListLarge.Images.SetKeyName(7, "rar.png");
-            this.imageListLarge.Images.SetKeyName(8, "ppt.png");
-            this.imageListLarge.Images.SetKeyName(9, "xls.png");
-            this.imageListLarge.Images.SetKeyName(10, "md.png");
-            this.imageListLarge.Images.SetKeyName(11, "swf.png");
-            this.imageListLarge.Images.SetKeyName(12, "file.png");
-            this.imageListLarge.Images.SetKeyName(13, "folder.png");
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "tx");
-            this.imageListSmall.Images.SetKeyName(1, "pdf");
-            this.imageListSmall.Images.SetKeyName(2, "htm");
-            this.imageListSmall.Images.SetKeyName(3, "doc");
-            this.imageListSmall.Images.SetKeyName(4, "exe");
-            this.imageListSmall.Images.SetKeyName(5, "image");
-            this.imageListSmall.Images.SetKeyName(6, "music");
-            this.imageListSmall.Images.SetKeyName(7, "rar");
-            this.imageListSmall.Images.SetKeyName(8, "ppt");
-            this.imageListSmall.Images.SetKeyName(9, "xls");
-            this.imageListSmall.Images.SetKeyName(10, "md");
-            this.imageListSmall.Images.SetKeyName(11, "swf");
-            this.imageListSmall.Images.SetKeyName(12, "file");
-            this.imageListSmall.Images.SetKeyName(13, "folder");
-            // 
             // treeView
             // 
             this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -201,17 +236,6 @@
             this.treeView.SelectedImageIndex = 0;
             this.treeView.Size = new System.Drawing.Size(160, 292);
             this.treeView.TabIndex = 1;
-            // 
-            // imageListTreeView
-            // 
-            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
-            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
-            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
-            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
             // NavigationTablePanel
             // 
@@ -388,8 +412,6 @@
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.HeaderTablePanel.Size = new System.Drawing.Size(890, 30);
             this.HeaderTablePanel.TabIndex = 5;
-            this.HeaderTablePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseDown);
-            this.HeaderTablePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HeaderTablePanel_MouseMove);
             // 
             // BtnExit
             // 
@@ -455,31 +477,7 @@
             this.panel1.Size = new System.Drawing.Size(16, 431);
             this.panel1.TabIndex = 3;
             // 
-            // roundedTablePanel1
-            // 
-            this.roundedTablePanel1.BackColor = System.Drawing.Color.Transparent;
-            this.roundedTablePanel1.BorderColor = System.Drawing.Color.Empty;
-            this.roundedTablePanel1.ColumnCount = 3;
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.roundedTablePanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.Controls.Add(this.MainTablePanel, 1, 0);
-            this.roundedTablePanel1.Controls.Add(this.OuterLeftEdge, 0, 0);
-            this.roundedTablePanel1.Controls.Add(this.OuterBottomEdge, 1, 1);
-            this.roundedTablePanel1.Controls.Add(this.panel1, 2, 0);
-            this.roundedTablePanel1.CornerRadius = 50;
-            this.roundedTablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.roundedTablePanel1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.roundedTablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.roundedTablePanel1.Name = "roundedTablePanel1";
-            this.roundedTablePanel1.RowCount = 2;
-            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.roundedTablePanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.roundedTablePanel1.Size = new System.Drawing.Size(930, 455);
-            this.roundedTablePanel1.TabIndex = 2;
-            this.roundedTablePanel1.TrueBackColor = System.Drawing.Color.Red;
-            // 
-            // FileManager
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -489,8 +487,9 @@
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Name = "FileManager";
+            this.Name = "MainForm";
             this.Text = "File Manager";
+            this.roundedTablePanel1.ResumeLayout(false);
             this.MainTablePanel.ResumeLayout(false);
             this.DisplayTablePanel.ResumeLayout(false);
             this.NavigationTablePanel.ResumeLayout(false);
@@ -499,7 +498,6 @@
             this.StatusTablePanel.ResumeLayout(false);
             this.StatusTablePanel.PerformLayout();
             this.HeaderTablePanel.ResumeLayout(false);
-            this.roundedTablePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

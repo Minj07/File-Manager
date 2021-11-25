@@ -13,8 +13,10 @@ namespace FileManager
 {
     public partial class MainForm : Form
     {
+        private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
         public MainForm()
         {
+
             FMIntialize();//Just like Initailize Components
             //Add event
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
@@ -54,5 +56,6 @@ namespace FileManager
                 clsTreeListView.ClickItem(this.listView, item);
             }
         }
+
     }
 }

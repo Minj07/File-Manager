@@ -13,9 +13,9 @@ using FileManager.Properties;
 
 namespace FileManager
 {
-    public partial class MainForm : Form
+    public partial class MainForm
     {
-        private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
+        
         private string currentAddr;
         private Point mouseLocation; //Use for dragging the form
 
