@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsTreeListView.cs" />
-    <Compile Include="CustomButton.cs">
+    <Compile Include="RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FMFunction.cs">

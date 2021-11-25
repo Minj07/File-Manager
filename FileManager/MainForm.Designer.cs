@@ -55,12 +55,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LbStatus2 = new System.Windows.Forms.Label();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnExit = new System.Windows.Forms.Button();
-            this.BtnY = new System.Windows.Forms.Button();
-            this.BtnG = new System.Windows.Forms.Button();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.roundedButton1 = new FileManager.RoundedButton();
+            this.roundedButton2 = new FileManager.RoundedButton();
+            this.roundedButton3 = new FileManager.RoundedButton();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -318,6 +318,7 @@
             this.BtnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnForward.FlatAppearance.BorderSize = 0;
             this.BtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnForward.Image = global::FileManager.Properties.Resources.right_arrow;
             this.BtnForward.Location = new System.Drawing.Point(44, 4);
             this.BtnForward.Margin = new System.Windows.Forms.Padding(4);
             this.BtnForward.Name = "BtnForward";
@@ -330,6 +331,7 @@
             this.BtnRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRecent.FlatAppearance.BorderSize = 0;
             this.BtnRecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRecent.Image = global::FileManager.Properties.Resources.expand_arrow;
             this.BtnRecent.Location = new System.Drawing.Point(84, 4);
             this.BtnRecent.Margin = new System.Windows.Forms.Padding(4);
             this.BtnRecent.Name = "BtnRecent";
@@ -342,6 +344,7 @@
             this.BtnParentFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnParentFolder.FlatAppearance.BorderSize = 0;
             this.BtnParentFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnParentFolder.Image = global::FileManager.Properties.Resources.up_arrow;
             this.BtnParentFolder.Location = new System.Drawing.Point(124, 4);
             this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(4);
             this.BtnParentFolder.Name = "BtnParentFolder";
@@ -395,15 +398,14 @@
             // HeaderTablePanel
             // 
             this.HeaderTablePanel.ColumnCount = 5;
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.HeaderTablePanel.Controls.Add(this.BtnExit, 0, 0);
-            this.HeaderTablePanel.Controls.Add(this.BtnY, 1, 0);
-            this.HeaderTablePanel.Controls.Add(this.BtnG, 2, 0);
+            this.HeaderTablePanel.Controls.Add(this.roundedButton1, 0, 0);
+            this.HeaderTablePanel.Controls.Add(this.roundedButton2, 1, 0);
+            this.HeaderTablePanel.Controls.Add(this.roundedButton3, 2, 0);
             this.HeaderTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeaderTablePanel.Location = new System.Drawing.Point(0, 0);
             this.HeaderTablePanel.Margin = new System.Windows.Forms.Padding(0);
@@ -412,43 +414,6 @@
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.HeaderTablePanel.Size = new System.Drawing.Size(890, 30);
             this.HeaderTablePanel.TabIndex = 5;
-            // 
-            // BtnExit
-            // 
-            this.BtnExit.BackColor = System.Drawing.Color.Red;
-            this.BtnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnExit.FlatAppearance.BorderSize = 0;
-            this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.ForeColor = System.Drawing.Color.Yellow;
-            this.BtnExit.Location = new System.Drawing.Point(3, 3);
-            this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(24, 24);
-            this.BtnExit.TabIndex = 0;
-            this.BtnExit.UseVisualStyleBackColor = false;
-            // 
-            // BtnY
-            // 
-            this.BtnY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.BtnY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnY.FlatAppearance.BorderSize = 0;
-            this.BtnY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnY.Location = new System.Drawing.Point(33, 3);
-            this.BtnY.Name = "BtnY";
-            this.BtnY.Size = new System.Drawing.Size(24, 24);
-            this.BtnY.TabIndex = 1;
-            this.BtnY.UseVisualStyleBackColor = false;
-            // 
-            // BtnG
-            // 
-            this.BtnG.BackColor = System.Drawing.Color.Lime;
-            this.BtnG.FlatAppearance.BorderSize = 0;
-            this.BtnG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnG.Location = new System.Drawing.Point(63, 3);
-            this.BtnG.Name = "BtnG";
-            this.BtnG.Size = new System.Drawing.Size(24, 23);
-            this.BtnG.TabIndex = 2;
-            this.BtnG.UseVisualStyleBackColor = false;
             // 
             // OuterLeftEdge
             // 
@@ -476,6 +441,45 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(16, 431);
             this.panel1.TabIndex = 3;
+            // 
+            // roundedButton1
+            // 
+            this.roundedButton1.BackColor = System.Drawing.Color.Red;
+            this.roundedButton1.BorderColor = System.Drawing.Color.Red;
+            this.roundedButton1.BorderSize = 1F;
+            this.roundedButton1.CornerRadius = 5;
+            this.roundedButton1.Location = new System.Drawing.Point(2, 7);
+            this.roundedButton1.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Size = new System.Drawing.Size(16, 16);
+            this.roundedButton1.TabIndex = 0;
+            this.roundedButton1.UseVisualStyleBackColor = false;
+            // 
+            // roundedButton2
+            // 
+            this.roundedButton2.BackColor = System.Drawing.Color.Yellow;
+            this.roundedButton2.BorderColor = System.Drawing.Color.Yellow;
+            this.roundedButton2.BorderSize = 1F;
+            this.roundedButton2.CornerRadius = 5;
+            this.roundedButton2.Location = new System.Drawing.Point(22, 7);
+            this.roundedButton2.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.roundedButton2.Name = "roundedButton2";
+            this.roundedButton2.Size = new System.Drawing.Size(16, 16);
+            this.roundedButton2.TabIndex = 1;
+            this.roundedButton2.UseVisualStyleBackColor = false;
+            // 
+            // roundedButton3
+            // 
+            this.roundedButton3.BackColor = System.Drawing.Color.Lime;
+            this.roundedButton3.BorderColor = System.Drawing.Color.Lime;
+            this.roundedButton3.BorderSize = 1F;
+            this.roundedButton3.CornerRadius = 5;
+            this.roundedButton3.Location = new System.Drawing.Point(42, 7);
+            this.roundedButton3.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.roundedButton3.Name = "roundedButton3";
+            this.roundedButton3.Size = new System.Drawing.Size(16, 16);
+            this.roundedButton3.TabIndex = 2;
+            this.roundedButton3.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
@@ -521,7 +525,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LbStatus2;
         private System.Windows.Forms.Button BtnMinimize;
-        private System.Windows.Forms.Button BtnExit;
         private System.Windows.Forms.ImageList imageListTreeView;
         private System.Windows.Forms.Panel OuterLeftEdge;
         private System.Windows.Forms.Panel OuterBottomEdge;
@@ -532,9 +535,10 @@
         private System.Windows.Forms.ColumnHeader colSize;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
-        private System.Windows.Forms.Button BtnY;
-        private System.Windows.Forms.Button BtnG;
         private RoundedTablePanel OuterTablePanel;
+        private RoundedButton roundedButton1;
+        private RoundedButton roundedButton2;
+        private RoundedButton roundedButton3;
     }
 }
 

@@ -24,7 +24,8 @@ namespace FileManager
             Random random = new Random();
             do
             {
-                Unused = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+                //Unused = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+                Unused = Color.Azure;
             } while ((new Color[] { main, lighterMain, darkerMain, text }).Contains(Unused));
         }
         public Theme(Theme theme)
@@ -52,7 +53,7 @@ namespace FileManager
                 {
                     if (input.GetPixel(i,j).A > 0)
                     {
-                        input.SetPixel(i, j, text);
+                        input.SetPixel(i, j, Color.FromArgb(text.R,text.G,text.B, input.GetPixel(i, j).A));
                     }
                 }
             }

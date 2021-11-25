@@ -26,6 +26,8 @@ namespace FileManager
             Theme dark = new Theme(Color.FromArgb(30,30,30));
             currentTheme = dark;
             InitializeComponent();
+            HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
+            HeaderTablePanel.MouseMove += new MouseEventHandler(HeaderTablePanel_MouseMove);
             reloadTheme();
             currentAddr = "C:/";            
         }
@@ -35,26 +37,27 @@ namespace FileManager
 
         private void reloadTheme()
         {
-            //Change Back Color
-            foreach (Button b in this.Controls.OfType<Button>())
-            {
-                
-            }
             //Form
             this.BackColor = currentTheme.Unused;
             OuterTablePanel.BackColor = currentTheme.Unused;
             this.TransparencyKey = currentTheme.Unused;
             OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
+
             //Navigation
+
             this.NavigationTablePanel.BackColor = currentTheme.darkerMain;
             foreach (Button b in new Button[] {BtnBack, BtnForward, BtnRecent, BtnParentFolder}) {
                 b.BackColor = currentTheme.darkerMain;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
+
+            //BtnBack.Image = currentTheme.getIcon(Theme.icon.left_arrow);
+            //BtnForward.Image = currentTheme.getIcon(Theme.icon.right_arrow);
+            //BtnRecent.Image = currentTheme.getIcon(Theme.icon.expand_arrow);
+
             foreach (TextBox t in new TextBox[] {TxtBxAddress, TxtBxSearch })
             {
                 t.BackColor = currentTheme.darkerMain;
-
                 t.ForeColor = currentTheme.text;
             }
             this.TxtBxAddress.BackColor = currentTheme.darkerMain;
