@@ -13,7 +13,7 @@ using FileManager.Properties;
 
 namespace FileManager
 {
-    public partial class FileManager : Form
+    public partial class MainForm : Form
     {
         private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
         private string currentAddr;

@@ -2,7 +2,6 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe.config
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.pdb
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.SuggestedBindingRedirects.cache
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.FileManager.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.Properties.Resources.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.GenerateResource.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.CoreCompileInputs.cache
@@ -31,3 +30,4 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManag
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.exe
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.pdb
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.MainForm.resources

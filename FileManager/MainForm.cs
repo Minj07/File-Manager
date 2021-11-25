@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace FileManager
 {
-    public partial class FileManager : Form
+    public partial class MainForm : Form
     {
-        public FileManager()
+        public MainForm()
         {
             FMIntialize();//Just like Initailize Components
             //Add event
