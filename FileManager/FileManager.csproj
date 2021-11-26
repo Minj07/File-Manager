@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClsTreeListView.cs" />
-    <Compile Include="CustomTreeView.cs">
+    <Compile Include="Extra Components\ClsTreeListView.cs" />
+    <Compile Include="Extra Components\CustomTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="RoundedButton.cs">
+    <Compile Include="Extra Components\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FMFunction.cs">
@@ -70,10 +70,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RoundedTablePanel.cs">
+    <Compile Include="Extra Components\RoundedTablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Theme.cs" />
+    <Compile Include="Extra Components\Theme.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
