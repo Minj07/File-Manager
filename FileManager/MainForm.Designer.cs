@@ -441,7 +441,7 @@
             // 
             // roundedButton3
             // 
-            this.roundedButton3.BackColor = System.Drawing.Color.Lime;
+            this.roundedButton3.BackColor = System.Drawing.Color.Aqua;
             this.roundedButton3.BorderColor = System.Drawing.Color.Lime;
             this.roundedButton3.BorderSize = 1F;
             this.roundedButton3.CornerRadius = 5;
