@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace FileManager
 {
@@ -35,6 +36,28 @@ namespace FileManager
             darkerMain = theme.darkerMain;
             text = theme.text;
         }
+
+        public static Color HexColor(string h)
+        {
+            Exception InvalidHexadecimal = new Exception("Invalid Hexadecimal");
+            Exception InvalidHexColor = new Exception("Invalid Hex Color");
+            CultureInfo ci = new CultureInfo("en-US");
+            if (h[0] == '#'&&h.Length==7) h = h.Substring(1, 6);
+            if (h.Length!=6) throw InvalidHexColor;
+            foreach (char c in h)
+            {
+                if (!"0123456789ABCDEF".Contains(c))
+                {
+                    throw InvalidHexadecimal;
+                }
+            }
+            if (h.Length != 6)
+            {
+                throw InvalidHexadecimal;
+            }
+            return Color.FromArgb(int.Parse(h.Substring(0,2),NumberStyles.HexNumber), int.Parse(h.Substring(2, 2), NumberStyles.HexNumber), int.Parse(h.Substring(4, 2), NumberStyles.HexNumber));
+        }
+
         private int increase(int i)
         {
             return (255 - i) / 10 + i;

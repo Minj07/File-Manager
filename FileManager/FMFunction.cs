@@ -28,12 +28,34 @@ namespace FileManager
             InitializeComponent();
             HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
             HeaderTablePanel.MouseMove += new MouseEventHandler(HeaderTablePanel_MouseMove);
+            BtnExit.Click += new EventHandler(BtnExit_Click);
+            BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
+            BtnMaximize.Click += new EventHandler (BtnMaximize_Click);
             reloadTheme();
             currentAddr = "C:/";            
         }
         #endregion
 
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
+        private void BtnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void BtnMaximize_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            } else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
 
         private void reloadTheme()
         {
@@ -50,10 +72,6 @@ namespace FileManager
                 b.BackColor = currentTheme.darkerMain;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
-
-            //BtnBack.Image = currentTheme.getIcon(Theme.icon.left_arrow);
-            //BtnForward.Image = currentTheme.getIcon(Theme.icon.right_arrow);
-            //BtnRecent.Image = currentTheme.getIcon(Theme.icon.expand_arrow);
 
             foreach (TextBox t in new TextBox[] {TxtBxAddress, TxtBxSearch })
             {
