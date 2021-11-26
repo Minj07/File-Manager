@@ -57,5 +57,9 @@ namespace FileManager
             }
         }
 
+        private void OuterTablePanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
