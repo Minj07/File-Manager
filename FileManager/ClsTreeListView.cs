@@ -73,7 +73,7 @@ namespace FileManager
         #region Show Folder Tree
         public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
         {
-            if (currentNode.Name != "This PC")
+            if (currentNode.Text != "This PC")
             {
                 try
                 {
@@ -111,6 +111,36 @@ namespace FileManager
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                listView.Items.Clear();
+                foreach (TreeNode node in currentNode.Nodes)
+                {
+                    string[] item = new string[3];
+                    item[0] = node.Text;
+                    switch(node.ImageIndex)
+                    {
+                        case 1:
+                            item[2] = "Removable Disk";
+                            break;
+                        case 2:
+                            item[2]= "Local Disk";
+                            break;
+                        case 3:
+                            item[2]= "Network Disk";
+                            break;
+                        case 4:
+                            item[2]= "CD Disk";
+                            break;
+                        default:
+                            item[2]="File folder";
+                            break;
+                    }
+
+                    ListViewItem listViewItem = new ListViewItem(item);
+                    listView.Items.Add(listViewItem);
                 }
             }
             return false;
