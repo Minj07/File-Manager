@@ -11,26 +11,62 @@ namespace FileManager
 {
     public class RoundedButton : Button
     {
-        public Color BorderColor { get; set; }
-        public int CornerRadius { get; set; }
-        public float BorderSize { get; set; }
+        public Color BorderColor { get; set; } = DefaultBackColor;
+        public Color HoverColor { get; set; } = DefaultBackColor;
+        public Color ActivatedColor { get; set; }
+        public int CornerRadius { get; set; } = 15;
+        public float BorderSize { get; set; } = 1;
+
+
         public RoundedButton()
         {
             this.DoubleBuffered = true;
-            CornerRadius = 15;
-            BorderSize = 1;
-            BorderColor = BackColor;
-            Text = "";
+            if (BorderColor == null) BorderColor = BackColor;
+            if (ActivatedColor == null) ActivatedColor = BackColor;
         }
+
+        #region Activated and Hover
+
+        private bool Hover { get; set; } = false;
+        private bool Activated { get; set; } = false;
+
+        protected override void OnMouseDown(MouseEventArgs mevent)
+        {
+            base.OnMouseDown(mevent);
+            Activated = true;
+            this.Refresh();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs mevent)
+        {
+            base.OnMouseUp(mevent);
+            Activated = false;
+            this.Refresh();
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            Hover = true;
+            this.Refresh();
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            Hover = false;
+            this.Refresh();
+        }
+
+        #endregion
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            
             base.OnPaint(e);
             using (var graphicsPath = getRoundRectangle(this.ClientRectangle))
             {
                 e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-                using (var brush = new SolidBrush(BackColor))
+                using (var brush = new SolidBrush((Hover ? (Activated ? ActivatedColor : HoverColor) : BackColor)))
                     e.Graphics.FillPath(brush, graphicsPath);
                 using (var pen = new Pen(BorderColor, 1.0f))
                     e.Graphics.DrawPath(pen, graphicsPath);
