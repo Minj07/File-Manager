@@ -21,7 +21,6 @@ D:\Projects\Lập trình trực quan\File-Manager\FileManager\bin\Debug\FileMana
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\FileManager.exe.config
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\FileManager.exe
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\FileManager.pdb
-D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.SuggestedBindingRedirects.cache
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.Properties.Resources.resources
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.GenerateResource.cache
@@ -31,3 +30,4 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManag
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.MainForm.resources
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.MainForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache

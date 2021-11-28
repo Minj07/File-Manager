@@ -20,7 +20,7 @@ namespace FileManager
 
             //Create new node
             ThisPC = new TreeNode("This PC", 0, 0);
-
+            ThisPC.Name = "This PC";
             //Delete treeView
             treeView.Nodes.Clear();
             treeView.Nodes.Add(ThisPC);
@@ -73,7 +73,7 @@ namespace FileManager
         #region Show Folder Tree
         public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
         {
-            if (currentNode.Text != "This PC")
+            if (currentNode.Name != "This PC")
             {
                 try
                 {
@@ -84,7 +84,7 @@ namespace FileManager
                     }
 
                     //Handle display folder
-                    else
+                    //else
                     {
                         string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
                         foreach (string strDirectory in strDirectories)
@@ -111,37 +111,7 @@ namespace FileManager
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                }
-            }
-            else
-            {
-                listView.Items.Clear();
-                foreach (TreeNode node in currentNode.Nodes)
-                {
-                    string[] item = new string[3];
-                    item[0] = node.Text;
-                    switch(node.ImageIndex)
-                    {
-                        case 1:
-                            item[2] = "Removable Disk";
-                            break;
-                        case 2:
-                            item[2]= "Local Disk";
-                            break;
-                        case 3:
-                            item[2]= "Network Disk";
-                            break;
-                        case 4:
-                            item[2]= "CD Disk";
-                            break;
-                        default:
-                            item[2]="File folder";
-                            break;
-                    }
-
-                    ListViewItem listViewItem = new ListViewItem(item);
-                    listView.Items.Add(listViewItem);
-                }
+                }               
             }
             return false;
         }
@@ -167,28 +137,55 @@ namespace FileManager
         {
             try
             {
-                //Delete all items in List View
-                listView.Items.Clear();
+                if (currentNode.Name != "This PC")
+                {  //Delete all items in List View
+                    listView.Items.Clear();
 
-                DirectoryInfo directoryInfo = GetPathDir(currentNode);
+                    DirectoryInfo directoryInfo = new DirectoryInfo(GetFullPath(currentNode.FullPath));
 
-                //Information of directories
-                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
-                    listView.Items.Add(GetLVItems(dir));
+                    //Information of directories
+                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                        listView.Items.Add(GetLVItems(dir));
 
-                //Information of files
-                foreach (FileInfo file in directoryInfo.GetFiles())
-                    listView.Items.Add(GetLVItems(file, listView));
+                    //Information of files
+                    foreach (FileInfo file in directoryInfo.GetFiles())
+                        listView.Items.Add(GetLVItems(file, listView));
+                }
+                else
+                {
+                    listView.Items.Clear();
+                    foreach (TreeNode node in currentNode.Nodes)
+                    {
+                        string[] item = new string[5];
+                        item[0] = node.Text;
+                        switch (node.ImageIndex)
+                        {
+                            case 1:
+                                item[2] = "Removable Disk";
+                                break;
+                            case 2:
+                                item[2] = "Local Disk";
+                                break;
+                            case 3:
+                                item[2] = "Network Disk";
+                                break;
+                            case 4:
+                                item[2] = "CD Disk";
+                                break;
+                            default:
+                                item[2] = "File folder";
+                                break;
+                        }
+                        item[4] = node.Text;
+                        ListViewItem listViewItem = new ListViewItem(item, node.ImageIndex - 1);
+                        listView.Items.Add(listViewItem);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-        }
-        //Get directory of a Tree Node
-        public DirectoryInfo GetPathDir(TreeNode currentNode)
-        {
-            return new DirectoryInfo(GetFullPath(currentNode.FullPath));
         }
 
         //Get List View item having info from folder
@@ -200,7 +197,7 @@ namespace FileManager
             item[2] = "File folder";
             item[4] = folder.FullName;
             ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = 0;
+            listViewItem.ImageIndex = 4;
             return listViewItem;
         }
 
@@ -224,7 +221,7 @@ namespace FileManager
                 key = file.FullName;
             else if(key=="")
             {
-                listViewItem.ImageIndex = 1;
+                listViewItem.ImageIndex = 5;
                 return listViewItem;
             }
 
@@ -260,6 +257,7 @@ namespace FileManager
                     {
                         MessageBox.Show("'" + path + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
+                        
                     }
 
                     listView.Items.Clear();
