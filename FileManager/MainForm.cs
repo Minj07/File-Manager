@@ -16,11 +16,7 @@ namespace FileManager
         private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
         public MainForm()
         {
-
             FMIntialize();//Just like Initailize Components
-            //Add event
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
-            this.Load += new System.EventHandler(this.FileManager_Load);
         }
 
         //Create tree view when File Manger loads
@@ -32,7 +28,8 @@ namespace FileManager
         //Handle event when a tree node is selected
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //if (tn.Text != "This PC")
+            if (e.Node.Name == "This PC")
+                clsTreeListView.ShowContent(listView, e.Node);
                 clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
         }
 
@@ -43,17 +40,13 @@ namespace FileManager
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ListViewItem item = this.listView.FocusedItem;
-            clsTreeListView.ClickItem(this.listView, item);
+            clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem);
         }
 
         private void listView_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar ==(int)Keys.Enter)
-            {
-                ListViewItem item=this.listView.FocusedItem;
-                clsTreeListView.ClickItem(this.listView, item);
-            }
+                clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem);
         }
 
     }
