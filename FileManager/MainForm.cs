@@ -49,10 +49,5 @@ namespace FileManager
                 clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem);
         }
 
-        private void OuterTablePanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
     }
 }
