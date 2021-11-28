@@ -86,15 +86,6 @@ namespace FileManager
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
 
-            if (changingAddress)
-            {
-                BtnGoRefresh.Image = Resources.right_arrow;
-            } else
-            {
-                BtnGoRefresh.Image = Resources.reboot;
-            }
-
-
             AddressTablePanel.BackColor = currentTheme.darkerMain;
             AddressTablePanel.BorderColor = currentTheme.lighterMain;
             CbAddress.BackColor = currentTheme.darkerMain;

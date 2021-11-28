@@ -111,7 +111,7 @@ namespace FileManager
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                }               
+                }
             }
             return false;
         }
@@ -207,7 +207,7 @@ namespace FileManager
             string[] item = new string[5];
             item[0] = file.Name;
             item[1] = file.LastWriteTime.ToString();
-            item[2] = (file.Extension.Equals(""))?"File":file.Extension;
+            item[2] = (file.Extension.Equals("")) ? "File" : file.Extension;
             item[3] = Math.Ceiling(file.Length / (1024 * 1.0)).ToString("###,###") + " KB";
             item[4] = file.FullName;
 
@@ -217,9 +217,9 @@ namespace FileManager
 
 
             string key = file.Extension;
-            if(key==".exe")
+            if (key == ".exe")
                 key = file.FullName;
-            else if(key=="")
+            else if (key == "")
             {
                 listViewItem.ImageIndex = 5;
                 return listViewItem;
@@ -237,6 +237,43 @@ namespace FileManager
             listViewItem.ImageKey = key;
             return listViewItem;
         }
+
+        public void ShowContent(ListView listView, string path)
+        {
+            try
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                if (directoryInfo.Exists)
+                {
+                    listView.Items.Clear();
+
+                    //Information of directories
+                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                        listView.Items.Add(GetLVItems(dir));
+
+                    //Information of files
+                    foreach (FileInfo file in directoryInfo.GetFiles())
+                        listView.Items.Add(GetLVItems(file, listView));
+                }
+                else
+                    MessageBox.Show("Can't find '" + path + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Can't find '" + path + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("You don't currently have permission to access this folder.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         #endregion
 
 
@@ -257,7 +294,7 @@ namespace FileManager
                     {
                         MessageBox.Show("'" + path + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
-                        
+
                     }
 
                     listView.Items.Clear();
@@ -282,4 +319,5 @@ namespace FileManager
         }
     }
 }
+
 

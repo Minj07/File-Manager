@@ -251,10 +251,10 @@
             this.TxtBxSearch.BackColor = System.Drawing.SystemColors.Window;
             this.TxtBxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxSearch.Location = new System.Drawing.Point(624, 5);
+            this.TxtBxSearch.Location = new System.Drawing.Point(932, 5);
             this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(2, 5, 0, 3);
             this.TxtBxSearch.Name = "TxtBxSearch";
-            this.TxtBxSearch.Size = new System.Drawing.Size(397, 36);
+            this.TxtBxSearch.Size = new System.Drawing.Size(298, 36);
             this.TxtBxSearch.TabIndex = 2;
             // 
             // NavigationButtonTablePanel
@@ -286,7 +286,7 @@
             this.BtnBack.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BtnBack.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBack.Image = global::FileManager.Properties.Resources.left_arrow;
+            this.BtnBack.Image = ((System.Drawing.Image)(resources.GetObject("BtnBack.Image")));
             this.BtnBack.Location = new System.Drawing.Point(4, 4);
             this.BtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBack.Name = "BtnBack";
@@ -299,7 +299,7 @@
             this.BtnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnForward.FlatAppearance.BorderSize = 0;
             this.BtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnForward.Image = global::FileManager.Properties.Resources.right_arrow;
+            this.BtnForward.Image = ((System.Drawing.Image)(resources.GetObject("BtnForward.Image")));
             this.BtnForward.Location = new System.Drawing.Point(57, 4);
             this.BtnForward.Margin = new System.Windows.Forms.Padding(4);
             this.BtnForward.Name = "BtnForward";
@@ -312,7 +312,7 @@
             this.BtnRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRecent.FlatAppearance.BorderSize = 0;
             this.BtnRecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRecent.Image = global::FileManager.Properties.Resources.expand_arrow;
+            this.BtnRecent.Image = ((System.Drawing.Image)(resources.GetObject("BtnRecent.Image")));
             this.BtnRecent.Location = new System.Drawing.Point(110, 4);
             this.BtnRecent.Margin = new System.Windows.Forms.Padding(4);
             this.BtnRecent.Name = "BtnRecent";
@@ -325,7 +325,7 @@
             this.BtnParentFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnParentFolder.FlatAppearance.BorderSize = 0;
             this.BtnParentFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnParentFolder.Image = global::FileManager.Properties.Resources.up_arrow;
+            this.BtnParentFolder.Image = ((System.Drawing.Image)(resources.GetObject("BtnParentFolder.Image")));
             this.BtnParentFolder.Location = new System.Drawing.Point(163, 4);
             this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(4);
             this.BtnParentFolder.Name = "BtnParentFolder";
@@ -344,12 +344,12 @@
             this.AddressTablePanel.Controls.Add(this.BtnGoRefresh, 1, 0);
             this.AddressTablePanel.CornerRadius = 50;
             this.AddressTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddressTablePanel.Location = new System.Drawing.Point(163, 3);
+            this.AddressTablePanel.Location = new System.Drawing.Point(216, 3);
             this.AddressTablePanel.Name = "AddressTablePanel";
             this.AddressTablePanel.Rounded = false;
             this.AddressTablePanel.RowCount = 1;
             this.AddressTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.AddressTablePanel.Size = new System.Drawing.Size(456, 34);
+            this.AddressTablePanel.Size = new System.Drawing.Size(711, 43);
             this.AddressTablePanel.TabIndex = 4;
             this.AddressTablePanel.TrueBackColor = System.Drawing.Color.Transparent;
             // 
@@ -361,21 +361,23 @@
             this.CbAddress.Location = new System.Drawing.Point(0, 0);
             this.CbAddress.Margin = new System.Windows.Forms.Padding(0);
             this.CbAddress.Name = "CbAddress";
-            this.CbAddress.Size = new System.Drawing.Size(422, 33);
+            this.CbAddress.Size = new System.Drawing.Size(677, 37);
             this.CbAddress.TabIndex = 0;
+            this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             // 
             // BtnGoRefresh
             // 
             this.BtnGoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnGoRefresh.FlatAppearance.BorderSize = 0;
             this.BtnGoRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGoRefresh.Image = global::FileManager.Properties.Resources.reboot;
-            this.BtnGoRefresh.Location = new System.Drawing.Point(422, 0);
+            this.BtnGoRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BtnGoRefresh.Image")));
+            this.BtnGoRefresh.Location = new System.Drawing.Point(677, 0);
             this.BtnGoRefresh.Margin = new System.Windows.Forms.Padding(0);
             this.BtnGoRefresh.Name = "BtnGoRefresh";
-            this.BtnGoRefresh.Size = new System.Drawing.Size(34, 34);
+            this.BtnGoRefresh.Size = new System.Drawing.Size(34, 43);
             this.BtnGoRefresh.TabIndex = 1;
             this.BtnGoRefresh.UseVisualStyleBackColor = true;
+            this.BtnGoRefresh.Click += new System.EventHandler(this.BtnGoRefresh_Click);
             // 
             // StatusTablePanel
             // 
