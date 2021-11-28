@@ -32,8 +32,7 @@ namespace FileManager
         //Handle event when a tree node is selected
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode tn = e.Node;
-            if (tn.Text != "This PC")
+            //if (tn.Text != "This PC")
                 clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
         }
 
