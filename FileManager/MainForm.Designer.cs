@@ -44,13 +44,15 @@
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.treeView = new System.Windows.Forms.TreeView();
             this.NavigationTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.TxtBxAddress = new System.Windows.Forms.TextBox();
             this.TxtBxSearch = new System.Windows.Forms.TextBox();
             this.NavigationButtonTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.BtnBack = new System.Windows.Forms.Button();
             this.BtnForward = new System.Windows.Forms.Button();
             this.BtnRecent = new System.Windows.Forms.Button();
             this.BtnParentFolder = new System.Windows.Forms.Button();
+            this.AddressTablePanel = new FileManager.RoundedTablePanel();
+            this.CbAddress = new System.Windows.Forms.ComboBox();
+            this.BtnGoRefresh = new System.Windows.Forms.Button();
             this.StatusTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.LbStatus2 = new System.Windows.Forms.Label();
@@ -60,12 +62,12 @@
             this.BtnMaximize = new FileManager.RoundedButton();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
             this.NavigationTablePanel.SuspendLayout();
             this.NavigationButtonTablePanel.SuspendLayout();
+            this.AddressTablePanel.SuspendLayout();
             this.StatusTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
             this.SuspendLayout();
@@ -106,19 +108,18 @@
             this.OuterTablePanel.Controls.Add(this.MainTablePanel, 1, 0);
             this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
             this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
-            this.OuterTablePanel.Controls.Add(this.panel1, 2, 0);
             this.OuterTablePanel.CornerRadius = 40;
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
             this.OuterTablePanel.Name = "OuterTablePanel";
+            this.OuterTablePanel.Rounded = true;
             this.OuterTablePanel.RowCount = 2;
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.OuterTablePanel.Size = new System.Drawing.Size(930, 455);
             this.OuterTablePanel.TabIndex = 2;
             this.OuterTablePanel.TrueBackColor = System.Drawing.SystemColors.Control;
-            this.OuterTablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.OuterTablePanel_Paint);
             // 
             // MainTablePanel
             // 
@@ -222,9 +223,10 @@
             this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.NavigationTablePanel.Controls.Add(this.TxtBxAddress, 1, 0);
+            this.NavigationTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.NavigationTablePanel.Controls.Add(this.TxtBxSearch, 2, 0);
             this.NavigationTablePanel.Controls.Add(this.NavigationButtonTablePanel, 0, 0);
+            this.NavigationTablePanel.Controls.Add(this.AddressTablePanel, 1, 0);
             this.NavigationTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NavigationTablePanel.Location = new System.Drawing.Point(0, 72);
             this.NavigationTablePanel.Margin = new System.Windows.Forms.Padding(0);
@@ -234,23 +236,13 @@
             this.NavigationTablePanel.Size = new System.Drawing.Size(922, 40);
             this.NavigationTablePanel.TabIndex = 3;
             // 
-            // TxtBxAddress
-            // 
-            this.TxtBxAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TxtBxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxAddress.Location = new System.Drawing.Point(161, 4);
-            this.TxtBxAddress.Margin = new System.Windows.Forms.Padding(1, 4, 2, 4);
-            this.TxtBxAddress.Name = "TxtBxAddress";
-            this.TxtBxAddress.Size = new System.Drawing.Size(459, 30);
-            this.TxtBxAddress.TabIndex = 1;
-            // 
             // TxtBxSearch
             // 
             this.TxtBxSearch.BackColor = System.Drawing.SystemColors.Window;
             this.TxtBxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxSearch.Location = new System.Drawing.Point(624, 3);
-            this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(2, 3, 0, 3);
+            this.TxtBxSearch.Location = new System.Drawing.Point(624, 5);
+            this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(2, 5, 0, 3);
             this.TxtBxSearch.Name = "TxtBxSearch";
             this.TxtBxSearch.Size = new System.Drawing.Size(298, 30);
             this.TxtBxSearch.TabIndex = 2;
@@ -326,6 +318,50 @@
             this.BtnParentFolder.Size = new System.Drawing.Size(34, 34);
             this.BtnParentFolder.TabIndex = 3;
             this.BtnParentFolder.UseVisualStyleBackColor = true;
+            // 
+            // AddressTablePanel
+            // 
+            this.AddressTablePanel.BackColor = System.Drawing.Color.Transparent;
+            this.AddressTablePanel.BorderColor = System.Drawing.Color.Empty;
+            this.AddressTablePanel.ColumnCount = 2;
+            this.AddressTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.AddressTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.AddressTablePanel.Controls.Add(this.CbAddress, 0, 0);
+            this.AddressTablePanel.Controls.Add(this.BtnGoRefresh, 1, 0);
+            this.AddressTablePanel.CornerRadius = 50;
+            this.AddressTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AddressTablePanel.Location = new System.Drawing.Point(163, 3);
+            this.AddressTablePanel.Name = "AddressTablePanel";
+            this.AddressTablePanel.Rounded = false;
+            this.AddressTablePanel.RowCount = 1;
+            this.AddressTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.AddressTablePanel.Size = new System.Drawing.Size(456, 34);
+            this.AddressTablePanel.TabIndex = 4;
+            this.AddressTablePanel.TrueBackColor = System.Drawing.Color.Transparent;
+            // 
+            // CbAddress
+            // 
+            this.CbAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbAddress.FormattingEnabled = true;
+            this.CbAddress.Location = new System.Drawing.Point(0, 0);
+            this.CbAddress.Margin = new System.Windows.Forms.Padding(0);
+            this.CbAddress.Name = "CbAddress";
+            this.CbAddress.Size = new System.Drawing.Size(422, 33);
+            this.CbAddress.TabIndex = 0;
+            // 
+            // BtnGoRefresh
+            // 
+            this.BtnGoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnGoRefresh.FlatAppearance.BorderSize = 0;
+            this.BtnGoRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnGoRefresh.Image = global::FileManager.Properties.Resources.reboot;
+            this.BtnGoRefresh.Location = new System.Drawing.Point(422, 0);
+            this.BtnGoRefresh.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnGoRefresh.Name = "BtnGoRefresh";
+            this.BtnGoRefresh.Size = new System.Drawing.Size(34, 34);
+            this.BtnGoRefresh.TabIndex = 1;
+            this.BtnGoRefresh.UseVisualStyleBackColor = true;
             // 
             // StatusTablePanel
             // 
@@ -457,15 +493,6 @@
             this.OuterBottomEdge.Size = new System.Drawing.Size(922, 4);
             this.OuterBottomEdge.TabIndex = 2;
             // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(928, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1, 447);
-            this.panel1.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -484,6 +511,7 @@
             this.NavigationTablePanel.ResumeLayout(false);
             this.NavigationTablePanel.PerformLayout();
             this.NavigationButtonTablePanel.ResumeLayout(false);
+            this.AddressTablePanel.ResumeLayout(false);
             this.StatusTablePanel.ResumeLayout(false);
             this.StatusTablePanel.PerformLayout();
             this.HeaderTablePanel.ResumeLayout(false);
@@ -498,7 +526,6 @@
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.TableLayoutPanel NavigationTablePanel;
-        private System.Windows.Forms.TextBox TxtBxAddress;
         private System.Windows.Forms.TextBox TxtBxSearch;
         private System.Windows.Forms.TableLayoutPanel NavigationButtonTablePanel;
         private System.Windows.Forms.Button BtnBack;
@@ -512,7 +539,6 @@
         private System.Windows.Forms.ImageList imageListTreeView;
         private System.Windows.Forms.Panel OuterLeftEdge;
         private System.Windows.Forms.Panel OuterBottomEdge;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ColumnHeader colDateModified;
         private System.Windows.Forms.ColumnHeader colType;
@@ -523,6 +549,9 @@
         private RoundedButton BtnExit;
         private RoundedButton BtnMinimize;
         private RoundedButton BtnMaximize;
+        private RoundedTablePanel AddressTablePanel;
+        private System.Windows.Forms.ComboBox CbAddress;
+        private System.Windows.Forms.Button BtnGoRefresh;
     }
 }
 
