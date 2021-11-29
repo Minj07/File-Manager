@@ -361,6 +361,7 @@
             this.CbAddress.Name = "CbAddress";
             this.CbAddress.Size = new System.Drawing.Size(507, 33);
             this.CbAddress.TabIndex = 0;
+            this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             // 
             // BtnGoRefresh
             // 
@@ -374,6 +375,7 @@
             this.BtnGoRefresh.Size = new System.Drawing.Size(26, 36);
             this.BtnGoRefresh.TabIndex = 1;
             this.BtnGoRefresh.UseVisualStyleBackColor = true;
+            this.BtnGoRefresh.Click += new System.EventHandler(this.BtnGoRefresh_Click);
             // 
             // StatusTablePanel
             // 

@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.IO;
+using System.Diagnostics;
+using FileManager.Properties;
 
 namespace FileManager
 {
@@ -49,5 +52,62 @@ namespace FileManager
                 clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem);
         }
 
+        private void BtnGoRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(CbAddress.Text!=" ")
+                {
+                    FileInfo fileInfo = new FileInfo(CbAddress.Text.Trim());
+                    if (fileInfo.Exists)
+                    {
+                        Process.Start(fileInfo.FullName);
+                        DirectoryInfo directoryInfo= fileInfo.Directory;
+                        CbAddress.Text = directoryInfo.FullName;
+                    }
+                    else
+                    {
+                        clsTreeListView.ShowContent(listView, CbAddress.Text.Trim());
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Can't find '" + CbAddress.Text + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("You don't currently have permission to access this file.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            changingAddress = false;
+            if (changingAddress)
+            {
+                BtnGoRefresh.Image = Resources.right_arrow;
+            }
+            else
+            {
+                BtnGoRefresh.Image = Resources.reboot;
+            }
+        }
+
+        private void CbAddress_TextChanged(object sender, EventArgs e)
+        {
+            changingAddress = true;
+            if (changingAddress)
+            {
+                BtnGoRefresh.Image = Resources.right_arrow;
+            }
+            else
+            {
+                BtnGoRefresh.Image = Resources.reboot;
+            }
+        }
     }
 }
