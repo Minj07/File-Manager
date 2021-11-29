@@ -18,7 +18,7 @@ namespace FileManager
         
         private string currentAddr;
         private bool changingAddress = false;
-        private Point mouseDownLocation; //Use for dragging the form
+        private Point mouseLocation; //Use for dragging the form
 
         #region Initialize
         private void FMIntialize()
@@ -37,7 +37,8 @@ namespace FileManager
             BtnMaximize.Click += new EventHandler (BtnMaximize_Click);
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
-          
+
+            
 
             ReloadTheme();
 
@@ -79,7 +80,7 @@ namespace FileManager
             //Navigation
 
             this.NavigationTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnBack, BtnForward, BtnRecent, BtnParentFolder, BtnGoRefresh, BtnDisplayInfo, BtnDisplayThumbnail})
+            foreach (Button b in new Button[] { BtnBack, BtnForward, BtnRecent, BtnParentFolder ,BtnGoRefresh})
             {
                 b.BackColor = currentTheme.darkerMain;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
@@ -111,11 +112,11 @@ namespace FileManager
             if (this.WindowState == FormWindowState.Normal)
             {
                 OuterTablePanel.Rounded = true;
-
                 
             } else
             {
                 OuterTablePanel.Rounded=false;
+
             }
             OuterTablePanel.Refresh();
         }
@@ -123,26 +124,24 @@ namespace FileManager
         #region Dragging
         private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDownLocation = new Point(-e.X, -e.Y);
-            TxtBxSearch.Text = mouseDownLocation.ToString();
+            mouseLocation = new Point(-e.X, -e.Y);
+            
         }
 
         private void HeaderTablePanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                Point mouseOffset = Control.MousePosition;
-                if (MousePosition.Y<50 && this.WindowState == FormWindowState.Normal)
+                Point mousePose = Control.MousePosition;
+                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                Location = mousePose;
+                if (MousePosition.Y<50)
                 {
                     this.WindowState = FormWindowState.Maximized;
                 } else if (MousePosition.Y>=50 && this.WindowState == FormWindowState.Maximized)
                 {
                     this.WindowState = FormWindowState.Normal;
-                    mouseDownLocation = new Point(-e.X, -e.Y);
-                    TxtBxSearch.Text = mouseDownLocation.ToString();
                 }
-                mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
-                Location = mouseOffset;
             }
         }
 
