@@ -31,9 +31,12 @@ namespace FileManager
         //Handle event when a tree node is selected
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Name == "This PC")
+            if (e.Node.Name == "This PC"||e.Node.Checked)
                 clsTreeListView.ShowContent(listView, e.Node);
-                clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
+
+            else clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
+
+            CbAddress.Text = clsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
         private void MainTablePanel_Paint(object sender, PaintEventArgs e)
@@ -43,7 +46,9 @@ namespace FileManager
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem);
+            ListViewItem item = this.listView.FocusedItem;
+            if(clsTreeListView.ClickItem(this.listView, item))
+                CbAddress.Text = item.SubItems[4].Text;
         }
 
         private void listView_KeyPress(object sender, KeyPressEventArgs e)
@@ -56,7 +61,9 @@ namespace FileManager
         {
             try
             {
-                if(CbAddress.Text!=" ")
+                if (CbAddress.Text == "This PC")
+                    clsTreeListView.ShowContent(listView, treeView.Nodes[0]);
+                else if (CbAddress.Text != " ") 
                 {
                     FileInfo fileInfo = new FileInfo(CbAddress.Text.Trim());
                     if (fileInfo.Exists)
@@ -70,6 +77,7 @@ namespace FileManager
                         clsTreeListView.ShowContent(listView, CbAddress.Text.Trim());
                     }
                 }
+                CbAddress.Items.Add(CbAddress.Text);
             }
             catch (IOException)
             {
@@ -108,6 +116,12 @@ namespace FileManager
             {
                 BtnGoRefresh.Image = Resources.reboot;
             }
+        }
+
+        private void CbAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==(char)Keys.Enter)
+                BtnGoRefresh_Click(sender, e);
         }
     }
 }

@@ -63,7 +63,6 @@ namespace FileManager
 
                 //Create tree node for each disk
                 TreeNode diskTreeNode = new TreeNode(item["Name"].ToString() + "\\", imageIndex, imageIndex);
-
                 //Add to tree view
                 treeNodeCollection.Add(diskTreeNode);
             }
@@ -86,13 +85,14 @@ namespace FileManager
                     //Handle display folder
                     //else
                     {
-                        string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
-                        foreach (string strDirectory in strDirectories)
-                        {
-                            string strName = GetName(strDirectory);
-                            TreeNode dirNode = new TreeNode(strName, 5, 5);
-                            currentNode.Nodes.Add(dirNode);
-                        }
+                            string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
+                            foreach (string strDirectory in strDirectories)
+                            {
+                                string strName = GetName(strDirectory);
+                                TreeNode dirNode = new TreeNode(strName, 5, 5);
+                                currentNode.Nodes.Add(dirNode);
+                            }
+                        currentNode.Checked = true;
 
                         ShowContent(listView, currentNode);
                     }
@@ -306,6 +306,11 @@ namespace FileManager
                 }
                 return true;
             }
+            catch (IOException)
+            {
+                MessageBox.Show("Can't find '" + item.SubItems[4].Text + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("You don't currently have permission to access this folder.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
