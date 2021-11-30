@@ -375,6 +375,7 @@
             this.CbAddress.Size = new System.Drawing.Size(507, 33);
             this.CbAddress.TabIndex = 0;
             this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
+            this.CbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbAddress_KeyPress);
             // 
             // BtnGoRefresh
             // 
