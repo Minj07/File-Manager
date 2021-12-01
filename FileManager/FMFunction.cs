@@ -47,6 +47,24 @@ namespace FileManager
         }
         #endregion
 
+        #region Flags
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                OuterTablePanel.Rounded = true;
+                NormalSize = this.Size;
+            }
+            else
+            {
+                OuterTablePanel.Rounded = false;
+
+            }
+            OuterTablePanel.Refresh();
+        }
+
+        #endregion
+
         #region Control Buttons
         private void BtnExit_Click(object sender, EventArgs e)
         {
@@ -70,6 +88,7 @@ namespace FileManager
         }
         #endregion
 
+        #region Reload Theme
         private void ReloadTheme()
         {
             //Form
@@ -117,20 +136,8 @@ namespace FileManager
 
         }
 
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                OuterTablePanel.Rounded = true;
-                NormalSize = this.Size;
-            } else
-            {
-                OuterTablePanel.Rounded=false;
-                
-            }
-            OuterTablePanel.Refresh();
-        }
-
+        #endregion
+       
         #region Dragging
         private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
         {
