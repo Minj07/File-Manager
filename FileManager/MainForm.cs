@@ -123,5 +123,63 @@ namespace FileManager
             if(e.KeyChar==(char)Keys.Enter)
                 BtnGoRefresh_Click(sender, e);
         }
+
+        //Create button cut,copy,paste,delete
+        private bool isCopying;
+        private bool isFolder;
+        private bool isListView;
+        private ListViewItem itemPaste;
+        private string path;
+
+        private void BtnCopy_Click(object sender, EventArgs e)
+        {
+            isCopying = true;
+            if (this.listView.Focused)
+            {
+                isListView = true;
+                itemPaste = this.listView.FocusedItem;
+
+                if (itemPaste == null)
+                    return;
+
+                if (itemPaste.SubItems[2].Text == "File foder")
+                    isFolder = true;
+                else isFolder = false;
+                path=itemPaste.SubItems[4].Text;
+            }
+            else if(this.treeView.Focused)
+            {
+                isListView=false;
+                isFolder = true;
+                path = clsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
+            }
+            BtnPaste.Enabled = true;
+        }
+
+        private bool isCutting;
+        private void BtnCut_Click(object sender, EventArgs e)
+        {
+            isCutting=true;
+            if(this.listView.Focused)
+            {
+                isListView = true;
+                itemPaste=this.listView.FocusedItem;
+
+                if (itemPaste == null)
+                    return;
+
+                if (itemPaste.SubItems[2].Text == "File folder") 
+                    isFolder=true;
+                else isFolder=false;
+                path = itemPaste.SubItems[4].Text;               
+            }
+            else if(this.treeView.Focused)
+            {
+                isListView = false;
+                isFolder=true;
+                path = clsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
+            }
+            BtnPaste.Enabled=true;
+        }
     }
 }
