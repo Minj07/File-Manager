@@ -121,6 +121,12 @@
     <None Include="assets\icon\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\icon\copy.png" />
+    <None Include="assets\icon\cut.png" />
+    <None Include="assets\icon\paste.png" />
+    <None Include="assets\icon\rename.png" />
+    <None Include="assets\icon\share.png" />
+    <None Include="assets\icon\trash.png" />
     <Content Include="assets\Windows Icons\Audio file.ico" />
     <Content Include="assets\Windows Icons\Audio.ico" />
     <Content Include="assets\Windows Icons\Blank.ico" />

@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using FileManager.Properties;
+using System.Threading;
 
 namespace FileManager
 {
     public partial class MainForm
     {
-        
+        private Size NormalSize;
         private string currentAddr;
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
@@ -41,8 +42,27 @@ namespace FileManager
 
             ReloadTheme();
 
-            currentAddr = "C:/";            
+            currentAddr = "C:/";
+            NormalSize = this.Size;
         }
+        #endregion
+
+        #region Flags
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                OuterTablePanel.Rounded = true;
+                NormalSize = this.Size;
+            }
+            else
+            {
+                OuterTablePanel.Rounded = false;
+
+            }
+            OuterTablePanel.Refresh();
+        }
+
         #endregion
 
         #region Control Buttons
@@ -68,6 +88,7 @@ namespace FileManager
         }
         #endregion
 
+        #region Reload Theme
         private void ReloadTheme()
         {
             //Form
@@ -75,6 +96,15 @@ namespace FileManager
             OuterTablePanel.BackColor = currentTheme.Unused;
             this.TransparencyKey = currentTheme.Unused;
             OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
+
+            //Toolbar
+
+            this.ToolTablePanel.BackColor = currentTheme.darkerMain;
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnShare, BtnDelete })
+            {
+                b.BackColor = currentTheme.main;
+                b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
+            }
 
             //Navigation
 
@@ -106,20 +136,8 @@ namespace FileManager
 
         }
 
-        private void MainForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                OuterTablePanel.Rounded = true;
-
-                
-            } else
-            {
-                OuterTablePanel.Rounded=false;
-            }
-            OuterTablePanel.Refresh();
-        }
-
+        #endregion
+       
         #region Dragging
         private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -134,15 +152,21 @@ namespace FileManager
                 Point mouseOffset = Control.MousePosition;
                 if (MousePosition.Y<50 && this.WindowState == FormWindowState.Normal)
                 {
+                    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
+                    this.Location = mouseOffset;
                     this.WindowState = FormWindowState.Maximized;
                 } else if (MousePosition.Y>=50 && this.WindowState == FormWindowState.Maximized)
                 {
-                    this.WindowState = FormWindowState.Normal;
-                    mouseDownLocation = new Point(-e.X, -e.Y);
+                    mouseDownLocation.X = -NormalSize.Width / 2;
                     TxtBxSearch.Text = mouseDownLocation.ToString();
+                    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
+                    this.Location = mouseOffset;
+                    this.WindowState = FormWindowState.Normal;
+                } else
+                {
+                    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
+                    this.Location = mouseOffset;
                 }
-                mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
-                Location = mouseOffset;
             }
         }
 
