@@ -62,8 +62,19 @@
             this.BtnExit = new FileManager.RoundedButton();
             this.BtnMinimize = new FileManager.RoundedButton();
             this.BtnMaximize = new FileManager.RoundedButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
+            this.CbNew = new System.Windows.Forms.ComboBox();
+            this.BtnCut = new System.Windows.Forms.Button();
+            this.BtnCopy = new System.Windows.Forms.Button();
+            this.BtnPaste = new System.Windows.Forms.Button();
+            this.BtnRename = new System.Windows.Forms.Button();
+            this.BtnShare = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.CbSort = new System.Windows.Forms.ComboBox();
+            this.CbView = new System.Windows.Forms.ComboBox();
+            this.CbMore = new System.Windows.Forms.ComboBox();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -72,6 +83,7 @@
             this.AddressTablePanel.SuspendLayout();
             this.StatusTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListLarge
@@ -140,6 +152,7 @@
             this.MainTablePanel.Controls.Add(this.NavigationTablePanel, 0, 3);
             this.MainTablePanel.Controls.Add(this.StatusTablePanel, 0, 5);
             this.MainTablePanel.Controls.Add(this.HeaderTablePanel, 0, 1);
+            this.MainTablePanel.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.MainTablePanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.MainTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTablePanel.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -434,10 +447,9 @@
             // 
             this.BtnDisplayInfo.FlatAppearance.BorderSize = 0;
             this.BtnDisplayInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDisplayInfo.Location = new System.Drawing.Point(1154, 4);
-            this.BtnDisplayInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDisplayInfo.Location = new System.Drawing.Point(865, 3);
             this.BtnDisplayInfo.Name = "BtnDisplayInfo";
-            this.BtnDisplayInfo.Size = new System.Drawing.Size(32, 28);
+            this.BtnDisplayInfo.Size = new System.Drawing.Size(24, 23);
             this.BtnDisplayInfo.TabIndex = 2;
             this.BtnDisplayInfo.Text = "button1";
             this.BtnDisplayInfo.UseVisualStyleBackColor = true;
@@ -446,10 +458,9 @@
             // 
             this.BtnDisplayThumbnail.FlatAppearance.BorderSize = 0;
             this.BtnDisplayThumbnail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDisplayThumbnail.Location = new System.Drawing.Point(1194, 4);
-            this.BtnDisplayThumbnail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDisplayThumbnail.Location = new System.Drawing.Point(895, 3);
             this.BtnDisplayThumbnail.Name = "BtnDisplayThumbnail";
-            this.BtnDisplayThumbnail.Size = new System.Drawing.Size(32, 28);
+            this.BtnDisplayThumbnail.Size = new System.Drawing.Size(24, 23);
             this.BtnDisplayThumbnail.TabIndex = 3;
             this.BtnDisplayThumbnail.Text = "button2";
             this.BtnDisplayThumbnail.UseVisualStyleBackColor = true;
@@ -523,6 +534,38 @@
             this.BtnMaximize.TabIndex = 2;
             this.BtnMaximize.UseVisualStyleBackColor = false;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 10;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.CbNew, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnCut, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnCopy, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnPaste, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnRename, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnShare, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtnDelete, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CbSort, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CbView, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CbMore, 9, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 32);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(922, 40);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
             // OuterLeftEdge
             // 
             this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -540,6 +583,105 @@
             this.OuterBottomEdge.Name = "OuterBottomEdge";
             this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
             this.OuterBottomEdge.TabIndex = 2;
+            // 
+            // CbNew
+            // 
+            this.CbNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CbNew.FormattingEnabled = true;
+            this.CbNew.Location = new System.Drawing.Point(3, 3);
+            this.CbNew.Name = "CbNew";
+            this.CbNew.Size = new System.Drawing.Size(74, 21);
+            this.CbNew.TabIndex = 0;
+            // 
+            // BtnCut
+            // 
+            this.BtnCut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnCut.Location = new System.Drawing.Point(80, 0);
+            this.BtnCut.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnCut.Name = "BtnCut";
+            this.BtnCut.Size = new System.Drawing.Size(40, 40);
+            this.BtnCut.TabIndex = 1;
+            this.BtnCut.Text = "BtnCut";
+            this.BtnCut.UseVisualStyleBackColor = true;
+            // 
+            // BtnCopy
+            // 
+            this.BtnCopy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnCopy.Location = new System.Drawing.Point(120, 0);
+            this.BtnCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnCopy.Name = "BtnCopy";
+            this.BtnCopy.Size = new System.Drawing.Size(40, 40);
+            this.BtnCopy.TabIndex = 2;
+            this.BtnCopy.Text = "BtnCopy";
+            this.BtnCopy.UseVisualStyleBackColor = true;
+            // 
+            // BtnPaste
+            // 
+            this.BtnPaste.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnPaste.Location = new System.Drawing.Point(160, 0);
+            this.BtnPaste.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnPaste.Name = "BtnPaste";
+            this.BtnPaste.Size = new System.Drawing.Size(40, 40);
+            this.BtnPaste.TabIndex = 3;
+            this.BtnPaste.Text = "BtnPaste";
+            this.BtnPaste.UseVisualStyleBackColor = true;
+            // 
+            // BtnRename
+            // 
+            this.BtnRename.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnRename.Location = new System.Drawing.Point(200, 0);
+            this.BtnRename.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnRename.Name = "BtnRename";
+            this.BtnRename.Size = new System.Drawing.Size(40, 40);
+            this.BtnRename.TabIndex = 4;
+            this.BtnRename.Text = "BtnRename";
+            this.BtnRename.UseVisualStyleBackColor = true;
+            // 
+            // BtnShare
+            // 
+            this.BtnShare.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnShare.Location = new System.Drawing.Point(240, 0);
+            this.BtnShare.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnShare.Name = "BtnShare";
+            this.BtnShare.Size = new System.Drawing.Size(40, 40);
+            this.BtnShare.TabIndex = 5;
+            this.BtnShare.Text = "BtnShare";
+            this.BtnShare.UseVisualStyleBackColor = true;
+            // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnDelete.Location = new System.Drawing.Point(280, 0);
+            this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(40, 40);
+            this.BtnDelete.TabIndex = 6;
+            this.BtnDelete.Text = "button6";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            // 
+            // CbSort
+            // 
+            this.CbSort.FormattingEnabled = true;
+            this.CbSort.Location = new System.Drawing.Point(323, 3);
+            this.CbSort.Name = "CbSort";
+            this.CbSort.Size = new System.Drawing.Size(74, 21);
+            this.CbSort.TabIndex = 7;
+            // 
+            // CbView
+            // 
+            this.CbView.FormattingEnabled = true;
+            this.CbView.Location = new System.Drawing.Point(403, 3);
+            this.CbView.Name = "CbView";
+            this.CbView.Size = new System.Drawing.Size(74, 21);
+            this.CbView.TabIndex = 8;
+            // 
+            // CbMore
+            // 
+            this.CbMore.FormattingEnabled = true;
+            this.CbMore.Location = new System.Drawing.Point(483, 3);
+            this.CbMore.Name = "CbMore";
+            this.CbMore.Size = new System.Drawing.Size(66, 21);
+            this.CbMore.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -565,6 +707,7 @@
             this.StatusTablePanel.ResumeLayout(false);
             this.StatusTablePanel.PerformLayout();
             this.HeaderTablePanel.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -604,6 +747,17 @@
         private System.Windows.Forms.Button BtnGoRefresh;
         private System.Windows.Forms.Button BtnDisplayInfo;
         private System.Windows.Forms.Button BtnDisplayThumbnail;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox CbNew;
+        private System.Windows.Forms.Button BtnCut;
+        private System.Windows.Forms.Button BtnCopy;
+        private System.Windows.Forms.Button BtnPaste;
+        private System.Windows.Forms.Button BtnRename;
+        private System.Windows.Forms.Button BtnShare;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.ComboBox CbSort;
+        private System.Windows.Forms.ComboBox CbView;
+        private System.Windows.Forms.ComboBox CbMore;
     }
 }
 
