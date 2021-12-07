@@ -73,16 +73,29 @@ namespace FileManager
         public void CreateTreeView(TreeView treeView)
         {
             TreeNode ThisPC;
-
-            //Create new node
-            ThisPC = new TreeNode("This PC", 0, 0);
+            TreeNode Tag;
+            //Create ThisPC node
+            ThisPC = new TreeNode("This PC");
             ThisPC.Name = "This PC";
+
+            //Create Favorite node
+            Tag = new TreeNode("Tag");
+            Tag.Name = "Tag";
+
             //Delete treeView
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(ThisPC);
 
-            //Tree node collection of ThisPC
-            TreeNodeCollection treeNodeCollection = ThisPC.Nodes;
+            Icon icon;
+
+            //Add Tag node                       PENDING...
+            icon = Properties.Resources.Computer;
+            Tag.Tag = new CustomTreeView.TreeNodeTag(icon, false);
+            treeView.Nodes.Add(Tag);
+
+            //Add ThisPC node
+            icon = Properties.Resources.Computer;
+            ThisPC.Tag = new CustomTreeView.TreeNodeTag(icon, true);
+            treeView.Nodes.Add(ThisPC);          
 
             //Get list of disk in ThisPC
             ManagementObjectSearcher query = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
@@ -90,56 +103,22 @@ namespace FileManager
 
             foreach (ManagementObject item in collectionQuery)
             {
-                const int RemovableDisk = 2;
-                const int LocalDisk = 3;
-                const int NetworkDisk = 4;
-                const int CDDisk = 5;
-
-                int imageIndex;
-
-                //Assign icons to disks by using imageIndex and selectIndex
-                switch (int.Parse(item["DriveType"].ToString()))
-                {
-                    case RemovableDisk:
-                        imageIndex = 1;
-                        break;
-                    case LocalDisk:
-                        imageIndex = 2;
-                        break;
-                    case NetworkDisk:
-                        imageIndex = 3;
-                        break;
-                    case CDDisk:
-                        imageIndex = 4;
-                        break;
-                    default:
-                        imageIndex = 5;
-                        break;
-                }
-
                 //Create tree node for each disk
-                TreeNode diskTreeNode = new TreeNode(item["Name"].ToString() + "\\", imageIndex, imageIndex);
-                //Add to tree view
-                Icon icon = Properties.Resources.Folder;
-                string path = GetFullPath(diskTreeNode.FullPath);                
-                bool special = false;
-                bool hasChild = false;
-                special = (diskTreeNode.Text == "This PC");
-                if (!special)
-                {
-                    icon = GetDirectoryIcon(path, false);
-                    hasChild = (new DirectoryInfo(path)).GetDirectories() != null;
-                } else
-                {
-                    if (diskTreeNode.Text == "This PC") 
-                    { 
-                        icon = Properties.Resources.Computer;
-                        hasChild = true;
-                    }
-                }
-                diskTreeNode.Tag = new CustomTreeView.TreeNodeTag(icon,hasChild);
-                treeNodeCollection.Add(diskTreeNode);
+                TreeNode diskTreeNode = new TreeNode(item["Name"].ToString() + "\\");
+
+                //Add tree node's tag
+                diskTreeNode.Tag = GetTreeNodeTag(diskTreeNode.Text);
+                ThisPC.Nodes.Add(diskTreeNode);
             }
+        }
+
+        public CustomTreeView.TreeNodeTag GetTreeNodeTag(string path)
+        {
+            Icon icon = GetDirectoryIcon(path, false);
+            bool hasChild = false;
+            if(new DirectoryInfo(path).GetDirectories().Length!=0)
+                hasChild = true;
+            return  new CustomTreeView.TreeNodeTag(icon, hasChild);
         }
         #endregion
 
@@ -154,18 +133,22 @@ namespace FileManager
                     if (!Directory.Exists(GetFullPath(currentNode.FullPath)))
                     {
                         MessageBox.Show("'" + GetFullPath(currentNode.FullPath) + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
                     }
 
                     //Handle display folder
-                    //else
+                    else
                     {
-                            string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
-                            foreach (string strDirectory in strDirectories)
-                            {
-                                string strName = GetName(strDirectory);
-                            TreeNode dirNode = new TreeNode(strName, 5, 5);
-                                currentNode.Nodes.Add(dirNode);
-                            }
+                        string[] strDirectories = Directory.GetDirectories(GetFullPath(currentNode.FullPath));
+                        foreach (string strDirectory in strDirectories)
+                        {
+                            //Check if the dir is unauthorized or not
+                            if (CheckUnauthoried(strDirectory)) continue;
+                            string strName = GetName(strDirectory);
+                            TreeNode dirNode = new TreeNode(strName);
+                            dirNode.Tag = GetTreeNodeTag(strDirectory);
+                            currentNode.Nodes.Add(dirNode);
+                         }
                         currentNode.Checked = true;
 
                         ShowContent(listView, currentNode);
@@ -187,6 +170,14 @@ namespace FileManager
                     MessageBox.Show(ex.ToString());
                 }
             }
+            return false;
+        }
+
+        //Check if the dir is unauthorized or not
+        public bool CheckUnauthoried(string strPath)
+        {
+            try { new DirectoryInfo(strPath).GetDirectories(); }
+            catch (UnauthorizedAccessException) { return true; }
             return false;
         }
 

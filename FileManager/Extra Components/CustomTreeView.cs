@@ -160,36 +160,25 @@ namespace FileManager
                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40,SelectedOverlayColor)), Bound);
             }
 
-            if (e.Node.Text != "This PC")
+
+            bool hasChild = ((TreeNodeTag)e.Node.Tag).hasChild;
+            Icon icon = ((TreeNodeTag)e.Node.Tag).icon;
+            Point StartingPoint = new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
+
+            if (icon==null)
             {
-                string FullPath = ClsTreeListView.GetFullPath(e.Node.FullPath);
-                try
-                {
-                    bool hasChild = (new DirectoryInfo(FullPath))
-                        .GetDirectories().Count() != 0;
-                }
-                catch (UnauthorizedAccessException) { }
-                Icon icon = GetDirectoryIcon(FullPath, false);
-
-                Point StartingPoint = new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
-
-                if (icon==null)
-                {
-                    icon = Properties.Resources.Folder;
+                icon = Properties.Resources.Folder;
                     
-                }
-
-                if (icon.Size!=new Size(16,16))
-                {
-                    icon = ResizeImage(icon.ToBitmap(), 16, 16);
-                }
-
-                e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y+TopOffset);
-                TextRenderer.DrawText(e.Graphics, e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent) + icon.Width, Bound.Location.Y+TopOffset), this.ForeColor);
-            } else
-            {
-                TextRenderer.DrawText(e.Graphics, e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y+TopOffset), this.ForeColor);
             }
+
+            if (icon.Size!=new Size(16,16))
+            {
+                icon = ResizeImage(icon.ToBitmap(), 16, 16);
+            }
+
+            e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y+TopOffset);
+            TextRenderer.DrawText(e.Graphics, e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent) + icon.Width, Bound.Location.Y+TopOffset), this.ForeColor);
+
             
             //e.Graphics.DrawString(e.Node.Text, this.Font, new SolidBrush(this.ForeColor), Bound);
             base.OnDrawNode(e);
