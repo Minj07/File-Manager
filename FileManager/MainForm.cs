@@ -39,7 +39,8 @@ namespace FileManager
             else isOK = clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
 
             if(isOK)
-            CbAddress.Text = clsTreeListView.GetFullPath(e.Node.FullPath);
+
+            CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
         private void MainTablePanel_Paint(object sender, PaintEventArgs e)

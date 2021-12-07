@@ -87,7 +87,7 @@ namespace FileManager
         {
             left_arrow = 1,
             right_arrow = 2,
-            expand_arrow = 3,
+            expand_down_arrow = 3,
             up_arrow = 4,
             new_file = 5,
             reboot = 6,
@@ -102,7 +102,7 @@ namespace FileManager
                     break;
                 case icon.right_arrow: temp = Properties.Resources.right_arrow;
                     break;
-                case icon.expand_arrow: temp = Properties.Resources.expand_arrow;
+                case icon.expand_down_arrow: temp = Properties.Resources.expand_down_arrow;
                     break;
                 case icon.up_arrow: temp = Properties.Resources.up_arrow;
                     break;

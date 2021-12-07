@@ -10,7 +10,17 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "e032e1ed-90ce-4a76-b4d9-c98f18a8bdf3": {
+      "ProjectGuid": "e032e1ed-90ce-4a76-b4d9-c98f18a8bdf3",
+      "DisplayName": "LAB",
+      "ColorIndex": 1
+    },
+    "82142418-4e0f-445b-a418-5a435e5bebf7": {
+      "ProjectGuid": "82142418-4e0f-445b-a418-5a435e5bebf7",
+      "DisplayName": "LAB",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }
