@@ -52,6 +52,23 @@ namespace FileManager
             public string szTypeName;
         };
 
+        public static Icon GetDirectoryIcon(string dirName, bool largeIcon)
+        {
+            SHFILEINFO _SHFILEINFO = new SHFILEINFO();
+            int cbFileInfo = Marshal.SizeOf(_SHFILEINFO);
+            SHGFI flags = SHGFI.Icon;
+            if (largeIcon)
+                flags |= SHGFI.LargeIcon;
+            else
+                flags |= SHGFI.SmallIcon;
+
+            IntPtr IconIntPtr = SHGetFileInfo(dirName, 0, out _SHFILEINFO, (uint)cbFileInfo, flags);
+            if (IconIntPtr.Equals(IntPtr.Zero))
+                return null;
+            Icon _Icon = System.Drawing.Icon.FromHandle(_SHFILEINFO.hIcon);
+            return _Icon;
+        }
+
         #region Create Tree View
         public void CreateTreeView(TreeView treeView)
         {
@@ -104,12 +121,23 @@ namespace FileManager
                 TreeNode diskTreeNode = new TreeNode(item["Name"].ToString() + "\\", imageIndex, imageIndex);
                 //Add to tree view
                 Icon icon = Properties.Resources.Folder;
+                string path = GetFullPath(diskTreeNode.FullPath);                
                 bool special = false;
+                bool hasChild = false;
+                special = (diskTreeNode.Text == "This PC");
                 if (!special)
                 {
-
+                    icon = GetDirectoryIcon(path, false);
+                    hasChild = (new DirectoryInfo(path)).GetDirectories() != null;
+                } else
+                {
+                    if (diskTreeNode.Text == "This PC") 
+                    { 
+                        icon = Properties.Resources.Computer;
+                        hasChild = true;
+                    }
                 }
-                diskTreeNode.Tag = new CustomTreeView.TreeNodeTag(diskTreeNode.Text,icon);
+                diskTreeNode.Tag = new CustomTreeView.TreeNodeTag(icon,hasChild);
                 treeNodeCollection.Add(diskTreeNode);
             }
         }

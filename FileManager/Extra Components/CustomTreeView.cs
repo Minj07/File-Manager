@@ -53,6 +53,23 @@ namespace FileManager
             public string szTypeName;
         };
 
+        public static Icon GetDirectoryIcon(string dirName, bool largeIcon)
+        {
+            SHFILEINFO _SHFILEINFO = new SHFILEINFO();
+            int cbFileInfo = Marshal.SizeOf(_SHFILEINFO);
+            SHGFI flags = SHGFI.Icon;
+            if (largeIcon)
+                flags |= SHGFI.LargeIcon;
+            else
+                flags |= SHGFI.SmallIcon;
+
+            IntPtr IconIntPtr = SHGetFileInfo(dirName, 0, out _SHFILEINFO, (uint)cbFileInfo, flags);
+            if (IconIntPtr.Equals(IntPtr.Zero))
+                return null;
+            Icon _Icon = System.Drawing.Icon.FromHandle(_SHFILEINFO.hIcon);
+            return _Icon;
+        }
+
         private Icon ExpandDown = ResizeImage(Properties.Resources.expand_down_arrow,16,16);
 
         private Icon ExpandRight = ResizeImage(Properties.Resources.expand_right_arrow, 16, 16);
@@ -65,13 +82,13 @@ namespace FileManager
 
         public class TreeNodeTag
         {
-            public TreeNodeTag(string address,Icon CustomIcon = null)
+            public TreeNodeTag( Icon CustomIcon, bool hasChild)
             {
-                this.address = address;
                 this.icon = CustomIcon;
+                this.hasChild = hasChild;
             }
 
-            public string address { get; set; }
+            public bool hasChild { get; set; }
 
             public Icon icon { get; set; }
         }
@@ -124,22 +141,7 @@ namespace FileManager
             return NodeLevel(node.Parent)+1;
         }
 
-        public static Icon GetDirectoryIcon(string dirName, bool largeIcon)
-        {
-            SHFILEINFO _SHFILEINFO = new SHFILEINFO();
-            int cbFileInfo = Marshal.SizeOf(_SHFILEINFO);
-            SHGFI flags = SHGFI.Icon;
-            if (largeIcon)
-                flags |= SHGFI.LargeIcon;
-            else
-                flags |= SHGFI.SmallIcon;
-
-            IntPtr IconIntPtr = SHGetFileInfo(dirName, 0, out _SHFILEINFO, (uint)cbFileInfo, flags);
-            if (IconIntPtr.Equals(IntPtr.Zero))
-                return null;
-            Icon _Icon = System.Drawing.Icon.FromHandle(_SHFILEINFO.hIcon);
-            return _Icon;
-        }
+        
 
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
