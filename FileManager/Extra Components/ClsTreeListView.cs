@@ -117,7 +117,7 @@ namespace FileManager
         }
 
         //Return the full path of a tree node after handling
-        public string GetFullPath(string strPath)
+        static public string GetFullPath(string strPath)
         {
             return strPath.Replace(@"This PC\", "").Replace(@"\\", @"\");
         }

@@ -14,3 +14,19 @@ FileManager/obj/Debug/FileManager.csproj.GenerateResource.cache
 >>>>>>> d56a2602896ac550d0226316cfbece07505fdeeb
 *.cache
 *.cache
+LAB/App.config
+LAB/bin/Debug/LAB.exe.config
+LAB/Form1.cs
+LAB/Form1.Designer.cs
+LAB/Form1.resx
+LAB/LAB.csproj
+LAB/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+LAB/obj/Debug/LAB.csproj.FileListAbsolute.txt
+LAB/obj/Debug/LAB.Form1.resources
+LAB/obj/Debug/LAB.Properties.Resources.resources
+LAB/Program.cs
+LAB/Properties/AssemblyInfo.cs
+LAB/Properties/Resources.Designer.cs
+LAB/Properties/Resources.resx
+LAB/Properties/Settings.Designer.cs
+LAB/Properties/Settings.settings

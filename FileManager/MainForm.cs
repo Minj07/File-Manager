@@ -36,7 +36,7 @@ namespace FileManager
 
             else clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
 
-            CbAddress.Text = clsTreeListView.GetFullPath(e.Node.FullPath);
+            CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
         private void MainTablePanel_Paint(object sender, PaintEventArgs e)
@@ -151,7 +151,7 @@ namespace FileManager
             {
                 isListView=false;
                 isFolder = true;
-                path = clsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
+                path = ClsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
             }
             BtnPaste.Enabled = true;
         }
@@ -177,7 +177,7 @@ namespace FileManager
             {
                 isListView = false;
                 isFolder=true;
-                path = clsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
+                path = ClsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
             }
             BtnPaste.Enabled=true;
         }

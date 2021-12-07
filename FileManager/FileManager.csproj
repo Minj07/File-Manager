@@ -82,7 +82,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -127,6 +127,8 @@
     <None Include="assets\icon\rename.png" />
     <None Include="assets\icon\share.png" />
     <None Include="assets\icon\trash.png" />
+    <None Include="assets\icon\expand_down_arrow.png" />
+    <None Include="assets\icon\expand_right_arrow.png" />
     <Content Include="assets\Windows Icons\Audio file.ico" />
     <Content Include="assets\Windows Icons\Audio.ico" />
     <Content Include="assets\Windows Icons\Blank.ico" />
