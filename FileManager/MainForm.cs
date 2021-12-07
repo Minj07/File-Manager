@@ -39,7 +39,6 @@ namespace FileManager
             else isOK = clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
 
             if(isOK)
-
             CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
@@ -141,7 +140,7 @@ namespace FileManager
         private bool isCopying;
         private List<bool> isFolder;
         private bool isListView;
-        private List<ListViewItem> itemPaste;
+        private List<Object> itemPaste;
         private List<string> path;
 
         private void BtnCopy_Click(object sender, EventArgs e)
@@ -170,6 +169,7 @@ namespace FileManager
                 isFolder = true;
                 path = clsTreeListView.GetFullPath(nodeFocus.FullPath);
             }*/
+            if (itemPaste != null) 
             BtnPaste.Enabled = true;
         }
 
@@ -206,7 +206,7 @@ namespace FileManager
         private void Paste()
         {
             try
-            {
+            {     
                 List<string> pathSource = path;
                 List<string> pathDest = new List<string>();
                 //Assign name to file copied
@@ -477,16 +477,22 @@ namespace FileManager
 
         }
 
+        //Get selected tree node when click the button cut or copy
+        /*private void List<TreeNode> GetSelectedTreeNode()
+        {
+            List<TreeNode> nodeSelected =new List<TreeNode>();
+            foreach(TreeNode node in treeView.SelectedNode)
+
+        }*/
+
         private void listView_MouseClick(object sender, MouseEventArgs e)
         {
             isListView = true;
         }
 
-        /*private TreeNode nodeFocus;
         private void treeView_MouseClick(object sender, MouseEventArgs e)
         {
             isListView=false;
-            nodeFocus=treeView.SelectedNode;
-        }*/
+        }
     }
 }
