@@ -89,7 +89,7 @@ namespace FileManager
                             foreach (string strDirectory in strDirectories)
                             {
                                 string strName = GetName(strDirectory);
-                                TreeNode dirNode = new TreeNode(strName, 5, 5);
+                            TreeNode dirNode = new TreeNode(strName, 5, 5);
                                 currentNode.Nodes.Add(dirNode);
                             }
                         currentNode.Checked = true;
@@ -133,7 +133,7 @@ namespace FileManager
 
         #region Show Content
         //Show content of directory selected in Tree View
-        public void ShowContent(ListView listView, TreeNode currentNode)
+        public bool ShowContent(ListView listView, TreeNode currentNode)
         {
             try
             {
@@ -181,12 +181,25 @@ namespace FileManager
                         listView.Items.Add(listViewItem);
                     }
                 }
+                return true;
             }
+            catch (IOException)
+            {
+                MessageBox.Show("'" + GetFullPath(currentNode.FullPath) + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("You don't currently have permission to access this folder.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            return false;
         }
+    
 
         //Get List View item having info from folder
         public ListViewItem GetLVItems(DirectoryInfo folder)
@@ -308,7 +321,7 @@ namespace FileManager
             }
             catch (IOException)
             {
-                MessageBox.Show("Can't find '" + item.SubItems[4].Text + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("'" + GetFullPath(item.SubItems[4].Text) + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             catch (UnauthorizedAccessException)
