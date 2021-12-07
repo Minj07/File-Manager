@@ -53,24 +53,9 @@ namespace FileManager
             public string szTypeName;
         };
 
-
-
-        //public int Indent { get; set; } = 10;
-
         private Icon ExpandDown = ResizeImage(Properties.Resources.expand_down_arrow,16,16);
 
         private Icon ExpandRight = ResizeImage(Properties.Resources.expand_right_arrow, 16, 16);
-
-        private int angle = 0;
-
-        public int Angle
-        {
-            get { return angle; }
-            set { angle = value; Invalidate(); } }
-
-        private Timer AngleDelay = new Timer();
-
-        private System.ComponentModel.IContainer components;
 
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
        
@@ -99,9 +84,6 @@ namespace FileManager
             Graphics g = this.CreateGraphics();
             ItemHeight = (int)g.MeasureString(" ", this.Font).Height * 7 / 4;   //(1.75)
             TopOffset = ItemHeight * 3 / 14;                                    //((0.75/2)/1.75)
-            AngleDelay.Interval = 50;
-            AngleDelay.Start();
-            AngleDelay.Tick += (s, e) => { Angle = (Angle + 1) % 360; };
         }
 
         /// <summary>
@@ -211,11 +193,6 @@ namespace FileManager
             base.OnDrawNode(e);
         }
 
-        protected override void OnPaintBackground(PaintEventArgs pevent)
-        {
-            base.OnPaintBackground(pevent);
-            pevent.Graphics.FillRectangle(new LinearGradientBrush(pevent.ClipRectangle, this.BackColor, Color.Yellow, Angle), pevent.ClipRectangle);
-        }
 
     }
 }
