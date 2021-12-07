@@ -15,6 +15,16 @@ namespace FileManager
 {
     internal class CustomTreeView : TreeView
     {
+        private enum SHGFI
+        {
+            SmallIcon = 0x00000001,
+            LargeIcon = 0x00000000,
+            Icon = 0x00000100,
+            DisplayName = 0x00000200,
+            Typename = 0x00000400,
+            SysIconIndex = 0x00004000,
+            UseFileAttributes = 0x00000010
+        }
 
         [DllImport("Shell32.dll")]
         private static extern IntPtr SHGetFileInfo
@@ -43,30 +53,32 @@ namespace FileManager
             public string szTypeName;
         };
 
-        private enum SHGFI
-        {
-            SmallIcon = 0x00000001,
-            LargeIcon = 0x00000000,
-            Icon = 0x00000100,
-            DisplayName = 0x00000200,
-            Typename = 0x00000400,
-            SysIconIndex = 0x00004000,
-            UseFileAttributes = 0x00000010
-        }
+
 
         //public int Indent { get; set; } = 10;
 
         private Icon ExpandDown = ResizeImage(Properties.Resources.expand_down_arrow,16,16);
 
         private Icon ExpandRight = ResizeImage(Properties.Resources.expand_right_arrow, 16, 16);
-      
+
+        private int angle = 0;
+
+        public int Angle
+        {
+            get { return angle; }
+            set { angle = value; Invalidate(); } }
+
+        private Timer AngleDelay = new Timer();
+
+        private System.ComponentModel.IContainer components;
+
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
        
         public Color HoverOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
 
         private int TopOffset;
 
-        class TreeNodeTag
+        public class TreeNodeTag
         {
             public TreeNodeTag(string address,Icon CustomIcon = null)
             {
@@ -87,7 +99,9 @@ namespace FileManager
             Graphics g = this.CreateGraphics();
             ItemHeight = (int)g.MeasureString(" ", this.Font).Height * 7 / 4;   //(1.75)
             TopOffset = ItemHeight * 3 / 14;                                    //((0.75/2)/1.75)
-            
+            AngleDelay.Interval = 50;
+            AngleDelay.Start();
+            AngleDelay.Tick += (s, e) => { Angle = (Angle + 1) % 360; };
         }
 
         /// <summary>
@@ -150,7 +164,7 @@ namespace FileManager
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Rectangle Bound = new Rectangle(this.Location.X,e.Bounds.Y,this.Bounds.Width,e.Bounds.Height);
 
-            e.Graphics.FillRectangle(new SolidBrush(BackColor), Bound);
+            e.Graphics.FillRectangle(new SolidBrush(this.BackColor),Bound);
 
             if (e.State.HasFlag(TreeNodeStates.Hot))
             {
@@ -159,7 +173,7 @@ namespace FileManager
 
             if (e.State.HasFlag(TreeNodeStates.Selected))
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40,SelectedOverlayColor)), Bound);
+               e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40,SelectedOverlayColor)), Bound);
             }
 
             if (e.Node.Text != "This PC")
@@ -197,13 +211,11 @@ namespace FileManager
             base.OnDrawNode(e);
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), e.ClipRectangle);
-            base.OnPaint(e);
+            base.OnPaintBackground(pevent);
+            pevent.Graphics.FillRectangle(new LinearGradientBrush(pevent.ClipRectangle, this.BackColor, Color.Yellow, Angle), pevent.ClipRectangle);
         }
 
-
-       
     }
 }

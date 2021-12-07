@@ -211,7 +211,7 @@ namespace FileManager
                 List<string> pathDest = new List<string>();
                 //Assign name to file copied
                 foreach (ListViewItem item in itemPaste)
-                    pathDest.Add(clsTreeListView.GetFullPath(currentAddr + "\\" + item.Text));
+                    pathDest.Add(ClsTreeListView.GetFullPath(currentAddr + "\\" + item.Text));
 
                 List<string> listConflict = new List<string>();
                 int countCopying = 0;
@@ -354,7 +354,7 @@ namespace FileManager
                     {
                         if (pathSource[i] != null)
                         {
-                            tmpSrc.AddRange(clsTreeListView.GetFullPath(pathSource[i]).Split('\\'));
+                            tmpSrc.AddRange(ClsTreeListView.GetFullPath(pathSource[i]).Split('\\'));
                             break;
                         }
                     }
