@@ -140,7 +140,7 @@ namespace FileManager
         private bool isCopying;
         private List<bool> isFolder;
         private bool isListView;
-        private List<Object> itemPaste;
+        private List<ListViewItem> itemPaste;
         private List<string> path;
 
         private void BtnCopy_Click(object sender, EventArgs e)
