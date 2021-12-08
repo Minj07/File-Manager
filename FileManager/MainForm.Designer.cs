@@ -36,7 +36,7 @@
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.listView = new System.Windows.Forms.ListView();
+            this.listView = new CustomListView();
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -751,7 +751,7 @@
 
         private System.Windows.Forms.TableLayoutPanel MainTablePanel;
         private System.Windows.Forms.TableLayoutPanel DisplayTablePanel;
-        private System.Windows.Forms.ListView listView;
+        private CustomListView listView;
         private CustomTreeView treeView;
         private System.Windows.Forms.TableLayoutPanel NavigationTablePanel;
         private System.Windows.Forms.TextBox TxtBxSearch;
