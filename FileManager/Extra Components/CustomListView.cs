@@ -19,13 +19,9 @@ namespace FileManager
                 this.SmallIcon = SmallIcon;
                 this.LargeIcon = LargeIcon;
             }
-
             public string Extension { get; set; }
-
             public Icon SmallIcon { get; set; }
-
             public Icon LargeIcon { get; set; }
-
         }
 
         public CustomListView()

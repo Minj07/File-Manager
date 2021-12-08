@@ -264,7 +264,6 @@ namespace FileManager
             }
             return false;
         }
-    
 
         //Get List View item having info from folder
         public ListViewItem GetLVItems(DirectoryInfo folder)
@@ -275,7 +274,7 @@ namespace FileManager
             item[2] = "File folder";
             item[4] = folder.FullName;
             ListViewItem listViewItem = new ListViewItem(item);
-            listViewItem.ImageIndex = 4;
+            listViewItem.Tag=new CustomListView.ListViewItemTag(null,GetDirectoryIcon(folder.FullName,false),GetDirectoryIcon(folder.FullName,true));
             return listViewItem;
         }
 
@@ -290,7 +289,7 @@ namespace FileManager
             item[4] = file.FullName;
 
             //Set a default icon for the file
-            Icon iconForFile = SystemIcons.WinLogo;
+            /*Icon iconForFile = SystemIcons.WinLogo;
             ListViewItem listViewItem = new ListViewItem(item, 1);
 
 
@@ -312,7 +311,9 @@ namespace FileManager
                 listView.LargeImageList.Images.Add(key, iconForFile);
             }
 
-            listViewItem.ImageKey = key;
+            listViewItem.ImageKey = key;*/
+            ListViewItem listViewItem=new ListViewItem(item);
+            listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, GetDirectoryIcon(file.FullName, false), GetDirectoryIcon(file.FullName, true));
             return listViewItem;
         }
 
