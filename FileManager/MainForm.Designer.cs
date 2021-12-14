@@ -63,16 +63,11 @@
             this.BtnMinimize = new FileManager.RoundedButton();
             this.BtnMaximize = new FileManager.RoundedButton();
             this.ToolTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.CbNew = new System.Windows.Forms.ComboBox();
             this.BtnCut = new System.Windows.Forms.Button();
             this.BtnCopy = new System.Windows.Forms.Button();
             this.BtnPaste = new System.Windows.Forms.Button();
             this.BtnRename = new System.Windows.Forms.Button();
-            this.BtnShare = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
-            this.CbSort = new System.Windows.Forms.ComboBox();
-            this.CbView = new System.Windows.Forms.ComboBox();
-            this.CbMore = new System.Windows.Forms.ComboBox();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
@@ -123,7 +118,7 @@
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4);
             this.OuterTablePanel.Name = "OuterTablePanel";
             this.OuterTablePanel.Rounded = true;
             this.OuterTablePanel.RowCount = 2;
@@ -164,6 +159,7 @@
             this.DisplayTablePanel.ColumnCount = 2;
             this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.DisplayTablePanel.Controls.Add(this.listView, 1, 0);
             this.DisplayTablePanel.Controls.Add(this.treeView, 0, 0);
             this.DisplayTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -194,7 +190,6 @@
             this.listView.SmallImageList = this.imageListSmall;
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
             this.listView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listView_KeyPress);
             this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
             this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
@@ -217,7 +212,7 @@
             // colSize
             // 
             this.colSize.Text = "Size";
-            this.colSize.Width = 105;
+            this.colSize.Width = 10000;
             // 
             // treeView
             // 
@@ -235,7 +230,6 @@
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Margin = new System.Windows.Forms.Padding(0);
             this.treeView.Name = "treeView";
-            this.treeView.Scrollable = false;
             this.treeView.SelectedImageIndex = 0;
             this.treeView.SelectedOverlayColor = System.Drawing.Color.White;
             this.treeView.ShowLines = false;
@@ -368,7 +362,7 @@
             this.AddressTablePanel.CornerRadius = 50;
             this.AddressTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressTablePanel.Location = new System.Drawing.Point(162, 2);
-            this.AddressTablePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddressTablePanel.Margin = new System.Windows.Forms.Padding(2);
             this.AddressTablePanel.Name = "AddressTablePanel";
             this.AddressTablePanel.Rounded = false;
             this.AddressTablePanel.RowCount = 1;
@@ -553,16 +547,11 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ToolTablePanel.Controls.Add(this.CbNew, 0, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
-            this.ToolTablePanel.Controls.Add(this.BtnShare, 5, 0);
-            this.ToolTablePanel.Controls.Add(this.BtnDelete, 6, 0);
-            this.ToolTablePanel.Controls.Add(this.CbSort, 7, 0);
-            this.ToolTablePanel.Controls.Add(this.CbView, 8, 0);
-            this.ToolTablePanel.Controls.Add(this.CbMore, 9, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 32);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -571,15 +560,6 @@
             this.ToolTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ToolTablePanel.Size = new System.Drawing.Size(922, 39);
             this.ToolTablePanel.TabIndex = 6;
-            // 
-            // CbNew
-            // 
-            this.CbNew.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CbNew.FormattingEnabled = true;
-            this.CbNew.Location = new System.Drawing.Point(3, 3);
-            this.CbNew.Name = "CbNew";
-            this.CbNew.Size = new System.Drawing.Size(74, 21);
-            this.CbNew.TabIndex = 0;
             // 
             // BtnCut
             // 
@@ -638,55 +618,18 @@
             this.BtnRename.TabIndex = 4;
             this.BtnRename.UseVisualStyleBackColor = true;
             // 
-            // BtnShare
-            // 
-            this.BtnShare.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnShare.FlatAppearance.BorderSize = 0;
-            this.BtnShare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShare.Image = global::FileManager.Properties.Resources.share;
-            this.BtnShare.Location = new System.Drawing.Point(240, 0);
-            this.BtnShare.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnShare.Name = "BtnShare";
-            this.BtnShare.Size = new System.Drawing.Size(40, 39);
-            this.BtnShare.TabIndex = 5;
-            this.BtnShare.UseVisualStyleBackColor = true;
-            // 
             // BtnDelete
             // 
             this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnDelete.FlatAppearance.BorderSize = 0;
             this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDelete.Image = global::FileManager.Properties.Resources.trash;
-            this.BtnDelete.Location = new System.Drawing.Point(280, 0);
+            this.BtnDelete.Location = new System.Drawing.Point(240, 0);
             this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(40, 39);
             this.BtnDelete.TabIndex = 6;
             this.BtnDelete.UseVisualStyleBackColor = true;
-            // 
-            // CbSort
-            // 
-            this.CbSort.FormattingEnabled = true;
-            this.CbSort.Location = new System.Drawing.Point(323, 3);
-            this.CbSort.Name = "CbSort";
-            this.CbSort.Size = new System.Drawing.Size(74, 21);
-            this.CbSort.TabIndex = 7;
-            // 
-            // CbView
-            // 
-            this.CbView.FormattingEnabled = true;
-            this.CbView.Location = new System.Drawing.Point(403, 3);
-            this.CbView.Name = "CbView";
-            this.CbView.Size = new System.Drawing.Size(74, 21);
-            this.CbView.TabIndex = 8;
-            // 
-            // CbMore
-            // 
-            this.CbMore.FormattingEnabled = true;
-            this.CbMore.Location = new System.Drawing.Point(483, 3);
-            this.CbMore.Name = "CbMore";
-            this.CbMore.Size = new System.Drawing.Size(66, 21);
-            this.CbMore.TabIndex = 9;
             // 
             // OuterLeftEdge
             // 
@@ -770,16 +713,11 @@
         private System.Windows.Forms.Button BtnDisplayInfo;
         private System.Windows.Forms.Button BtnDisplayThumbnail;
         private System.Windows.Forms.TableLayoutPanel ToolTablePanel;
-        private System.Windows.Forms.ComboBox CbNew;
         private System.Windows.Forms.Button BtnCut;
         private System.Windows.Forms.Button BtnCopy;
         private System.Windows.Forms.Button BtnPaste;
         private System.Windows.Forms.Button BtnRename;
-        private System.Windows.Forms.Button BtnShare;
         private System.Windows.Forms.Button BtnDelete;
-        private System.Windows.Forms.ComboBox CbSort;
-        private System.Windows.Forms.ComboBox CbView;
-        private System.Windows.Forms.ComboBox CbMore;
         private System.Windows.Forms.ImageList imageListTreeView;
     }
 }

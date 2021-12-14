@@ -100,7 +100,7 @@ namespace FileManager
             //Toolbar
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnShare, BtnDelete })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
@@ -142,7 +142,6 @@ namespace FileManager
         private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDownLocation = new Point(-e.X, -e.Y);
-            TxtBxSearch.Text = mouseDownLocation.ToString();
         }
 
         private void HeaderTablePanel_MouseMove(object sender, MouseEventArgs e)

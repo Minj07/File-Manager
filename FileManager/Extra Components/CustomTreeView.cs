@@ -70,9 +70,11 @@ namespace FileManager
             return _Icon;
         }
 
-        private Icon ExpandDown = ResizeImage(Properties.Resources.expand_down_arrow,16,16);
+        private Icon ExpandDown;
 
-        private Icon ExpandRight = ResizeImage(Properties.Resources.expand_right_arrow, 16, 16);
+        private Icon ExpandRight;
+
+        private int Offset = 0;
 
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
        
@@ -96,57 +98,35 @@ namespace FileManager
         {
             DrawMode = TreeViewDrawMode.OwnerDrawAll;
             HotTracking = true;
-            ShowLines = false;
-            Scrollable = false;
             Graphics g = this.CreateGraphics();
             ItemHeight = (int)g.MeasureString(" ", this.Font).Height * 7 / 4;   //(1.75)
             TopOffset = ItemHeight * 3 / 14;                                    //((0.75/2)/1.75)
+            ExpandDown = Icon.FromHandle(
+                Theme.Recolor(
+                    Theme.ResizeImage(Properties.Resources.expand_down_arrow, 16, 16), Color.White)
+                .GetHicon()
+                );
+            ExpandRight = Icon.FromHandle(
+                Theme.Recolor(
+                    Theme.ResizeImage(Properties.Resources.expand_right_arrow, 16, 16), Color.White)
+                .GetHicon()
+                );
         }
-
-        /// <summary>
-        /// Resize the image to the specified width and height.
-        /// </summary>
-        /// <param name="image">The image to resize.</param>
-        /// <param name="width">The width to resize to.</param>
-        /// <param name="height">The height to resize to.</param>
-        /// <returns>The resized image.</returns>
-        public static Icon ResizeImage(Image image, int width, int height)
-        {
-            var destRect = new Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
-
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-
-            return Icon.FromHandle(destImage.GetHicon());
-        }
-
+       
         private int NodeLevel(TreeNode node)
         {
             if (node.Parent == null) return 0;
             return NodeLevel(node.Parent)+1;
+            
         }
-
-        
 
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            
             Rectangle Bound = new Rectangle(this.Location.X,e.Bounds.Y,this.Bounds.Width,e.Bounds.Height);
+
+            Bound.Offset(0, -Offset);
 
             e.Graphics.FillRectangle(new SolidBrush(this.BackColor),Bound);
 
@@ -173,14 +153,22 @@ namespace FileManager
 
             if (icon.Size!=new Size(16,16))
             {
-                icon = ResizeImage(icon.ToBitmap(), 16, 16);
+                icon = Icon.FromHandle(Theme.ResizeImage(icon.ToBitmap(), 16, 16).GetHicon());
             }
+            if (((TreeNodeTag)e.Node.Tag).hasChild)
+            {
+                if (e.Node.IsExpanded)
+                {
+                    e.Graphics.DrawIcon(this.ExpandDown, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
+                } else
+                {
+                    e.Graphics.DrawIcon(this.ExpandRight, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
+                }
+            }
+            e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent) + 20, Bound.Location.Y + TopOffset);
+            TextRenderer.DrawText(e.Graphics,e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent) + 36, Bound.Location.Y+TopOffset), this.ForeColor);
 
-            e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y+TopOffset);
-            TextRenderer.DrawText(e.Graphics, e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent) + icon.Width, Bound.Location.Y+TopOffset), this.ForeColor);
-
-            
-            //e.Graphics.DrawString(e.Node.Text, this.Font, new SolidBrush(this.ForeColor), Bound);
+           
             base.OnDrawNode(e);
         }
 
