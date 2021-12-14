@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -42,7 +43,6 @@
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.treeView = new FileManager.CustomTreeView();
-            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.NavigationTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.TxtBxSearch = new System.Windows.Forms.TextBox();
             this.NavigationButtonTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -102,6 +102,17 @@
             this.imageListSmall.Images.SetKeyName(3, "network disk");
             this.imageListSmall.Images.SetKeyName(4, "folder");
             this.imageListSmall.Images.SetKeyName(5, "blank");
+            // 
+            // imageListTreeView
+            // 
+            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
+            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
+            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
+            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
             // OuterTablePanel
             // 
@@ -236,17 +247,6 @@
             this.treeView.Size = new System.Drawing.Size(250, 297);
             this.treeView.TabIndex = 1;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
-            // 
-            // imageListTreeView
-            // 
-            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
-            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
-            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
-            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
             // NavigationTablePanel
             // 

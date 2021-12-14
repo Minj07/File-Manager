@@ -12,6 +12,7 @@ namespace FileManager
     {
 
         private int ViewIndex = 1;
+        private bool HoldingControl = false;
         public class ListViewItemTag
         {
             public ListViewItemTag(string Extension, Icon SmallIcon, Icon LargeIcon)
@@ -37,27 +38,46 @@ namespace FileManager
             input = (input > max ? max : input);
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Control&&!HoldingControl)
+            {
+                HoldingControl = true;
+            }
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (!e.Control&&HoldingControl)
+            {
+                HoldingControl = false;
+            }
+            base.OnKeyUp(e);
+        }
+
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-
-            ViewIndex += e.Delta / SystemInformation.MouseWheelScrollDelta;
-            cap(ref ViewIndex, 0, 4);
-            switch (ViewIndex)
+            if (HoldingControl)
             {
-                case 0: View = View.Tile; break;
-                case 1: View = View.Details; break;
-                case 2: View = View.List; break;
-                case 3: View = View.SmallIcon; break;
-                case 4: View = View.LargeIcon; break;
+                ViewIndex += e.Delta / SystemInformation.MouseWheelScrollDelta;
+                cap(ref ViewIndex, 0, 4);
+                switch (ViewIndex)
+                {
+                    case 0: View = View.Tile; break;
+                    case 1: View = View.Details; break;
+                    case 2: View = View.List; break;
+                    case 3: View = View.SmallIcon; break;
+                    case 4: View = View.LargeIcon; break;
+                }
             }
-
             base.OnMouseWheel(e);
         }
 
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
             e.DrawDefault = true;
-            //e.Item.Text = e.Bounds.Size.ToString();            
+            e.Item.Text = HoldingControl.ToString();            
             base.OnDrawItem(e);
             
         }
