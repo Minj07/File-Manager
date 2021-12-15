@@ -30,16 +30,22 @@ namespace FileManager
         }
 
         //Handle event when a tree node is selected
-        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        //Refresh tree view
+        public void RefreshTreeView(TreeView treeView, TreeNode treeNode)
         {
-            bool isOK;
-            if (e.Node.Name == "This PC" || e.Node.Checked)
-                isOK = clsTreeListView.ShowContent(listView, e.Node);
+            if (treeNode.Name != "This PC" && treeNode.Name != "Tag")
+            {
+                treeNode.Nodes.Clear();
+                clsTreeListView.ShowFolderTree(treeView, treeNode);
+            }
+        }
 
-            else isOK = clsTreeListView.ShowFolderTree(treeView, listView, e.Node);
-
-            if(isOK)
-            CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
+        private void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(e.Node.Nodes.Count == 0)
+                clsTreeListView.ShowFolderTree(treeView, e.Node);
+            if (clsTreeListView.ShowContent(listView, e.Node))
+                CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
         private void MainTablePanel_Paint(object sender, PaintEventArgs e)
@@ -50,7 +56,7 @@ namespace FileManager
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem item = this.listView.FocusedItem;
-            if(clsTreeListView.ClickItem(this.listView, item))
+            if (clsTreeListView.ClickItem(this.listView, this.treeView, item))
                 CbAddress.Text = item.SubItems[4].Text;
         }
 
@@ -59,8 +65,8 @@ namespace FileManager
             if (this.listView.FocusedItem == null) return;
             ListViewItem item = this.listView.FocusedItem;
             if (e.KeyChar == (int)Keys.Enter)
-                if(clsTreeListView.ClickItem(this.listView, this.listView.FocusedItem))
-                    CbAddress.Text=item.SubItems[4].Text;
+                if (clsTreeListView.ClickItem(this.listView, this.treeView, this.listView.FocusedItem))
+                    CbAddress.Text = item.SubItems[4].Text;
         }
 
         private void BtnGoRefresh_Click(object sender, EventArgs e)
@@ -69,13 +75,13 @@ namespace FileManager
             {
                 if (CbAddress.Text == "This PC")
                     clsTreeListView.ShowContent(listView, treeView.Nodes[0]);
-                else if (CbAddress.Text != " ") 
+                else if (CbAddress.Text != " ")
                 {
                     FileInfo fileInfo = new FileInfo(CbAddress.Text.Trim());
                     if (fileInfo.Exists)
                     {
                         Process.Start(fileInfo.FullName);
-                        DirectoryInfo directoryInfo= fileInfo.Directory;
+                        DirectoryInfo directoryInfo = fileInfo.Directory;
                         CbAddress.Text = directoryInfo.FullName;
                     }
                     else
@@ -131,7 +137,7 @@ namespace FileManager
 
         private void CbAddress_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar==(char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
                 BtnGoRefresh_Click(sender, e);
         }
 
@@ -141,13 +147,15 @@ namespace FileManager
         private List<bool> isFolder;
         private bool isListView;
         private List<ListViewItem> itemPaste;
+        private TreeNode treeNodePaste;
         private List<string> path;
 
-        private void BtnCopy_Click(object sender, EventArgs e)
+        private void Copy()
         {
             isFolder = new List<bool>();
             path = new List<string>();
             isCopying = true;
+            isCutting = false;
             if (isListView)
             {
                 itemPaste = GetSelectedListViewItems();
@@ -163,74 +171,115 @@ namespace FileManager
                     path.Add(item.SubItems[4].Text);
                 }
             }
-            /*else if(this.treeView.Focused)
+            else
             {
-                isListView=false;
-                isFolder = true;
-                path = clsTreeListView.GetFullPath(nodeFocus.FullPath);
-            }*/
-            if (itemPaste != null) 
-            BtnPaste.Enabled = true;
+                if (treeView.SelectedNode == null)
+                    return;
+                treeNodePaste = treeView.SelectedNode;
+                isFolder.Add(true);
+                path.Add(ClsTreeListView.GetFullPath(treeNodePaste.FullPath));
+            }
+            if (itemPaste != null || treeNodePaste != null)
+                BtnPaste.Enabled = true;
+        }
+        private void BtnCopy_Click(object sender, EventArgs e)
+        {
+            Copy();
         }
 
-        //private bool isCutting;
-        private void BtnCut_Click(object sender, EventArgs e)
+        private bool isCutting;
+        private void Cut()
         {
-            isCopying=false;
-            if(isListView)
+            isFolder = new List<bool>();
+            path = new List<string>();
+            isCutting = true;
+            isCopying = false;
+            if (isListView)
             {
+                itemPaste = GetSelectedListViewItems();
 
-                itemPaste = GetSelectedListViewItems();                
                 if (itemPaste == null)
                     return;
 
                 foreach (ListViewItem item in itemPaste)
                 {
-                    item.ForeColor = Color.LightGray;
                     if (item.SubItems[2].Text == "File folder")
                         isFolder.Add(true);
                     else isFolder.Add(false);
                     path.Add(item.SubItems[4].Text);
                 }
             }
-            /*else if(this.treeView.Focused)
+            else
             {
-                isListView = false;
-                isFolder=true;
-                path = clsTreeListView.GetFullPath(this.treeView.SelectedNode.FullPath);
-            }*/
-            BtnPaste.Enabled=true;
+                if (treeView.SelectedNode == null)
+                    return;
+                treeNodePaste = treeView.SelectedNode;
+                isFolder.Add(true);
+                path.Add(ClsTreeListView.GetFullPath(treeNodePaste.FullPath));
+            }
+            if (itemPaste != null || treeNodePaste != null)
+                BtnPaste.Enabled = true;
+        }
+        private void BtnCut_Click(object sender, EventArgs e)
+        {
+            Cut();
         }
         #endregion
 
         private void Paste()
         {
             try
-            {     
+            {
                 List<string> pathSource = path;
                 List<string> pathDest = new List<string>();
-                //Assign name to file copied
-                foreach (ListViewItem item in itemPaste)
-                    pathDest.Add(ClsTreeListView.GetFullPath(currentAddr + "\\" + item.Text));
 
                 List<string> listConflict = new List<string>();
                 int countCopying = 0;
-                //Check if having problem
-                for (int i = 0; i < itemPaste.Count; i++)
+                if (isListView)
                 {
+                    //Assign name to file copied
+                    foreach (ListViewItem item in itemPaste)
+                        pathDest.Add(ClsTreeListView.GetFullPath(currentAddr + "\\" + item.Text));
+                }
+                else pathDest.Add(ClsTreeListView.GetFullPath(currentAddr + "\\" + treeNodePaste.Text));
+
+                //Check if having problem
+                for (int i = 0; i < pathSource.Count; i++)
+                {
+                    if (pathSource[i] == null) continue;
                     //Check if the destination folder is a subfolder of the source folder or not and handle it
                     if (isFolder[i])
                     {
-                        if (currentAddr.Contains(pathSource[i]))
+                        List<string> src = new List<string>();
+                        src.AddRange(pathSource[i].Split('\\'));
+                        List<string> dst = new List<string>();
+                        dst.AddRange(currentAddr.Split('\\'));
+                        bool isSub = false;
+                        if (src.Count <= dst.Count)
+                        {
+                            isSub = true;
+                            for (int j = 0; j < src.Count; j++)
+                                if (src[j] != dst[j])
+                                {
+                                    isSub = false;
+                                    break;
+                                }
+                        }
+                        if (isSub)
                         {
                             DialogResult result = MessageBox.Show("The destination folder is a subfolder of the source folder : " +
                                              "\n" + pathSource[i] + "\nDo you want to skip ? ", "Interrupted Action", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                             if (result == DialogResult.OK)
                             {
+                                BtnPaste.Enabled = false;
                                 pathSource[i] = null;
                                 continue;
                             }
-                            else return;
+                            else
+                            {
+                                BtnPaste.Enabled = false;
+                                return;
+                            }
                         }
                     }
 
@@ -239,21 +288,20 @@ namespace FileManager
                         countCopying += CountItem(pathSource[i]);
                     else countCopying++;
 
-                    //Handle problem 
+                    //Handle problem copy and cut same path
                     if (pathDest[i] == pathSource[i])
                     {
-                        int copy = 2;
-                        pathDest[i] += " - Copy";
-                        if (isFolder[i])
+                        if (isCopying)
                         {
+                            int copy = 2;
+                            pathDest[i] += " - Copy";
                             DirectoryInfo directoryInfo = new DirectoryInfo(currentAddr);
                             if (!directoryInfo.Exists)
                                 return;
-                            else
+                            if (isFolder[i])
                             {
-
                                 bool flag = false;
-
+                                //Check if currentAddr folder has the same name "... - Copy"
                                 foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
                                 {
                                     if (dir.FullName == pathDest[i])
@@ -275,17 +323,10 @@ namespace FileManager
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
-                            DirectoryInfo directoryInfo = new DirectoryInfo(currentAddr);
-                            if (!directoryInfo.Exists)
-                                return;
                             else
                             {
-
                                 bool flag = false;
-                                //Check if currentAddr folder has the same name "... - Copy"
+                                //Check if currentAddr folder has the file with the same name "... - Copy"
                                 foreach (FileInfo file in directoryInfo.GetFiles())
                                 {
                                     if (file.FullName == pathDest[i])
@@ -310,19 +351,47 @@ namespace FileManager
                                 }
                             }
                         }
+                        else if (isCutting)
+                        {
+                            DialogResult result = MessageBox.Show(((isFolder[i]) ? "The destination folder is the same as the source folder." : "The source and destination file names are the same.") + "\n" + currentAddr +
+                                                                  "\nDo you want to skip ? ", "Interupted Action", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            if (result == DialogResult.OK)
+                            {
+                                BtnPaste.Enabled = false;
+                                pathSource[i] = null;
+                            }
+                            else
+                            {
+                                BtnPaste.Enabled = false;
+                                return;
+                            }
+                        }
                     }
+
+                    //Handle when different path source and destination
                     else
                     {
                         DirectoryInfo directoryInfo = new DirectoryInfo(currentAddr);
                         bool isConflict = false;
+                        //Check if the destination folder has the file of folder with the source
                         if (isFolder[i])
                         {
-                            foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
-                                if (dir.Name == itemPaste[i].Text)
-                                {
-                                    isConflict = true;
-                                    break;
-                                }
+                            if (isListView)
+                            {
+                                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                                    if (dir.Name == itemPaste[i].Text)
+                                    {
+                                        isConflict = true;
+                                        break;
+                                    }
+                            }
+                            else
+                                foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                                    if (dir.Name == treeNodePaste.Text)
+                                    {
+                                        isConflict = true;
+                                        break;
+                                    }
                         }
                         else
                         {
@@ -350,7 +419,7 @@ namespace FileManager
                 {
                     //Get the source folder and the destination source 
                     List<string> tmpSrc = new List<string>();
-                    for (int i = 0; i < itemPaste.Count; i++)
+                    for (int i = 0; i < pathSource.Count; i++)
                     {
                         if (pathSource[i] != null)
                         {
@@ -365,48 +434,58 @@ namespace FileManager
                     string a = "";
                     foreach (string i in listConflict)
                         a += ("\n" + i);
-                    DialogResult result = MessageBox.Show("Copying " + countCopying + " item" + ((countCopying > 1) ? "s" : "") + " from \"" + src.Remove(src.Length-1,1) + "\" to \"" + dst + "\"" +
+                    DialogResult result = MessageBox.Show(((isCopying) ? "Copying " : "Moving ") + countCopying + " item" + ((countCopying > 1) ? "s" : "") + " from \"" + src.Remove(src.Length - 1, 1) + "\" to \"" + dst + "\"" +
                                                         "\nThe destination has " + listConflict.Count + " file" + ((listConflict.Count > 1) ? "s" : "") + " with the same name" + ((listConflict.Count > 1) ? "s" : "") + " : " + a +
-                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                         isReplace = true;
+                    else if (result == DialogResult.Cancel)
+                        return;
                 }
-
                 //Copy or Cut
-                for (int i = 0; i < itemPaste.Count; i++)
+                for (int i = 0; i < pathSource.Count; i++)
                 {
                     if (pathSource[i] == null || pathDest[i] == null)
                         continue;
+                    // Get the parent of the source node for refreshing
+                    TreeNode parent = new TreeNode();
+                    if (isFolder[i])
+                        parent = treeView.Nodes.Find(pathSource[i], true)[0].Parent;
                     if (isCopying)
                     {
                         if (isFolder[i])
+                        {
                             FileSystem.CopyDirectory(pathSource[i], pathDest[i], isReplace);
+                            RefreshTreeView(treeView, parent);
+                        }
                         else FileSystem.CopyFile(pathSource[i], pathDest[i], isReplace);
                     }
-                    else
+                    else if (isCutting)
                     {
                         if (isFolder[i])
-                            FileSystem.MoveDirectory(pathSource[i], pathDest[i]);
-                        else FileSystem.MoveFile(pathSource[i], pathDest[i]);
-                        BtnPaste.Enabled = false;
-                    }
+                        {
+                            FileSystem.MoveDirectory(pathSource[i], pathDest[i], isReplace);
+                            RefreshTreeView(treeView, parent);
+                        }
+                        else FileSystem.MoveFile(pathSource[i], pathDest[i], isReplace);
+                        
+
+                    }              
                 }
 
-                //Refresh list view
+                //Refresh 
+                TreeNode treeNode = treeView.Nodes.Find(currentAddr, true)[0];
+                RefreshTreeView(treeView, treeNode);
                 clsTreeListView.ShowContent(listView, currentAddr);
 
-
+                if (isCutting)
+                {
+                    BtnPaste.Enabled = false;
+                }
             }
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("You don't currently have permission to access this folder.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (IOException)
-            {
-                /*if (isFolder[i])
-                    MessageBox.Show("The destination folder is the same as the source folder.", "Interrupted", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                else
-                    MessageBox.Show("The source and the destination file names are the same.", "Interrupted", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);*/
             }
             catch (Exception ex)
             {
@@ -425,9 +504,9 @@ namespace FileManager
                 return listConflict;
             else
             {
-                foreach(DirectoryInfo directoryInfo in directoryDst.GetDirectories())
-                    if(directoryInfo.Name ==directoryInfo.Name)
-                        directoryDst=directoryInfo;
+                foreach (DirectoryInfo directoryInfo in directoryDst.GetDirectories())
+                    if (directoryInfo.Name == directoryInfo.Name)
+                        directoryDst = directoryInfo;
 
                 foreach (DirectoryInfo dirSrc in directorySrc.GetDirectories())
                     foreach (DirectoryInfo dirDst in directoryDst.GetDirectories())
@@ -445,15 +524,15 @@ namespace FileManager
         private List<string> GetConflict(FileInfo fileSrc, DirectoryInfo directoryDst)
         {
             List<string> listConflict = new List<string>();
-            foreach(FileInfo fileDst in directoryDst.GetFiles())
-                        if (fileSrc.Name.Equals(fileDst.Name))
-                listConflict.Add(fileDst.FullName);
+            foreach (FileInfo fileDst in directoryDst.GetFiles())
+                if (fileSrc.Name.Equals(fileDst.Name))
+                    listConflict.Add(fileDst.FullName);
             return listConflict;
         }
         private int CountItem(string path)
         {
             int count = 1;
-            DirectoryInfo directoryInfo=new DirectoryInfo(path);
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
                 return count;
             else
@@ -466,7 +545,7 @@ namespace FileManager
             }
             return count;
         }
- 
+
         //Get list of selected list view items when click button copy or cut
         private List<ListViewItem> GetSelectedListViewItems()
         {
@@ -477,14 +556,6 @@ namespace FileManager
 
         }
 
-        //Get selected tree node when click the button cut or copy
-        /*private void List<TreeNode> GetSelectedTreeNode()
-        {
-            List<TreeNode> nodeSelected =new List<TreeNode>();
-            foreach(TreeNode node in treeView.SelectedNode)
-
-        }*/
-
         private void listView_MouseClick(object sender, MouseEventArgs e)
         {
             isListView = true;
@@ -492,7 +563,222 @@ namespace FileManager
 
         private void treeView_MouseClick(object sender, MouseEventArgs e)
         {
-            isListView=false;
+            isListView = false;
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.C:
+                        Copy();
+                        break;
+                    case Keys.X:
+                        Cut();
+                        break;
+                    case Keys.V:
+                        if (BtnPaste.Enabled)
+                            Paste();
+                        break;
+                    case Keys.D:
+                        Delete();
+                        break ;
+                }
+            }
+        }
+        public void Delete()
+        {
+            if (GetSelectedListViewItems().Count == 0) return;
+            clsTreeListView.Delete(GetSelectedListViewItems());
+            //Refresh 
+            TreeNode treeNode = treeView.Nodes.Find(currentAddr, true)[0];
+            RefreshTreeView(treeView, treeNode);
+            clsTreeListView.ShowContent(listView, currentAddr);
+        }
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            Delete();
+        }
+
+        private bool isRenaming = false;
+        private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            RenameItem(e.Label);
+            e.CancelEdit = true;
+            isRenaming = false;
+            clsTreeListView.ShowContent(this.listView, currentAddr);
+        }
+        private void BtnRename_Click(object sender, EventArgs e)
+        {
+            isRenaming = true;
+            this.listView.SelectedItems[0].BeginEdit();
+        }
+
+        private void RenameItem(string e)
+        {
+            try
+            {
+                if (isRenaming)
+                {
+                    if (GetSelectedListViewItems() == null)
+                        return;
+                    ListViewItem listViewItem = GetSelectedListViewItems()[0];
+                    string path = listViewItem.SubItems[4].Text;
+                    if (e.Contains("\\") || e.Contains("/") || e.Contains(":") || e.Contains("*") || e.Contains("?") || e.Contains("\"") || e.Contains("<") || e.Contains(">") || e.Contains("|"))
+                    {
+                        MessageBox.Show("A file name can't contain any of the following characters:\n\\ / ; * ? ” < > |", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        clsTreeListView.ShowContent(this.listView, currentAddr);
+                        return;
+                    }
+                    else if (e != null)
+                    {
+                        string newName = "";
+                        if (listViewItem.SubItems[2].Text != "File folder")
+                        {
+                            FileInfo fileInfo = new FileInfo(listViewItem.SubItems[4].Text);
+                            if (!e.Contains(fileInfo.Extension))
+                            {
+                                DialogResult result = MessageBox.Show("If you change a file name extension, the file might become unusable.\nAre you sure you want to change it?", "Rename", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (result == DialogResult.No)
+                                    return;
+                            }
+                            
+                            newName = HandleRename(e, new DirectoryInfo(currentAddr));
+                            if (newName == null)
+                                return;
+                            else if(newName!=e)
+                            {
+                                DialogResult result = MessageBox.Show("Do you want to rename \"" + fileInfo.Name + "\" to \"" + newName + "\"? \nThere is already a file with the same name in this location.","Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if(result == DialogResult.No)
+                                    return;
+                            }
+                            FileSystem.RenameFile(fileInfo.FullName, newName);
+                        }
+                        else
+                        {
+                            DirectoryInfo directoryInfo = new DirectoryInfo(listViewItem.SubItems[4].Text);
+                            newName = HandleRename(e, new DirectoryInfo(currentAddr), directoryInfo);
+                            if (newName == null)
+                                return;
+                            FileSystem.RenameDirectory(directoryInfo.FullName, newName);
+                        }
+                    }
+                }
+                
+
+            }
+            catch (IOException)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private string HandleRename(string newName,DirectoryInfo directory, DirectoryInfo FolderRenamed=null)
+        {
+            bool isConflict = false;
+            bool isFolderConflict = true;
+            string path = "";
+            foreach(FileInfo file in directory.GetFiles())
+            {
+                if(file.Name == newName)
+                {
+                    isConflict = true;
+                    isFolderConflict = false;
+                    path = file.FullName;
+                    break;
+                }
+            }
+            foreach (DirectoryInfo dir in directory.GetDirectories())
+            {
+                if (dir.Name == newName)
+                {
+                    isConflict = true;
+                    path = dir.FullName;
+                    break;
+                }
+            }
+            if (isConflict)
+            {
+                if (FolderRenamed.Exists)
+                {
+                   if(isFolderConflict)
+                    {
+                        DialogResult result = MessageBox.Show("This destination already contains a folder named '" + newName + "'." +
+                                                              "\nIf any files have the same names, you will be asked if you want to replace those files." +
+                                                              "\nDo you still want to merge this folder" +
+                                                              "\n" + path +
+                                                              "\nwith this one?" +
+                                                              "\n" + FolderRenamed.FullName, "Confirm Folder Replace", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.No)
+                            return null;
+                        MergeFolder(FolderRenamed, new DirectoryInfo(path));
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is already a file with the same name as the folder name you specified.\n" + path + "\nSpecify a different name.", "Rename File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return null;
+                    }
+                }
+                else
+                {
+                    if (isFolderConflict)
+                    {
+                        MessageBox.Show("There is already a folder with the same name as the file name you specified.\n" + path + "\nSpecify a different name.", "Rename File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return null;
+                    }
+                    else
+                    {
+                        string extension = "";
+                        // Assign name without extension to string a
+                        if (newName.Contains('.'))
+                        {
+                            string a = "";
+                            string[] b = newName.Split('.');
+                            for (int i = 0; i < b.Length - 1; i++)
+                                a += (b[i] + ".");
+                            a = a.Remove(a.Length - 1, 1);
+
+                            // Assign extension to string extension
+                            extension = "." + b[b.Length - 1];
+                            newName = a;
+                        }
+                        int idRename = 2;
+                        newName += (" (" + idRename.ToString() + ")" + extension);
+                        foreach (FileInfo file in directory.GetFiles())
+                        {
+                            if (file.Name == newName)
+                            {
+                                idRename++;
+                                newName = newName.Remove(newName.Length - extension.Length - 2, 2 + extension.Length);
+                                newName += (idRename.ToString() + ")" + extension);
+                            }
+                        }
+                    }
+                }
+            }
+            return newName;       
+        }
+
+        private void MergeFolder(DirectoryInfo directorySrc,DirectoryInfo directoryDst)
+        {
+            foreach(FileInfo file in directorySrc.GetFiles())
+            {
+                string newName = HandleRename(file.Name, directoryDst);
+                if (newName != file.Name)
+                {
+                    DialogResult result = MessageBox.Show("Do you want to rename \"" + file.Name + "\" to \"" + newName + "\"? \nThere is already a file with the same name in this location.", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
+                        FileSystem.RenameFile(file.FullName, newName);
+                }
+                FileSystem.MoveFile(file.FullName,directoryDst.FullName+"\\"+file.Name);
+            }
+            foreach(DirectoryInfo directory in directorySrc.GetDirectories())
+                
         }
     }
 }

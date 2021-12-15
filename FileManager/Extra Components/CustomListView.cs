@@ -26,7 +26,7 @@ namespace FileManager
 
         public CustomListView()
         {
-            this.OwnerDraw = true;
+            //this.OwnerDraw = true;
         }
 
         protected override void OnDrawItem(DrawListViewItemEventArgs e)

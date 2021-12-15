@@ -9,6 +9,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using Microsoft.VisualBasic.FileIO;
 
 namespace FileManager
 {
@@ -109,6 +110,7 @@ namespace FileManager
                 //Add tree node's tag
                 diskTreeNode.Tag = GetTreeNodeTag(diskTreeNode.Text);
                 ThisPC.Nodes.Add(diskTreeNode);
+                ThisPC.LastNode.Name=ClsTreeListView.GetFullPath(ThisPC.LastNode.FullPath);
             }
         }
 
@@ -123,7 +125,7 @@ namespace FileManager
         #endregion
 
         #region Show Folder Tree
-        public bool ShowFolderTree(TreeView treeView, ListView listView, TreeNode currentNode)
+        public bool ShowFolderTree(TreeView treeView, TreeNode currentNode)
         {
             if (currentNode.Name != "This PC")
             {
@@ -148,10 +150,9 @@ namespace FileManager
                             TreeNode dirNode = new TreeNode(strName);
                             dirNode.Tag = GetTreeNodeTag(strDirectory);
                             currentNode.Nodes.Add(dirNode);
+                            currentNode.LastNode.Name = ClsTreeListView.GetFullPath(currentNode.LastNode.FullPath);
                          }
-                        currentNode.Checked = true;
-
-                        ShowContent(listView, currentNode);
+                        
                     }
                     return true;
                 }
@@ -356,16 +357,18 @@ namespace FileManager
         #endregion
 
 
-        public bool ClickItem(ListView listView, ListViewItem item)
+        public bool ClickItem(ListView listView,TreeView treeView, ListViewItem item)
         {
             try
             {
                 string path = item.SubItems[4].Text;
+                // If click a file, run that file
                 FileInfo file = new FileInfo(path);
                 if (file.Exists)
                 {
                     Process.Start(path);
                 }
+                // If click a folder, show content of that folder
                 else
                 {
                     DirectoryInfo directoryInfo = new DirectoryInfo(path);
@@ -382,6 +385,16 @@ namespace FileManager
 
                     foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
                         listView.Items.Add(GetLVItems(fileInfoTemp, listView));
+
+                    // Focus the tree node of the dir clicked
+                    List<TreeNode> tn=new List<TreeNode>();
+                    tn.AddRange(treeView.Nodes.Find(path, true));
+                    if(tn.Count <= 0)
+                    {
+                        ShowFolderTree(treeView, treeView.Nodes.Find(directoryInfo.Parent.FullName, true)[0]);
+                        tn.AddRange(treeView.Nodes.Find(path, true));
+                    }
+                    tn[0].EnsureVisible();
                 }
                 return true;
             }
@@ -400,6 +413,62 @@ namespace FileManager
                 MessageBox.Show(ex.ToString());
             }
             return false;
+        }
+
+        public void Delete(List<ListViewItem> listItem)
+        {
+            if (listItem == null) return;
+            try
+            {
+                string a = "";
+                // Check if list view item is null or not
+                foreach(ListViewItem item in listItem)
+                {
+                    if (item.SubItems[2].Text == "File folder")
+                    {
+                        if (!new DirectoryInfo(item.SubItems[4].Text).Exists)
+                            return;
+                    }
+                    else if (!new FileInfo(item.SubItems[4].Text).Exists)
+                        return;
+                    a += ("\n" + item.SubItems[4].Text);
+                }
+
+                // Show message box to make sure want to permanently delete
+                DialogResult result;
+                if (listItem.Count == 1)
+                    result = MessageBox.Show("Are you sure you want to permanently delete this " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file") + " ?"+a, "Delete " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                else result = MessageBox.Show("Are you sure you want to permanently delete these " + listItem.Count + " items ?"+a, "Delete Multiple Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                    return;
+
+                //Delete item
+                else
+                    foreach(ListViewItem item in listItem)
+                        if (item.SubItems[2].Text == "File folder")
+                        {
+                            DeleteFolder(new DirectoryInfo(item.SubItems[4].Text));
+                        }
+                        else
+                            new FileInfo(item.SubItems[4].Text).Delete();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        public void DeleteFolder(DirectoryInfo directoryInfo)
+        {
+            DirectoryInfo[] directories = directoryInfo.GetDirectories();
+            FileInfo[] files = directoryInfo.GetFiles();
+            if (directories.Length != 0 || files.Length != 0)
+            {
+                foreach (DirectoryInfo dir in directories)
+                    DeleteFolder(dir);
+                foreach(FileInfo file in files)
+                    file.Delete();
+            }
+            directoryInfo.Delete();
         }
     }
 }
