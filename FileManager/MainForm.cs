@@ -777,7 +777,7 @@ namespace FileManager
                 }
                 FileSystem.MoveFile(file.FullName,directoryDst.FullName+"\\"+file.Name);
             }
-            foreach(DirectoryInfo directory in directorySrc.GetDirectories())
+            foreach (DirectoryInfo directory in directorySrc.GetDirectories()) ;
                 
         }
     }

@@ -35,3 +35,5 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManag
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag.mdf
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag_log.ldf
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag.mdf
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag_log.ldf
