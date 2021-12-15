@@ -10,9 +10,14 @@ namespace FileManager
 {
     internal class CustomListView : ListView
     {
-
+        private ListViewItem HoveringItem = null;
         private int ViewIndex = 1;
         private bool HoldingControl = false;
+
+        public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
+
+        public Color HoverOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
+
         public class ListViewItemTag
         {
             public ListViewItemTag(string Extension, Icon SmallIcon, Icon LargeIcon)
@@ -29,7 +34,26 @@ namespace FileManager
 
         public CustomListView()
         {
+            
             this.OwnerDraw = true;            
+        }
+
+        protected override void OnItemMouseHover(ListViewItemMouseHoverEventArgs e)
+        {
+            if (HoveringItem == null)
+            {
+                HoveringItem = e.Item;
+            } else
+            {
+                if (HoveringItem!=e.Item)
+                {
+                    Invalidate(HoveringItem.Bounds);    
+                    HoveringItem = e.Item;
+                    Invalidate(HoveringItem.Bounds);
+                }
+            }
+            base.OnItemMouseHover(e);
+            
         }
 
         protected void cap(ref int input, int min, int max)
@@ -43,6 +67,10 @@ namespace FileManager
             if (e.Control&&!HoldingControl)
             {
                 HoldingControl = true;
+            }
+            if (e.KeyCode == Keys.I)
+            {
+                Invalidate();
             }
             base.OnKeyDown(e);
         }
@@ -58,6 +86,7 @@ namespace FileManager
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
+            this.VirtualListSize = 100;
             if (HoldingControl)
             {
                 ViewIndex += e.Delta / SystemInformation.MouseWheelScrollDelta;
@@ -73,11 +102,34 @@ namespace FileManager
             }
             base.OnMouseWheel(e);
         }
-
+         
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            //e.Graphics.FillRectangle(new SolidBrush(BackColor), e.Bounds);
+
+            Rectangle IconBounds;
+            Rectangle TextBounds;
+
+            if (e.Item == HoveringItem)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, HoverOverlayColor)), e.Bounds);
+            }
+
+            //if (e.State.HasFlag(ListViewItemStates.Selected))
+            //{
+            //    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
+            //}
+
+            switch (this.View)
+            {
+                case View.Details:
+                    
+                    break;
+            }
+
             e.DrawDefault = true;
-            e.Item.Text = HoldingControl.ToString();            
+            //e.Item.Text = e.Bounds.ToString();            
             base.OnDrawItem(e);
             
         }
@@ -85,15 +137,6 @@ namespace FileManager
         protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)
         {
             base.OnDrawColumnHeader(e);
-            //if (e.ColumnIndex == this.Columns.Count-1)
-            //{
-            //    int s = 0;
-            //    foreach (ColumnHeader c in this.Columns)
-            //    {
-            //        s+=c.Width;
-            //    }
-            //    this.Columns[e.ColumnIndex].Width = e.Bounds.Width-s;
-            //}
             using (Brush brush = new SolidBrush(BackColor))
             {
                 e.Graphics.FillRectangle(brush, e.Bounds);

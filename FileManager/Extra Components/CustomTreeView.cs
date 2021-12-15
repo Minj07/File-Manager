@@ -26,55 +26,17 @@ namespace FileManager
             UseFileAttributes = 0x00000010
         }
 
-        [DllImport("Shell32.dll")]
-        private static extern IntPtr SHGetFileInfo
-        (
-            string pszPath,
-            uint dwFileAttributes,
-            out SHFILEINFO psfi,
-            uint cbfileInfo,
-            SHGFI uFlags
-        );
-
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct SHFILEINFO
+        protected void cap(ref int input, int min, int max)
         {
-            public SHFILEINFO(bool b)
-            {
-                hIcon = IntPtr.Zero; iIcon = 0; dwAttributes = 0; szDisplayName = ""; szTypeName = "";
-            }
-            public IntPtr hIcon;
-            public int iIcon;
-            public uint dwAttributes;
-            [MarshalAs(UnmanagedType.LPStr, SizeConst = 260)]
-            public string szDisplayName;
-            [MarshalAs(UnmanagedType.LPStr, SizeConst = 80)]
-            public string szTypeName;
-        };
-
-        public static Icon GetDirectoryIcon(string dirName, bool largeIcon)
-        {
-            SHFILEINFO _SHFILEINFO = new SHFILEINFO();
-            int cbFileInfo = Marshal.SizeOf(_SHFILEINFO);
-            SHGFI flags = SHGFI.Icon;
-            if (largeIcon)
-                flags |= SHGFI.LargeIcon;
-            else
-                flags |= SHGFI.SmallIcon;
-
-            IntPtr IconIntPtr = SHGetFileInfo(dirName, 0, out _SHFILEINFO, (uint)cbFileInfo, flags);
-            if (IconIntPtr.Equals(IntPtr.Zero))
-                return null;
-            Icon _Icon = System.Drawing.Icon.FromHandle(_SHFILEINFO.hIcon);
-            return _Icon;
+            input = (input < min ? min : input);
+            input = (input > max ? max : input);
         }
 
         private Icon ExpandDown;
 
         private Icon ExpandRight;
 
-        private int Offset = 0;
+        //private int Offset = 0;
 
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
        
@@ -112,7 +74,8 @@ namespace FileManager
                 .GetHicon()
                 );
         }
-       
+
+
         private int NodeLevel(TreeNode node)
         {
             if (node.Parent == null) return 0;
@@ -123,11 +86,12 @@ namespace FileManager
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            Rectangle Bound = new Rectangle(this.Location.X,e.Bounds.Y,this.Bounds.Width,e.Bounds.Height);
-
-            Bound.Offset(0, -Offset);
-
+            if (e.Node.Text == "C:\\")
+            {
+//                MessageBox.Show("");
+            }
+            Rectangle Bound //= new Rectangle(this.Location.X,e.Bounds.Y,this.Bounds.Width,e.Bounds.Height);
+                            = e.Bounds;
             e.Graphics.FillRectangle(new SolidBrush(this.BackColor),Bound);
 
             if (e.State.HasFlag(TreeNodeStates.Hot))
@@ -143,12 +107,11 @@ namespace FileManager
 
             bool hasChild = ((TreeNodeTag)e.Node.Tag).hasChild;
             Icon icon = ((TreeNodeTag)e.Node.Tag).icon;
-            Point StartingPoint = new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
+            Point StartingPoint = new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y);// + TopOffset);
 
             if (icon==null)
             {
-                icon = Properties.Resources.Folder;
-                    
+                icon = Properties.Resources.Folder;                    
             }
 
             if (icon.Size!=new Size(16,16))

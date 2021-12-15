@@ -97,6 +97,11 @@ namespace FileManager
             this.TransparencyKey = currentTheme.Unused;
             OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
 
+            foreach (Control c in this.Controls)
+            {
+                c.Font = this.Font;
+            }
+
             //Toolbar
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
