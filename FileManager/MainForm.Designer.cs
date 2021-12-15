@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -42,7 +43,6 @@
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.treeView = new FileManager.CustomTreeView();
-            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.NavigationTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.TxtBxSearch = new System.Windows.Forms.TextBox();
             this.NavigationButtonTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -63,16 +63,11 @@
             this.BtnMinimize = new FileManager.RoundedButton();
             this.BtnMaximize = new FileManager.RoundedButton();
             this.ToolTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.CbNew = new System.Windows.Forms.ComboBox();
             this.BtnCut = new System.Windows.Forms.Button();
             this.BtnCopy = new System.Windows.Forms.Button();
             this.BtnPaste = new System.Windows.Forms.Button();
             this.BtnRename = new System.Windows.Forms.Button();
-            this.BtnShare = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
-            this.CbSort = new System.Windows.Forms.ComboBox();
-            this.CbView = new System.Windows.Forms.ComboBox();
-            this.CbMore = new System.Windows.Forms.ComboBox();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
@@ -107,6 +102,17 @@
             this.imageListSmall.Images.SetKeyName(3, "network disk");
             this.imageListSmall.Images.SetKeyName(4, "folder");
             this.imageListSmall.Images.SetKeyName(5, "blank");
+            // 
+            // imageListTreeView
+            // 
+            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
+            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
+            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
+            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
+            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
             // OuterTablePanel
             // 
@@ -164,6 +170,7 @@
             this.DisplayTablePanel.ColumnCount = 2;
             this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 333F));
             this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.DisplayTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.DisplayTablePanel.Controls.Add(this.listView, 1, 0);
             this.DisplayTablePanel.Controls.Add(this.treeView, 0, 0);
             this.DisplayTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -177,6 +184,8 @@
             // 
             // listView
             // 
+            this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView.AllowColumnReorder = true;
             this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName,
@@ -184,12 +193,17 @@
             this.colType,
             this.colSize});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.FullRowSelect = true;
+            this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView.HideSelection = false;
+            this.listView.HoverOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.listView.LabelEdit = true;
             this.listView.LargeImageList = this.imageListLarge;
             this.listView.Location = new System.Drawing.Point(337, 0);
             this.listView.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.listView.Name = "listView";
+            this.listView.OwnerDraw = true;
+            this.listView.SelectedOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.listView.Size = new System.Drawing.Size(893, 366);
             this.listView.SmallImageList = this.imageListSmall;
             this.listView.TabIndex = 0;
@@ -218,7 +232,7 @@
             // colSize
             // 
             this.colSize.Text = "Size";
-            this.colSize.Width = 105;
+            this.colSize.Width = 10000;
             // 
             // treeView
             // 
@@ -236,24 +250,12 @@
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Margin = new System.Windows.Forms.Padding(0);
             this.treeView.Name = "treeView";
-            this.treeView.Scrollable = false;
             this.treeView.SelectedImageIndex = 0;
             this.treeView.SelectedOverlayColor = System.Drawing.Color.White;
             this.treeView.ShowLines = false;
             this.treeView.Size = new System.Drawing.Size(333, 366);
             this.treeView.TabIndex = 1;
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
-            // 
-            // imageListTreeView
-            // 
-            this.imageListTreeView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeView.ImageStream")));
-            this.imageListTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTreeView.Images.SetKeyName(0, "Computer.ico");
-            this.imageListTreeView.Images.SetKeyName(1, "FloppyDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(2, "HardDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(3, "CDDisk.ico");
-            this.imageListTreeView.Images.SetKeyName(4, "NetworkDrive.ico");
-            this.imageListTreeView.Images.SetKeyName(5, "Folder.ico");
             // 
             // NavigationTablePanel
             // 
@@ -314,7 +316,7 @@
             this.BtnBack.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BtnBack.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBack.Image = ((System.Drawing.Image)(resources.GetObject("BtnBack.Image")));
+            this.BtnBack.Image = global::FileManager.Properties.Resources.left_arrow;
             this.BtnBack.Location = new System.Drawing.Point(4, 4);
             this.BtnBack.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBack.Name = "BtnBack";
@@ -327,7 +329,7 @@
             this.BtnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnForward.FlatAppearance.BorderSize = 0;
             this.BtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnForward.Image = ((System.Drawing.Image)(resources.GetObject("BtnForward.Image")));
+            this.BtnForward.Image = global::FileManager.Properties.Resources.right_arrow;
             this.BtnForward.Location = new System.Drawing.Point(57, 4);
             this.BtnForward.Margin = new System.Windows.Forms.Padding(4);
             this.BtnForward.Name = "BtnForward";
@@ -340,7 +342,7 @@
             this.BtnRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRecent.FlatAppearance.BorderSize = 0;
             this.BtnRecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRecent.Image = ((System.Drawing.Image)(resources.GetObject("BtnRecent.Image")));
+            this.BtnRecent.Image = global::FileManager.Properties.Resources.expand_down_arrow;
             this.BtnRecent.Location = new System.Drawing.Point(110, 4);
             this.BtnRecent.Margin = new System.Windows.Forms.Padding(4);
             this.BtnRecent.Name = "BtnRecent";
@@ -353,7 +355,7 @@
             this.BtnParentFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnParentFolder.FlatAppearance.BorderSize = 0;
             this.BtnParentFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnParentFolder.Image = ((System.Drawing.Image)(resources.GetObject("BtnParentFolder.Image")));
+            this.BtnParentFolder.Image = global::FileManager.Properties.Resources.up_arrow;
             this.BtnParentFolder.Location = new System.Drawing.Point(163, 4);
             this.BtnParentFolder.Margin = new System.Windows.Forms.Padding(4);
             this.BtnParentFolder.Name = "BtnParentFolder";
@@ -385,12 +387,12 @@
             // CbAddress
             // 
             this.CbAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CbAddress.FormattingEnabled = true;
             this.CbAddress.Location = new System.Drawing.Point(0, 9);
             this.CbAddress.Margin = new System.Windows.Forms.Padding(0, 9, 0, 0);
             this.CbAddress.Name = "CbAddress";
-            this.CbAddress.Size = new System.Drawing.Size(676, 37);
+            this.CbAddress.Size = new System.Drawing.Size(676, 33);
             this.CbAddress.TabIndex = 0;
             this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             this.CbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbAddress_KeyPress);
@@ -400,7 +402,7 @@
             this.BtnGoRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnGoRefresh.FlatAppearance.BorderSize = 0;
             this.BtnGoRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGoRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BtnGoRefresh.Image")));
+            this.BtnGoRefresh.Image = global::FileManager.Properties.Resources.reboot;
             this.BtnGoRefresh.Location = new System.Drawing.Point(676, 0);
             this.BtnGoRefresh.Margin = new System.Windows.Forms.Padding(0);
             this.BtnGoRefresh.Name = "BtnGoRefresh";
@@ -562,16 +564,11 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ToolTablePanel.Controls.Add(this.CbNew, 0, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
-            this.ToolTablePanel.Controls.Add(this.BtnShare, 5, 0);
-            this.ToolTablePanel.Controls.Add(this.BtnDelete, 6, 0);
-            this.ToolTablePanel.Controls.Add(this.CbSort, 7, 0);
-            this.ToolTablePanel.Controls.Add(this.CbView, 8, 0);
-            this.ToolTablePanel.Controls.Add(this.CbMore, 9, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 39);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -581,23 +578,13 @@
             this.ToolTablePanel.Size = new System.Drawing.Size(1230, 48);
             this.ToolTablePanel.TabIndex = 6;
             // 
-            // CbNew
-            // 
-            this.CbNew.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CbNew.FormattingEnabled = true;
-            this.CbNew.Location = new System.Drawing.Point(4, 4);
-            this.CbNew.Margin = new System.Windows.Forms.Padding(4);
-            this.CbNew.Name = "CbNew";
-            this.CbNew.Size = new System.Drawing.Size(99, 24);
-            this.CbNew.TabIndex = 0;
-            // 
             // BtnCut
             // 
             this.BtnCut.AutoSize = true;
             this.BtnCut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnCut.FlatAppearance.BorderSize = 0;
             this.BtnCut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCut.Image = ((System.Drawing.Image)(resources.GetObject("BtnCut.Image")));
+            this.BtnCut.Image = global::FileManager.Properties.Resources.cut;
             this.BtnCut.Location = new System.Drawing.Point(107, 0);
             this.BtnCut.Margin = new System.Windows.Forms.Padding(0);
             this.BtnCut.Name = "BtnCut";
@@ -611,7 +598,7 @@
             this.BtnCopy.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnCopy.FlatAppearance.BorderSize = 0;
             this.BtnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopy.Image = ((System.Drawing.Image)(resources.GetObject("BtnCopy.Image")));
+            this.BtnCopy.Image = global::FileManager.Properties.Resources.copy;
             this.BtnCopy.Location = new System.Drawing.Point(160, 0);
             this.BtnCopy.Margin = new System.Windows.Forms.Padding(0);
             this.BtnCopy.Name = "BtnCopy";
@@ -626,7 +613,7 @@
             this.BtnPaste.Enabled = false;
             this.BtnPaste.FlatAppearance.BorderSize = 0;
             this.BtnPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPaste.Image = ((System.Drawing.Image)(resources.GetObject("BtnPaste.Image")));
+            this.BtnPaste.Image = global::FileManager.Properties.Resources.paste;
             this.BtnPaste.Location = new System.Drawing.Point(213, 0);
             this.BtnPaste.Margin = new System.Windows.Forms.Padding(0);
             this.BtnPaste.Name = "BtnPaste";
@@ -640,7 +627,7 @@
             this.BtnRename.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnRename.FlatAppearance.BorderSize = 0;
             this.BtnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRename.Image = ((System.Drawing.Image)(resources.GetObject("BtnRename.Image")));
+            this.BtnRename.Image = global::FileManager.Properties.Resources.rename;
             this.BtnRename.Location = new System.Drawing.Point(266, 0);
             this.BtnRename.Margin = new System.Windows.Forms.Padding(0);
             this.BtnRename.Name = "BtnRename";
@@ -649,59 +636,19 @@
             this.BtnRename.UseVisualStyleBackColor = true;
             this.BtnRename.Click += new System.EventHandler(this.BtnRename_Click);
             // 
-            // BtnShare
-            // 
-            this.BtnShare.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnShare.FlatAppearance.BorderSize = 0;
-            this.BtnShare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnShare.Image = ((System.Drawing.Image)(resources.GetObject("BtnShare.Image")));
-            this.BtnShare.Location = new System.Drawing.Point(319, 0);
-            this.BtnShare.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnShare.Name = "BtnShare";
-            this.BtnShare.Size = new System.Drawing.Size(53, 48);
-            this.BtnShare.TabIndex = 5;
-            this.BtnShare.UseVisualStyleBackColor = true;
-            // 
             // BtnDelete
             // 
             this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnDelete.FlatAppearance.BorderSize = 0;
             this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("BtnDelete.Image")));
-            this.BtnDelete.Location = new System.Drawing.Point(372, 0);
+            this.BtnDelete.Image = global::FileManager.Properties.Resources.trash;
+            this.BtnDelete.Location = new System.Drawing.Point(319, 0);
             this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(53, 48);
             this.BtnDelete.TabIndex = 6;
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
-            // 
-            // CbSort
-            // 
-            this.CbSort.FormattingEnabled = true;
-            this.CbSort.Location = new System.Drawing.Point(429, 4);
-            this.CbSort.Margin = new System.Windows.Forms.Padding(4);
-            this.CbSort.Name = "CbSort";
-            this.CbSort.Size = new System.Drawing.Size(97, 24);
-            this.CbSort.TabIndex = 7;
-            // 
-            // CbView
-            // 
-            this.CbView.FormattingEnabled = true;
-            this.CbView.Location = new System.Drawing.Point(536, 4);
-            this.CbView.Margin = new System.Windows.Forms.Padding(4);
-            this.CbView.Name = "CbView";
-            this.CbView.Size = new System.Drawing.Size(97, 24);
-            this.CbView.TabIndex = 8;
-            // 
-            // CbMore
-            // 
-            this.CbMore.FormattingEnabled = true;
-            this.CbMore.Location = new System.Drawing.Point(643, 4);
-            this.CbMore.Margin = new System.Windows.Forms.Padding(4);
-            this.CbMore.Name = "CbMore";
-            this.CbMore.Size = new System.Drawing.Size(87, 24);
-            this.CbMore.TabIndex = 9;
             // 
             // OuterLeftEdge
             // 
@@ -787,16 +734,11 @@
         private System.Windows.Forms.Button BtnDisplayInfo;
         private System.Windows.Forms.Button BtnDisplayThumbnail;
         private System.Windows.Forms.TableLayoutPanel ToolTablePanel;
-        private System.Windows.Forms.ComboBox CbNew;
         private System.Windows.Forms.Button BtnCut;
         private System.Windows.Forms.Button BtnCopy;
         private System.Windows.Forms.Button BtnPaste;
         private System.Windows.Forms.Button BtnRename;
-        private System.Windows.Forms.Button BtnShare;
         private System.Windows.Forms.Button BtnDelete;
-        private System.Windows.Forms.ComboBox CbSort;
-        private System.Windows.Forms.ComboBox CbView;
-        private System.Windows.Forms.ComboBox CbMore;
         private System.Windows.Forms.ImageList imageListTreeView;
     }
 }

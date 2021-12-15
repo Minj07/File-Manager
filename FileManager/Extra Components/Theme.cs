@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace FileManager
 {
@@ -68,7 +70,7 @@ namespace FileManager
             return i - (i / 10);
         }
         
-        private Bitmap Recolor(Bitmap input)
+        static public Bitmap Recolor(Bitmap input, Color color)
         {
             for (int i =0 ; i < input.Width; i++)
             {
@@ -76,11 +78,43 @@ namespace FileManager
                 {
                     if (input.GetPixel(i,j).A > 0)
                     {
-                        input.SetPixel(i, j, Color.FromArgb(text.R,text.G,text.B, input.GetPixel(i, j).A));
+                        input.SetPixel(i, j, Color.FromArgb(input.GetPixel(i, j).A,color));
                     }
                 }
             }
             return input;
+        }
+
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        public static Bitmap ResizeImage(Bitmap image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
 
         public enum icon
@@ -112,7 +146,7 @@ namespace FileManager
                     break;
                 default: temp = Properties.Resources.reboot; break;
             }
-            return Recolor(temp);
+            return Recolor(temp,text);
         }
 
         public void test(Control c)
