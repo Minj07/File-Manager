@@ -449,18 +449,17 @@ namespace FileManager
                     if (pathSource[i] == null || pathDest[i] == null)
                         continue;
                     // Get the parent of the source node for refreshing
-                    TreeNode parent = new TreeNode();
-                    if (isFolder[i])
-                    {
-                        if (treeView.Nodes.Find(pathSource[i], true) != null) 
-                        parent = treeView.Nodes.Find(pathSource[i], true)[0].Parent;
-                    }
+                    TreeNode parent = null;
+                    if (treeView.Nodes.Find(currentAddr, true) != null)
+                        parent = treeView.Nodes.Find(currentAddr, true)[0];
+                    
                     if (isCopying)
                     {
                         if (isFolder[i])
                         {
                             FileSystem.CopyDirectory(pathSource[i], pathDest[i], isReplace);
-                            RefreshTreeView(treeView, parent);
+                            if (parent != null)
+                                RefreshTreeView(treeView, parent);
                         }
                         else FileSystem.CopyFile(pathSource[i], pathDest[i], isReplace);
                     }
@@ -469,7 +468,8 @@ namespace FileManager
                         if (isFolder[i])
                         {
                             FileSystem.MoveDirectory(pathSource[i], pathDest[i], isReplace);
-                            RefreshTreeView(treeView, parent);
+                            if (parent != null)
+                                RefreshTreeView(treeView, parent);
                         }
                         else FileSystem.MoveFile(pathSource[i], pathDest[i], isReplace);
                         
@@ -610,9 +610,14 @@ namespace FileManager
         private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             if(e.Label == null) return;
+            TreeNode parent = null;
+            if (treeView.Nodes.Find(currentAddr, true) != null)
+                parent = treeView.Nodes.Find(currentAddr, true)[0];
             RenameItem(e.Label);
             e.CancelEdit = true;
             isRenaming = false;
+            if (parent != null)
+                RefreshTreeView(treeView, parent);
             clsTreeListView.ShowContent(this.listView, currentAddr);
         }
         private void BtnRename_Click(object sender, EventArgs e)
