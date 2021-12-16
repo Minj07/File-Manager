@@ -10,9 +10,9 @@ namespace FileManager
 {
     internal class CustomListView : ListView
     {
-        private ListViewItem HoveringItem = null;
         private int ViewIndex = 1;
         private bool HoldingControl = false;
+        private ListViewItem HoveringItem = null;
 
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
 
@@ -34,26 +34,30 @@ namespace FileManager
 
         public CustomListView()
         {
-            
+
             this.OwnerDraw = true;            
         }
 
-        protected override void OnItemMouseHover(ListViewItemMouseHoverEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            if (HoveringItem == null)
+            ListViewItem currentItem = this.GetItemAt(e.X, e.Y);
+            if (currentItem != null)
             {
-                HoveringItem = e.Item;
+                if (HoveringItem != currentItem)
+                {
+                    HoveringItem = currentItem;
+                }                
             } else
             {
-                if (HoveringItem!=e.Item)
-                {
-                    Invalidate(HoveringItem.Bounds);    
-                    HoveringItem = e.Item;
-                    Invalidate(HoveringItem.Bounds);
-                }
+                this.HoveringItem = null;
             }
-            base.OnItemMouseHover(e);
-            
+            base.OnMouseMove(e);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            HoveringItem = null;
+            base.OnMouseLeave(e);
         }
 
         protected void cap(ref int input, int min, int max)
@@ -90,14 +94,15 @@ namespace FileManager
             if (HoldingControl)
             {
                 ViewIndex += e.Delta / SystemInformation.MouseWheelScrollDelta;
-                cap(ref ViewIndex, 0, 4);
+                cap(ref ViewIndex, 0, 2);
                 switch (ViewIndex)
                 {
                     case 0: View = View.Tile; break;
                     case 1: View = View.Details; break;
-                    case 2: View = View.List; break;
-                    case 3: View = View.SmallIcon; break;
-                    case 4: View = View.LargeIcon; break;
+                    case 2: View = View.LargeIcon; break;
+                    //case 2: View = View.List; break;
+                    //case 3: View = View.SmallIcon; break;
+                    //case 4: View = View.LargeIcon; break;
                 }
             }
             base.OnMouseWheel(e);
@@ -106,32 +111,41 @@ namespace FileManager
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            //e.Graphics.FillRectangle(new SolidBrush(BackColor), e.Bounds);
 
-            Rectangle IconBounds;
-            Rectangle TextBounds;
+            Icon icon = ((ListViewItemTag)e.Item.Tag).SmallIcon;
+            Icon iconL = ((ListViewItemTag)e.Item.Tag).LargeIcon;
+            Rectangle IconBounds = e.Bounds;
+            Rectangle TagBounds = e.Bounds;
 
+            if (this.SelectedItems.Contains(e.Item))
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
+            }
             if (e.Item == HoveringItem)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, HoverOverlayColor)), e.Bounds);
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
             }
-
-            //if (e.State.HasFlag(ListViewItemStates.Selected))
-            //{
-            //    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
-            //}
-
+            
             switch (this.View)
             {
+                case View.Tile:
+                    IconBounds = new Rectangle(new Point(e.Bounds.Left + 9, e.Bounds.Top + 9), new Size(32, 32));
+                    icon = iconL;
+                    break;
                 case View.Details:
-                    
+                    IconBounds = new Rectangle(new Point(e.Bounds.Left + 2, e.Bounds.Top + 2), new Size(16, 16));
+                    break;
+                case View.LargeIcon:
+                    IconBounds = new Rectangle(new Point(e.Bounds.Left + 21, e.Bounds.Top + 3), new Size(48, 48));
+                    icon = iconL;
                     break;
             }
-
+            e.Graphics.DrawIcon(icon, IconBounds);
+            //e.Graphics.FillRectangle(new SolidBrush(Color.AliceBlue),IconBounds);
             e.DrawDefault = true;
-            //e.Item.Text = e.Bounds.ToString();            
+            //e.Item.Text = e.Bounds.ToString();         
             base.OnDrawItem(e);
-            
+
         }
 
         protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)

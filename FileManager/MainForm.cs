@@ -605,6 +605,7 @@ namespace FileManager
         private bool isRenaming = false;
         private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
+            if(e.Label==null) return;
             RenameItem(e.Label);
             e.CancelEdit = true;
             isRenaming = false;
@@ -625,6 +626,7 @@ namespace FileManager
                     if (GetSelectedListViewItems() == null)
                         return;
                     ListViewItem listViewItem = GetSelectedListViewItems()[0];
+                    if (listViewItem == null) return;
                     string path = listViewItem.SubItems[4].Text;
                     if (e.Contains("\\") || e.Contains("/") || e.Contains(":") || e.Contains("*") || e.Contains("?") || e.Contains("\"") || e.Contains("<") || e.Contains(">") || e.Contains("|"))
                     {
