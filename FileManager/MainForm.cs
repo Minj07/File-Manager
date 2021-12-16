@@ -450,7 +450,10 @@ namespace FileManager
                     // Get the parent of the source node for refreshing
                     TreeNode parent = new TreeNode();
                     if (isFolder[i])
+                    {
+                        if (treeView.Nodes.Find(pathSource[i], true) != null) 
                         parent = treeView.Nodes.Find(pathSource[i], true)[0].Parent;
+                    }
                     if (isCopying)
                     {
                         if (isFolder[i])
