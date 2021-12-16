@@ -29,11 +29,10 @@
         private Theme currentTheme;
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
+            this.imageListLarge = new System.Windows.Forms.ImageList();
+            this.imageListSmall = new System.Windows.Forms.ImageList();
+            this.imageListTreeView = new System.Windows.Forms.ImageList();
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -192,6 +191,7 @@
             this.colDateModified,
             this.colType,
             this.colSize});
+            this.listView.DiskThreshold = 0.85F;
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -349,6 +349,7 @@
             this.BtnRecent.Size = new System.Drawing.Size(45, 54);
             this.BtnRecent.TabIndex = 2;
             this.BtnRecent.UseVisualStyleBackColor = true;
+            this.BtnRecent.Visible = false;
             // 
             // BtnParentFolder
             // 
