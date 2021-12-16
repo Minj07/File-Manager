@@ -41,3 +41,4 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSe
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.xsd
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.xss
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.CreateTagForm.resources

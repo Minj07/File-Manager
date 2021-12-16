@@ -110,7 +110,7 @@ namespace FileManager
             RefreshTags();
         }
 
-        public void AddTag(string name, Color color)
+        static public void AddTag(string name, Color color)
         {
             List<int> idList = new List<int>();
             foreach (DataRow Row in ds.Tables[0].Rows)
@@ -124,7 +124,7 @@ namespace FileManager
             }
             InsertTag(i, name, color); 
         }
-        private void InsertTag(int id, string name, Color color)
+        static private void InsertTag(int id, string name, Color color)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
             String query = "Insert into Tag (Id,Name,R,G,B) values (" + id + ",'" + name + "'," + color.R + "," + color.G + "," + color.B + ")";

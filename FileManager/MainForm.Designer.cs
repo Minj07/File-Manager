@@ -71,6 +71,7 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
+            this.BtnAddTag = new System.Windows.Forms.Button();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -548,6 +549,7 @@
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
             this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Controls.Add(this.menuStrip1, 0, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnAddTag, 6, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 39);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -638,7 +640,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(107, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(107, 30);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -648,7 +650,7 @@
             this.newToolStripMenuItem});
             this.toolStripMenuItem1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(83, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(83, 26);
             this.toolStripMenuItem1.Text = "sdfsdfsdf";
             // 
             // newToolStripMenuItem
@@ -675,6 +677,19 @@
             this.OuterBottomEdge.Name = "OuterBottomEdge";
             this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
             this.OuterBottomEdge.TabIndex = 2;
+            // 
+            // BtnAddTag
+            // 
+            this.BtnAddTag.FlatAppearance.BorderSize = 0;
+            this.BtnAddTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddTag.Image = global::FileManager.Properties.Resources.star;
+            this.BtnAddTag.Location = new System.Drawing.Point(372, 0);
+            this.BtnAddTag.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnAddTag.Name = "BtnAddTag";
+            this.BtnAddTag.Size = new System.Drawing.Size(53, 48);
+            this.BtnAddTag.TabIndex = 6;
+            this.BtnAddTag.UseVisualStyleBackColor = true;
+            this.BtnAddTag.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // MainForm
             // 
@@ -752,6 +767,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.Button BtnAddTag;
     }
 }
 

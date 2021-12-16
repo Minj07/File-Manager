@@ -20,6 +20,7 @@ namespace FileManager
         private string currentAddr;
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
+        private TagDatabase tagDatabase = new TagDatabase();
 
         #region Initialize
         private void FMIntialize()
@@ -36,6 +37,7 @@ namespace FileManager
             BtnExit.Click += new EventHandler(BtnExit_Click);
             BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
             BtnMaximize.Click += new EventHandler (BtnMaximize_Click);
+            BtnAddTag.Click += new EventHandler(BtnAddTag_Click);
             this.listView.MouseHover += ListView_MouseHover;
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
@@ -84,6 +86,17 @@ namespace FileManager
             } else
             {
                 this.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void BtnAddTag_Click(object sender, EventArgs e)
+        {
+            using (CreateTagForm frm = new CreateTagForm())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    TagDatabase.AddTag(frm.textBox1.Text,frm.color);
+                }
             }
         }
         #endregion
