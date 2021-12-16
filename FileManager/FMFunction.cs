@@ -39,8 +39,6 @@ namespace FileManager
             this.listView.MouseHover += ListView_MouseHover;
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
-          
-
             ReloadTheme();
 
             currentAddr = "C:/";

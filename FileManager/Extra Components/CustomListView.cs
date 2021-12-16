@@ -29,8 +29,10 @@ namespace FileManager
                 this.Extension = Extension;
                 this.SmallIcon = SmallIcon;
                 this.LargeIcon = LargeIcon;
+                this.Tags = new List<TagDatabase.Tag>();
             }
             
+            public List<TagDatabase.Tag> Tags { get; set; }
             public string Extension { get; set; }
             public Icon SmallIcon { get; set; }
             public Icon LargeIcon { get; set; }

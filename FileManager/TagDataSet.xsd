@@ -170,9 +170,4 @@ SELECT Id, Path, TagId FROM Tagged WHERE (Id = @Id)</CommandText>
       <xs:field xpath="mstns:Id" />
     </xs:unique>
   </xs:element>
-  <xs:annotation>
-    <xs:appinfo>
-      <msdata:Relationship name="FK_TagId_Tags" msdata:parent="Tag" msdata:child="Tagged" msdata:parentkey="Id" msdata:childkey="TagId" msprop:Generator_UserParentTable="Tag" msprop:Generator_UserChildTable="Tagged" msprop:Generator_RelationVarName="relationFK_TagId_Tags" msprop:Generator_ChildPropName="GetTaggedRows" msprop:Generator_ParentPropName="TagRow" msprop:Generator_UserRelationName="FK_TagId_Tags" />
-    </xs:appinfo>
-  </xs:annotation>
 </xs:schema>

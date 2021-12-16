@@ -28,8 +28,6 @@ namespace FileManager {
         
         private TaggedDataTable tableTagged;
         
-        private global::System.Data.DataRelation relationFK_TagId_Tags;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -220,7 +218,6 @@ namespace FileManager {
                     this.tableTagged.InitVars();
                 }
             }
-            this.relationFK_TagId_Tags = this.Relations["FK_TagId_Tags"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -235,10 +232,6 @@ namespace FileManager {
             base.Tables.Add(this.tableTag);
             this.tableTagged = new TaggedDataTable();
             base.Tables.Add(this.tableTagged);
-            this.relationFK_TagId_Tags = new global::System.Data.DataRelation("FK_TagId_Tags", new global::System.Data.DataColumn[] {
-                        this.tableTag.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTagged.TagIdColumn}, false);
-            this.Relations.Add(this.relationFK_TagId_Tags);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -740,15 +733,12 @@ namespace FileManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TaggedRow AddTaggedRow(int Id, string Path, TagRow parentTagRowByFK_TagId_Tags) {
+            public TaggedRow AddTaggedRow(int Id, string Path, int TagId) {
                 TaggedRow rowTaggedRow = ((TaggedRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Id,
                         Path,
-                        null};
-                if ((parentTagRowByFK_TagId_Tags != null)) {
-                    columnValuesArray[2] = parentTagRowByFK_TagId_Tags[0];
-                }
+                        TagId};
                 rowTaggedRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTaggedRow);
                 return rowTaggedRow;
@@ -993,17 +983,6 @@ namespace FileManager {
                     this[this.tableTag.BColumn] = value;
                 }
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TaggedRow[] GetTaggedRows() {
-                if ((this.Table.ChildRelations["FK_TagId_Tags"] == null)) {
-                    return new TaggedRow[0];
-                }
-                else {
-                    return ((TaggedRow[])(base.GetChildRows(this.Table.ChildRelations["FK_TagId_Tags"])));
-                }
-            }
         }
         
         /// <summary>
@@ -1050,17 +1029,6 @@ namespace FileManager {
                 }
                 set {
                     this[this.tableTagged.TagIdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TagRow TagRow {
-                get {
-                    return ((TagRow)(this.GetParentRow(this.Table.ParentRelations["FK_TagId_Tags"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_TagId_Tags"]);
                 }
             }
         }
