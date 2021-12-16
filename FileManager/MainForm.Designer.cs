@@ -396,6 +396,7 @@
             this.CbAddress.TabIndex = 0;
             this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             this.CbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbAddress_KeyPress);
+            this.CbAddress.Validated += new System.EventHandler(this.CbAddress_Validated);
             // 
             // BtnGoRefresh
             // 

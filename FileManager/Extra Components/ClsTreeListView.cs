@@ -244,6 +244,7 @@ namespace FileManager
                         }
                         item[4] = node.Text;
                         ListViewItem listViewItem = new ListViewItem(item, node.ImageIndex - 1);
+                        listViewItem.Tag = new CustomListView.ListViewItemTag("", GetDirectoryIcon(item[4], false), GetDirectoryIcon(item[4], true));
                         listView.Items.Add(listViewItem);
                     }
                 }
@@ -287,6 +288,7 @@ namespace FileManager
             item[1] = file.LastWriteTime.ToString();
             item[2] = (file.Extension.Equals("")) ? "File" : file.Extension;
             item[3] = Math.Ceiling(file.Length / (1024 * 1.0)).ToString("###,###") + " KB";
+            if (item[3].Equals(" KB")) item[3] = "0 KB";
             item[4] = file.FullName;
 
             //Set a default icon for the file

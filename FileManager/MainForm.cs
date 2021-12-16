@@ -605,6 +605,7 @@ namespace FileManager
         private bool isRenaming = false;
         private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
+            if(e.Label == null) return;
             RenameItem(e.Label);
             e.CancelEdit = true;
             isRenaming = false;
@@ -612,8 +613,9 @@ namespace FileManager
         }
         private void BtnRename_Click(object sender, EventArgs e)
         {
+            if (GetSelectedListViewItems().Count==0) return;
             isRenaming = true;
-            this.listView.SelectedItems[0].BeginEdit();
+            GetSelectedListViewItems()[0].BeginEdit();
         }
 
         private void RenameItem(string e)
@@ -659,18 +661,17 @@ namespace FileManager
                         else
                         {
                             DirectoryInfo directoryInfo = new DirectoryInfo(listViewItem.SubItems[4].Text);
-                            newName = HandleRename(e, new DirectoryInfo(currentAddr), directoryInfo);
+                            newName = HandleRename(e, new DirectoryInfo(currentAddr), directoryInfo.FullName);
                             if (newName == null)
                                 return;
-                            FileSystem.RenameDirectory(directoryInfo.FullName, newName);
+                            else 
+                            {
+                                FileSystem.RenameDirectory(directoryInfo.FullName, newName);
+                            }   
                         }
                     }
                 }
                 
-
-            }
-            catch (IOException)
-            {
 
             }
             catch (Exception ex)
@@ -678,7 +679,7 @@ namespace FileManager
                 MessageBox.Show(ex.ToString());
             }
         }
-        private string HandleRename(string newName,DirectoryInfo directory, DirectoryInfo FolderRenamed=null)
+        private string HandleRename(string newName,DirectoryInfo directory, string pathFolderRenamed=null)
         {
             bool isConflict = false;
             bool isFolderConflict = true;
@@ -704,8 +705,9 @@ namespace FileManager
             }
             if (isConflict)
             {
-                if (FolderRenamed.Exists)
+                if (pathFolderRenamed!=null)
                 {
+                    DirectoryInfo FolderRenamed = new DirectoryInfo(pathFolderRenamed);
                    if(isFolderConflict)
                     {
                         DialogResult result = MessageBox.Show("This destination already contains a folder named '" + newName + "'." +
@@ -714,9 +716,9 @@ namespace FileManager
                                                               "\n" + path +
                                                               "\nwith this one?" +
                                                               "\n" + FolderRenamed.FullName, "Confirm Folder Replace", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (result == DialogResult.No)
-                            return null;
-                        MergeFolder(FolderRenamed, new DirectoryInfo(path));
+                        if (result == DialogResult.Yes)
+                            MergeFolder(FolderRenamed, new DirectoryInfo(path));
+                        return null;
                     }
                     else
                     {
@@ -769,16 +771,48 @@ namespace FileManager
             foreach(FileInfo file in directorySrc.GetFiles())
             {
                 string newName = HandleRename(file.Name, directoryDst);
-                if (newName != file.Name)
+                if (newName != file.Name && newName != null) 
                 {
                     DialogResult result = MessageBox.Show("Do you want to rename \"" + file.Name + "\" to \"" + newName + "\"? \nThere is already a file with the same name in this location.", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
+                    {
                         FileSystem.RenameFile(file.FullName, newName);
+                        string a = "";
+                        string[] b = file.FullName.Split('\\');
+                        for (int i = 0; i < b.Length - 1; i++)
+                            a += (b[i] + "\\");
+                        a += newName;
+                        FileSystem.MoveFile(a, directoryDst.FullName + "\\" + newName);
+                    }
                 }
-                FileSystem.MoveFile(file.FullName,directoryDst.FullName+"\\"+file.Name);
+                else if (newName != null) FileSystem.MoveFile(file.FullName, directoryDst.FullName + "\\" + file.Name);
             }
-            foreach (DirectoryInfo directory in directorySrc.GetDirectories()) ;
-                
+            foreach (DirectoryInfo directory in directorySrc.GetDirectories())
+            {
+                HandleRename(directory.Name, directoryDst,directory.FullName);                                
+            }
+            DirectoryInfo[] directories = directorySrc.GetDirectories();
+            FileInfo[] files = directorySrc.GetFiles();
+            if (directories.Length == 0 && files.Length == 0)
+                directorySrc.Delete();
+        }
+
+        private void CbAddress_Validated(object sender, EventArgs e)
+        {
+            if (CbAddress.Text == null || !CbAddress.Text.Contains('\\')) return;
+            string[] split = CbAddress.Text.Split('\\');
+            string a = CbAddress.Text;
+            if (split.Length == 0)
+                return;
+            if (split[split.Length - 1] != "")
+                return;
+            CbAddress.Text = "";
+            for(int i=0;i<split.Length;i++)
+            {
+                CbAddress.Text+=split[i];
+                if (i != split.Length - 1)
+                    CbAddress.Text += " > ";
+            }
         }
     }
 }
