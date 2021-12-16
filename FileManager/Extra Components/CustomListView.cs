@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +12,10 @@ namespace FileManager
 {
     internal class CustomListView : ListView
     {
-        private int ViewIndex = 1;
+        private int ViewIndex = 0;
         private bool HoldingControl = false;
+        private Size space;
+        public float DiskThreshold { get; set; } = 0.85f;
         private ListViewItem HoveringItem = null;
 
         public Color SelectedOverlayColor { get; set; } = Color.FromArgb(255, 255, 255);
@@ -30,12 +34,15 @@ namespace FileManager
             public string Extension { get; set; }
             public Icon SmallIcon { get; set; }
             public Icon LargeIcon { get; set; }
+
+            public bool EditingLabel { get; set; } = false;
         }
 
         public CustomListView()
         {
-
-            this.OwnerDraw = true;            
+            this.View = View.Tile;
+            this.OwnerDraw = true;
+            space = TextRenderer.MeasureText(" ", this.Font);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -107,7 +114,31 @@ namespace FileManager
             }
             base.OnMouseWheel(e);
         }
-         
+
+        protected override void OnBeforeLabelEdit(LabelEditEventArgs e)
+        {
+            (this.Items[e.Item].Tag as ListViewItemTag).EditingLabel = true;
+            base.OnBeforeLabelEdit(e);
+        }
+
+        protected override void OnAfterLabelEdit(LabelEditEventArgs e)
+        {
+            (this.Items[e.Item].Tag as ListViewItemTag).EditingLabel = false;
+            base.OnAfterLabelEdit(e);
+        }
+
+        protected Point GetColumnLocation(int ColumnIndex)
+        {
+            ColumnHeader column = this.Columns[ColumnIndex];
+            int Left = 0;
+            int Top = 0;
+            for (int i = 0; i < ColumnIndex; i++)
+            {
+                Left+=this.Columns[i].Width;
+            }
+            return new Point(Left, Top);
+        }
+
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
@@ -115,6 +146,7 @@ namespace FileManager
             Icon icon = ((ListViewItemTag)e.Item.Tag).SmallIcon;
             Icon iconL = ((ListViewItemTag)e.Item.Tag).LargeIcon;
             Rectangle IconBounds = e.Bounds;
+            Rectangle LabelBounds = e.Bounds;
             Rectangle TagBounds = e.Bounds;
 
             if (this.SelectedItems.Contains(e.Item))
@@ -131,18 +163,70 @@ namespace FileManager
                 case View.Tile:
                     IconBounds = new Rectangle(new Point(e.Bounds.Left + 9, e.Bounds.Top + 9), new Size(32, 32));
                     icon = iconL;
+                    if (e.Item.Text.Last() == '\\')
+                    {
+                        LabelBounds = new Rectangle(new Point(IconBounds.Right + 9, e.Bounds.Top + 5), new Size(160, 48));
+                        TextFormatFlags flags = TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.ModifyString;
+                        DriveInfo drive = new DriveInfo(e.Item.Text);
+
+                        TextRenderer.DrawText(e.Graphics,
+                                                (string.IsNullOrEmpty(drive.VolumeLabel)?"Local Disk": drive.VolumeLabel) + " ("+e.Item.Text.Substring(0,e.Item.Text.Length-1)+")" + "\n\n" + drive.AvailableFreeSpace / 1024/1024/1024 + " GB free of " + drive.TotalSize / 1024/1024/1024 + " GB",
+                                                this.Font, LabelBounds, this.ForeColor, flags);
+
+                        RectangleF capBar = new Rectangle(LabelBounds.X,LabelBounds.Y+(LabelBounds.Height/3),LabelBounds.Width,LabelBounds.Height/5);
+                        e.Graphics.FillRectangle(new SolidBrush(this.ForeColor),capBar);
+
+                        capBar.Offset(1, 1);
+                        capBar.Size = new SizeF(capBar.Width - 1, capBar.Height - 1);
+
+                        SolidBrush usage = new SolidBrush((float)drive.AvailableFreeSpace / drive.TotalSize < (1-DiskThreshold) ? Color.Red : Color.DeepSkyBlue);
+                        capBar.Size = new SizeF((capBar.Width)*(1.0f-(float)drive.AvailableFreeSpace / drive.TotalSize) , capBar.Height);
+
+                        e.Graphics.FillRectangle(usage, capBar);
+                        
+                    } else if (!(e.Item.Tag as ListViewItemTag).EditingLabel)
+                    {
+                        LabelBounds = new Rectangle(new Point(IconBounds.Right + 9, e.Bounds.Top + 5), new Size(160, 48));
+                        TextFormatFlags flags = TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.ModifyString;
+                        TextRenderer.DrawText(e.Graphics,
+                                                e.Item.Text + "\n" + e.Item.SubItems[1].Text + "\n" + e.Item.SubItems[2].Text,
+                                                this.Font, LabelBounds, this.ForeColor, flags);
+                    }
                     break;
                 case View.Details:
-                    IconBounds = new Rectangle(new Point(e.Bounds.Left + 2, e.Bounds.Top + 2), new Size(16, 16));
-                    break;
+                    IconBounds = new Rectangle(new Point(e.Bounds.Left + 5, e.Bounds.Top + 2), new Size(16, 16));
+                    if (!(e.Item.Tag as ListViewItemTag).EditingLabel)
+                    {
+                        LabelBounds = new Rectangle(new Point(IconBounds.Right + 5, e.Bounds.Top + 2), new Size(1000, 16));
+                        TextFormatFlags flags = TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.ModifyString;
+
+                        Rectangle Name = new Rectangle(LabelBounds.Location, new Size(this.Columns[1].Width - LabelBounds.Location.X, 16));
+                        Rectangle Date = new Rectangle(new Point(GetColumnLocation(1).X, LabelBounds.Y), new Size(this.Columns[1].Width, 16));
+                        Rectangle Type = new Rectangle(new Point(GetColumnLocation(2).X, LabelBounds.Y), new Size(this.Columns[2].Width, 16));
+                        Rectangle Size = new Rectangle(new Point(GetColumnLocation(3).X, LabelBounds.Y), new Size(this.Columns[3].Width, 16));
+
+                        TextRenderer.DrawText(e.Graphics, e.Item.SubItems[0].Text, this.Font, Name, this.ForeColor, flags);
+                        TextRenderer.DrawText(e.Graphics, e.Item.SubItems[1].Text, this.Font, Date, this.ForeColor, flags);
+                        TextRenderer.DrawText(e.Graphics, e.Item.SubItems[2].Text, this.Font, Type, this.ForeColor, flags);
+                        TextRenderer.DrawText(e.Graphics, e.Item.SubItems[3].Text, this.Font, Size, this.ForeColor, flags);
+                    }
+                        break;
                 case View.LargeIcon:
                     IconBounds = new Rectangle(new Point(e.Bounds.Left + 21, e.Bounds.Top + 3), new Size(48, 48));
                     icon = iconL;
+                    if (!(e.Item.Tag as ListViewItemTag).EditingLabel)
+                    {
+                        LabelBounds = new Rectangle(new Point(e.Bounds.Left, IconBounds.Bottom + 3), new Size(e.Bounds.Width, e.Bounds.Height - 56));
+                        TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak | TextFormatFlags.Top;
+                        TextRenderer.DrawText(e.Graphics, e.Item.Text, this.Font, LabelBounds, this.ForeColor,flags);
+                    }
                     break;
             }
+            
             e.Graphics.DrawIcon(icon, IconBounds);
-            //e.Graphics.FillRectangle(new SolidBrush(Color.AliceBlue),IconBounds);
-            e.DrawDefault = true;
+            //TextRenderer.DrawText(e.Graphics,e.Item.Text,this.Font,LabelBounds,this.ForeColor);
+            //e.Graphics.FillRectangle(new SolidBrush(Color.Blue),LabelBounds);
+            //e.DrawDefault = true;
             //e.Item.Text = e.Bounds.ToString();         
             base.OnDrawItem(e);
 
@@ -150,7 +234,8 @@ namespace FileManager
 
         protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)
         {
-            base.OnDrawColumnHeader(e);
+            
+            base.OnDrawColumnHeader(e);            
             using (Brush brush = new SolidBrush(BackColor))
             {
                 e.Graphics.FillRectangle(brush, e.Bounds);

@@ -27,6 +27,7 @@ namespace FileManager
         private void FileManager_Load(object sender, EventArgs e)
         {
             this.clsTreeListView.CreateTreeView(treeView);
+            clsTreeListView.ShowContent(listView, treeView.Nodes[1]);
         }
 
         //Handle event when a tree node is selected
