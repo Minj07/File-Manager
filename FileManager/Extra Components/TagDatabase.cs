@@ -72,8 +72,7 @@ namespace FileManager.Extra_Components
             }
         }
         static SqlConnection connection = new SqlConnection();
-        //static string connectString = "FileManager.Properties.Settings.TagConnectionString";
-        public List<Tag> Tags=new List<Tag>();
+
         public TagDatabase()
         {
             connection = new SqlConnection("FileManager.Properties.Settings.TagConnectionString");
@@ -90,38 +89,10 @@ namespace FileManager.Extra_Components
             dataAdapter = new SqlDataAdapter("Select * from Tagged", connection);
             ds.Tables.Add (dataTableTagged);
             dataAdapter.Fill(ds, dataTableTagged.TableName);
-            /*// Declare variables for DataColumn and DataRow objects
-            DataColumn column;
-            DataRow row;
-
-            // Create new Id DataColumn, set DataType, ColumnName and add to DataTable
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Id";
-            column.ReadOnly = true;
-            column.Unique = true;
-            dataTableTag.Columns.Add(column);
-            
-            // Create new Name DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Name";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);
-
-            // Create new R DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "R";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);
-
-            // Create new G DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "G";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);*/
+            foreach(DataRow a in ds.Tables[0].Rows)
+            {
+                a.ItemArray.GetValue(0);
+            }
         }
 
     }
