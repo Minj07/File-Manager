@@ -36,6 +36,7 @@ namespace FileManager
             BtnExit.Click += new EventHandler(BtnExit_Click);
             BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
             BtnMaximize.Click += new EventHandler (BtnMaximize_Click);
+            this.listView.MouseHover += ListView_MouseHover;
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
           
@@ -45,6 +46,7 @@ namespace FileManager
             currentAddr = "C:/";
             NormalSize = this.Size;
         }
+
         #endregion
 
         #region Flags
@@ -174,8 +176,16 @@ namespace FileManager
             }
         }
 
-        
 
+
+        #endregion
+
+        #region Extra
+
+        private void ListView_MouseHover(object sender, EventArgs e)
+        {
+
+        }
         #endregion
     }
 
