@@ -47,6 +47,7 @@ namespace FileManager
             space = TextRenderer.MeasureText(" ", this.Font);
         }
 
+        #region Events
         protected override void OnMouseMove(MouseEventArgs e)
         {
             ListViewItem currentItem = this.GetItemAt(e.X, e.Y);
@@ -67,12 +68,6 @@ namespace FileManager
         {
             HoveringItem = null;
             base.OnMouseLeave(e);
-        }
-
-        protected void cap(ref int input, int min, int max)
-        {
-            input = (input < min ? min : input);
-            input = (input > max ? max : input);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -128,6 +123,15 @@ namespace FileManager
             (this.Items[e.Item].Tag as ListViewItemTag).EditingLabel = false;
             base.OnAfterLabelEdit(e);
         }
+        #endregion
+
+        protected void cap(ref int input, int min, int max)
+        {
+            input = (input < min ? min : input);
+            input = (input > max ? max : input);
+        }
+
+
 
         protected Point GetColumnLocation(int ColumnIndex)
         {
@@ -140,6 +144,8 @@ namespace FileManager
             }
             return new Point(Left, Top);
         }
+
+        #region Draw
 
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
@@ -159,7 +165,6 @@ namespace FileManager
             {
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
             }
-            
             switch (this.View)
             {
                 case View.Tile:
@@ -249,5 +254,7 @@ namespace FileManager
             }
             
         }
+
+        #endregion
     }
 }

@@ -180,34 +180,7 @@ namespace FileManager
             dataAdapter = new SqlDataAdapter("Select * from Tagged", connection);
             dataAdapter.Fill(dataTableTagged);
             ds.Tables.Add (dataTableTagged);
-            // Create new Id DataColumn, set DataType, ColumnName and add to DataTable
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Id";
-            column.ReadOnly = true;
-            column.Unique = true;
-            dataTableTag.Columns.Add(column);
             
-            // Create new Name DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Name";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);
-
-            // Create new R DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "R";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);
-
-            // Create new G DataColumn, set DataType, ColumnName and add to DataTable.
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "G";
-            column.ReadOnly = true;
-            dataTableTag.Columns.Add(column);*/
         }
 
     }

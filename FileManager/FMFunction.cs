@@ -114,7 +114,7 @@ namespace FileManager
             //Navigation
 
             this.NavigationTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnBack, BtnForward, BtnRecent, BtnParentFolder, BtnGoRefresh, BtnDisplayInfo, BtnDisplayThumbnail})
+            foreach (Button b in new Button[] { BtnBack, BtnForward, BtnRecent, BtnParentFolder, BtnGoRefresh})
             {
                 b.BackColor = currentTheme.darkerMain;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
