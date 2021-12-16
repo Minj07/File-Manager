@@ -588,9 +588,11 @@ namespace FileManager
                         break;
                     case Keys.D:
                         Delete();
-                        break ;
+                        break;
                 }
             }
+            else if (e.KeyCode == Keys.F2)
+                Rename();
         }
         public void Delete()
         {
@@ -610,21 +612,29 @@ namespace FileManager
         private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             if(e.Label == null) return;
-            TreeNode parent = null;
-            if (treeView.Nodes.Find(currentAddr, true) != null)
-                parent = treeView.Nodes.Find(currentAddr, true)[0];
             RenameItem(e.Label);
             e.CancelEdit = true;
             isRenaming = false;
-            if (parent != null)
-                RefreshTreeView(treeView, parent);
+            if (treeView.Nodes.Find(currentAddr, true) != null)
+                RefreshTreeView(treeView, treeView.Nodes.Find(currentAddr, true)[0]);
             clsTreeListView.ShowContent(this.listView, currentAddr);
+        }
+
+        private void Rename()
+        {
+            if (GetSelectedListViewItems().Count == 0) return;
+            isRenaming = true;
+            ListViewItem listViewItem = GetSelectedListViewItems()[0];
+            if (listViewItem.Text == "C:\\" || listViewItem.Text == "D:\\")
+            {
+                MessageBox.Show("You don't have authorization to rename this drive", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            listViewItem.BeginEdit();
         }
         private void BtnRename_Click(object sender, EventArgs e)
         {
-            if (GetSelectedListViewItems().Count==0) return;
-            isRenaming = true;
-            GetSelectedListViewItems()[0].BeginEdit();
+            Rename();
         }
 
         private void RenameItem(string e)
@@ -807,22 +817,7 @@ namespace FileManager
                 directorySrc.Delete();
         }
 
-        private void CbAddress_Validated(object sender, EventArgs e)
-        {
-            if (CbAddress.Text == null || !CbAddress.Text.Contains('\\')) return;
-            string[] split = CbAddress.Text.Split('\\');
-            string a = CbAddress.Text;
-            if (split.Length == 0)
-                return;
-            if (split[split.Length - 1] != "")
-                return;
-            CbAddress.Text = "";
-            for(int i=0;i<split.Length;i++)
-            {
-                CbAddress.Text+=split[i];
-                if (i != split.Length - 1)
-                    CbAddress.Text += " > ";
-            }
-        }
+        // Create button Back, Forward
+
     }
 }

@@ -244,7 +244,7 @@ namespace FileManager
                         }
                         item[4] = node.Text;
                         ListViewItem listViewItem = new ListViewItem(item, node.ImageIndex - 1);
-                      
+                        listViewItem.Name=node.Name;
                         listViewItem.Tag = new CustomListView.ListViewItemTag(null, GetDirectoryIcon(item[4].Remove(item[4].Length-1,1), false), GetDirectoryIcon(item[4].Remove(item[4].Length - 1, 1), true));
                         listView.Items.Add(listViewItem);
                     }
