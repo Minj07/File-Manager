@@ -817,22 +817,7 @@ namespace FileManager
                 directorySrc.Delete();
         }
 
-        private void CbAddress_Validated(object sender, EventArgs e)
-        {
-            if (CbAddress.Text == null || !CbAddress.Text.Contains('\\')) return;
-            string[] split = CbAddress.Text.Split('\\');
-            string a = CbAddress.Text;
-            if (split.Length == 0)
-                return;
-            if (split[split.Length - 1] != "")
-                return;
-            CbAddress.Text = "";
-            for(int i=0;i<split.Length;i++)
-            {
-                CbAddress.Text+=split[i];
-                if (i != split.Length - 1)
-                    CbAddress.Text += " > ";
-            }
-        }
+        // Create button Back, Forward
+
     }
 }

@@ -83,12 +83,13 @@ namespace FileManager.Extra_Components
             SqlDataAdapter dataAdapter=new SqlDataAdapter();
 
             dataAdapter = new SqlDataAdapter("Select * from Tag", connection);
+            dataAdapter.Fill(dataTableTag);
             ds.Tables.Add(dataTableTag);
-            dataAdapter.Fill(ds, dataTableTag.TableName);
 
             dataAdapter = new SqlDataAdapter("Select * from Tagged", connection);
+            dataAdapter.Fill(dataTableTagged);
             ds.Tables.Add (dataTableTagged);
-            dataAdapter.Fill(ds, dataTableTagged.TableName);
+
             foreach(DataRow a in ds.Tables[0].Rows)
             {
                 a.ItemArray.GetValue(0);
