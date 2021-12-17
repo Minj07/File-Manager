@@ -170,7 +170,6 @@
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.MainTablePanel.Size = new System.Drawing.Size(1230, 555);
             this.MainTablePanel.TabIndex = 0;
-            this.MainTablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainTablePanel_Paint);
             // 
             // DisplayTablePanel
             // 

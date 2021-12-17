@@ -35,7 +35,7 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag.mdf
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag_log.ldf
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag.mdf
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag_log.ldf
-D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.CreateTagForm.resources
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.CreateTagForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache

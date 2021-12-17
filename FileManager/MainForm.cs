@@ -56,10 +56,7 @@ namespace FileManager
                 CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
         }
 
-        private void MainTablePanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -315,8 +312,18 @@ namespace FileManager
                     {
                         if (isCopying)
                         {
+                            string extension = new FileInfo(pathDest[i]).Extension;
                             int copy = 2;
-                            pathDest[i] += " - Copy";
+                            int idRename = 2;
+                            if (new FileInfo(pathDest[i]).Exists)
+                            {
+                                string a = "";
+                                extension =new FileInfo(pathDest[i]).Extension;
+                                pathDest[i] = pathDest[i].Remove(pathDest[i].Length - extension.Length);
+                                pathDest[i] += " - Copy"+extension;
+                            }
+                            else pathDest[i] += " - Copy";
+                            
                             DirectoryInfo directoryInfo = new DirectoryInfo(currentAddr);
                             if (!directoryInfo.Exists)
                                 return;
@@ -347,6 +354,7 @@ namespace FileManager
                             }
                             else
                             {
+                                
                                 bool flag = false;
                                 //Check if currentAddr folder has the file with the same name "... - Copy"
                                 foreach (FileInfo file in directoryInfo.GetFiles())
@@ -360,17 +368,30 @@ namespace FileManager
 
                                 //Handle if the currentAddr folder has the same name "... - Copy" by adding "... - Copy (2)","(3)",...
                                 if (flag)
-                                    pathDest[i] += " " + "(" + copy.ToString() + ")";
-
-                                foreach (FileInfo file in directoryInfo.GetFiles())
                                 {
-                                    if (file.FullName == pathDest[i])
                                     {
-                                        copy++;
-                                        pathDest[i] = pathDest[i].Remove(pathDest[i].Length - 2, 2);
-                                        pathDest[i] += copy.ToString() + ")";
+                                        string a = "";
+                                        extension = new FileInfo(pathDest[i]).Extension;
+                                        pathDest[i] = pathDest[i].Remove(pathDest[i].Length - extension.Length);
+                                        pathDest[i] += " " + "(" + copy.ToString() + ")";
+                                        pathDest[i] += extension;
+                                    }
+
+                                    foreach (FileInfo file in directoryInfo.GetFiles())
+                                    {
+                                        if (file.FullName == pathDest[i])
+                                        {
+                                            copy++;
+                                            string a = "";
+                                            extension = new FileInfo(pathDest[i]).Extension;
+                                            pathDest[i] = pathDest[i].Remove(pathDest[i].Length - extension.Length);
+                                            pathDest[i] = pathDest[i].Remove(pathDest[i].Length - 2, 2);
+                                            pathDest[i] += copy.ToString() + ")";
+                                            pathDest[i] += extension;
+                                        }
                                     }
                                 }
+                                
                             }
                         }
                         else if (isCutting)
@@ -450,16 +471,16 @@ namespace FileManager
                         }
                     }
                     string src = "";
-                    for (int i = 0; i < tmpSrc.Count - 1; i++)
-                        src += (tmpSrc[i] + "\\");
+                    for (int j = 0; j < tmpSrc.Count - 1; j++)
+                        src += (tmpSrc[j] + "\\");
                     string dst = currentAddr;
                     string a = "";
                     foreach (string i in listConflict)
                         a += ("\n" + i);
                     DialogResult result = MessageBox.Show(((isCopying) ? "Copying " : "Moving ") + countCopying + " item" + ((countCopying > 1) ? "s" : "") + " from \"" + src.Remove(src.Length - 1, 1) + "\" to \"" + dst + "\"" +
                                                         "\nThe destination has " + listConflict.Count + " file" + ((listConflict.Count > 1) ? "s" : "") + " with the same name" + ((listConflict.Count > 1) ? "s" : "") + " : " + a +
-                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                    if (result == DialogResult.Yes)
+                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (result == DialogResult.OK)
                         isReplace = true;
                     else if (result == DialogResult.Cancel)
                         return;
@@ -925,6 +946,11 @@ namespace FileManager
 
             //Refresh
             clsTreeListView.ShowContent(listView, currentAddr);
+        }
+
+        private void MainTablePanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
