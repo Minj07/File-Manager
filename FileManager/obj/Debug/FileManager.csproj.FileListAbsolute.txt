@@ -29,7 +29,6 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManag
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.pdb
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.MainForm.resources
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.MainForm.resources
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag.mdf

@@ -347,6 +347,7 @@ namespace FileManager
                 (GetDirectoryIcon(folder.FullName, true) == null ?
                 Properties.Resources.Folder :
                 GetDirectoryIcon(folder.FullName, true)));
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(folder.FullName);
             return listViewItem;
         }
 
@@ -364,6 +365,7 @@ namespace FileManager
             
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, Icon.ExtractAssociatedIcon(file.FullName), Icon.ExtractAssociatedIcon(file.FullName));
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(file.FullName);
             return listViewItem;
         }
 

@@ -215,7 +215,7 @@ namespace FileManager
                     Text = tag.name,
                     BackColor = tag.color,
                     ForeColor = this.ForeColor,
-                    Tag = tag,
+                    Tag = tag.id,
                 });
                 MenuTagItemList.Last().Click += TagMenuItemClick;
                 this.MenuTagItem.DropDownItems.Add(MenuTagItemList.Last());
@@ -224,7 +224,7 @@ namespace FileManager
 
         private void TagMenuItemClick(object sender, EventArgs e)
         {
-            TagDatabase.Tag tag = (TagDatabase.Tag)((ToolStripMenuItem)sender).Tag;
+            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
             if (this.listView.SelectedItems.Count != 0)
             {
                 foreach (ListViewItem item in this.listView.SelectedItems)
@@ -238,6 +238,7 @@ namespace FileManager
                     }
                 }
             }
+            this.Refresh();
         }
 
         private void ListView_MouseHover(object sender, EventArgs e)

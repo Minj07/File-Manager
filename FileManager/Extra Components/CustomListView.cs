@@ -62,7 +62,8 @@ namespace FileManager
         {
             this.View = View.Tile;
             this.OwnerDraw = true;
-            space = TextRenderer.MeasureText(" ", this.Font);
+            space = TextRenderer.MeasureText(" ", this.Font); //W=10 H=16
+            
         }
 
         #region Events
@@ -199,8 +200,8 @@ namespace FileManager
                         DriveInfo drive = new DriveInfo(e.Item.Text);
 
                         TextRenderer.DrawText(e.Graphics,
-                                                (string.IsNullOrEmpty(drive.VolumeLabel)?"Local Disk": drive.VolumeLabel) + " ("+e.Item.Text.Substring(0,e.Item.Text.Length-1)+")" + "\n\n" + drive.AvailableFreeSpace / 1024/1024/1024 + " GB free of " + drive.TotalSize / 1024/1024/1024 + " GB",
-                                                this.Font, LabelBounds, this.ForeColor, flags);
+                            (string.IsNullOrEmpty(drive.VolumeLabel)?"Local Disk": drive.VolumeLabel) + " ("+e.Item.Text.Substring(0,e.Item.Text.Length-1)+")" + "\n\n" + drive.AvailableFreeSpace / 1024/1024/1024 + " GB free of " + drive.TotalSize / 1024/1024/1024 + " GB",
+                            this.Font, LabelBounds, this.ForeColor, flags);
 
                         RectangleF capBar = new Rectangle(LabelBounds.X,LabelBounds.Y+(LabelBounds.Height/3),LabelBounds.Width,LabelBounds.Height/5);
                         e.Graphics.FillRectangle(new SolidBrush(this.ForeColor),capBar);
@@ -217,9 +218,31 @@ namespace FileManager
                     {
                         LabelBounds = new Rectangle(new Point(IconBounds.Right + 9, e.Bounds.Top + 5), new Size(160, 48));
                         TextFormatFlags flags = TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.ModifyString;
+                        string extraSpace = "";
+                        if (!((ListViewItemTag)e.Item.Tag).isTag)
+                        {
+                            int pixel = 10;
+                            Rectangle temp = new Rectangle(new Point (LabelBounds.Location.X, LabelBounds.Location.Y+1), new Size(10, 10));
+                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            {
+                                PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
+                                temp.Offset(5, 0);
+                                pixel += 5;
+
+                            }
+                            
+                            if (pixel!=10)
+                            {
+                                int spaces = (int)Math.Ceiling(pixel*1d/4);
+                                for (int i = 0; i < spaces; i++)
+                                {
+                                    extraSpace = extraSpace + " ";
+                                }
+                            }
+                        }
                         TextRenderer.DrawText(e.Graphics,
-                                                e.Item.Text + "\n" + e.Item.SubItems[1].Text + "\n" + e.Item.SubItems[2].Text,
-                                                this.Font, LabelBounds, this.ForeColor, flags);
+                            extraSpace + e.Item.Text + "\n" + e.Item.SubItems[1].Text + "\n" + e.Item.SubItems[2].Text,
+                            this.Font, LabelBounds, this.ForeColor, flags);
                     }
                     break;
                 case View.Details:
@@ -234,7 +257,30 @@ namespace FileManager
                         Rectangle Type = new Rectangle(new Point(GetColumnLocation(2).X, LabelBounds.Y), new Size(this.Columns[2].Width, 16));
                         Rectangle Size = new Rectangle(new Point(GetColumnLocation(3).X, LabelBounds.Y), new Size(this.Columns[3].Width, 16));
 
-                        TextRenderer.DrawText(e.Graphics, e.Item.SubItems[0].Text, this.Font, Name, this.ForeColor, flags);
+                        string extraSpace = "";
+                        if (!((ListViewItemTag)e.Item.Tag).isTag)
+                        {
+                            int pixel = 10;
+                            Rectangle temp = new Rectangle(new Point(LabelBounds.Location.X, LabelBounds.Location.Y + 1), new Size(10, 10));
+                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            {
+                                PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
+                                temp.Offset(5, 0);
+                                pixel += 5;
+
+                            }
+
+                            if (pixel != 10)
+                            {
+                                int spaces = (int)Math.Ceiling(pixel * 1d / 4);
+                                for (int i = 0; i < spaces; i++)
+                                {
+                                    extraSpace = extraSpace + " ";
+                                }
+                            }
+                        }
+
+                        TextRenderer.DrawText(e.Graphics, extraSpace+e.Item.SubItems[0].Text, this.Font, Name, this.ForeColor, flags);
                         TextRenderer.DrawText(e.Graphics, e.Item.SubItems[1].Text, this.Font, Date, this.ForeColor, flags);
                         TextRenderer.DrawText(e.Graphics, e.Item.SubItems[2].Text, this.Font, Type, this.ForeColor, flags);
                         TextRenderer.DrawText(e.Graphics, e.Item.SubItems[3].Text, this.Font, Size, this.ForeColor, flags);
@@ -243,11 +289,35 @@ namespace FileManager
                 case View.LargeIcon:
                     IconBounds = new Rectangle(new Point(e.Bounds.Left + 21, e.Bounds.Top + 3), new Size(48, 48));
                     icon = iconL;
+
                     if (!(e.Item.Tag as ListViewItemTag).EditingLabel)
                     {
                         LabelBounds = new Rectangle(new Point(e.Bounds.Left, IconBounds.Bottom + 3), new Size(e.Bounds.Width, e.Bounds.Height - 56));
                         TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak | TextFormatFlags.Top;
-                        TextRenderer.DrawText(e.Graphics, e.Item.Text, this.Font, LabelBounds, this.ForeColor,flags);
+                        string extraSpace = "";
+
+                        if (!((ListViewItemTag)e.Item.Tag).isTag)
+                        {
+                            int pixel = 10;
+                            Rectangle temp = new Rectangle(new Point(LabelBounds.Location.X+10, LabelBounds.Location.Y + 1), new Size(10, 10));
+                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            {
+                                PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
+                                temp.Offset(5, 0);
+                                pixel += 5;
+
+                            }
+
+                            if (pixel != 10)
+                            {
+                                int spaces = (int)Math.Ceiling(pixel * 1d / 4);
+                                for (int i = 0; i < spaces; i++)
+                                {
+                                    extraSpace = extraSpace + " ";
+                                }
+                            }
+                        }
+                        TextRenderer.DrawText(e.Graphics, extraSpace + e.Item.Text, this.Font, LabelBounds, this.ForeColor,flags);
                     }
                     break;
             }
