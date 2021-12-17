@@ -885,5 +885,46 @@ namespace FileManager
         {
 
         }
+
+        private void newFolderToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string new_path=ClsTreeListView.GetFullPath(currentAddr.ToString())+"\\New Folder";
+            if(new DirectoryInfo(new_path).Exists)
+            {
+                int new_id = 2;
+                new_path += " (2)";
+                while(new DirectoryInfo(new_path).Exists)
+                {
+                    new_id++;
+                    new_path=new_path.Remove(new_path.Length-2,2);
+                    new_path+=new_id.ToString()+")";
+                }
+            }
+            Directory.CreateDirectory(new_path);
+            
+            //Refresh
+            RefreshTreeView(treeView,treeView.Nodes.Find(currentAddr.ToString(),true)[0]);
+            clsTreeListView.ShowContent(listView,currentAddr);
+        }
+
+        private void newTextDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string new_path = ClsTreeListView.GetFullPath(currentAddr.ToString()) + "\\New Text Document";
+            if (new FileInfo(new_path+".txt").Exists)
+            {
+                int new_id = 2;
+                new_path += " (2)";
+                while (new FileInfo(new_path+".txt").Exists)
+                {
+                    new_id++;
+                    new_path = new_path.Remove(new_path.Length - 2, 2);
+                    new_path += new_id.ToString() + ")";
+                }
+            }
+            using (StreamWriter sw = File.CreateText(new_path+".txt")) ;
+
+            //Refresh
+            clsTreeListView.ShowContent(listView, currentAddr);
+        }
     }
 }

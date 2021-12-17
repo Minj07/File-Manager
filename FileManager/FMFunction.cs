@@ -132,7 +132,14 @@ namespace FileManager
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
-
+            this.MenuNew.BackColor = currentTheme.main;
+            this.MenuNew.ForeColor = currentTheme.text;
+            this.MenuNewItem.BackColor = currentTheme.main;
+            this.MenuNewItem.ForeColor = currentTheme.text;
+            this.MenuItemNewFolder.BackColor = currentTheme.main;
+            this.MenuItemNewFolder.ForeColor = currentTheme.text;
+            this.MenuItemNewTextFile.BackColor = currentTheme.main;
+            this.MenuItemNewTextFile.ForeColor = currentTheme.text;
             this.MenuTag.BackColor = currentTheme.main;
 
             //Navigation
