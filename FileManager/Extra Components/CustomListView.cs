@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace FileManager
 {
     internal class CustomListView : ListView
@@ -33,16 +34,19 @@ namespace FileManager
                 isTag = false;
             }
             
-            public ListViewItemTag(Color color)
+            public ListViewItemTag(Color color, int TagId)
             {
                 this.color = color;
                 this.Extension = null;
                 this.SmallIcon = null;
                 this.LargeIcon = null;
+                this.TagId=TagId;
                 isTag = true;
             }
             
             public bool isTag { get; set; }
+
+            public int TagId { get; set; }
 
             public List<TagDatabase.Tag> Tags { get; set; }
             public string Extension { get; set; }
@@ -139,13 +143,17 @@ namespace FileManager
         }
         #endregion
 
-        protected void cap(ref int input, int min, int max)
+        private void cap(ref int input, int min, int max)
         {
             input = (input < min ? min : input);
             input = (input > max ? max : input);
         }
 
-
+        private void PaintEllipse(IDeviceContext dc, Color color, Color borderColor, Rectangle bounds)
+        {
+            ((Graphics)dc).FillEllipse(new SolidBrush(color), bounds);
+            ((Graphics)dc).DrawEllipse(new Pen(borderColor,1), bounds);
+        }
 
         protected Point GetColumnLocation(int ColumnIndex)
         {
@@ -244,7 +252,14 @@ namespace FileManager
                     break;
             }
             
-            e.Graphics.DrawIcon(icon, IconBounds);
+            if (!((ListViewItemTag)e.Item.Tag).isTag)
+            {
+                e.Graphics.DrawIcon(icon, IconBounds);
+            } else
+            {
+                PaintEllipse(e.Graphics, ((ListViewItemTag)e.Item.Tag).color, this.ForeColor, IconBounds);
+            }
+            
             //TextRenderer.DrawText(e.Graphics,e.Item.Text,this.Font,LabelBounds,this.ForeColor);
             //e.Graphics.FillRectangle(new SolidBrush(Color.Blue),LabelBounds);
             //e.DrawDefault = true;

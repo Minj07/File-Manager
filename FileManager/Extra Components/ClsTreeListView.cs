@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using Microsoft.VisualBasic.FileIO;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace FileManager
 {
@@ -117,7 +119,7 @@ namespace FileManager
             foreach (TagDatabase.Tag tag in TagDatabase.Tags)
             {
                 TreeNode tagNode=new TreeNode(tag.name);
-                tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, (tag.items.Count != 0) ? true : false);
+                tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
                 Tag.Nodes.Add(tagNode);
                 Tag.LastNode.Name = Tag.LastNode.FullPath;
             }
@@ -186,7 +188,7 @@ namespace FileManager
                 {
                     currentNode.Nodes.Clear();
                     TreeNode tagNode = new TreeNode(tag.name);
-                    tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, (tag.items.Count != 0) ? true : false);
+                    tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
                     currentNode.Nodes.Add(tagNode);
                     currentNode.LastNode.Name = currentNode.LastNode.FullPath;
                 }
@@ -225,21 +227,8 @@ namespace FileManager
         {
             try
             {
-                if (currentNode.Name != "This PC" && currentNode.Name != "Tag")
-                {  //Delete all items in List View
-                    listView.Items.Clear();
 
-                    DirectoryInfo directoryInfo = new DirectoryInfo(GetFullPath(currentNode.FullPath));
-
-                    //Information of directories
-                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
-                        listView.Items.Add(GetLVItems(dir));
-
-                    //Information of files
-                    foreach (FileInfo file in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(file, listView));
-                }
-                else if (currentNode.Name == "This PC")
+                if (currentNode.Name == "This PC")
                 {
                     listView.Items.Clear();
                     foreach (TreeNode node in currentNode.Nodes)
@@ -278,14 +267,50 @@ namespace FileManager
                     {
                         string[] item = new string[5];
                         item[0] = tag.name;
+                        item[4] = currentNode.Name + "\\" + tag.name;
                         ListViewItem listViewItem = new ListViewItem(item);
                         listViewItem.Name = tag.name;
-                        listViewItem.Tag = new CustomListView.ListViewItemTag(tag.color);
+                        listViewItem.Tag = new CustomListView.ListViewItemTag(tag.color, tag.id);
                         listView.Items.Add(listViewItem);
                     }
-
-                    return true;
                 }
+                else if (currentNode.Parent.Name == "Tag")
+                {
+                    int id = ((CustomTreeView.TreeNodeTag)currentNode.Tag).TagId;
+                    listView.Items.Clear();
+                    List<string> path = new List<string>();
+                    foreach (DataRow row in TagDatabase.ds.Tables[1].Rows)
+                    {
+                        if ((int)row["TagId"] == id)
+                            path.Add(row["Path"].ToString());
+                    }
+                    foreach (string a in path)
+                    {
+                        if (new FileInfo(a).Exists)
+                        {
+                            ListViewItem listViewItem = GetLVItems(new FileInfo(a));
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(a);
+                            listView.Items.Add(listViewItem);
+                        }
+                        else if (new DirectoryInfo(a).Exists)
+                            listView.Items.Add(GetLVItems(new DirectoryInfo(a)));
+                    }
+                }
+                else if (currentNode.Name != "This PC" && currentNode.Name != "Tag")
+                {  //Delete all items in List View
+                    listView.Items.Clear();
+
+                    DirectoryInfo directoryInfo = new DirectoryInfo(GetFullPath(currentNode.FullPath));
+
+                    //Information of directories
+                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                        listView.Items.Add(GetLVItems(dir));
+
+                    //Information of files
+                    foreach (FileInfo file in directoryInfo.GetFiles())
+                        listView.Items.Add(GetLVItems(file));
+                }
+                return true;
             }
             catch (IOException)
             {
@@ -326,7 +351,7 @@ namespace FileManager
         }
 
         //Get List View item having info from file
-        public ListViewItem GetLVItems(FileInfo file, ListView listView)
+        public ListViewItem GetLVItems(FileInfo file)
         {
             string[] item = new string[5];
             item[0] = file.Name;
@@ -336,30 +361,7 @@ namespace FileManager
             if (item[3].Equals(" KB")) item[3] = "0 KB";
             item[4] = file.FullName;
 
-            //Set a default icon for the file
-            /*Icon iconForFile = SystemIcons.WinLogo;
-            ListViewItem listViewItem = new ListViewItem(item, 1);
-
-
-            string key = file.Extension;
-            if (key == ".exe")
-                key = file.FullName;
-            else if (key == "")
-            {
-                listViewItem.ImageIndex = 5;
-                return listViewItem;
-            }
-
-            //Check to see if the image collection contains an image for this extension, using the extension as a key
-            if (!listView.SmallImageList.Images.ContainsKey(file.Extension))
-            {
-                //If not, add the image to the image list
-                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
-                listView.SmallImageList.Images.Add(key, iconForFile);
-                listView.LargeImageList.Images.Add(key, iconForFile);
-            }
-
-            listViewItem.ImageKey = key;*/
+            
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, Icon.ExtractAssociatedIcon(file.FullName), Icon.ExtractAssociatedIcon(file.FullName));
             return listViewItem;
@@ -380,7 +382,7 @@ namespace FileManager
 
                     //Information of files
                     foreach (FileInfo file in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(file, listView));
+                        listView.Items.Add(GetLVItems(file));
                 }
                 else
                     MessageBox.Show("Can't find '" + path + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -408,40 +410,65 @@ namespace FileManager
         {
             try
             {
-                string path = item.SubItems[4].Text;
-                // If click a file, run that file
-                FileInfo file = new FileInfo(path);
-                if (file.Exists)
+                if (!((CustomListView.ListViewItemTag)item.Tag).isTag)
                 {
-                    Process.Start(path);
+                    string path = item.SubItems[4].Text;
+                    // If click a file, run that file
+                    FileInfo file = new FileInfo(path);
+                    if (file.Exists)
+                    {
+                        Process.Start(path);
+                    }
+                    // If click a folder, show content of that folder
+                    else
+                    {
+                        DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                        if (!directoryInfo.Exists)
+                        {
+                            MessageBox.Show("'" + path + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+
+                        }
+
+                        listView.Items.Clear();
+                        foreach (DirectoryInfo directoryInfoTemp in directoryInfo.GetDirectories())
+                            listView.Items.Add(GetLVItems(directoryInfoTemp));
+
+                        foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
+                            listView.Items.Add(GetLVItems(fileInfoTemp));
+
+                        // Focus the tree node of the dir clicked
+                        List<TreeNode> tn = new List<TreeNode>();
+                        tn.AddRange(treeView.Nodes.Find(path, true));
+                        if (tn.Count <= 0)
+                        {
+                            ShowFolderTree(treeView, treeView.Nodes.Find(directoryInfo.Parent.FullName, true)[0]);
+                            tn.AddRange(treeView.Nodes.Find(path, true));
+                        }
+                        tn[0].EnsureVisible();
+                    }
                 }
-                // If click a folder, show content of that folder
                 else
                 {
-                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                    if (!directoryInfo.Exists)
-                    {
-                        MessageBox.Show("'" + path + "' doesn't exist.", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-
-                    }
-
+                    int id = ((CustomListView.ListViewItemTag)item.Tag).TagId;
                     listView.Items.Clear();
-                    foreach (DirectoryInfo directoryInfoTemp in directoryInfo.GetDirectories())
-                        listView.Items.Add(GetLVItems(directoryInfoTemp));
-
-                    foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(fileInfoTemp, listView));
-
-                    // Focus the tree node of the dir clicked
-                    List<TreeNode> tn = new List<TreeNode>();
-                    tn.AddRange(treeView.Nodes.Find(path, true));
-                    if (tn.Count <= 0)
+                    List<string> path=new List<string>();
+                    foreach(DataRow row in TagDatabase.ds.Tables[1].Rows)
                     {
-                        ShowFolderTree(treeView, treeView.Nodes.Find(directoryInfo.Parent.FullName, true)[0]);
-                        tn.AddRange(treeView.Nodes.Find(path, true));
+                        if ((int)row["TagId"] == id)
+                            path.Add(row["Path"].ToString());
                     }
-                    tn[0].EnsureVisible();
+                    foreach(string a in path)
+                    {
+                        if (new FileInfo(a).Exists)
+                        {
+                            ListViewItem listViewItem = GetLVItems(new FileInfo(a));
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(a);
+                            listView.Items.Add(listViewItem);
+                        }
+                        else if (new DirectoryInfo(a).Exists)
+                            listView.Items.Add(GetLVItems(new DirectoryInfo(a)));
+                    }                    
                 }
                 return true;
             }

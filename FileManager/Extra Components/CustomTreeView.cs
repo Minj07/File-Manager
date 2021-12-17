@@ -54,13 +54,15 @@ namespace FileManager
                 isTag = false;
             }
 
-            public TreeNodeTag(Color color, bool hasChild)
+            public TreeNodeTag(Color color,int id, bool hasChild)
             {
                 this.color = color;
                 this.hasChild= hasChild;
                 isTag = true;
+                this.TagId = id;
             }
 
+            public int TagId { get; set; }
             public bool hasChild { get; set; }
 
             public bool isTag { get; set; }
@@ -98,7 +100,7 @@ namespace FileManager
 
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             if (e.Node.Text == "C:\\")
             {
 //                MessageBox.Show("");
@@ -141,7 +143,16 @@ namespace FileManager
                     e.Graphics.DrawIcon(this.ExpandRight, Bound.Location.X + (NodeLevel(e.Node) * Indent), Bound.Location.Y + TopOffset);
                 }
             }
-            e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent) + 20, Bound.Location.Y + TopOffset);
+            if (!((TreeNodeTag)e.Node.Tag).isTag)
+            {
+                e.Graphics.DrawIcon(icon, Bound.Location.X + (NodeLevel(e.Node) * Indent) + 20, Bound.Location.Y + TopOffset);
+                
+            } else
+            {
+                Rectangle colorBall = new Rectangle((NodeLevel(e.Node) * Indent) + 20, Bound.Location.Y + TopOffset, 16, 16);
+                e.Graphics.FillEllipse(new SolidBrush(((TreeNodeTag)e.Node.Tag).color), colorBall);
+                e.Graphics.DrawEllipse(new Pen(this.ForeColor, 1), colorBall);
+            }
             TextRenderer.DrawText(e.Graphics,e.Node.Text, this.Font, new Point(Bound.Location.X + (NodeLevel(e.Node) * Indent) + 36, Bound.Location.Y+TopOffset), this.ForeColor);
 
            

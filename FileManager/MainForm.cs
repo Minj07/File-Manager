@@ -34,7 +34,7 @@ namespace FileManager
         //Refresh tree view
         public void RefreshTreeView(TreeView treeView, TreeNode treeNode)
         {
-            if (treeNode.Name != "This PC" && treeNode.Name != "Tag")
+            if (treeNode.Name != "This PC")
             {
                 treeNode.Nodes.Clear();
                 clsTreeListView.ShowFolderTree(treeView, treeNode);
@@ -43,7 +43,14 @@ namespace FileManager
 
         private void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if(e.Node.Nodes.Count == 0)
+            if (e.Node.Parent != null)
+                if (e.Node.Parent.Name == "Tag")
+                {
+                    clsTreeListView.ShowContent(listView, e.Node);
+                    CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);
+                    return;
+                }
+            if (e.Node.Nodes.Count == 0)
                 clsTreeListView.ShowFolderTree(treeView, e.Node);
             if (clsTreeListView.ShowContent(listView, e.Node))
                 CbAddress.Text = ClsTreeListView.GetFullPath(e.Node.FullPath);

@@ -95,6 +95,17 @@ namespace FileManager
                 }
                 RefreshTags();
             }
+
+            public List<string> GetPaths()
+            {
+                List<string> paths = new List<string>();
+                foreach(DataRow row in ds.Tables[1].Rows)
+                {
+                    if ((int)row["TagId"] == this.id)
+                        paths.Add(row["Path"].ToString());
+                }
+                return paths;
+            }
         }
 
         static SqlConnection connection = new SqlConnection();
@@ -103,7 +114,7 @@ namespace FileManager
 
         static public List<Tag> Tags=new List<Tag>();
 
-        static DataSet ds;
+        static public DataSet ds;
 
         public TagDatabase()
         {
@@ -124,6 +135,27 @@ namespace FileManager
             }
             InsertTag(i, name, color); 
         }
+
+        static public List<Tag> GetTags(string path)
+        {
+            List<Tag> result = new List<Tag>();
+            List<int> id_path=new List<int>();
+            foreach (DataRow row in ds.Tables[1].Rows)
+                if (row["Path"].ToString() == path)
+                    id_path.Add((int)row["TagId"]);
+            foreach (int a in id_path)
+                result.Add(GetTag(a));
+
+            return result;
+        }
+        static public Tag GetTag(int tagid)
+        {
+            foreach (Tag tag in Tags)
+                if (tag.id == tagid)
+                    return tag;
+            return null;
+        }
+
         static private void InsertTag(int id, string name, Color color)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -141,6 +173,8 @@ namespace FileManager
             }
             RefreshTags();
         }
+
+
 
         static public void RefreshTags()
         {
