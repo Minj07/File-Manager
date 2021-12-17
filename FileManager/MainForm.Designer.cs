@@ -72,6 +72,10 @@
             this.BtnAddTag = new System.Windows.Forms.Button();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
+            this.MenuTag = new System.Windows.Forms.MenuStrip();
+            this.MenuTagItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -82,6 +86,7 @@
             this.HeaderTablePanel.SuspendLayout();
             this.ToolTablePanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.MenuTag.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListLarge
@@ -543,8 +548,8 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
@@ -553,6 +558,7 @@
             this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Controls.Add(this.menuStrip1, 0, 0);
             this.ToolTablePanel.Controls.Add(this.BtnAddTag, 6, 0);
+            this.ToolTablePanel.Controls.Add(this.MenuTag, 7, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 39);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -637,13 +643,14 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.IndianRed;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(107, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(91, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -660,7 +667,7 @@
             // 
             this.newToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(119, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.newToolStripMenuItem.Text = "new";
             // 
             // BtnAddTag
@@ -694,6 +701,49 @@
             this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
             this.OuterBottomEdge.TabIndex = 2;
             // 
+            // MenuTag
+            // 
+            this.MenuTag.BackColor = System.Drawing.Color.Transparent;
+            this.MenuTag.BackgroundImage = global::FileManager.Properties.Resources.star;
+            this.MenuTag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenuTag.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MenuTag.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuTag.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuTagItem,
+            this.toolStripMenuItem2});
+            this.MenuTag.Location = new System.Drawing.Point(425, 0);
+            this.MenuTag.Name = "MenuTag";
+            this.MenuTag.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.MenuTag.Size = new System.Drawing.Size(53, 48);
+            this.MenuTag.TabIndex = 7;
+            this.MenuTag.Text = "                            ";
+            // 
+            // MenuTagItem
+            // 
+            this.MenuTagItem.BackColor = System.Drawing.Color.Transparent;
+            this.MenuTagItem.BackgroundImage = global::FileManager.Properties.Resources.star;
+            this.MenuTagItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenuTagItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3});
+            this.MenuTagItem.ForeColor = System.Drawing.Color.Transparent;
+            this.MenuTagItem.Name = "MenuTagItem";
+            this.MenuTagItem.Size = new System.Drawing.Size(43, 44);
+            this.MenuTagItem.Text = "     ";
+            this.MenuTagItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem3.Text = "new";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 44);
+            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -724,6 +774,8 @@
             this.ToolTablePanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.MenuTag.ResumeLayout(false);
+            this.MenuTag.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -771,6 +823,10 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.Button BtnAddTag;
+        private System.Windows.Forms.MenuStrip MenuTag;
+        private System.Windows.Forms.ToolStripMenuItem MenuTagItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 
