@@ -56,8 +56,6 @@
             this.StatusTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.LbStatus2 = new System.Windows.Forms.Label();
-            this.BtnDisplayInfo = new System.Windows.Forms.Button();
-            this.BtnDisplayThumbnail = new System.Windows.Forms.Button();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.BtnExit = new FileManager.RoundedButton();
             this.BtnMinimize = new FileManager.RoundedButton();
@@ -71,6 +69,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnAddTag = new System.Windows.Forms.Button();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
@@ -430,8 +429,6 @@
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.StatusTablePanel.Controls.Add(this.label1, 0, 0);
             this.StatusTablePanel.Controls.Add(this.LbStatus2, 1, 0);
-            this.StatusTablePanel.Controls.Add(this.BtnDisplayInfo, 3, 0);
-            this.StatusTablePanel.Controls.Add(this.BtnDisplayThumbnail, 4, 0);
             this.StatusTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatusTablePanel.Location = new System.Drawing.Point(0, 518);
             this.StatusTablePanel.Margin = new System.Windows.Forms.Padding(0);
@@ -466,30 +463,6 @@
             this.LbStatus2.TabIndex = 1;
             this.LbStatus2.Text = "label2";
             this.LbStatus2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BtnDisplayInfo
-            // 
-            this.BtnDisplayInfo.FlatAppearance.BorderSize = 0;
-            this.BtnDisplayInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDisplayInfo.Location = new System.Drawing.Point(1154, 4);
-            this.BtnDisplayInfo.Margin = new System.Windows.Forms.Padding(4);
-            this.BtnDisplayInfo.Name = "BtnDisplayInfo";
-            this.BtnDisplayInfo.Size = new System.Drawing.Size(32, 28);
-            this.BtnDisplayInfo.TabIndex = 2;
-            this.BtnDisplayInfo.Text = "button1";
-            this.BtnDisplayInfo.UseVisualStyleBackColor = true;
-            // 
-            // BtnDisplayThumbnail
-            // 
-            this.BtnDisplayThumbnail.FlatAppearance.BorderSize = 0;
-            this.BtnDisplayThumbnail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDisplayThumbnail.Location = new System.Drawing.Point(1194, 4);
-            this.BtnDisplayThumbnail.Margin = new System.Windows.Forms.Padding(4);
-            this.BtnDisplayThumbnail.Name = "BtnDisplayThumbnail";
-            this.BtnDisplayThumbnail.Size = new System.Drawing.Size(32, 28);
-            this.BtnDisplayThumbnail.TabIndex = 3;
-            this.BtnDisplayThumbnail.Text = "button2";
-            this.BtnDisplayThumbnail.UseVisualStyleBackColor = true;
             // 
             // HeaderTablePanel
             // 
@@ -579,6 +552,7 @@
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
             this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Controls.Add(this.menuStrip1, 0, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnAddTag, 6, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 39);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -684,9 +658,23 @@
             // 
             // newToolStripMenuItem
             // 
+            this.newToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(119, 26);
             this.newToolStripMenuItem.Text = "new";
+            // 
+            // BtnAddTag
+            // 
+            this.BtnAddTag.FlatAppearance.BorderSize = 0;
+            this.BtnAddTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddTag.Image = global::FileManager.Properties.Resources.star;
+            this.BtnAddTag.Location = new System.Drawing.Point(372, 0);
+            this.BtnAddTag.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnAddTag.Name = "BtnAddTag";
+            this.BtnAddTag.Size = new System.Drawing.Size(53, 48);
+            this.BtnAddTag.TabIndex = 6;
+            this.BtnAddTag.UseVisualStyleBackColor = true;
+            this.BtnAddTag.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // OuterLeftEdge
             // 
@@ -772,8 +760,6 @@
         private RoundedTablePanel AddressTablePanel;
         private System.Windows.Forms.ComboBox CbAddress;
         private System.Windows.Forms.Button BtnGoRefresh;
-        private System.Windows.Forms.Button BtnDisplayInfo;
-        private System.Windows.Forms.Button BtnDisplayThumbnail;
         private System.Windows.Forms.TableLayoutPanel ToolTablePanel;
         private System.Windows.Forms.Button BtnCut;
         private System.Windows.Forms.Button BtnCopy;
@@ -784,6 +770,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.Button BtnAddTag;
     }
 }
 

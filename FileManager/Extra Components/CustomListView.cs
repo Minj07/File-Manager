@@ -30,12 +30,26 @@ namespace FileManager
                 this.SmallIcon = SmallIcon;
                 this.LargeIcon = LargeIcon;
                 this.Tags = new List<TagDatabase.Tag>();
+                isTag = false;
             }
             
+            public ListViewItemTag(Color color)
+            {
+                this.color = color;
+                this.Extension = null;
+                this.SmallIcon = null;
+                this.LargeIcon = null;
+                isTag = true;
+            }
+            
+            public bool isTag { get; set; }
+
             public List<TagDatabase.Tag> Tags { get; set; }
             public string Extension { get; set; }
             public Icon SmallIcon { get; set; }
             public Icon LargeIcon { get; set; }
+
+            public Color color { get; set; }
 
             public bool EditingLabel { get; set; } = false;
         }
@@ -47,6 +61,7 @@ namespace FileManager
             space = TextRenderer.MeasureText(" ", this.Font);
         }
 
+        #region Events
         protected override void OnMouseMove(MouseEventArgs e)
         {
             ListViewItem currentItem = this.GetItemAt(e.X, e.Y);
@@ -67,12 +82,6 @@ namespace FileManager
         {
             HoveringItem = null;
             base.OnMouseLeave(e);
-        }
-
-        protected void cap(ref int input, int min, int max)
-        {
-            input = (input < min ? min : input);
-            input = (input > max ? max : input);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -128,6 +137,15 @@ namespace FileManager
             (this.Items[e.Item].Tag as ListViewItemTag).EditingLabel = false;
             base.OnAfterLabelEdit(e);
         }
+        #endregion
+
+        protected void cap(ref int input, int min, int max)
+        {
+            input = (input < min ? min : input);
+            input = (input > max ? max : input);
+        }
+
+
 
         protected Point GetColumnLocation(int ColumnIndex)
         {
@@ -140,6 +158,8 @@ namespace FileManager
             }
             return new Point(Left, Top);
         }
+
+        #region Draw
 
         protected override void OnDrawItem(DrawListViewItemEventArgs e)
         {
@@ -159,7 +179,6 @@ namespace FileManager
             {
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, SelectedOverlayColor)), e.Bounds);
             }
-            
             switch (this.View)
             {
                 case View.Tile:
@@ -249,5 +268,7 @@ namespace FileManager
             }
             
         }
+
+        #endregion
     }
 }
