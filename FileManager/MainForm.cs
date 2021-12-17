@@ -41,6 +41,7 @@ namespace FileManager
             }
         }
 
+        // Handle when click tree node
         private void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Parent != null)
@@ -57,7 +58,7 @@ namespace FileManager
         }
 
         
-
+        // Handle when click on list view item
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem item = this.listView.FocusedItem;
@@ -74,6 +75,7 @@ namespace FileManager
                     CbAddress.Text = item.SubItems[4].Text;
         }
 
+        #region Create go/refresh button
         private void BtnGoRefresh_Click(object sender, EventArgs e)
         {
             try
@@ -159,8 +161,9 @@ namespace FileManager
             if (e.KeyChar == (char)Keys.Enter)
                 BtnGoRefresh_Click(sender, e);
         }
+        #endregion
 
-        #region Create button
+        #region Create copy button
         //Create button cut,copy,paste,delete
         private bool isCopying;
         private List<bool> isFolder;
@@ -205,7 +208,9 @@ namespace FileManager
         {
             Copy();
         }
+        #endregion
 
+        #region Create cut button
         private bool isCutting;
         private void Cut()
         {
@@ -245,6 +250,7 @@ namespace FileManager
         }
         #endregion
 
+        #region Create paste button
         private void Paste()
         {
             try
@@ -611,31 +617,9 @@ namespace FileManager
         {
             isListView = false;
         }
+        #endregion
 
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.C:
-                        Copy();
-                        break;
-                    case Keys.X:
-                        Cut();
-                        break;
-                    case Keys.V:
-                        if (BtnPaste.Enabled)
-                            Paste();
-                        break;
-                    case Keys.D:
-                        Delete();
-                        break;
-                }
-            }
-            else if (e.KeyCode == Keys.F2)
-                Rename();
-        }
+        #region Create delete button
         public void Delete()
         {
             if (GetSelectedListViewItems().Count == 0) return;
@@ -661,7 +645,9 @@ namespace FileManager
                 RefreshTreeView(treeView, treeView.Nodes.Find(currentAddr, true)[0]);
             clsTreeListView.ShowContent(this.listView, currentAddr);
         }
+        #endregion
 
+        #region Create rename button
         private void Rename()
         {
             if (GetSelectedListViewItems().Count == 0) return;
@@ -858,7 +844,36 @@ namespace FileManager
             if (directories.Length == 0 && files.Length == 0)
                 directorySrc.Delete();
         }
+        #endregion
 
+        #region Create short cut
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.C:
+                        Copy();
+                        break;
+                    case Keys.X:
+                        Cut();
+                        break;
+                    case Keys.V:
+                        if (BtnPaste.Enabled)
+                            Paste();
+                        break;
+                    case Keys.D:
+                        Delete();
+                        break;
+                }
+            }
+            else if (e.KeyCode == Keys.F2)
+                Rename();
+        }
+        #endregion
+
+        #region Create back, forward, up
         // Create button Back, Forward
         // Get list of all the path had passed through
         public List<string> pathBackForward=new List<string>();
@@ -901,12 +916,9 @@ namespace FileManager
             }
             else return;
         }
+        #endregion
 
-        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
+        #region Create new button
         private void newFolderToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string new_path=ClsTreeListView.GetFullPath(currentAddr.ToString())+"\\New Folder";
@@ -947,10 +959,7 @@ namespace FileManager
             //Refresh
             clsTreeListView.ShowContent(listView, currentAddr);
         }
+        #endregion
 
-        private void MainTablePanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

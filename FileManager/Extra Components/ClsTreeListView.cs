@@ -131,7 +131,7 @@ namespace FileManager
                 treeView.Nodes[0].Nodes.Clear();
             foreach (TagDatabase.Tag tag in TagDatabase.Tags)
                 {
-                    TreeNode tagNode = new TreeNode();
+                TreeNode tagNode = new TreeNode(tag.name);
                     tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
                     treeView.Nodes[0].Nodes.Add(tagNode);
                     treeView.Nodes[0].LastNode.Name = treeView.Nodes[0].LastNode.FullPath;
