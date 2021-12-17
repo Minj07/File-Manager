@@ -34,13 +34,16 @@ namespace FileManager
             this.MaximizedBounds = Screen.GetWorkingArea(this);
 
             HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
+            LbTitle.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
             HeaderTablePanel.MouseMove += new MouseEventHandler(HeaderTablePanel_MouseMove);
 
             BtnExit.Click += new EventHandler(BtnExit_Click);
             BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
             BtnMaximize.Click += new EventHandler (BtnMaximize_Click);
-            BtnAddTag.Click += new EventHandler(BtnAddTag_Click);
+            BtnChangeTheme.Click += new EventHandler(BtnChangeTheme_Click);
             this.listView.MouseHover += ListView_MouseHover;
+            this.CbAddress.TextChanged += CbAddress_TextChanged1;
+
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
             ReloadTheme();
@@ -48,6 +51,8 @@ namespace FileManager
             currentAddr = "C:/";
             NormalSize = this.Size;
         }
+
+
 
         #endregion
 
@@ -91,26 +96,10 @@ namespace FileManager
             }
         }
 
-        private void BtnAddTag_Click(object sender, EventArgs e)
-        {
-            using (CreateTagForm frm = new CreateTagForm()
-            {
-                BackColor = currentTheme.main,
-                Font = this.Font,
-                ForeColor = this.ForeColor,
-            })
-            {
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    TagDatabase.AddTag(frm.textBox1.Text,frm.color);
-                }
-            }
 
-            UpdateMenuTag();
-        }
         #endregion
 
-        #region Reload Theme
+        #region Theme
         private void ReloadTheme()
         {
             //Form
@@ -118,6 +107,8 @@ namespace FileManager
             OuterTablePanel.BackColor = currentTheme.Unused;
             this.TransparencyKey = currentTheme.Unused;
             OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
+            this.LbTitle.ForeColor = currentTheme.text;
+            this.LbTitle.Font = this.Font;
 
             foreach (Control c in this.Controls)
             {
@@ -127,7 +118,7 @@ namespace FileManager
             //Toolbar
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnAddTag })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
@@ -170,10 +161,23 @@ namespace FileManager
             this.treeView.BackColor = currentTheme.main;
             this.treeView.ForeColor = currentTheme.text;
 
+            this.Refresh();
+
+        }
+        private void BtnChangeTheme_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    currentTheme = new Theme(colorDialog.Color);
+                    ReloadTheme();
+                }
+            }
         }
 
         #endregion
-       
+
         #region Dragging
         private void HeaderTablePanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -208,7 +212,7 @@ namespace FileManager
 
         #endregion
 
-        #region Extra
+        #region Tag
 
         private void UpdateMenuTag()
         {
@@ -222,14 +226,67 @@ namespace FileManager
                     Text = tag.name,
                     BackColor = tag.color,
                     ForeColor = this.ForeColor,
-                    Tag = tag.id,
                 });
-                MenuTagItemList.Last().Click += TagMenuItemClick;
+
+                ToolStripMenuItem ToggleBtn = new ToolStripMenuItem()
+                {
+                    Text = "Toggle Tag",
+                    BackColor = tag.color,
+                    ForeColor = this.ForeColor,
+                    Tag = tag.id,
+                };
+                ToggleBtn.Click += TagMenuToggleBtnClick;
+                MenuTagItemList.Last().DropDownItems.Add(ToggleBtn);
+
+                ToolStripMenuItem RemoveBtn = new ToolStripMenuItem()
+                {
+                    Text = "Remove Tag",
+                    BackColor = tag.color,
+                    ForeColor = this.ForeColor,
+                    Tag = tag.id,
+                };
+                RemoveBtn.Click += TagMenuRemoveBtnClick;
+                MenuTagItemList.Last().DropDownItems.Add(RemoveBtn);
+
                 this.MenuTagItem.DropDownItems.Add(MenuTagItemList.Last());
             }
+            ToolStripMenuItem AddBtn = new ToolStripMenuItem()
+            {
+                Text = "Add New Tag",
+                BackColor = currentTheme.main,
+                ForeColor = currentTheme.text,
+            };
+            AddBtn.Click += TagMenuAddBtnClick;
+            this.MenuTagItem.DropDownItems.Add(AddBtn);
+            UpdateViews();
         }
 
-        private void TagMenuItemClick(object sender, EventArgs e)
+        private void TagMenuAddBtnClick(object sender, EventArgs e)
+        {
+            using (CreateTagForm frm = new CreateTagForm()
+            {
+                BackColor = currentTheme.main,
+                Font = this.Font,
+                ForeColor = this.ForeColor,
+            })
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    TagDatabase.AddTag(frm.textBox1.Text, frm.color);
+                }
+            }
+
+            UpdateMenuTag();
+        }
+
+        private void TagMenuRemoveBtnClick(object sender, EventArgs e)
+        {
+            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            tag.Delete();
+            UpdateMenuTag();
+        }
+
+        private void TagMenuToggleBtnClick(object sender, EventArgs e)
         {
             TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
             if (this.listView.SelectedItems.Count != 0)
@@ -239,13 +296,30 @@ namespace FileManager
                     if (tag.items.Contains(item.SubItems[4].Text))
                     {
                         tag.Remove(item.SubItems[4].Text);
-                    } else
+                    }
+                    else
                     {
                         tag.Insert(item.SubItems[4].Text);
                     }
                 }
             }
-            this.Refresh();
+            UpdateViews();
+        }
+
+        #endregion
+
+        #region Extra
+
+        private void CbAddress_TextChanged1(object sender, EventArgs e)
+        {
+            LbTitle.Text = currentAddr;
+        }
+
+        public void UpdateViews()
+        {
+            if (this.treeView.Nodes.Count == 0) return;
+            clsTreeListView.RefreshTagNode(this.treeView);
+            clsTreeListView.ShowContent(this.listView, this.treeView.Nodes.Find("Tag", true)[0]);
         }
 
         private void ListView_MouseHover(object sender, EventArgs e)

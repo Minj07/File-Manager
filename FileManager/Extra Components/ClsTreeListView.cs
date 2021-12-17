@@ -125,6 +125,19 @@ namespace FileManager
             }
         }
 
+        public void RefreshTagNode(TreeView treeView)
+        {
+            if(treeView.Nodes[0].Nodes.Count==0) return;
+                treeView.Nodes[0].Nodes.Clear();
+            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+                {
+                    TreeNode tagNode = new TreeNode();
+                    tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
+                    treeView.Nodes[0].Nodes.Add(tagNode);
+                    treeView.Nodes[0].LastNode.Name = treeView.Nodes[0].LastNode.FullPath;
+                }
+        }
+
         public CustomTreeView.TreeNodeTag GetTreeNodeTag(string path)
         {
             Icon icon = GetDirectoryIcon(path, false);

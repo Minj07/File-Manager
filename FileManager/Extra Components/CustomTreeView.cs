@@ -133,7 +133,7 @@ namespace FileManager
             {
                 icon = Icon.FromHandle(Theme.ResizeImage(icon.ToBitmap(), 16, 16).GetHicon());
             }
-            if (((TreeNodeTag)e.Node.Tag).hasChild)
+            if (((TreeNodeTag)e.Node.Tag).hasChild&& !((TreeNodeTag)e.Node.Tag).isTag)
             {
                 if (e.Node.IsExpanded)
                 {
