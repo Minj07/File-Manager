@@ -12,12 +12,18 @@ namespace FileManager
 {
     public partial class CreateTagForm : Form
     {
-        public Color color { get; set; } = Color.Aqua;
+        public Color color { get; set; } = Color.Red;
 
         public CreateTagForm()
         {
             InitializeComponent();
             this.DialogResult = DialogResult.Abort;
+            roundedButton1.BackColor = color;
+            roundedButton1.ForeColor = this.ForeColor;
+            roundedButton1.BorderColor = this.ForeColor;
+            label1.ForeColor = this.BackColor;
+            label1.BackColor = this.ForeColor;
+
         }
 
         private void roundedButton1_Click(object sender, EventArgs e)

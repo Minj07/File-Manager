@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.roundedButton1 = new FileManager.RoundedButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.roundedButton1 = new FileManager.RoundedButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,23 +60,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(442, 322);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // roundedButton1
-            // 
-            this.roundedButton1.ActivatedColor = System.Drawing.Color.Empty;
-            this.roundedButton1.BorderColor = System.Drawing.SystemColors.Control;
-            this.roundedButton1.BorderSize = 1F;
-            this.roundedButton1.CornerRadius = 15;
-            this.roundedButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.roundedButton1.HoverColor = System.Drawing.SystemColors.Control;
-            this.roundedButton1.Location = new System.Drawing.Point(96, 148);
-            this.roundedButton1.Margin = new System.Windows.Forms.Padding(30, 20, 30, 20);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(249, 24);
-            this.roundedButton1.TabIndex = 0;
-            this.roundedButton1.Text = "Choose Color";
-            this.roundedButton1.UseVisualStyleBackColor = true;
-            this.roundedButton1.Click += new System.EventHandler(this.roundedButton1_Click);
-            // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -90,8 +73,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(69, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(303, 64);
@@ -101,6 +86,7 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(96, 276);
             this.button1.Margin = new System.Windows.Forms.Padding(30, 20, 30, 20);
@@ -108,11 +94,12 @@
             this.button1.Size = new System.Drawing.Size(249, 26);
             this.button1.TabIndex = 3;
             this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Lime;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.Location = new System.Drawing.Point(96, 212);
             this.button2.Margin = new System.Windows.Forms.Padding(30, 20, 30, 20);
@@ -120,8 +107,25 @@
             this.button2.Size = new System.Drawing.Size(249, 24);
             this.button2.TabIndex = 4;
             this.button2.Text = "Create";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // roundedButton1
+            // 
+            this.roundedButton1.ActivatedColor = System.Drawing.Color.Empty;
+            this.roundedButton1.BorderColor = System.Drawing.SystemColors.Control;
+            this.roundedButton1.BorderSize = 2F;
+            this.roundedButton1.CornerRadius = 15;
+            this.roundedButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roundedButton1.HoverColor = System.Drawing.SystemColors.Control;
+            this.roundedButton1.Location = new System.Drawing.Point(106, 148);
+            this.roundedButton1.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Size = new System.Drawing.Size(229, 24);
+            this.roundedButton1.TabIndex = 0;
+            this.roundedButton1.Text = "Choose Color";
+            this.roundedButton1.UseVisualStyleBackColor = true;
+            this.roundedButton1.Click += new System.EventHandler(this.roundedButton1_Click);
             // 
             // CreateTagForm
             // 

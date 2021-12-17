@@ -30,12 +30,26 @@ namespace FileManager
                 this.SmallIcon = SmallIcon;
                 this.LargeIcon = LargeIcon;
                 this.Tags = new List<TagDatabase.Tag>();
+                isTag = false;
             }
             
+            public ListViewItemTag(Color color)
+            {
+                this.color = color;
+                this.Extension = null;
+                this.SmallIcon = null;
+                this.LargeIcon = null;
+                isTag = true;
+            }
+            
+            public bool isTag { get; set; }
+
             public List<TagDatabase.Tag> Tags { get; set; }
             public string Extension { get; set; }
             public Icon SmallIcon { get; set; }
             public Icon LargeIcon { get; set; }
+
+            public Color color { get; set; }
 
             public bool EditingLabel { get; set; } = false;
         }

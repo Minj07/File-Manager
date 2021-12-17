@@ -88,8 +88,8 @@ namespace FileManager
 
             Icon icon;
 
-            //Add Tag node                       PENDING...
-            icon = Properties.Resources.Computer;
+            //Add Tag node                     
+            icon = Icon.FromHandle(Properties.Resources.star.GetHicon());
             Tag.Tag = new CustomTreeView.TreeNodeTag(icon, false);
             treeView.Nodes.Add(Tag);
 
@@ -112,6 +112,15 @@ namespace FileManager
                 ThisPC.Nodes.Add(diskTreeNode);
                 ThisPC.LastNode.Name = ClsTreeListView.GetFullPath(ThisPC.LastNode.FullPath);
             }
+
+            // Create Tag nodes
+            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+            {
+                TreeNode tagNode=new TreeNode(tag.name);
+                tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, (tag.items.Count != 0) ? true : false);
+                Tag.Nodes.Add(tagNode);
+                Tag.LastNode.Name = Tag.LastNode.FullPath;
+            }
         }
 
         public CustomTreeView.TreeNodeTag GetTreeNodeTag(string path)
@@ -127,7 +136,7 @@ namespace FileManager
         #region Show Folder Tree
         public bool ShowFolderTree(TreeView treeView, TreeNode currentNode)
         {
-            if (currentNode.Name != "This PC")
+            if (currentNode.Name != "This PC" && currentNode.Name != "Tag") 
             {
                 try
                 {
@@ -171,6 +180,19 @@ namespace FileManager
                     MessageBox.Show(ex.ToString());
                 }
             }
+            else if(currentNode.Name=="Tag")
+            {
+                foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+                {
+                    currentNode.Nodes.Clear();
+                    TreeNode tagNode = new TreeNode(tag.name);
+                    tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, (tag.items.Count != 0) ? true : false);
+                    currentNode.Nodes.Add(tagNode);
+                    currentNode.LastNode.Name = currentNode.LastNode.FullPath;
+                }
+            }
+            else if(currentNode.Parent.Name=="Tag")
+                return true;
             return false;
         }
 
@@ -203,7 +225,7 @@ namespace FileManager
         {
             try
             {
-                if (currentNode.Name != "This PC")
+                if (currentNode.Name != "This PC" && currentNode.Name != "Tag")
                 {  //Delete all items in List View
                     listView.Items.Clear();
 
@@ -217,7 +239,7 @@ namespace FileManager
                     foreach (FileInfo file in directoryInfo.GetFiles())
                         listView.Items.Add(GetLVItems(file, listView));
                 }
-                else
+                else if (currentNode.Name == "This PC")
                 {
                     listView.Items.Clear();
                     foreach (TreeNode node in currentNode.Nodes)
@@ -244,12 +266,26 @@ namespace FileManager
                         }
                         item[4] = node.Text;
                         ListViewItem listViewItem = new ListViewItem(item, node.ImageIndex - 1);
-                        listViewItem.Name=node.Name;
-                        listViewItem.Tag = new CustomListView.ListViewItemTag(null, GetDirectoryIcon(item[4].Remove(item[4].Length-1,1), false), GetDirectoryIcon(item[4].Remove(item[4].Length - 1, 1), true));
+                        listViewItem.Name = node.Name;
+                        listViewItem.Tag = new CustomListView.ListViewItemTag(null, GetDirectoryIcon(item[4].Remove(item[4].Length - 1, 1), false), GetDirectoryIcon(item[4].Remove(item[4].Length - 1, 1), true));
                         listView.Items.Add(listViewItem);
                     }
                 }
-                return true;
+                else if (currentNode.Name == "Tag")
+                {
+                    listView.Items.Clear();
+                    foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+                    {
+                        string[] item = new string[5];
+                        item[0] = tag.name;
+                        ListViewItem listViewItem = new ListViewItem(item);
+                        listViewItem.Name = tag.name;
+                        listViewItem.Tag = new CustomListView.ListViewItemTag(tag.color);
+                        listView.Items.Add(listViewItem);
+                    }
+
+                    return true;
+                }
             }
             catch (IOException)
             {

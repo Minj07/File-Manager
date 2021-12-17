@@ -50,9 +50,22 @@ namespace FileManager
             {
                 this.icon = CustomIcon;
                 this.hasChild = hasChild;
+                color = Color.Empty;
+                isTag = false;
+            }
+
+            public TreeNodeTag(Color color, bool hasChild)
+            {
+                this.color = color;
+                this.hasChild= hasChild;
+                isTag = true;
             }
 
             public bool hasChild { get; set; }
+
+            public bool isTag { get; set; }
+
+            public Color color;
 
             public Icon icon { get; set; }
         }

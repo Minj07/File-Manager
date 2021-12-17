@@ -91,7 +91,12 @@ namespace FileManager
 
         private void BtnAddTag_Click(object sender, EventArgs e)
         {
-            using (CreateTagForm frm = new CreateTagForm())
+            using (CreateTagForm frm = new CreateTagForm()
+            {
+                BackColor = currentTheme.main,
+                Font = this.Font,
+                ForeColor = this.ForeColor,
+            })
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
