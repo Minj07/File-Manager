@@ -140,7 +140,21 @@ namespace FileManager
                     BtnGoRefresh.Image = Resources.reboot;
                 }
             }
-            else currentAddr = CbAddress.Text;
+            else
+            {
+                currentAddr = CbAddress.Text;
+                if (!backForward)
+                {
+                    if (indexBackForward < pathBackForward.Count - 1)
+                        pathBackForward.RemoveRange(indexBackForward + 1, pathBackForward.Count - indexBackForward - 1);
+                    pathBackForward.Add(CbAddress.Text);
+                    indexBackForward++;
+                    BtnBack.Enabled = true;
+                    BtnForward.Enabled = false;
+                }
+                else backForward = false;
+                //BtnForward.Enabled = true;
+            }
         }
 
         private void CbAddress_KeyPress(object sender, KeyPressEventArgs e)
@@ -825,6 +839,46 @@ namespace FileManager
         }
 
         // Create button Back, Forward
+        // Get list of all the path had passed through
+        public List<string> pathBackForward=new List<string>();
+        public int indexBackForward = -1;
+        public bool backForward = false;
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            backForward = true;
+            indexBackForward--;
+            CbAddress.Text = pathBackForward[indexBackForward];
+            if (CbAddress.Text != "This PC" && CbAddress.Text != "Tag")
+                clsTreeListView.ShowContent(this.listView, CbAddress.Text);
+            else if (CbAddress.Text == "This PC")
+                clsTreeListView.ShowContent(this.listView, this.treeView.Nodes[1]);
+            if(indexBackForward==0) BtnBack.Enabled=false;
+            BtnForward.Enabled=true;
+        }
 
+        private void BtnForward_Click(object sender, EventArgs e)
+        {
+            backForward = true;
+            indexBackForward++;
+            CbAddress.Text = pathBackForward[indexBackForward];
+            if (CbAddress.Text != "This PC" && CbAddress.Text != "Tag")
+                clsTreeListView.ShowContent(this.listView, CbAddress.Text);
+            else if (CbAddress.Text == "This PC")
+                clsTreeListView.ShowContent(this.listView, this.treeView.Nodes[1]);
+            if (indexBackForward == pathBackForward.Count-1) BtnForward.Enabled = false;
+            BtnBack.Enabled=true;
+        }
+
+        private void BtnParentFolder_Click(object sender, EventArgs e)
+        {
+            if (treeView.Nodes.Find(CbAddress.Text, true).Length == 0) return;
+            TreeNode treeNode = treeView.Nodes.Find(CbAddress.Text,true)[0].Parent;
+            if (treeNode != null)
+            {
+                clsTreeListView.ShowContent(this.listView, treeNode);
+                CbAddress.Text = ClsTreeListView.GetFullPath(treeNode.FullPath);
+            }
+            else return;
+        }
     }
 }

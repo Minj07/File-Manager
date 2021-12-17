@@ -327,6 +327,7 @@
             this.BtnBack.Size = new System.Drawing.Size(45, 54);
             this.BtnBack.TabIndex = 0;
             this.BtnBack.UseVisualStyleBackColor = false;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // BtnForward
             // 
@@ -340,6 +341,7 @@
             this.BtnForward.Size = new System.Drawing.Size(45, 54);
             this.BtnForward.TabIndex = 1;
             this.BtnForward.UseVisualStyleBackColor = true;
+            this.BtnForward.Click += new System.EventHandler(this.BtnForward_Click);
             // 
             // BtnRecent
             // 
@@ -367,6 +369,7 @@
             this.BtnParentFolder.Size = new System.Drawing.Size(46, 54);
             this.BtnParentFolder.TabIndex = 3;
             this.BtnParentFolder.UseVisualStyleBackColor = true;
+            this.BtnParentFolder.Click += new System.EventHandler(this.BtnParentFolder_Click);
             // 
             // AddressTablePanel
             // 

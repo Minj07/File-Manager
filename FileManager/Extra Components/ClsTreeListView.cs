@@ -371,14 +371,14 @@ namespace FileManager
         {
             try
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                if (directoryInfo.Exists)
-                {
-                    listView.Items.Clear();
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    if (directoryInfo.Exists)
+                    {
+                        listView.Items.Clear();
 
-                    //Information of directories
-                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
-                        listView.Items.Add(GetLVItems(dir));
+                        //Information of directories
+                        foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                            listView.Items.Add(GetLVItems(dir));
 
                     //Information of files
                     foreach (FileInfo file in directoryInfo.GetFiles())
