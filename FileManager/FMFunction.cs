@@ -319,7 +319,7 @@ namespace FileManager
         {
             if (this.treeView.Nodes.Count == 0) return;
             clsTreeListView.RefreshTagNode(this.treeView);
-            clsTreeListView.ShowContent(this.listView, this.treeView.Nodes.Find("Tag", true)[0]);
+            clsTreeListView.ShowContent(this.listView, this.treeView.Nodes.Find(CbAddress.Text, true)[0]);
         }
 
         private void ListView_MouseHover(object sender, EventArgs e)
