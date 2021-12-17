@@ -66,16 +66,17 @@
             this.BtnPaste = new System.Windows.Forms.Button();
             this.BtnRename = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuNew = new System.Windows.Forms.MenuStrip();
+            this.MenuNewItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemNewFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemNewTextFile = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnAddTag = new System.Windows.Forms.Button();
-            this.OuterLeftEdge = new System.Windows.Forms.Panel();
-            this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.MenuTag = new System.Windows.Forms.MenuStrip();
             this.MenuTagItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.OuterLeftEdge = new System.Windows.Forms.Panel();
+            this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -85,7 +86,7 @@
             this.StatusTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
             this.ToolTablePanel.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.MenuNew.SuspendLayout();
             this.MenuTag.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -556,7 +557,7 @@
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
             this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
-            this.ToolTablePanel.Controls.Add(this.menuStrip1, 0, 0);
+            this.ToolTablePanel.Controls.Add(this.MenuNew, 0, 0);
             this.ToolTablePanel.Controls.Add(this.BtnAddTag, 6, 0);
             this.ToolTablePanel.Controls.Add(this.MenuTag, 7, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -640,35 +641,43 @@
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // menuStrip1
+            // MenuNew
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.IndianRed;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(91, 28);
-            this.menuStrip1.TabIndex = 7;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MenuNew.BackColor = System.Drawing.SystemColors.Control;
+            this.MenuNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MenuNew.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuNew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuNewItem});
+            this.MenuNew.Location = new System.Drawing.Point(0, 0);
+            this.MenuNew.Name = "MenuNew";
+            this.MenuNew.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.MenuNew.Size = new System.Drawing.Size(107, 48);
+            this.MenuNew.TabIndex = 7;
+            this.MenuNew.Text = "New";
             // 
-            // toolStripMenuItem1
+            // MenuNewItem
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem});
-            this.toolStripMenuItem1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(83, 24);
-            this.toolStripMenuItem1.Text = "sdfsdfsdf";
+            this.MenuNewItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemNewFolder,
+            this.MenuItemNewTextFile});
+            this.MenuNewItem.Image = global::FileManager.Properties.Resources.new_file;
+            this.MenuNewItem.Name = "MenuNewItem";
+            this.MenuNewItem.Size = new System.Drawing.Size(77, 44);
+            this.MenuNewItem.Text = "New ";
             // 
-            // newToolStripMenuItem
+            // MenuItemNewFolder
             // 
-            this.newToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.newToolStripMenuItem.Text = "new";
+            this.MenuItemNewFolder.Name = "MenuItemNewFolder";
+            this.MenuItemNewFolder.Size = new System.Drawing.Size(226, 26);
+            this.MenuItemNewFolder.Text = "New Folder";
+            this.MenuItemNewFolder.Click += new System.EventHandler(this.newFolderToolStripMenuItem1_Click);
+            // 
+            // MenuItemNewTextFile
+            // 
+            this.MenuItemNewTextFile.Name = "MenuItemNewTextFile";
+            this.MenuItemNewTextFile.Size = new System.Drawing.Size(226, 26);
+            this.MenuItemNewTextFile.Text = "New Text Document";
+            this.MenuItemNewTextFile.Click += new System.EventHandler(this.newTextDocumentToolStripMenuItem_Click);
             // 
             // BtnAddTag
             // 
@@ -682,24 +691,6 @@
             this.BtnAddTag.TabIndex = 6;
             this.BtnAddTag.UseVisualStyleBackColor = true;
             this.BtnAddTag.Click += new System.EventHandler(this.BtnDelete_Click);
-            // 
-            // OuterLeftEdge
-            // 
-            this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
-            this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
-            this.OuterLeftEdge.Name = "OuterLeftEdge";
-            this.OuterLeftEdge.Size = new System.Drawing.Size(5, 555);
-            this.OuterLeftEdge.TabIndex = 1;
-            // 
-            // OuterBottomEdge
-            // 
-            this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterBottomEdge.Location = new System.Drawing.Point(5, 555);
-            this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
-            this.OuterBottomEdge.Name = "OuterBottomEdge";
-            this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
-            this.OuterBottomEdge.TabIndex = 2;
             // 
             // MenuTag
             // 
@@ -735,7 +726,7 @@
             // 
             this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(119, 26);
             this.toolStripMenuItem3.Text = "new";
             // 
             // toolStripMenuItem2
@@ -743,6 +734,24 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 44);
             this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
+            // OuterLeftEdge
+            // 
+            this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
+            this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
+            this.OuterLeftEdge.Name = "OuterLeftEdge";
+            this.OuterLeftEdge.Size = new System.Drawing.Size(5, 555);
+            this.OuterLeftEdge.TabIndex = 1;
+            // 
+            // OuterBottomEdge
+            // 
+            this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterBottomEdge.Location = new System.Drawing.Point(5, 555);
+            this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
+            this.OuterBottomEdge.Name = "OuterBottomEdge";
+            this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
+            this.OuterBottomEdge.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -754,7 +763,7 @@
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.MenuNew;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "File Manager";
@@ -772,8 +781,8 @@
             this.HeaderTablePanel.ResumeLayout(false);
             this.ToolTablePanel.ResumeLayout(false);
             this.ToolTablePanel.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MenuNew.ResumeLayout(false);
+            this.MenuNew.PerformLayout();
             this.MenuTag.ResumeLayout(false);
             this.MenuTag.PerformLayout();
             this.ResumeLayout(false);
@@ -819,14 +828,15 @@
         private System.Windows.Forms.Button BtnRename;
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.ImageList imageListTreeView;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip MenuNew;
         private System.Windows.Forms.Button BtnAddTag;
         private System.Windows.Forms.MenuStrip MenuTag;
         private System.Windows.Forms.ToolStripMenuItem MenuTagItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem MenuNewItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemNewFolder;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemNewTextFile;
     }
 }
 
