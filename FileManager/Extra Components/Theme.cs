@@ -22,8 +22,8 @@ namespace FileManager
         {
             this.main = main;
             lighterMain = Color.FromArgb(increase(main.R),increase(main.G),increase(main.B));
-            darkerMain = Color.FromArgb(decrease(main.R),decrease(main.G),decrease(main.B));
-            text = Color.FromArgb(255 - main.R, 255 - main.G, 255 - main.B);
+            darkerMain = Color.FromArgb(decrease(main.R),decrease(main.G),decrease(main.B));            
+            text = (contrast(Color.White, main) > contrast(Color.Black, main) ? Color.White : Color.Black);
             Random random = new Random();
             do
             {

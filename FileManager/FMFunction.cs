@@ -21,12 +21,14 @@ namespace FileManager
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
         private TagDatabase tagDatabase = new TagDatabase();
+        private List<ToolStripMenuItem> MenuTagItemList =  new List<ToolStripMenuItem>();
 
         #region Initialize
         private void FMIntialize()
         {
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(30,30,30));
+
             currentTheme = dark;
             InitializeComponent();
             this.MaximizedBounds = Screen.GetWorkingArea(this);
@@ -42,7 +44,7 @@ namespace FileManager
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
             ReloadTheme();
-
+            this.UpdateMenuTag();
             currentAddr = "C:/";
             NormalSize = this.Size;
         }
@@ -103,6 +105,8 @@ namespace FileManager
                     TagDatabase.AddTag(frm.textBox1.Text,frm.color);
                 }
             }
+
+            UpdateMenuTag();
         }
         #endregion
 
@@ -123,11 +127,13 @@ namespace FileManager
             //Toolbar
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnAddTag })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
+
+            this.MenuTag.BackColor = currentTheme.main;
 
             //Navigation
 
@@ -180,7 +186,6 @@ namespace FileManager
                 } else if (MousePosition.Y>=50 && this.WindowState == FormWindowState.Maximized)
                 {
                     mouseDownLocation.X = -NormalSize.Width / 2;
-                    TxtBxSearch.Text = mouseDownLocation.ToString();
                     mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
                     this.Location = mouseOffset;
                     this.WindowState = FormWindowState.Normal;
@@ -197,6 +202,43 @@ namespace FileManager
         #endregion
 
         #region Extra
+
+        private void UpdateMenuTag()
+        {
+            MenuTagItemList.Clear();
+            this.MenuTagItem.DropDownItems.Clear();
+            TagDatabase tagDatabase = new TagDatabase();
+            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+            {
+                MenuTagItemList.Add(new ToolStripMenuItem()
+                {
+                    Text = tag.name,
+                    BackColor = tag.color,
+                    ForeColor = this.ForeColor,
+                    Tag = tag,
+                });
+                MenuTagItemList.Last().Click += TagMenuItemClick;
+                this.MenuTagItem.DropDownItems.Add(MenuTagItemList.Last());
+            }
+        }
+
+        private void TagMenuItemClick(object sender, EventArgs e)
+        {
+            TagDatabase.Tag tag = (TagDatabase.Tag)((ToolStripMenuItem)sender).Tag;
+            if (this.listView.SelectedItems.Count != 0)
+            {
+                foreach (ListViewItem item in this.listView.SelectedItems)
+                {
+                    if (tag.items.Contains(item.SubItems[4].Text))
+                    {
+                        tag.Remove(item.SubItems[4].Text);
+                    } else
+                    {
+                        tag.Insert(item.SubItems[4].Text);
+                    }
+                }
+            }
+        }
 
         private void ListView_MouseHover(object sender, EventArgs e)
         {
