@@ -68,11 +68,11 @@
             this.BtnPaste = new System.Windows.Forms.Button();
             this.BtnRename = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
-            this.OuterLeftEdge = new System.Windows.Forms.Panel();
-            this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OuterLeftEdge = new System.Windows.Forms.Panel();
+            this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -328,6 +328,7 @@
             this.BtnBack.Size = new System.Drawing.Size(45, 54);
             this.BtnBack.TabIndex = 0;
             this.BtnBack.UseVisualStyleBackColor = false;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // BtnForward
             // 
@@ -341,6 +342,7 @@
             this.BtnForward.Size = new System.Drawing.Size(45, 54);
             this.BtnForward.TabIndex = 1;
             this.BtnForward.UseVisualStyleBackColor = true;
+            this.BtnForward.Click += new System.EventHandler(this.BtnForward_Click);
             // 
             // BtnRecent
             // 
@@ -368,6 +370,7 @@
             this.BtnParentFolder.Size = new System.Drawing.Size(46, 54);
             this.BtnParentFolder.TabIndex = 3;
             this.BtnParentFolder.UseVisualStyleBackColor = true;
+            this.BtnParentFolder.Click += new System.EventHandler(this.BtnParentFolder_Click);
             // 
             // AddressTablePanel
             // 
@@ -402,7 +405,6 @@
             this.CbAddress.TabIndex = 0;
             this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             this.CbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbAddress_KeyPress);
-            this.CbAddress.Validated += new System.EventHandler(this.CbAddress_Validated);
             // 
             // BtnGoRefresh
             // 
@@ -658,24 +660,6 @@
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // OuterLeftEdge
-            // 
-            this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
-            this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
-            this.OuterLeftEdge.Name = "OuterLeftEdge";
-            this.OuterLeftEdge.Size = new System.Drawing.Size(5, 555);
-            this.OuterLeftEdge.TabIndex = 1;
-            // 
-            // OuterBottomEdge
-            // 
-            this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterBottomEdge.Location = new System.Drawing.Point(5, 555);
-            this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
-            this.OuterBottomEdge.Name = "OuterBottomEdge";
-            this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
-            this.OuterBottomEdge.TabIndex = 2;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.IndianRed;
@@ -701,8 +685,26 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(119, 26);
             this.newToolStripMenuItem.Text = "new";
+            // 
+            // OuterLeftEdge
+            // 
+            this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
+            this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
+            this.OuterLeftEdge.Name = "OuterLeftEdge";
+            this.OuterLeftEdge.Size = new System.Drawing.Size(5, 555);
+            this.OuterLeftEdge.TabIndex = 1;
+            // 
+            // OuterBottomEdge
+            // 
+            this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterBottomEdge.Location = new System.Drawing.Point(5, 555);
+            this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
+            this.OuterBottomEdge.Name = "OuterBottomEdge";
+            this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
+            this.OuterBottomEdge.TabIndex = 2;
             // 
             // MainForm
             // 

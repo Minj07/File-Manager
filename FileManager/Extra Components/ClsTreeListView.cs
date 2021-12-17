@@ -215,7 +215,7 @@ namespace FileManager
 
                     //Information of files
                     foreach (FileInfo file in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(file, listView));
+                        listView.Items.Add(GetLVItems(file));
                 }
                 else
                 {
@@ -290,7 +290,7 @@ namespace FileManager
         }
 
         //Get List View item having info from file
-        public ListViewItem GetLVItems(FileInfo file, ListView listView)
+        public ListViewItem GetLVItems(FileInfo file)
         {
             string[] item = new string[5];
             item[0] = file.Name;
@@ -300,30 +300,6 @@ namespace FileManager
             if (item[3].Equals(" KB")) item[3] = "0 KB";
             item[4] = file.FullName;
 
-            //Set a default icon for the file
-            /*Icon iconForFile = SystemIcons.WinLogo;
-            ListViewItem listViewItem = new ListViewItem(item, 1);
-
-
-            string key = file.Extension;
-            if (key == ".exe")
-                key = file.FullName;
-            else if (key == "")
-            {
-                listViewItem.ImageIndex = 5;
-                return listViewItem;
-            }
-
-            //Check to see if the image collection contains an image for this extension, using the extension as a key
-            if (!listView.SmallImageList.Images.ContainsKey(file.Extension))
-            {
-                //If not, add the image to the image list
-                iconForFile = Icon.ExtractAssociatedIcon(file.FullName);
-                listView.SmallImageList.Images.Add(key, iconForFile);
-                listView.LargeImageList.Images.Add(key, iconForFile);
-            }
-
-            listViewItem.ImageKey = key;*/
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, Icon.ExtractAssociatedIcon(file.FullName), Icon.ExtractAssociatedIcon(file.FullName));
             return listViewItem;
@@ -333,21 +309,21 @@ namespace FileManager
         {
             try
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                if (directoryInfo.Exists)
-                {
-                    listView.Items.Clear();
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    if (directoryInfo.Exists)
+                    {
+                        listView.Items.Clear();
 
-                    //Information of directories
-                    foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
-                        listView.Items.Add(GetLVItems(dir));
+                        //Information of directories
+                        foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
+                            listView.Items.Add(GetLVItems(dir));
 
-                    //Information of files
-                    foreach (FileInfo file in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(file, listView));
-                }
-                else
-                    MessageBox.Show("Can't find '" + path + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //Information of files
+                        foreach (FileInfo file in directoryInfo.GetFiles())
+                            listView.Items.Add(GetLVItems(file));
+                    }
+                    else
+                        MessageBox.Show("Can't find '" + path + "'. Check the spelling and try again", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);               
             }
             catch (IOException)
             {
@@ -378,6 +354,7 @@ namespace FileManager
                 if (file.Exists)
                 {
                     Process.Start(path);
+                    return false;
                 }
                 // If click a folder, show content of that folder
                 else
@@ -395,7 +372,7 @@ namespace FileManager
                         listView.Items.Add(GetLVItems(directoryInfoTemp));
 
                     foreach (FileInfo fileInfoTemp in directoryInfo.GetFiles())
-                        listView.Items.Add(GetLVItems(fileInfoTemp, listView));
+                        listView.Items.Add(GetLVItems(fileInfoTemp));
 
                     // Focus the tree node of the dir clicked
                     List<TreeNode> tn = new List<TreeNode>();

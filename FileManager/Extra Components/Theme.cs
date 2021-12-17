@@ -39,6 +39,26 @@ namespace FileManager
             text = theme.text;
         }
 
+        public double luminance(Color color)
+        {
+            double r = color.R / 255d;
+            double g = color.G / 255d;
+            double b = color.B / 255d;
+            Func<double, double> calc = v => (v <= 0.03928
+            ? v / 12.92
+            : Math.Pow((v + 0.055) / 1.055, 2.4));
+            return calc(r) * 0.2126 + calc(g) * 0.7152 + calc(b) * 0.0722;
+        }
+
+        public double contrast(Color a, Color b)
+        {
+            double lum1 = luminance(a);
+            double lum2 = luminance(b);
+            double brightest = (lum1 > lum2 ? lum1 : lum2);
+            double darkest = (lum1 < lum2 ? lum1 : lum2);
+            return (brightest + 0.05) / (darkest + 0.05);
+        }
+        
         public static Color HexColor(string h)
         {
             Exception InvalidHexadecimal = new Exception("Invalid Hexadecimal");
