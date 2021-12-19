@@ -433,6 +433,7 @@ namespace FileManager
                     if (file.Exists)
                     {
                         Process.Start(path);
+                        return false;
                     }
                     // If click a folder, show content of that folder
                     else

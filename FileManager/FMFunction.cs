@@ -118,7 +118,8 @@ namespace FileManager
             //Toolbar
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme })
+            this.ToolbarSeparator.BackColor = currentTheme.lighterMain;
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnArchive })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;

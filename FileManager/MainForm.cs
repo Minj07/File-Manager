@@ -513,15 +513,15 @@ namespace FileManager
                     }
                     else if (isCutting)
                     {
+                        //TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
                         if (isFolder[i])
                         {
+                            
                             FileSystem.MoveDirectory(pathSource[i], pathDest[i], isReplace);
                             if (parent != null)
                                 RefreshTreeView(treeView, parent);
                         }
                         else FileSystem.MoveFile(pathSource[i], pathDest[i], isReplace);
-                        
-
                     }              
                 }
 

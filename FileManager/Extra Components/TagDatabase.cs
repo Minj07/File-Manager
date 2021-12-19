@@ -53,6 +53,36 @@ namespace FileManager
                 RefreshTags();
             }
 
+            public void Modify (string newName, Color newColor)
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string queryName = "";
+                string queryColor = "";
+                if(newName != null)
+                    queryName = "Update Tag set Name='" + newName + "' where Id=" + this.id;
+                if(newColor != null)
+                    queryColor="Update Tag set R="+newColor.R+" and G="+newColor.G+" and B="+newColor.B+" where Id="+this.id;
+                using (connection)
+                {                    
+                    connection.Open();
+                    if (newName != null)
+                    {
+                        SqlCommand command = new SqlCommand(queryName, connection);
+                        adapter.UpdateCommand = command;
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        command.Dispose();
+                    }
+                    if(newColor != null)
+                    {
+                        SqlCommand command = new SqlCommand(queryColor, connection);
+                        adapter.UpdateCommand = command;
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        command.Dispose();
+                    }
+                    connection.Close();
+                }
+            }
+
             public void Remove(string path)
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -174,7 +204,23 @@ namespace FileManager
             RefreshTags();
         }
 
+        static public void UpdateItem(string oldPath, string newPath)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            String query = "Update Tagged set Path='" + newPath + "' where Path='" + oldPath + "'";
+            using(connection)
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
 
+                adapter.UpdateCommand = command;
+                adapter.UpdateCommand.ExecuteNonQuery();
+                command.Dispose();
+
+                connection.Close();
+            }
+            RefreshTags();
+        }
 
         static public void RefreshTags()
         {
