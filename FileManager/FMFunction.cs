@@ -239,6 +239,16 @@ namespace FileManager
                 ToggleBtn.Click += TagMenuToggleBtnClick;
                 MenuTagItemList.Last().DropDownItems.Add(ToggleBtn);
 
+                ToolStripMenuItem ModifyBtn = new ToolStripMenuItem()
+                {
+                    Text = "Modify Tag",
+                    BackColor = tag.color,
+                    ForeColor = this.ForeColor,
+                    Tag = tag.id,
+                };
+                ModifyBtn.Click += TagMenuModifyBtnClick;
+                MenuTagItemList.Last().DropDownItems.Add(ModifyBtn);
+
                 ToolStripMenuItem RemoveBtn = new ToolStripMenuItem()
                 {
                     Text = "Remove Tag",
@@ -269,21 +279,17 @@ namespace FileManager
                 BackColor = currentTheme.main,
                 Font = this.Font,
                 ForeColor = this.ForeColor,
+                Text = "Create new Tag"
             })
             {
+                frm.LblName.BackColor = frm.BackColor;
+                frm.LblName.ForeColor = this.ForeColor;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    TagDatabase.AddTag(frm.textBox1.Text, frm.color);
+                    TagDatabase.AddTag(frm.TxtBoxName.Text, frm.color);
                 }
             }
 
-            UpdateMenuTag();
-        }
-
-        private void TagMenuRemoveBtnClick(object sender, EventArgs e)
-        {
-            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
-            tag.Delete();
             UpdateMenuTag();
         }
 
@@ -305,6 +311,38 @@ namespace FileManager
                 }
             }
             UpdateViews();
+        }
+
+        private void TagMenuModifyBtnClick(object sender, EventArgs e)
+        {
+            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            using (CreateTagForm frm = new CreateTagForm()
+            {
+                BackColor = currentTheme.main,
+                Font = this.Font,
+                ForeColor = this.ForeColor,
+                Text = "Modify Tag",
+                color = tag.color,
+            })
+            {
+                frm.TxtBoxName.Text = tag.name;
+                frm.BtnColor.BackColor = tag.color;
+                frm.BtnOk.Text = "Apply";
+                frm.LblName.BackColor = frm.BackColor;
+                frm.LblName.ForeColor = this.ForeColor;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    tag.Modify(frm.TxtBoxName.Text, frm.color);
+                }
+            }
+            UpdateMenuTag();
+        }
+
+        private void TagMenuRemoveBtnClick(object sender, EventArgs e)
+        {
+            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            tag.Delete();
+            UpdateMenuTag();
         }
 
         #endregion
