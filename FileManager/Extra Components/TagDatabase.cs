@@ -86,7 +86,7 @@ namespace FileManager
             public void Remove(string path)
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                String query = "Delete from Tagged where TagId=" + id.ToString()+" and  Convert(VARCHAR, Path)='"+path+"'";
+                String query = "Delete from Tagged where TagId=" + id.ToString()+" and  Convert(VARCHAR(MAX), Path)='"+path+"'";
                 using (connection)
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -207,7 +207,7 @@ namespace FileManager
         static public void UpdateItem(string oldPath, string newPath)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
-            String query = "Update Tagged set Path='" + newPath + "' where Convert(VARCHAR, Path)='" + oldPath + "'";
+            String query = "Update Tagged set Path='" + newPath + "' where Convert(VARCHAR(MAX), Path)='" + oldPath + "'";
             using(connection)
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -225,7 +225,7 @@ namespace FileManager
         static public void DeleteItem(string path)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
-            String query = "Delete from Tagged where Convert(VARCHAR, Path)='" + path + "'";
+            String query = "Delete from Tagged where Convert(VARCHAR(MAX), Path)='" + path + "'";
             using (connection)
             {
                 SqlCommand command = new SqlCommand(query, connection);
