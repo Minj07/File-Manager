@@ -61,7 +61,7 @@ namespace FileManager
                 if(newName != null)
                     queryName = "Update Tag set Name='" + newName + "' where Id=" + this.id;
                 if(newColor != null)
-                    queryColor="Update Tag set R="+newColor.R+" and G="+newColor.G+" and B="+newColor.B+" where Id="+this.id;
+                    queryColor="Update Tag set R="+newColor.R+", G="+newColor.G+", B="+newColor.B+" where Id="+this.id;
                 using (connection)
                 {                    
                     connection.Open();
@@ -207,7 +207,7 @@ namespace FileManager
         static public void UpdateItem(string oldPath, string newPath)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
-            String query = "Update Tagged set Path='" + newPath + "' where Path='" + oldPath + "'";
+            String query = "Update Tagged set Path='" + newPath + "' where Convert(VARCHAR, Path)='" + oldPath + "'";
             using(connection)
             {
                 SqlCommand command = new SqlCommand(query, connection);

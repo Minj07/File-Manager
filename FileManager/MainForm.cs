@@ -513,7 +513,7 @@ namespace FileManager
                     }
                     else if (isCutting)
                     {
-                        //TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
+                        TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
                         if (isFolder[i])
                         {
                             

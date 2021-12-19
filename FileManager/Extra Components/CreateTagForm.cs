@@ -18,11 +18,11 @@ namespace FileManager
         {
             InitializeComponent();
             this.DialogResult = DialogResult.Abort;
-            roundedButton1.BackColor = color;
-            roundedButton1.ForeColor = this.ForeColor;
-            roundedButton1.BorderColor = this.ForeColor;
-            label1.ForeColor = this.BackColor;
-            label1.BackColor = this.ForeColor;
+            BtnColor.BackColor = color;
+            BtnColor.ForeColor = this.ForeColor;
+            BtnColor.BorderColor = this.ForeColor;
+            LblName.ForeColor = this.ForeColor;
+            TxtBoxName.BackColor = this.BackColor;
 
         }
 
@@ -34,7 +34,7 @@ namespace FileManager
                 if (result == DialogResult.OK)
                 {
                     color = colorDialog.Color;
-                    roundedButton1.BackColor = color;
+                    BtnColor.BackColor = color;
                 }
 
             }
