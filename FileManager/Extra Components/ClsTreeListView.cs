@@ -536,11 +536,13 @@ namespace FileManager
                 else
                     foreach (ListViewItem item in listItem)
                         if (item.SubItems[2].Text == "File folder")
-                        {
+
                             DeleteFolder(new DirectoryInfo(item.SubItems[4].Text));
-                        }
                         else
+                        {
+                            TagDatabase.DeleteItem(item.SubItems[4].Text);
                             new FileInfo(item.SubItems[4].Text).Delete();
+                        }
             }
             catch (Exception ex)
             {
@@ -556,8 +558,12 @@ namespace FileManager
                 foreach (DirectoryInfo dir in directories)
                     DeleteFolder(dir);
                 foreach (FileInfo file in files)
+                {
+                    TagDatabase.DeleteItem(file.FullName);
                     file.Delete();
+                }
             }
+            TagDatabase.DeleteItem(directoryInfo.FullName);
             directoryInfo.Delete();
         }
     }

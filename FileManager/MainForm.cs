@@ -259,6 +259,7 @@ namespace FileManager
                 List<string> pathDest = new List<string>();
 
                 List<string> listConflict = new List<string>();
+                List<string> listConflictSrc = new List<string>();
                 int countCopying = 0;
                 if (isListView)
                 {
@@ -455,9 +456,17 @@ namespace FileManager
                         //Get the list full path of conflicted file
                         if (isConflict)
                         {
-                            //Get the full name of parent directory of source path
-                            if (isFolder[i]) listConflict.AddRange(GetConflict(new DirectoryInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
-                            else listConflict.AddRange(GetConflict(new FileInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
+                            //Get the full name of parent directory of dst path
+                            if (isFolder[i])
+                            {
+                                listConflict.AddRange(GetConflict(new DirectoryInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
+                                listConflictSrc.AddRange(GetConflictSrc(new DirectoryInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
+                            }
+                            else
+                            {
+                                listConflict.AddRange(GetConflict(new FileInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
+                                listConflictSrc.AddRange(GetConflictSrc(new FileInfo(pathSource[i]), new DirectoryInfo(currentAddr)));
+                            }
                         }
                     }
                 }
@@ -485,9 +494,16 @@ namespace FileManager
                         a += ("\n" + i);
                     DialogResult result = MessageBox.Show(((isCopying) ? "Copying " : "Moving ") + countCopying + " item" + ((countCopying > 1) ? "s" : "") + " from \"" + src.Remove(src.Length - 1, 1) + "\" to \"" + dst + "\"" +
                                                         "\nThe destination has " + listConflict.Count + " file" + ((listConflict.Count > 1) ? "s" : "") + " with the same name" + ((listConflict.Count > 1) ? "s" : "") + " : " + a +
-                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                    if (result == DialogResult.OK)
+                                                        "\nDo you want to replace the file" + ((listConflict.Count > 1) ? "s" : "") + " in the destination ? ", "Replace Files", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
                         isReplace = true;
+                    else if (result == DialogResult.No)
+                    {
+                        for (int j =0;j<pathSource.Count;j++)
+                            foreach (string srcConfilct in listConflictSrc)
+                                if (srcConfilct == pathSource[j])
+                                    pathSource[j] = null;
+                    }
                     else if (result == DialogResult.Cancel)
                         return;
                 }
@@ -513,7 +529,7 @@ namespace FileManager
                     }
                     else if (isCutting)
                     {
-                        //TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
+                        TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
                         if (isFolder[i])
                         {
                             
@@ -522,6 +538,7 @@ namespace FileManager
                                 RefreshTreeView(treeView, parent);
                         }
                         else FileSystem.MoveFile(pathSource[i], pathDest[i], isReplace);
+                        
                     }              
                 }
 
@@ -579,6 +596,39 @@ namespace FileManager
             foreach (FileInfo fileDst in directoryDst.GetFiles())
                 if (fileSrc.Name.Equals(fileDst.Name))
                     listConflict.Add(fileDst.FullName);
+            return listConflict;
+        }
+
+        private List<string> GetConflictSrc(DirectoryInfo directorySrc, DirectoryInfo directoryDst)
+        {
+            List<string> listConflict = new List<string>();
+            if (!directorySrc.Exists || !directoryDst.Exists)
+                return listConflict;
+            else
+            {
+                foreach (DirectoryInfo directoryInfo in directoryDst.GetDirectories())
+                    if (directoryInfo.Name == directoryInfo.Name)
+                        directoryDst = directoryInfo;
+
+                foreach (DirectoryInfo dirSrc in directorySrc.GetDirectories())
+                    foreach (DirectoryInfo dirDst in directoryDst.GetDirectories())
+                        if (dirSrc.Name.Equals(dirDst.Name))
+                            listConflict.AddRange(GetConflictSrc(new DirectoryInfo(dirSrc.FullName), new DirectoryInfo(directoryDst.FullName)));
+
+                foreach (FileInfo fileSrc in directorySrc.GetFiles())
+                    foreach (FileInfo fileDst in directoryDst.GetFiles())
+                        if (fileSrc.Name.Equals(fileDst.Name))
+                            listConflict.Add(fileSrc.FullName);
+            }
+            return listConflict;
+        }
+
+        private List<string> GetConflictSrc(FileInfo fileSrc, DirectoryInfo directoryDst)
+        {
+            List<string> listConflict = new List<string>();
+            foreach (FileInfo fileDst in directoryDst.GetFiles())
+                if (fileSrc.Name.Equals(fileDst.Name))
+                    listConflict.Add(fileSrc.FullName);
             return listConflict;
         }
         private int CountItem(string path)
@@ -704,6 +754,7 @@ namespace FileManager
                                 if(result == DialogResult.No)
                                     return;
                             }
+                            TagDatabase.UpdateItem(fileInfo.FullName, fileInfo.FullName.Remove(fileInfo.FullName.Length - fileInfo.Name.Length, fileInfo.Name.Length) + newName);
                             FileSystem.RenameFile(fileInfo.FullName, newName);
                         }
                         else
@@ -714,6 +765,7 @@ namespace FileManager
                                 return;
                             else 
                             {
+                                TagDatabase.UpdateItem(directoryInfo.FullName, directoryInfo.FullName.Remove(directoryInfo.FullName.Length - directoryInfo.Name.Length, directoryInfo.Name.Length) + newName);
                                 FileSystem.RenameDirectory(directoryInfo.FullName, newName);
                             }   
                         }
@@ -819,7 +871,7 @@ namespace FileManager
             foreach(FileInfo file in directorySrc.GetFiles())
             {
                 string newName = HandleRename(file.Name, directoryDst);
-                if (newName != file.Name && newName != null) 
+                if (newName != file.Name && newName != null)
                 {
                     DialogResult result = MessageBox.Show("Do you want to rename \"" + file.Name + "\" to \"" + newName + "\"? \nThere is already a file with the same name in this location.", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
@@ -830,10 +882,15 @@ namespace FileManager
                         for (int i = 0; i < b.Length - 1; i++)
                             a += (b[i] + "\\");
                         a += newName;
+                        TagDatabase.UpdateItem(a, directoryDst.FullName + "\\" + newName);
                         FileSystem.MoveFile(a, directoryDst.FullName + "\\" + newName);
                     }
                 }
-                else if (newName != null) FileSystem.MoveFile(file.FullName, directoryDst.FullName + "\\" + file.Name);
+                else if (newName != null)
+                {
+                    TagDatabase.UpdateItem(file.FullName, directoryDst.FullName + "\\" + file.Name);
+                    FileSystem.MoveFile(file.FullName, directoryDst.FullName + "\\" + file.Name);
+                }
             }
             foreach (DirectoryInfo directory in directorySrc.GetDirectories())
             {
@@ -842,7 +899,10 @@ namespace FileManager
             DirectoryInfo[] directories = directorySrc.GetDirectories();
             FileInfo[] files = directorySrc.GetFiles();
             if (directories.Length == 0 && files.Length == 0)
+            {
+                TagDatabase.DeleteItem(directorySrc.FullName);
                 directorySrc.Delete();
+            }
         }
         #endregion
 
