@@ -60,6 +60,7 @@
             this.BtnMaximize = new FileManager.RoundedButton();
             this.LbTitle = new System.Windows.Forms.Label();
             this.ToolTablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnArchive = new System.Windows.Forms.Button();
             this.BtnCut = new System.Windows.Forms.Button();
             this.BtnCopy = new System.Windows.Forms.Button();
             this.BtnPaste = new System.Windows.Forms.Button();
@@ -69,15 +70,14 @@
             this.MenuNewItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemNewFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemNewTextFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnChangeTheme = new System.Windows.Forms.Button();
             this.MenuTag = new System.Windows.Forms.MenuStrip();
             this.MenuTagItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnChangeTheme = new System.Windows.Forms.Button();
+            this.ToolbarSeparator = new System.Windows.Forms.Panel();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
-            this.BtnArchive = new System.Windows.Forms.Button();
-            this.ToolbarSeparator = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -554,6 +554,18 @@
             this.ToolTablePanel.Size = new System.Drawing.Size(1230, 48);
             this.ToolTablePanel.TabIndex = 6;
             // 
+            // BtnArchive
+            // 
+            this.BtnArchive.FlatAppearance.BorderSize = 0;
+            this.BtnArchive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnArchive.Image = global::FileManager.Properties.Resources.color;
+            this.BtnArchive.Location = new System.Drawing.Point(372, 0);
+            this.BtnArchive.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnArchive.Name = "BtnArchive";
+            this.BtnArchive.Size = new System.Drawing.Size(53, 48);
+            this.BtnArchive.TabIndex = 8;
+            this.BtnArchive.UseVisualStyleBackColor = true;
+            // 
             // BtnCut
             // 
             this.BtnCut.AutoSize = true;
@@ -664,19 +676,6 @@
             this.MenuItemNewTextFile.Text = "New Text Document";
             this.MenuItemNewTextFile.Click += new System.EventHandler(this.newTextDocumentToolStripMenuItem_Click);
             // 
-            // BtnChangeTheme
-            // 
-            this.BtnChangeTheme.FlatAppearance.BorderSize = 0;
-            this.BtnChangeTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnChangeTheme.Image = global::FileManager.Properties.Resources.color;
-            this.BtnChangeTheme.Location = new System.Drawing.Point(479, 0);
-            this.BtnChangeTheme.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnChangeTheme.Name = "BtnChangeTheme";
-            this.BtnChangeTheme.Size = new System.Drawing.Size(53, 48);
-            this.BtnChangeTheme.TabIndex = 6;
-            this.BtnChangeTheme.UseVisualStyleBackColor = true;
-            this.BtnChangeTheme.Click += new System.EventHandler(this.BtnDelete_Click);
-            // 
             // MenuTag
             // 
             this.MenuTag.BackColor = System.Drawing.Color.Transparent;
@@ -711,7 +710,7 @@
             // 
             this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(119, 26);
             this.toolStripMenuItem3.Text = "new";
             // 
             // toolStripMenuItem2
@@ -719,6 +718,28 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 44);
             this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
+            // BtnChangeTheme
+            // 
+            this.BtnChangeTheme.FlatAppearance.BorderSize = 0;
+            this.BtnChangeTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeTheme.Image = global::FileManager.Properties.Resources.color;
+            this.BtnChangeTheme.Location = new System.Drawing.Point(479, 0);
+            this.BtnChangeTheme.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnChangeTheme.Name = "BtnChangeTheme";
+            this.BtnChangeTheme.Size = new System.Drawing.Size(53, 48);
+            this.BtnChangeTheme.TabIndex = 6;
+            this.BtnChangeTheme.UseVisualStyleBackColor = true;
+            this.BtnChangeTheme.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // ToolbarSeparator
+            // 
+            this.ToolbarSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToolbarSeparator.Location = new System.Drawing.Point(478, 5);
+            this.ToolbarSeparator.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.ToolbarSeparator.Name = "ToolbarSeparator";
+            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 38);
+            this.ToolbarSeparator.TabIndex = 9;
             // 
             // OuterLeftEdge
             // 
@@ -737,27 +758,6 @@
             this.OuterBottomEdge.Name = "OuterBottomEdge";
             this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
             this.OuterBottomEdge.TabIndex = 2;
-            // 
-            // BtnArchive
-            // 
-            this.BtnArchive.FlatAppearance.BorderSize = 0;
-            this.BtnArchive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnArchive.Image = global::FileManager.Properties.Resources.color;
-            this.BtnArchive.Location = new System.Drawing.Point(372, 0);
-            this.BtnArchive.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnArchive.Name = "BtnArchive";
-            this.BtnArchive.Size = new System.Drawing.Size(53, 48);
-            this.BtnArchive.TabIndex = 8;
-            this.BtnArchive.UseVisualStyleBackColor = true;
-            // 
-            // ToolbarSeparator
-            // 
-            this.ToolbarSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ToolbarSeparator.Location = new System.Drawing.Point(478, 5);
-            this.ToolbarSeparator.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.ToolbarSeparator.Name = "ToolbarSeparator";
-            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 38);
-            this.ToolbarSeparator.TabIndex = 9;
             // 
             // MainForm
             // 
