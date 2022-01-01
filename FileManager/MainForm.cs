@@ -18,9 +18,10 @@ namespace FileManager
     public partial class MainForm : Form
     {
         private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
-        public MainForm()
+        public MainForm(int uid)
         {
-            FMIntialize();//Just like Initailize Components
+            this.uid = uid;
+            FMInitialize();//Just like Initailize Components
         }
 
         //Create tree view when File Manger loads
@@ -187,9 +188,7 @@ namespace FileManager
 
                 foreach (ListViewItem item in itemPaste)
                 {
-                    if (item.SubItems[2].Text == "File folder")
-                        isFolder.Add(true);
-                    else isFolder.Add(false);
+                    isFolder.Add(item.SubItems[2].Text == "File folder");
                     path.Add(item.SubItems[4].Text);
                 }
             }
@@ -529,7 +528,7 @@ namespace FileManager
                     }
                     else if (isCutting)
                     {
-                        TagDatabase.UpdateItem(pathSource[i], pathDest[i]);
+                        Database.UpdateItem(pathSource[i], pathDest[i]);
                         if (isFolder[i])
                         {
                             
@@ -754,7 +753,7 @@ namespace FileManager
                                 if(result == DialogResult.No)
                                     return;
                             }
-                            TagDatabase.UpdateItem(fileInfo.FullName, fileInfo.FullName.Remove(fileInfo.FullName.Length - fileInfo.Name.Length, fileInfo.Name.Length) + newName);
+                            Database.UpdateItem(fileInfo.FullName, fileInfo.FullName.Remove(fileInfo.FullName.Length - fileInfo.Name.Length, fileInfo.Name.Length) + newName);
                             FileSystem.RenameFile(fileInfo.FullName, newName);
                         }
                         else
@@ -765,7 +764,7 @@ namespace FileManager
                                 return;
                             else 
                             {
-                                TagDatabase.UpdateItem(directoryInfo.FullName, directoryInfo.FullName.Remove(directoryInfo.FullName.Length - directoryInfo.Name.Length, directoryInfo.Name.Length) + newName);
+                                Database.UpdateItem(directoryInfo.FullName, directoryInfo.FullName.Remove(directoryInfo.FullName.Length - directoryInfo.Name.Length, directoryInfo.Name.Length) + newName);
                                 FileSystem.RenameDirectory(directoryInfo.FullName, newName);
                             }   
                         }
@@ -882,13 +881,13 @@ namespace FileManager
                         for (int i = 0; i < b.Length - 1; i++)
                             a += (b[i] + "\\");
                         a += newName;
-                        TagDatabase.UpdateItem(a, directoryDst.FullName + "\\" + newName);
+                        Database.UpdateItem(a, directoryDst.FullName + "\\" + newName);
                         FileSystem.MoveFile(a, directoryDst.FullName + "\\" + newName);
                     }
                 }
                 else if (newName != null)
                 {
-                    TagDatabase.UpdateItem(file.FullName, directoryDst.FullName + "\\" + file.Name);
+                    Database.UpdateItem(file.FullName, directoryDst.FullName + "\\" + file.Name);
                     FileSystem.MoveFile(file.FullName, directoryDst.FullName + "\\" + file.Name);
                 }
             }
@@ -900,7 +899,7 @@ namespace FileManager
             FileInfo[] files = directorySrc.GetFiles();
             if (directories.Length == 0 && files.Length == 0)
             {
-                TagDatabase.DeleteItem(directorySrc.FullName);
+                Database.DeleteItem(directorySrc.FullName);
                 directorySrc.Delete();
             }
         }
@@ -1014,7 +1013,7 @@ namespace FileManager
                     new_path += new_id.ToString() + ")";
                 }
             }
-            using (StreamWriter sw = File.CreateText(new_path+".txt")) ;
+            using (StreamWriter sw = File.CreateText(new_path+".txt"));
 
             //Refresh
             clsTreeListView.ShowContent(listView, currentAddr);

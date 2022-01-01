@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace FileManager
 {
-    internal class RoundedTablePanel : TableLayoutPanel
+    public class RoundedTablePanel : TableLayoutPanel
     {
         private bool rounded;
         public Color TrueBackColor { get; set; }

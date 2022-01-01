@@ -116,7 +116,7 @@ namespace FileManager
             }
 
             // Create Tag nodes
-            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+            foreach (Database.Tag tag in Database.Tags)
             {
                 TreeNode tagNode=new TreeNode(tag.name);
                 tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
@@ -129,21 +129,19 @@ namespace FileManager
         {
             if(treeView.Nodes[0].Nodes.Count==0) return;
                 treeView.Nodes[0].Nodes.Clear();
-            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
-                {
+            foreach (Database.Tag tag in Database.Tags)
+            {
                 TreeNode tagNode = new TreeNode(tag.name);
-                    tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
-                    treeView.Nodes[0].Nodes.Add(tagNode);
-                    treeView.Nodes[0].LastNode.Name = treeView.Nodes[0].LastNode.FullPath;
-                }
+                tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
+                treeView.Nodes[0].Nodes.Add(tagNode);
+                treeView.Nodes[0].LastNode.Name = treeView.Nodes[0].LastNode.FullPath;
+            }
         }
 
         public CustomTreeView.TreeNodeTag GetTreeNodeTag(string path)
         {
             Icon icon = GetDirectoryIcon(path, false);
-            bool hasChild = false;
-            if (new DirectoryInfo(path).GetDirectories().Length != 0)
-                hasChild = true;
+            bool hasChild = new DirectoryInfo(path).GetDirectories().Length != 0;
             return new CustomTreeView.TreeNodeTag(icon, hasChild);
         }
         #endregion
@@ -197,7 +195,7 @@ namespace FileManager
             }
             else if(currentNode.Name=="Tag")
             {
-                foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+                foreach (Database.Tag tag in Database.Tags)
                 {
                     currentNode.Nodes.Clear();
                     TreeNode tagNode = new TreeNode(tag.name);
@@ -276,7 +274,7 @@ namespace FileManager
                 else if (currentNode.Name == "Tag")
                 {
                     listView.Items.Clear();
-                    foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+                    foreach (Database.Tag tag in Database.Tags)
                     {
                         string[] item = new string[5];
                         item[0] = tag.name;
@@ -292,7 +290,7 @@ namespace FileManager
                     int id = ((CustomTreeView.TreeNodeTag)currentNode.Tag).TagId;
                     listView.Items.Clear();
                     List<string> path = new List<string>();
-                    foreach (DataRow row in TagDatabase.ds.Tables[1].Rows)
+                    foreach (DataRow row in Database.ds.Tables[1].Rows)
                     {
                         if ((int)row["TagId"] == id)
                             path.Add(row["Path"].ToString());
@@ -302,7 +300,7 @@ namespace FileManager
                         if (new FileInfo(a).Exists)
                         {
                             ListViewItem listViewItem = GetLVItems(new FileInfo(a));
-                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(a);
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(a);
                             listView.Items.Add(listViewItem);
                         }
                         else if (new DirectoryInfo(a).Exists)
@@ -360,7 +358,7 @@ namespace FileManager
                 (GetDirectoryIcon(folder.FullName, true) == null ?
                 Properties.Resources.Folder :
                 GetDirectoryIcon(folder.FullName, true)));
-            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(folder.FullName);
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(folder.FullName);
             return listViewItem;
         }
 
@@ -378,7 +376,7 @@ namespace FileManager
             
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, Icon.ExtractAssociatedIcon(file.FullName), Icon.ExtractAssociatedIcon(file.FullName));
-            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(file.FullName);
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(file.FullName);
             return listViewItem;
         }
 
@@ -469,7 +467,7 @@ namespace FileManager
                     int id = ((CustomListView.ListViewItemTag)item.Tag).TagId;
                     listView.Items.Clear();
                     List<string> path=new List<string>();
-                    foreach(DataRow row in TagDatabase.ds.Tables[1].Rows)
+                    foreach(DataRow row in Database.ds.Tables[1].Rows)
                     {
                         if ((int)row["TagId"] == id)
                             path.Add(row["Path"].ToString());
@@ -479,7 +477,7 @@ namespace FileManager
                         if (new FileInfo(a).Exists)
                         {
                             ListViewItem listViewItem = GetLVItems(new FileInfo(a));
-                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = TagDatabase.GetTags(a);
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(a);
                             listView.Items.Add(listViewItem);
                         }
                         else if (new DirectoryInfo(a).Exists)
@@ -540,7 +538,7 @@ namespace FileManager
                             DeleteFolder(new DirectoryInfo(item.SubItems[4].Text));
                         else
                         {
-                            TagDatabase.DeleteItem(item.SubItems[4].Text);
+                            Database.DeleteItem(item.SubItems[4].Text);
                             new FileInfo(item.SubItems[4].Text).Delete();
                         }
             }
@@ -559,11 +557,11 @@ namespace FileManager
                     DeleteFolder(dir);
                 foreach (FileInfo file in files)
                 {
-                    TagDatabase.DeleteItem(file.FullName);
+                    Database.DeleteItem(file.FullName);
                     file.Delete();
                 }
             }
-            TagDatabase.DeleteItem(directoryInfo.FullName);
+            Database.DeleteItem(directoryInfo.FullName);
             directoryInfo.Delete();
         }
     }

@@ -30,7 +30,7 @@ namespace FileManager
                 this.Extension = Extension;
                 this.SmallIcon = SmallIcon;
                 this.LargeIcon = LargeIcon;
-                this.Tags = new List<TagDatabase.Tag>();
+                this.Tags = new List<Database.Tag>();
                 isTag = false;
             }
             
@@ -48,7 +48,7 @@ namespace FileManager
 
             public int TagId { get; set; }
 
-            public List<TagDatabase.Tag> Tags { get; set; }
+            public List<Database.Tag> Tags { get; set; }
             public string Extension { get; set; }
             public Icon SmallIcon { get; set; }
             public Icon LargeIcon { get; set; }
@@ -223,7 +223,7 @@ namespace FileManager
                         {
                             int pixel = 10;
                             Rectangle temp = new Rectangle(new Point (LabelBounds.Location.X, LabelBounds.Location.Y+1), new Size(10, 10));
-                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            foreach (Database.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
                             {
                                 PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
                                 temp.Offset(5, 0);
@@ -262,7 +262,7 @@ namespace FileManager
                         {
                             int pixel = 10;
                             Rectangle temp = new Rectangle(new Point(LabelBounds.Location.X, LabelBounds.Location.Y + 1), new Size(10, 10));
-                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            foreach (Database.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
                             {
                                 PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
                                 temp.Offset(5, 0);
@@ -300,7 +300,7 @@ namespace FileManager
                         {
                             int pixel = 10;
                             Rectangle temp = new Rectangle(new Point(LabelBounds.Location.X+10, LabelBounds.Location.Y + 1), new Size(10, 10));
-                            foreach (TagDatabase.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
+                            foreach (Database.Tag tag in (e.Item.Tag as ListViewItemTag).Tags)
                             {
                                 PaintEllipse(e.Graphics, tag.color, this.ForeColor, temp);
                                 temp.Offset(5, 0);

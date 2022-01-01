@@ -17,7 +17,6 @@ namespace FileManager
         public int CornerRadius { get; set; } = 15;
         public float BorderSize { get; set; } = 1;
 
-
         public RoundedButton()
         {
             this.DoubleBuffered = true;
@@ -70,6 +69,11 @@ namespace FileManager
                     e.Graphics.FillPath(brush, graphicsPath);
                 using (var pen = new Pen(BorderColor, 1.0f))
                     e.Graphics.DrawPath(pen, graphicsPath);
+                if (this.Image != null)
+                {
+                    e.Graphics.DrawImage(this.Image, this.ClientRectangle);
+                }
+
                 TextRenderer.DrawText(e.Graphics, Text, this.Font, this.ClientRectangle, this.ForeColor);
             }
         }

@@ -65,11 +65,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extra Components\ClsTreeListView.cs" />
-    <Compile Include="Extra Components\CreateTagForm.cs">
+    <Compile Include="Extra Components\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Components\CreateTagForm.Designer.cs">
-      <DependentUpon>CreateTagForm.cs</DependentUpon>
+    <Compile Include="Extra Components\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extra Components\TagForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extra Components\TagForm.Designer.cs">
+      <DependentUpon>TagForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extra Components\CustomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extra Components\CustomForm.Designer.cs">
+      <DependentUpon>CustomForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extra Components\CustomListView.cs">
       <SubType>Component</SubType>
@@ -83,7 +95,7 @@
     <Compile Include="Extra Components\RoundedTablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Extra Components\TagDatabase.cs" />
+    <Compile Include="Extra Components\Database.cs" />
     <Compile Include="Extra Components\Theme.cs" />
     <Compile Include="FMFunction.cs">
       <SubType>Form</SubType>
@@ -106,8 +118,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TagDataSet.xsd</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Extra Components\CreateTagForm.resx">
-      <DependentUpon>CreateTagForm.cs</DependentUpon>
+    <EmbeddedResource Include="Extra Components\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extra Components\TagForm.resx">
+      <DependentUpon>TagForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extra Components\CustomForm.resx">
+      <DependentUpon>CustomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -166,6 +184,10 @@
   <ItemGroup>
     <None Include="assets\icon\star.png" />
     <None Include="assets\icon\color.png" />
+    <None Include="assets\icon\close.png" />
+    <None Include="assets\icon\maximize.png" />
+    <None Include="assets\icon\shrink.png" />
+    <None Include="assets\icon\subtract.png" />
     <Content Include="Tag.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

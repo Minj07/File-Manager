@@ -16,15 +16,18 @@ namespace FileManager
 {
     public partial class MainForm
     {
+        private int uid;
+        private bool isAdministrator = false;
+        private Theme currentTheme;
         private Size NormalSize;
         private string currentAddr;
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
-        private TagDatabase tagDatabase = new TagDatabase();
+        private Database _database = new Database();
         private List<ToolStripMenuItem> MenuTagItemList =  new List<ToolStripMenuItem>();
 
         #region Initialize
-        private void FMIntialize()
+        private void FMInitialize()
         {
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(30,30,30));
@@ -62,11 +65,13 @@ namespace FileManager
             if (this.WindowState == FormWindowState.Normal)
             {
                 OuterTablePanel.Rounded = true;
+                this.BtnMaximize.Image = Resources.maximize;
                 NormalSize = this.Size;
             }
             else
             {
                 OuterTablePanel.Rounded = false;
+                this.BtnMaximize.Image = Resources.shrink;
 
             }
             OuterTablePanel.Refresh();
@@ -119,7 +124,7 @@ namespace FileManager
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
             this.ToolbarSeparator.BackColor = currentTheme.lighterMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnArchive })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
@@ -219,8 +224,8 @@ namespace FileManager
         {
             MenuTagItemList.Clear();
             this.MenuTagItem.DropDownItems.Clear();
-            TagDatabase tagDatabase = new TagDatabase();
-            foreach (TagDatabase.Tag tag in TagDatabase.Tags)
+            Database database = new Database();
+            foreach (Database.Tag tag in Database.Tags)
             {
                 MenuTagItemList.Add(new ToolStripMenuItem()
                 {
@@ -274,19 +279,17 @@ namespace FileManager
 
         private void TagMenuAddBtnClick(object sender, EventArgs e)
         {
-            using (CreateTagForm frm = new CreateTagForm()
+            using (TagForm frm = new TagForm()
             {
-                BackColor = currentTheme.main,
+                CurrentTheme = this.currentTheme,
                 Font = this.Font,
-                ForeColor = this.ForeColor,
                 Text = "Create new Tag"
             })
             {
-                frm.LblName.BackColor = frm.BackColor;
-                frm.LblName.ForeColor = this.ForeColor;
+                frm.ReloadTheme();
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    TagDatabase.AddTag(frm.TxtBoxName.Text, frm.color);
+                    //Database.AddTag(frm.TxtBoxName.Text, frm.color);
                 }
             }
 
@@ -295,7 +298,7 @@ namespace FileManager
 
         private void TagMenuToggleBtnClick(object sender, EventArgs e)
         {
-            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            Database.Tag tag = Database.GetTag((int)((ToolStripMenuItem)sender).Tag);
             if (this.listView.SelectedItems.Count != 0)
             {
                 foreach (ListViewItem item in this.listView.SelectedItems)
@@ -315,12 +318,10 @@ namespace FileManager
 
         private void TagMenuModifyBtnClick(object sender, EventArgs e)
         {
-            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
-            using (CreateTagForm frm = new CreateTagForm()
+            Database.Tag tag = Database.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            using (TagForm frm = new TagForm()
             {
-                BackColor = currentTheme.main,
-                Font = this.Font,
-                ForeColor = this.ForeColor,
+                CurrentTheme = this.currentTheme,
                 Text = "Modify Tag",
                 color = tag.color,
             })
@@ -340,7 +341,7 @@ namespace FileManager
 
         private void TagMenuRemoveBtnClick(object sender, EventArgs e)
         {
-            TagDatabase.Tag tag = TagDatabase.GetTag((int)((ToolStripMenuItem)sender).Tag);
+            Database.Tag tag = Database.GetTag((int)((ToolStripMenuItem)sender).Tag);
             tag.Delete();
             UpdateMenuTag();
         }
@@ -364,6 +365,7 @@ namespace FileManager
 
         private void ListView_MouseHover(object sender, EventArgs e)
         {
+
 
         }
         #endregion

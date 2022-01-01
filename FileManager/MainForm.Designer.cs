@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private Theme currentTheme;
+        
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -69,15 +69,14 @@
             this.MenuNewItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemNewFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemNewTextFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnChangeTheme = new System.Windows.Forms.Button();
             this.MenuTag = new System.Windows.Forms.MenuStrip();
             this.MenuTagItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnChangeTheme = new System.Windows.Forms.Button();
+            this.ToolbarSeparator = new System.Windows.Forms.Panel();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
-            this.BtnArchive = new System.Windows.Forms.Button();
-            this.ToolbarSeparator = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.DisplayTablePanel.SuspendLayout();
@@ -292,7 +291,7 @@
             this.TxtBxSearch.Location = new System.Drawing.Point(1233, 12);
             this.TxtBxSearch.Margin = new System.Windows.Forms.Padding(3, 12, 0, 2);
             this.TxtBxSearch.Name = "TxtBxSearch";
-            this.TxtBxSearch.Size = new System.Drawing.Size(1, 36);
+            this.TxtBxSearch.Size = new System.Drawing.Size(1, 30);
             this.TxtBxSearch.TabIndex = 2;
             // 
             // NavigationButtonTablePanel
@@ -404,7 +403,7 @@
             this.CbAddress.Location = new System.Drawing.Point(0, 9);
             this.CbAddress.Margin = new System.Windows.Forms.Padding(0, 9, 0, 0);
             this.CbAddress.Name = "CbAddress";
-            this.CbAddress.Size = new System.Drawing.Size(976, 33);
+            this.CbAddress.Size = new System.Drawing.Size(976, 28);
             this.CbAddress.TabIndex = 0;
             this.CbAddress.TextChanged += new System.EventHandler(this.CbAddress_TextChanged);
             this.CbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbAddress_KeyPress);
@@ -471,6 +470,7 @@
             this.BtnExit.CornerRadius = 5;
             this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnExit.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnExit.Image = global::FileManager.Properties.Resources.close;
             this.BtnExit.Location = new System.Drawing.Point(16, 9);
             this.BtnExit.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
             this.BtnExit.Name = "BtnExit";
@@ -487,6 +487,7 @@
             this.BtnMinimize.CornerRadius = 5;
             this.BtnMinimize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnMinimize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(0)))));
+            this.BtnMinimize.Image = global::FileManager.Properties.Resources.subtract;
             this.BtnMinimize.Location = new System.Drawing.Point(43, 9);
             this.BtnMinimize.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
             this.BtnMinimize.Name = "BtnMinimize";
@@ -503,6 +504,7 @@
             this.BtnMaximize.CornerRadius = 5;
             this.BtnMaximize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
+            this.BtnMaximize.Image = global::FileManager.Properties.Resources.maximize;
             this.BtnMaximize.Location = new System.Drawing.Point(70, 9);
             this.BtnMaximize.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
             this.BtnMaximize.Name = "BtnMaximize";
@@ -523,9 +525,8 @@
             // 
             // ToolTablePanel
             // 
-            this.ToolTablePanel.ColumnCount = 11;
+            this.ToolTablePanel.ColumnCount = 10;
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
@@ -535,16 +536,16 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ToolTablePanel.Controls.Add(this.BtnArchive, 6, 0);
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
             this.ToolTablePanel.Controls.Add(this.BtnRename, 4, 0);
             this.ToolTablePanel.Controls.Add(this.BtnDelete, 5, 0);
             this.ToolTablePanel.Controls.Add(this.MenuNew, 0, 0);
-            this.ToolTablePanel.Controls.Add(this.MenuTag, 7, 0);
-            this.ToolTablePanel.Controls.Add(this.BtnChangeTheme, 9, 0);
-            this.ToolTablePanel.Controls.Add(this.ToolbarSeparator, 8, 0);
+            this.ToolTablePanel.Controls.Add(this.MenuTag, 6, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnChangeTheme, 8, 0);
+            this.ToolTablePanel.Controls.Add(this.ToolbarSeparator, 7, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 39);
             this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
@@ -635,6 +636,7 @@
             this.MenuNewItem});
             this.MenuNew.Location = new System.Drawing.Point(0, 0);
             this.MenuNew.Name = "MenuNew";
+            this.MenuNew.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.MenuNew.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.MenuNew.Size = new System.Drawing.Size(107, 48);
             this.MenuNew.TabIndex = 7;
@@ -647,35 +649,22 @@
             this.MenuItemNewTextFile});
             this.MenuNewItem.Image = global::FileManager.Properties.Resources.new_file;
             this.MenuNewItem.Name = "MenuNewItem";
-            this.MenuNewItem.Size = new System.Drawing.Size(77, 44);
+            this.MenuNewItem.Size = new System.Drawing.Size(66, 44);
             this.MenuNewItem.Text = "New ";
             // 
             // MenuItemNewFolder
             // 
             this.MenuItemNewFolder.Name = "MenuItemNewFolder";
-            this.MenuItemNewFolder.Size = new System.Drawing.Size(226, 26);
+            this.MenuItemNewFolder.Size = new System.Drawing.Size(181, 22);
             this.MenuItemNewFolder.Text = "New Folder";
             this.MenuItemNewFolder.Click += new System.EventHandler(this.newFolderToolStripMenuItem1_Click);
             // 
             // MenuItemNewTextFile
             // 
             this.MenuItemNewTextFile.Name = "MenuItemNewTextFile";
-            this.MenuItemNewTextFile.Size = new System.Drawing.Size(226, 26);
+            this.MenuItemNewTextFile.Size = new System.Drawing.Size(181, 22);
             this.MenuItemNewTextFile.Text = "New Text Document";
             this.MenuItemNewTextFile.Click += new System.EventHandler(this.newTextDocumentToolStripMenuItem_Click);
-            // 
-            // BtnChangeTheme
-            // 
-            this.BtnChangeTheme.FlatAppearance.BorderSize = 0;
-            this.BtnChangeTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnChangeTheme.Image = global::FileManager.Properties.Resources.color;
-            this.BtnChangeTheme.Location = new System.Drawing.Point(479, 0);
-            this.BtnChangeTheme.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnChangeTheme.Name = "BtnChangeTheme";
-            this.BtnChangeTheme.Size = new System.Drawing.Size(53, 48);
-            this.BtnChangeTheme.TabIndex = 6;
-            this.BtnChangeTheme.UseVisualStyleBackColor = true;
-            this.BtnChangeTheme.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // MenuTag
             // 
@@ -687,8 +676,9 @@
             this.MenuTag.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuTagItem,
             this.toolStripMenuItem2});
-            this.MenuTag.Location = new System.Drawing.Point(425, 0);
+            this.MenuTag.Location = new System.Drawing.Point(372, 0);
             this.MenuTag.Name = "MenuTag";
+            this.MenuTag.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.MenuTag.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.MenuTag.Size = new System.Drawing.Size(53, 48);
             this.MenuTag.TabIndex = 7;
@@ -703,7 +693,7 @@
             this.toolStripMenuItem3});
             this.MenuTagItem.ForeColor = System.Drawing.Color.Transparent;
             this.MenuTagItem.Name = "MenuTagItem";
-            this.MenuTagItem.Size = new System.Drawing.Size(43, 44);
+            this.MenuTagItem.Size = new System.Drawing.Size(34, 44);
             this.MenuTagItem.Text = "     ";
             this.MenuTagItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
@@ -711,14 +701,36 @@
             // 
             this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(96, 22);
             this.toolStripMenuItem3.Text = "new";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 44);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(125, 44);
             this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
+            // BtnChangeTheme
+            // 
+            this.BtnChangeTheme.FlatAppearance.BorderSize = 0;
+            this.BtnChangeTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeTheme.Image = global::FileManager.Properties.Resources.color;
+            this.BtnChangeTheme.Location = new System.Drawing.Point(426, 0);
+            this.BtnChangeTheme.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnChangeTheme.Name = "BtnChangeTheme";
+            this.BtnChangeTheme.Size = new System.Drawing.Size(53, 48);
+            this.BtnChangeTheme.TabIndex = 6;
+            this.BtnChangeTheme.UseVisualStyleBackColor = true;
+            this.BtnChangeTheme.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // ToolbarSeparator
+            // 
+            this.ToolbarSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToolbarSeparator.Location = new System.Drawing.Point(425, 5);
+            this.ToolbarSeparator.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.ToolbarSeparator.Name = "ToolbarSeparator";
+            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 38);
+            this.ToolbarSeparator.TabIndex = 9;
             // 
             // OuterLeftEdge
             // 
@@ -737,27 +749,6 @@
             this.OuterBottomEdge.Name = "OuterBottomEdge";
             this.OuterBottomEdge.Size = new System.Drawing.Size(1230, 5);
             this.OuterBottomEdge.TabIndex = 2;
-            // 
-            // BtnArchive
-            // 
-            this.BtnArchive.FlatAppearance.BorderSize = 0;
-            this.BtnArchive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnArchive.Image = global::FileManager.Properties.Resources.color;
-            this.BtnArchive.Location = new System.Drawing.Point(372, 0);
-            this.BtnArchive.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnArchive.Name = "BtnArchive";
-            this.BtnArchive.Size = new System.Drawing.Size(53, 48);
-            this.BtnArchive.TabIndex = 8;
-            this.BtnArchive.UseVisualStyleBackColor = true;
-            // 
-            // ToolbarSeparator
-            // 
-            this.ToolbarSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ToolbarSeparator.Location = new System.Drawing.Point(478, 5);
-            this.ToolbarSeparator.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.ToolbarSeparator.Name = "ToolbarSeparator";
-            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 38);
-            this.ToolbarSeparator.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -841,7 +832,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemNewFolder;
         private System.Windows.Forms.ToolStripMenuItem MenuItemNewTextFile;
         private System.Windows.Forms.Label LbTitle;
-        private System.Windows.Forms.Button BtnArchive;
         private System.Windows.Forms.Panel ToolbarSeparator;
     }
 }

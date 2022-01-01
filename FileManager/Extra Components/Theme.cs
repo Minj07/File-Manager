@@ -11,7 +11,7 @@ using System.Drawing.Imaging;
 
 namespace FileManager
 {
-    internal class Theme
+    public class Theme
     {
         public Color main;
         public Color lighterMain;
