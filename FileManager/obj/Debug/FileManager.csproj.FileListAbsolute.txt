@@ -40,3 +40,4 @@ D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.exe
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.pdb
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.TagForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.LoginForm.resources

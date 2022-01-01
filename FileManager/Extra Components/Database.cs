@@ -41,7 +41,8 @@ namespace FileManager
                 this.username = username;
                 this.password = password;
                 this.isAdministrator = isAdministrator;
-
+                this.tags = new List<Tag>();
+                this.activities = new List<Activity>();
             }
             public int uid { get;}
 
@@ -50,6 +51,8 @@ namespace FileManager
             public string password { get; }
 
             public bool isAdministrator { get; }
+
+            public List<Tag> tags { get; }
 
             public List<Activity> activities { get; }
 
@@ -100,27 +103,32 @@ namespace FileManager
 
             public void Delete()
             {
-                //SqlDataAdapter adapter = new SqlDataAdapter();
-                //String query = "Delete Tagged where TagId = " + id.ToString();
-                //String query1 = "Delete Tag where Id=" + id.ToString();
-                //using (connection)
-                //{
-                //    SqlCommand command = new SqlCommand(query, connection);
-                //    connection.Open();
+                foreach (Tag tag in tags)
+                {
+                    tag.Delete();
+                }
 
-                //    adapter.DeleteCommand = command;
-                //    adapter.DeleteCommand.ExecuteNonQuery();
-                //    command.Dispose();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                String query = "Delete Tagged where TagId = " + id.ToString();
+                String query1 = "Delete Tag where Id=" + id.ToString();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
 
-                //    command = new SqlCommand(query1, connection);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+                    command.Dispose();
 
-                //    adapter.DeleteCommand = command;
-                //    adapter.DeleteCommand.ExecuteNonQuery();
-                //    command.Dispose();
+                    command = new SqlCommand(query1, connection);
 
-                //    connection.Close();
-                //}
-                //UpdateTags();
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+                    command.Dispose();
+
+                    connection.Close();
+                }
+                UpdateTags();
             }
 
         }
@@ -167,20 +175,35 @@ namespace FileManager
             {
                 Users.Add(new User((int)Row["UID"], (string)Row["Username"], (string)Row["Password"], (bool)Row["IsAdministrator"]));
             }
+
+            foreach (DataRow Row in ds.Tables[0].Rows)
+            {
+                foreach (var user in Users.Where(user => user.uid == (int) Row["UID"]))
+                {
+                    user.tags.Add( new Tag(
+                            (int)Row["Id"],
+                            (int)Row["UID"],
+                            (string)Row["Name"],
+                            Color.FromArgb(
+                                (int)Row["R"],
+                                (int)Row["G"],
+                                (int)Row["B"]
+                            )
+                        )
+                    );
+                }
+            }
+
             foreach (DataRow Row in ds.Tables[3].Rows)
             {
-                foreach (User user in Users)
+                foreach (var user in Users.Where(user => user.uid == (int)Row["UID"]))
                 {
-                    if (user.uid == (int)Row["UID"])
-                    {
-                        user.activities.Add(new User.Activity(
-                            (User.Activity.ActionType) int.Parse((string) Row["Action"]),
-                            SqlDateTime.Parse((string) Row["Time"]).Value,
-                            (string) Row["Source"],
-                            (string) Row["Destination"]
-                        ));
-
-                    }
+                    user.activities.Add(new User.Activity(
+                        (User.Activity.ActionType) int.Parse((string) Row["Action"]),
+                        SqlDateTime.Parse((string) Row["Time"]).Value,
+                        (string) Row["Source"],
+                        (string) Row["Destination"]
+                    ));
                 }
             }
 
@@ -206,11 +229,7 @@ namespace FileManager
             public List<string> items { get; }
             public void Insert(string path)
             {
-                List<int> idList = new List<int>();
-                foreach (DataRow Row in ds.Tables[1].Rows)
-                {
-                    idList.Add((int)Row["Id"]);
-                }
+                List<int> idList = (from DataRow Row in ds.Tables[1].Rows select (int) Row["Id"]).ToList();
                 int i = 0;
                 while (idList.Contains(i))
                 {
@@ -418,12 +437,9 @@ namespace FileManager
             }
             foreach (DataRow Row in ds.Tables[1].Rows)
             {
-                foreach (Tag tag in Tags)
+                foreach (var tag in Tags.Where(tag => tag.id == (int)Row["TagId"]))
                 {
-                    if (tag.id == (int)Row["TagId"])
-                    {
-                        tag.items.Add((string)Row["Path"]);
-                    }
+                    tag.items.Add((string)Row["Path"]);
                 }
             }
 
