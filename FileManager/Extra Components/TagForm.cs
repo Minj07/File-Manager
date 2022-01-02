@@ -18,13 +18,13 @@ namespace FileManager
     {
         private Size NormalSize;
         private Point mouseDownLocation; //Use for dragging the form
-        public Theme CurrentTheme;
+        public Theme currentTheme;
         public Color color { get; set; } = Color.Red;
 
         #region Initialize
         public TagForm()
         {
-            CurrentTheme = new Theme(Color.FromArgb(30, 30, 30));
+            currentTheme = new Theme(Color.FromArgb(30, 30, 30));
 
             this.DoubleBuffered = true;
 
@@ -92,11 +92,12 @@ namespace FileManager
         public void ReloadTheme()
         {
             //Form
-            this.BackColor = CurrentTheme.Unused;
-            OuterTablePanel.BackColor = CurrentTheme.Unused;
-            this.TransparencyKey = CurrentTheme.Unused;
-            OuterTablePanel.TrueBackColor = CurrentTheme.lighterMain;
-            this.LbTitle.ForeColor = CurrentTheme.text;
+            this.BackColor = currentTheme.Unused;
+            OuterTablePanel.BackColor = currentTheme.Unused;
+            this.TransparencyKey = currentTheme.Unused;
+            OuterTablePanel.TrueBackColor = currentTheme.darkerMain;
+            this.MainPanel.BackColor = currentTheme.lighterMain;
+            this.LbTitle.ForeColor = currentTheme.text;
             
             foreach (Control c in this.Controls)
             {
@@ -104,7 +105,7 @@ namespace FileManager
             }
 
             this.LblName.BackColor = Color.Transparent;
-            this.LblName.ForeColor = CurrentTheme.text;
+            this.LblName.ForeColor = currentTheme.text;
 
             BtnColor.BackColor = color;
 
@@ -125,24 +126,24 @@ namespace FileManager
             if (e.Button == MouseButtons.Left)
             {
                 Point mouseOffset = Control.MousePosition;
-                if (MousePosition.Y < 50 && this.WindowState == FormWindowState.Normal)
-                {
+                //if (MousePosition.Y < 50 && this.WindowState == FormWindowState.Normal)
+                //{
+                //    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
+                //    this.Location = mouseOffset;
+                //    this.WindowState = FormWindowState.Maximized;
+                //}
+                //else if (MousePosition.Y >= 50 && this.WindowState == FormWindowState.Maximized)
+                //{
+                //    mouseDownLocation.X = -NormalSize.Width / 2;
+                //    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
+                //    this.Location = mouseOffset;
+                //    this.WindowState = FormWindowState.Normal;
+                //}
+                //else
+                //{
                     mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
                     this.Location = mouseOffset;
-                    this.WindowState = FormWindowState.Maximized;
-                }
-                else if (MousePosition.Y >= 50 && this.WindowState == FormWindowState.Maximized)
-                {
-                    mouseDownLocation.X = -NormalSize.Width / 2;
-                    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
-                    this.Location = mouseOffset;
-                    this.WindowState = FormWindowState.Normal;
-                }
-                else
-                {
-                    mouseOffset.Offset(mouseDownLocation.X, mouseDownLocation.Y);
-                    this.Location = mouseOffset;
-                }
+                //}
             }
         }
 

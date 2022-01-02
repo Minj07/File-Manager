@@ -94,7 +94,8 @@ namespace FileManager
             this.BackColor = currentTheme.Unused;
             OuterTablePanel.BackColor = currentTheme.Unused;
             this.TransparencyKey = currentTheme.Unused;
-            OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
+            OuterTablePanel.TrueBackColor = currentTheme.darkerMain;
+            this.MainPanel.BackColor = currentTheme.lighterMain;
             this.LbTitle.ForeColor = currentTheme.text;
             this.LbTitle.Font = this.Font;
 

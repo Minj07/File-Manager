@@ -117,6 +117,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TagDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <EmbeddedResource Include="Extra Components\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -147,14 +148,17 @@
     </Compile>
     <None Include="TagDataSet.xsc">
       <DependentUpon>TagDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TagDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TagDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TagDataSet.xss">
       <DependentUpon>TagDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

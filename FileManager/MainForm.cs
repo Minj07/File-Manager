@@ -18,11 +18,13 @@ namespace FileManager
     public partial class MainForm : Form
     {
         private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
-        public MainForm(int uid)
+
+        public MainForm(Database.User user)
         {
-            this.uid = uid;
+            this.user = user;
             FMInitialize();//Just like Initailize Components
         }
+
 
         //Create tree view when File Manger loads
         private void FileManager_Load(object sender, EventArgs e)

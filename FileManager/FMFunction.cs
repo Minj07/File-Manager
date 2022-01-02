@@ -16,14 +16,13 @@ namespace FileManager
 {
     public partial class MainForm
     {
-        private int uid;
-        private bool isAdministrator = false;
+        private Database.User user;
         private Theme currentTheme;
         private Size NormalSize;
         private string currentAddr;
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
-        private Database _database = new Database();
+        private Database database = new Database();
         private List<ToolStripMenuItem> MenuTagItemList =  new List<ToolStripMenuItem>();
 
         #region Initialize
@@ -225,7 +224,7 @@ namespace FileManager
             MenuTagItemList.Clear();
             this.MenuTagItem.DropDownItems.Clear();
             Database database = new Database();
-            foreach (Database.Tag tag in Database.Tags)
+            foreach (Database.Tag tag in user.tags)
             {
                 MenuTagItemList.Add(new ToolStripMenuItem()
                 {
@@ -256,7 +255,7 @@ namespace FileManager
 
                 ToolStripMenuItem RemoveBtn = new ToolStripMenuItem()
                 {
-                    Text = "Remove Tag",
+                    Text = "RemoveItem Tag",
                     BackColor = tag.color,
                     ForeColor = this.ForeColor,
                     Tag = tag.id,
@@ -281,7 +280,7 @@ namespace FileManager
         {
             using (TagForm frm = new TagForm()
             {
-                CurrentTheme = this.currentTheme,
+                currentTheme = this.currentTheme,
                 Font = this.Font,
                 Text = "Create new Tag"
             })
@@ -289,7 +288,7 @@ namespace FileManager
                 frm.ReloadTheme();
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    //Database.AddTag(frm.TxtBoxName.Text, frm.color);
+                    user.InsertTag(frm.TxtBoxName.Text, frm.color);
                 }
             }
 
@@ -305,11 +304,11 @@ namespace FileManager
                 {
                     if (tag.items.Contains(item.SubItems[4].Text))
                     {
-                        tag.Remove(item.SubItems[4].Text);
+                        tag.RemoveItem(item.SubItems[4].Text);
                     }
                     else
                     {
-                        tag.Insert(item.SubItems[4].Text);
+                        tag.InsertItem(item.SubItems[4].Text);
                     }
                 }
             }
@@ -321,7 +320,7 @@ namespace FileManager
             Database.Tag tag = Database.GetTag((int)((ToolStripMenuItem)sender).Tag);
             using (TagForm frm = new TagForm()
             {
-                CurrentTheme = this.currentTheme,
+                currentTheme = this.currentTheme,
                 Text = "Modify Tag",
                 color = tag.color,
             })

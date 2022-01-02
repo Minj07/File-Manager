@@ -29,8 +29,11 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag_log.ldf
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe.config
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.pdb
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.SuggestedBindingRedirects.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.LoginForm.resources
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.TagForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.CustomForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.MainForm.resources
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.Properties.Resources.resources
@@ -38,6 +41,7 @@ D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.GenerateRes
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.CoreCompileInputs.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.exe
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.pdb
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.TagForm.resources
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.LoginForm.resources
+D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.Designer.cs
+D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xsc
+D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xsd
+D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xss
