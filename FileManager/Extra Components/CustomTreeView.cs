@@ -102,13 +102,9 @@ namespace FileManager
         {
             object debug = this.Nodes;
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            //if (e.Node.Text == "C:\\")
-            //{
-            //    MessageBox.Show("");
-            //}
-            Rectangle Bound //= new Rectangle(this.Location.X,e.Bounds.Y,this.Bounds.Width,e.Bounds.Height);
-                            = e.Bounds;
+            Rectangle Bound = e.Bounds;
             e.Graphics.FillRectangle(new SolidBrush(this.BackColor),e.Bounds);
+            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), e.Bounds);
 
             if (e.State.HasFlag(TreeNodeStates.Hot))
             {

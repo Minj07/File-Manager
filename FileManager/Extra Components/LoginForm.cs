@@ -171,10 +171,7 @@ namespace FileManager
             this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);
             if (user != null)
             {
-                //Application.Run(new MainForm(user));
                 this.Close();
-                
-
             }
             else
             {
@@ -187,6 +184,7 @@ namespace FileManager
             if (Database.AddUser(TxtBxUsername.Text, TxtBxPassword.Text))
             {
                 this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);
+                this.Close();
             }
             else
             {

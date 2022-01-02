@@ -313,7 +313,7 @@
             this.ButtonsTable.Name = "ButtonsTable";
             this.ButtonsTable.RowCount = 1;
             this.ButtonsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.ButtonsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.ButtonsTable.Size = new System.Drawing.Size(415, 85);
             this.ButtonsTable.TabIndex = 2;
             // 

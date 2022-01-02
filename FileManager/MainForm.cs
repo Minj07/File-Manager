@@ -17,11 +17,12 @@ namespace FileManager
 {
     public partial class MainForm : Form
     {
-        private ClsTreeListView clsTreeListView = new ClsTreeListView(); //Generate a ClsTreeListView object
+        private ClsTreeListView clsTreeListView; //Generate a ClsTreeListView object
 
         public MainForm(Database.User user)
         {
             this.user = user;
+            clsTreeListView = new ClsTreeListView(user);
             FMInitialize();//Just like Initailize Components
         }
 
@@ -527,6 +528,7 @@ namespace FileManager
                                 RefreshTreeView(treeView, parent);
                         }
                         else FileSystem.CopyFile(pathSource[i], pathDest[i], isReplace);
+                        user.InsertActivity(Database.User.Activity.ActionType.Copy,DateTime.Now, pathSource[i],pathDest[i]);
                     }
                     else if (isCutting)
                     {
@@ -540,6 +542,7 @@ namespace FileManager
                         }
                         else FileSystem.MoveFile(pathSource[i], pathDest[i], isReplace);
                         
+                        user.InsertActivity(Database.User.Activity.ActionType.Cut,DateTime.Now, pathSource[i],pathDest[i]);
                     }              
                 }
 
@@ -671,10 +674,74 @@ namespace FileManager
         #endregion
 
         #region Create delete button
+        public void Delete(List<ListViewItem> listItem)
+        {
+            if (listItem == null) return;
+            try
+            {
+                string a = "";
+                // Check if list view item is null or not
+                foreach (ListViewItem item in listItem)
+                {
+                    if (item.SubItems[2].Text == "File folder")
+                    {
+                        if (!new DirectoryInfo(item.SubItems[4].Text).Exists)
+                            return;
+                    }
+                    else if (!new FileInfo(item.SubItems[4].Text).Exists)
+                        return;
+                    a += ("\n" + item.SubItems[4].Text);
+                }
+
+                // Show message box to make sure want to permanently delete
+                DialogResult result;
+                if (listItem.Count == 1)
+                    result = MessageBox.Show("Are you sure you want to permanently delete this " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file") + " ?" + a, "Delete " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                else result = MessageBox.Show("Are you sure you want to permanently delete these " + listItem.Count + " items ?" + a, "Delete Multiple Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                    return;
+
+                //Delete item
+                else
+                    foreach (ListViewItem item in listItem)
+                        if (item.SubItems[2].Text == "File folder")
+
+                            DeleteFolder(new DirectoryInfo(item.SubItems[4].Text));
+                        else
+                        {
+                            Database.DeleteItem(item.SubItems[4].Text);
+                            user.InsertActivity(Database.User.Activity.ActionType.Delete, DateTime.Now,
+                                item.SubItems[4].Text, "");
+                            new FileInfo(item.SubItems[4].Text).Delete();
+                        }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        public void DeleteFolder(DirectoryInfo directoryInfo)
+        {
+            DirectoryInfo[] directories = directoryInfo.GetDirectories();
+            FileInfo[] files = directoryInfo.GetFiles();
+            if (directories.Length != 0 || files.Length != 0)
+            {
+                foreach (DirectoryInfo dir in directories)
+                    DeleteFolder(dir);
+                foreach (FileInfo file in files)
+                {
+                    Database.DeleteItem(file.FullName);
+                    file.Delete();
+                }
+            }
+            Database.DeleteItem(directoryInfo.FullName);
+            user.InsertActivity(Database.User.Activity.ActionType.Delete, DateTime.Now, directoryInfo.FullName, "");
+            directoryInfo.Delete();
+        }
         public void Delete()
         {
             if (GetSelectedListViewItems().Count == 0) return;
-            clsTreeListView.Delete(GetSelectedListViewItems());
+            Delete(GetSelectedListViewItems());
             //Refresh 
             TreeNode treeNode = treeView.Nodes.Find(currentAddr, true)[0];
             RefreshTreeView(treeView, treeNode);
@@ -685,10 +752,14 @@ namespace FileManager
             Delete();
         }
 
+
+        #endregion
+
+        #region Create rename button
         private bool isRenaming = false;
         private void listView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
-            if(e.Label == null) return;
+            if (e.Label == null) return;
             RenameItem(e.Label);
             e.CancelEdit = true;
             isRenaming = false;
@@ -696,9 +767,6 @@ namespace FileManager
                 RefreshTreeView(treeView, treeView.Nodes.Find(currentAddr, true)[0]);
             clsTreeListView.ShowContent(this.listView, currentAddr);
         }
-        #endregion
-
-        #region Create rename button
         private void Rename()
         {
             if (GetSelectedListViewItems().Count == 0) return;
@@ -756,6 +824,7 @@ namespace FileManager
                                     return;
                             }
                             Database.UpdateItem(fileInfo.FullName, fileInfo.FullName.Remove(fileInfo.FullName.Length - fileInfo.Name.Length, fileInfo.Name.Length) + newName);
+                            user.InsertActivity(Database.User.Activity.ActionType.Rename,DateTime.Now, fileInfo.FullName, fileInfo.FullName.Remove(fileInfo.FullName.Length - fileInfo.Name.Length, fileInfo.Name.Length) + newName);
                             FileSystem.RenameFile(fileInfo.FullName, newName);
                         }
                         else
@@ -767,6 +836,7 @@ namespace FileManager
                             else 
                             {
                                 Database.UpdateItem(directoryInfo.FullName, directoryInfo.FullName.Remove(directoryInfo.FullName.Length - directoryInfo.Name.Length, directoryInfo.Name.Length) + newName);
+                                user.InsertActivity(Database.User.Activity.ActionType.Rename, DateTime.Now, directoryInfo.FullName, directoryInfo.FullName.Remove(directoryInfo.FullName.Length - directoryInfo.Name.Length, directoryInfo.Name.Length) + newName);
                                 FileSystem.RenameDirectory(directoryInfo.FullName, newName);
                             }   
                         }
@@ -884,12 +954,15 @@ namespace FileManager
                             a += (b[i] + "\\");
                         a += newName;
                         Database.UpdateItem(a, directoryDst.FullName + "\\" + newName);
+                        user.InsertActivity(Database.User.Activity.ActionType.Cut,DateTime.Now, a, directoryDst.FullName + "\\" + newName);
                         FileSystem.MoveFile(a, directoryDst.FullName + "\\" + newName);
                     }
                 }
                 else if (newName != null)
                 {
                     Database.UpdateItem(file.FullName, directoryDst.FullName + "\\" + file.Name);
+                    user.InsertActivity(Database.User.Activity.ActionType.Cut, DateTime.Now, file.FullName,
+                        directoryDst.FullName + "\\" + file.Name);
                     FileSystem.MoveFile(file.FullName, directoryDst.FullName + "\\" + file.Name);
                 }
             }
@@ -902,6 +975,8 @@ namespace FileManager
             if (directories.Length == 0 && files.Length == 0)
             {
                 Database.DeleteItem(directorySrc.FullName);
+                user.InsertActivity(Database.User.Activity.ActionType.Merge,DateTime.Now, 
+                    directorySrc.FullName + " ; " + directoryDst.FullName, directoryDst.FullName);
                 directorySrc.Delete();
             }
         }
@@ -994,6 +1069,7 @@ namespace FileManager
                     new_path+=new_id.ToString()+")";
                 }
             }
+            user.InsertActivity(Database.User.Activity.ActionType.New, DateTime.Now, "", new_path);
             Directory.CreateDirectory(new_path);
             
             //Refresh
@@ -1015,6 +1091,7 @@ namespace FileManager
                     new_path += new_id.ToString() + ")";
                 }
             }
+            user.InsertActivity(Database.User.Activity.ActionType.New, DateTime.Now, "", new_path + ".txt");
             using (StreamWriter sw = File.CreateText(new_path+".txt"));
 
             //Refresh

@@ -218,6 +218,8 @@ namespace FileManager
                     Copy = 1,
                     Rename = 2,
                     Delete = 3,
+                    Merge = 4,
+                    New = 5,
                 }
 
                 public ActionType actionType { get;}
@@ -319,6 +321,23 @@ namespace FileManager
                 UpdateTags();
             }
 
+            public List<Tag> GetTags(string path)
+            {
+                List<Tag> tl = new List<Tag>();
+                foreach (DataRow row in ds.Tables[1].Rows)
+                {
+                    if (row["Path"].ToString() == path)
+                    {
+                        if (GetTag((int) row["TagId"]).uid == this.uid)
+                        {
+                            tl.Add(GetTag((int)row["TagId"]));
+                        }
+                    }
+                }
+
+                return tl;
+            }
+
         }
         
         static private void InsertUser(int uid, string name, string password, bool isAdministrator)
@@ -339,7 +358,10 @@ namespace FileManager
             UpdateDatabase();
         }
 
-
+        internal static User GetUser(int uid)
+        {
+            return Users.FirstOrDefault(user => user.uid == uid);
+        }
         #endregion
 
         #region Tags
@@ -368,7 +390,7 @@ namespace FileManager
                     i++;
                 }
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                String query = "InsertItem into Tagged (Id,Path,TagId) values (" + i.ToString() + ",'" + path + "'," + id + ")";
+                String query = "Insert into Tagged (Id,Path,TagId) values (" + i.ToString() + ",'" + path + "'," + id + ")";
                 using (connection)
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -381,6 +403,7 @@ namespace FileManager
                     connection.Close();
                 }
                 UpdateTags();
+                UpdateUsers();
             }
             public void Modify(string newName, Color newColor)
             {
@@ -410,6 +433,8 @@ namespace FileManager
                     }
                     connection.Close();
                 }
+                UpdateTags();
+                UpdateUsers();
             }
 
             public void RemoveItem(string path)
@@ -453,6 +478,7 @@ namespace FileManager
                     connection.Close();
                 }
                 UpdateTags();
+                UpdateUsers();
             }
 
             public List<string> GetPaths()
@@ -469,15 +495,9 @@ namespace FileManager
         
         static public List<Tag> GetTags(string path)
         {
-            List<Tag> result = new List<Tag>();
-            List<int> id_path = new List<int>();
-            foreach (DataRow row in ds.Tables[1].Rows)
-                if (row["Path"].ToString() == path)
-                    id_path.Add((int)row["TagId"]);
-            foreach (int a in id_path)
-                result.Add(GetTag(a));
+            List<int> id_path = (from DataRow row in ds.Tables[1].Rows where row["Path"].ToString() == path select (int) row["TagId"]).ToList();
 
-            return result;
+            return id_path.Select(GetTag).ToList();
         }
 
         static public Tag GetTag(int tagid)
@@ -501,6 +521,7 @@ namespace FileManager
                 connection.Close();
             }
             UpdateTags();
+            UpdateUsers();
         }
 
         static public void UpdateItem(string oldPath, string newPath)

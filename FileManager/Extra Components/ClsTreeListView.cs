@@ -17,6 +17,12 @@ namespace FileManager
 {
     internal class ClsTreeListView
     {
+        private Database.User user;
+
+        public ClsTreeListView(Database.User user)
+        {
+            this.user = user;
+        }
         private enum SHGFI
         {
             SmallIcon = 0x00000001,
@@ -116,7 +122,7 @@ namespace FileManager
             }
 
             // Create Tag nodes
-            foreach (Database.Tag tag in Database.Tags)
+            foreach (Database.Tag tag in user.tags)
             {
                 TreeNode tagNode=new TreeNode(tag.name);
                 tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
@@ -129,7 +135,7 @@ namespace FileManager
         {
             if(treeView.Nodes[0].Nodes.Count==0) return;
                 treeView.Nodes[0].Nodes.Clear();
-            foreach (Database.Tag tag in Database.Tags)
+            foreach (Database.Tag tag in user.tags)
             {
                 TreeNode tagNode = new TreeNode(tag.name);
                 tagNode.Tag = new CustomTreeView.TreeNodeTag(tag.color, tag.id, (tag.items.Count != 0) ? true : false);
@@ -195,7 +201,7 @@ namespace FileManager
             }
             else if(currentNode.Name=="Tag")
             {
-                foreach (Database.Tag tag in Database.Tags)
+                foreach (Database.Tag tag in user.tags)
                 {
                     currentNode.Nodes.Clear();
                     TreeNode tagNode = new TreeNode(tag.name);
@@ -274,7 +280,7 @@ namespace FileManager
                 else if (currentNode.Name == "Tag")
                 {
                     listView.Items.Clear();
-                    foreach (Database.Tag tag in Database.Tags)
+                    foreach (Database.Tag tag in user.tags)
                     {
                         string[] item = new string[5];
                         item[0] = tag.name;
@@ -300,7 +306,7 @@ namespace FileManager
                         if (new FileInfo(a).Exists)
                         {
                             ListViewItem listViewItem = GetLVItems(new FileInfo(a));
-                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(a);
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = user.GetTags(a);
                             listView.Items.Add(listViewItem);
                         }
                         else if (new DirectoryInfo(a).Exists)
@@ -358,7 +364,7 @@ namespace FileManager
                 (GetDirectoryIcon(folder.FullName, true) == null ?
                 Properties.Resources.Folder :
                 GetDirectoryIcon(folder.FullName, true)));
-            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(folder.FullName);
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = user.GetTags(folder.FullName);
             return listViewItem;
         }
 
@@ -376,7 +382,7 @@ namespace FileManager
             
             ListViewItem listViewItem = new ListViewItem(item);
             listViewItem.Tag = new CustomListView.ListViewItemTag(file.Extension, Icon.ExtractAssociatedIcon(file.FullName), Icon.ExtractAssociatedIcon(file.FullName));
-            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(file.FullName);
+            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = user.GetTags(file.FullName);
             return listViewItem;
         }
 
@@ -477,7 +483,7 @@ namespace FileManager
                         if (new FileInfo(a).Exists)
                         {
                             ListViewItem listViewItem = GetLVItems(new FileInfo(a));
-                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = Database.GetTags(a);
+                            ((CustomListView.ListViewItemTag)listViewItem.Tag).Tags = user.GetTags(a);
                             listView.Items.Add(listViewItem);
                         }
                         else if (new DirectoryInfo(a).Exists)
@@ -503,66 +509,9 @@ namespace FileManager
             return false;
         }
 
-        public void Delete(List<ListViewItem> listItem)
+        public void UpdateUser()
         {
-            if (listItem == null) return;
-            try
-            {
-                string a = "";
-                // Check if list view item is null or not
-                foreach (ListViewItem item in listItem)
-                {
-                    if (item.SubItems[2].Text == "File folder")
-                    {
-                        if (!new DirectoryInfo(item.SubItems[4].Text).Exists)
-                            return;
-                    }
-                    else if (!new FileInfo(item.SubItems[4].Text).Exists)
-                        return;
-                    a += ("\n" + item.SubItems[4].Text);
-                }
-
-                // Show message box to make sure want to permanently delete
-                DialogResult result;
-                if (listItem.Count == 1)
-                    result = MessageBox.Show("Are you sure you want to permanently delete this " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file") + " ?" + a, "Delete " + ((listItem[0].SubItems[2].Text == "File folder") ? "folder" : "file"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                else result = MessageBox.Show("Are you sure you want to permanently delete these " + listItem.Count + " items ?" + a, "Delete Multiple Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                    return;
-
-                //Delete item
-                else
-                    foreach (ListViewItem item in listItem)
-                        if (item.SubItems[2].Text == "File folder")
-
-                            DeleteFolder(new DirectoryInfo(item.SubItems[4].Text));
-                        else
-                        {
-                            Database.DeleteItem(item.SubItems[4].Text);
-                            new FileInfo(item.SubItems[4].Text).Delete();
-                        }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        public void DeleteFolder(DirectoryInfo directoryInfo)
-        {
-            DirectoryInfo[] directories = directoryInfo.GetDirectories();
-            FileInfo[] files = directoryInfo.GetFiles();
-            if (directories.Length != 0 || files.Length != 0)
-            {
-                foreach (DirectoryInfo dir in directories)
-                    DeleteFolder(dir);
-                foreach (FileInfo file in files)
-                {
-                    Database.DeleteItem(file.FullName);
-                    file.Delete();
-                }
-            }
-            Database.DeleteItem(directoryInfo.FullName);
-            directoryInfo.Delete();
+            user = Database.GetUser(user.uid);
         }
     }
 }

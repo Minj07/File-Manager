@@ -29,7 +29,6 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag_log.ldf
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe.config
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.exe
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\FileManager.pdb
-D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.SuggestedBindingRedirects.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.LoginForm.resources
@@ -45,3 +44,5 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.Designer.cs
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xsc
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xsd
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xss
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
+D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.AdminForm.resources

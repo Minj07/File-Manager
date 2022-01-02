@@ -54,6 +54,9 @@
             this.CbAddress = new System.Windows.Forms.ComboBox();
             this.BtnGoRefresh = new System.Windows.Forms.Button();
             this.StatusTablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnTileView = new System.Windows.Forms.Button();
+            this.BtnDetailView = new System.Windows.Forms.Button();
+            this.BtnLargeIconView = new System.Windows.Forms.Button();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.BtnExit = new FileManager.RoundedButton();
             this.BtnMinimize = new FileManager.RoundedButton();
@@ -83,6 +86,7 @@
             this.NavigationTablePanel.SuspendLayout();
             this.NavigationButtonTablePanel.SuspendLayout();
             this.AddressTablePanel.SuspendLayout();
+            this.StatusTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
             this.ToolTablePanel.SuspendLayout();
             this.MenuNew.SuspendLayout();
@@ -217,6 +221,7 @@
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Tile;
+            this.listView.ViewIndex = 0;
             this.listView.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView_AfterLabelEdit);
             this.listView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listView_KeyPress);
             this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
@@ -420,12 +425,16 @@
             // 
             // StatusTablePanel
             // 
-            this.StatusTablePanel.ColumnCount = 5;
+            this.StatusTablePanel.ColumnCount = 6;
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.StatusTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.StatusTablePanel.Controls.Add(this.BtnTileView, 3, 0);
+            this.StatusTablePanel.Controls.Add(this.BtnDetailView, 4, 0);
+            this.StatusTablePanel.Controls.Add(this.BtnLargeIconView, 5, 0);
             this.StatusTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatusTablePanel.Location = new System.Drawing.Point(0, 421);
             this.StatusTablePanel.Margin = new System.Windows.Forms.Padding(0);
@@ -434,6 +443,45 @@
             this.StatusTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.StatusTablePanel.Size = new System.Drawing.Size(922, 30);
             this.StatusTablePanel.TabIndex = 4;
+            // 
+            // BtnTileView
+            // 
+            this.BtnTileView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnTileView.FlatAppearance.BorderSize = 0;
+            this.BtnTileView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTileView.Image = ((System.Drawing.Image)(resources.GetObject("BtnTileView.Image")));
+            this.BtnTileView.Location = new System.Drawing.Point(832, 0);
+            this.BtnTileView.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnTileView.Name = "BtnTileView";
+            this.BtnTileView.Size = new System.Drawing.Size(30, 30);
+            this.BtnTileView.TabIndex = 7;
+            this.BtnTileView.UseVisualStyleBackColor = true;
+            // 
+            // BtnDetailView
+            // 
+            this.BtnDetailView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnDetailView.FlatAppearance.BorderSize = 0;
+            this.BtnDetailView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDetailView.Image = ((System.Drawing.Image)(resources.GetObject("BtnDetailView.Image")));
+            this.BtnDetailView.Location = new System.Drawing.Point(862, 0);
+            this.BtnDetailView.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnDetailView.Name = "BtnDetailView";
+            this.BtnDetailView.Size = new System.Drawing.Size(30, 30);
+            this.BtnDetailView.TabIndex = 8;
+            this.BtnDetailView.UseVisualStyleBackColor = true;
+            // 
+            // BtnLargeIconView
+            // 
+            this.BtnLargeIconView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnLargeIconView.FlatAppearance.BorderSize = 0;
+            this.BtnLargeIconView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLargeIconView.Image = ((System.Drawing.Image)(resources.GetObject("BtnLargeIconView.Image")));
+            this.BtnLargeIconView.Location = new System.Drawing.Point(892, 0);
+            this.BtnLargeIconView.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnLargeIconView.Name = "BtnLargeIconView";
+            this.BtnLargeIconView.Size = new System.Drawing.Size(30, 30);
+            this.BtnLargeIconView.TabIndex = 9;
+            this.BtnLargeIconView.UseVisualStyleBackColor = true;
             // 
             // HeaderTablePanel
             // 
@@ -769,6 +817,7 @@
             this.NavigationTablePanel.PerformLayout();
             this.NavigationButtonTablePanel.ResumeLayout(false);
             this.AddressTablePanel.ResumeLayout(false);
+            this.StatusTablePanel.ResumeLayout(false);
             this.HeaderTablePanel.ResumeLayout(false);
             this.HeaderTablePanel.PerformLayout();
             this.ToolTablePanel.ResumeLayout(false);
@@ -829,6 +878,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemNewTextFile;
         private System.Windows.Forms.Label LbTitle;
         private System.Windows.Forms.Panel ToolbarSeparator;
+        private System.Windows.Forms.Button BtnLargeIconView;
+        private System.Windows.Forms.Button BtnTileView;
+        private System.Windows.Forms.Button BtnDetailView;
     }
 }
 
