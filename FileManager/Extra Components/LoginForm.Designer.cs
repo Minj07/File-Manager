@@ -47,6 +47,7 @@
             this.ButtonsTable = new System.Windows.Forms.TableLayoutPanel();
             this.BtnSignUp = new System.Windows.Forms.Button();
             this.BtnLogIn = new System.Windows.Forms.Button();
+            this.Logo = new System.Windows.Forms.PictureBox();
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
@@ -57,6 +58,7 @@
             this.UsernameTable.SuspendLayout();
             this.PasswordTable.SuspendLayout();
             this.ButtonsTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // OuterTablePanel
@@ -205,17 +207,17 @@
             // 
             this.MainTable.ColumnCount = 1;
             this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.MainTable.Controls.Add(this.UsernameTable, 0, 1);
             this.MainTable.Controls.Add(this.PasswordTable, 0, 2);
             this.MainTable.Controls.Add(this.ButtonsTable, 0, 3);
+            this.MainTable.Controls.Add(this.Logo, 0, 0);
             this.MainTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTable.Location = new System.Drawing.Point(0, 0);
             this.MainTable.Margin = new System.Windows.Forms.Padding(2);
             this.MainTable.Name = "MainTable";
             this.MainTable.RowCount = 4;
-            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.MainTable.Size = new System.Drawing.Size(405, 321);
@@ -229,13 +231,13 @@
             this.UsernameTable.Controls.Add(this.TxtBxUsername, 0, 1);
             this.UsernameTable.Controls.Add(this.LbUsername, 0, 0);
             this.UsernameTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UsernameTable.Location = new System.Drawing.Point(0, 80);
+            this.UsernameTable.Location = new System.Drawing.Point(0, 112);
             this.UsernameTable.Margin = new System.Windows.Forms.Padding(0);
             this.UsernameTable.Name = "UsernameTable";
             this.UsernameTable.RowCount = 2;
             this.UsernameTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.UsernameTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.UsernameTable.Size = new System.Drawing.Size(405, 80);
+            this.UsernameTable.Size = new System.Drawing.Size(405, 48);
             this.UsernameTable.TabIndex = 0;
             // 
             // TxtBxUsername
@@ -244,7 +246,7 @@
             this.TxtBxUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtBxUsername.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxUsername.Location = new System.Drawing.Point(22, 40);
+            this.TxtBxUsername.Location = new System.Drawing.Point(22, 24);
             this.TxtBxUsername.Margin = new System.Windows.Forms.Padding(22, 0, 22, 0);
             this.TxtBxUsername.Name = "TxtBxUsername";
             this.TxtBxUsername.Size = new System.Drawing.Size(361, 19);
@@ -254,7 +256,7 @@
             // 
             this.LbUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LbUsername.AutoSize = true;
-            this.LbUsername.Location = new System.Drawing.Point(22, 19);
+            this.LbUsername.Location = new System.Drawing.Point(22, 3);
             this.LbUsername.Margin = new System.Windows.Forms.Padding(22, 0, 22, 8);
             this.LbUsername.Name = "LbUsername";
             this.LbUsername.Size = new System.Drawing.Size(58, 13);
@@ -346,6 +348,18 @@
             this.BtnLogIn.UseVisualStyleBackColor = true;
             this.BtnLogIn.Click += new System.EventHandler(this.BtnLogIn_Click);
             // 
+            // Logo
+            // 
+            this.Logo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Logo.Image = global::FileManager.Properties.Resources.Logo;
+            this.Logo.Location = new System.Drawing.Point(0, 15);
+            this.Logo.Margin = new System.Windows.Forms.Padding(0, 15, 0, 5);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(405, 92);
+            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Logo.TabIndex = 3;
+            this.Logo.TabStop = false;
+            // 
             // OuterLeftEdge
             // 
             this.OuterLeftEdge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -386,6 +400,7 @@
             this.PasswordTable.ResumeLayout(false);
             this.PasswordTable.PerformLayout();
             this.ButtonsTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,5 +427,6 @@
         private System.Windows.Forms.TableLayoutPanel ButtonsTable;
         private System.Windows.Forms.Button BtnSignUp;
         private System.Windows.Forms.Button BtnLogIn;
+        private System.Windows.Forms.PictureBox Logo;
     }
 }

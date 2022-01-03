@@ -519,7 +519,6 @@
             this.LbStatus.Name = "LbStatus";
             this.LbStatus.Size = new System.Drawing.Size(244, 30);
             this.LbStatus.TabIndex = 10;
-            this.LbStatus.Text = "label1";
             this.LbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // HeaderTablePanel

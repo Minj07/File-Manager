@@ -67,7 +67,7 @@
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4);
             this.OuterTablePanel.Name = "OuterTablePanel";
             this.OuterTablePanel.Rounded = true;
             this.OuterTablePanel.RowCount = 2;
@@ -205,7 +205,7 @@
             this.TablePanel.Controls.Add(this.BtnOk, 1, 3);
             this.TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TablePanel.Location = new System.Drawing.Point(0, 0);
-            this.TablePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TablePanel.Margin = new System.Windows.Forms.Padding(2);
             this.TablePanel.Name = "TablePanel";
             this.TablePanel.RowCount = 5;
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -307,7 +307,7 @@
             this.Controls.Add(this.OuterTablePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TagForm";
             this.Text = "TagForm";
             this.OuterTablePanel.ResumeLayout(false);

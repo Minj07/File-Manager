@@ -146,6 +146,7 @@ namespace FileManager
             else
             {
                 currentAddr = CbAddress.Text;
+                UpdateStatus();
                 if (!backForward)
                 {
                     if (indexBackForward < pathBackForward.Count - 1)
@@ -1099,5 +1100,20 @@ namespace FileManager
         }
         #endregion
 
+        #region Create status
+        public void UpdateStatus()
+        {
+            LbStatus.Text = "";
+            int count = listView.Items.Count;
+            LbStatus.Text = count.ToString() + ((count == 1) ? " item" : " items" + "  | ");
+            count = GetSelectedListViewItems().Count;
+            if (count > 0)
+                LbStatus.Text += (count.ToString() + ((count == 1) ? " item" : " items") + " selected  |");
+        }
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+        #endregion
     }
 }
