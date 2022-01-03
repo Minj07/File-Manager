@@ -25,7 +25,6 @@ namespace FileManager
         public TagForm()
         {
             currentTheme = new Theme(Color.FromArgb(30, 30, 30));
-
             this.DoubleBuffered = true;
 
             InitializeComponent();

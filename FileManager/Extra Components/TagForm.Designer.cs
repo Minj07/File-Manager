@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagForm));
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
@@ -56,9 +57,9 @@
             this.OuterTablePanel.BackColor = System.Drawing.Color.Transparent;
             this.OuterTablePanel.BorderColor = System.Drawing.Color.Empty;
             this.OuterTablePanel.ColumnCount = 3;
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.OuterTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.OuterTablePanel.Controls.Add(this.MainTablePanel, 1, 0);
             this.OuterTablePanel.Controls.Add(this.OuterLeftEdge, 0, 0);
             this.OuterTablePanel.Controls.Add(this.OuterBottomEdge, 1, 1);
@@ -66,13 +67,13 @@
             this.OuterTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterTablePanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.OuterTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(5);
+            this.OuterTablePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OuterTablePanel.Name = "OuterTablePanel";
             this.OuterTablePanel.Rounded = true;
             this.OuterTablePanel.RowCount = 2;
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.OuterTablePanel.Size = new System.Drawing.Size(352, 398);
+            this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 4F));
+            this.OuterTablePanel.Size = new System.Drawing.Size(264, 323);
             this.OuterTablePanel.TabIndex = 3;
             this.OuterTablePanel.TrueBackColor = System.Drawing.SystemColors.Control;
             // 
@@ -85,25 +86,25 @@
             this.MainTablePanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.MainTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTablePanel.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.MainTablePanel.Location = new System.Drawing.Point(5, 0);
+            this.MainTablePanel.Location = new System.Drawing.Point(4, 0);
             this.MainTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.MainTablePanel.Name = "MainTablePanel";
             this.MainTablePanel.RowCount = 3;
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 2F));
-            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTablePanel.Size = new System.Drawing.Size(342, 393);
+            this.MainTablePanel.Size = new System.Drawing.Size(256, 319);
             this.MainTablePanel.TabIndex = 0;
             // 
             // HeaderTablePanel
             // 
             this.HeaderTablePanel.ColumnCount = 6;
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.HeaderTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.HeaderTablePanel.Controls.Add(this.BtnExit, 1, 0);
             this.HeaderTablePanel.Controls.Add(this.BtnMinimize, 2, 0);
             this.HeaderTablePanel.Controls.Add(this.BtnMaximize, 3, 0);
@@ -114,7 +115,7 @@
             this.HeaderTablePanel.Name = "HeaderTablePanel";
             this.HeaderTablePanel.RowCount = 1;
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HeaderTablePanel.Size = new System.Drawing.Size(342, 37);
+            this.HeaderTablePanel.Size = new System.Drawing.Size(256, 30);
             this.HeaderTablePanel.TabIndex = 5;
             // 
             // BtnExit
@@ -127,10 +128,10 @@
             this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnExit.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BtnExit.Image = global::FileManager.Properties.Resources.close;
-            this.BtnExit.Location = new System.Drawing.Point(16, 9);
-            this.BtnExit.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
+            this.BtnExit.Location = new System.Drawing.Point(12, 7);
+            this.BtnExit.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
             this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(21, 19);
+            this.BtnExit.Size = new System.Drawing.Size(16, 16);
             this.BtnExit.TabIndex = 0;
             this.BtnExit.UseVisualStyleBackColor = false;
             // 
@@ -144,10 +145,10 @@
             this.BtnMinimize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnMinimize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(0)))));
             this.BtnMinimize.Image = global::FileManager.Properties.Resources.subtract;
-            this.BtnMinimize.Location = new System.Drawing.Point(43, 9);
-            this.BtnMinimize.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
+            this.BtnMinimize.Location = new System.Drawing.Point(32, 7);
+            this.BtnMinimize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
             this.BtnMinimize.Name = "BtnMinimize";
-            this.BtnMinimize.Size = new System.Drawing.Size(21, 19);
+            this.BtnMinimize.Size = new System.Drawing.Size(16, 16);
             this.BtnMinimize.TabIndex = 1;
             this.BtnMinimize.UseVisualStyleBackColor = false;
             // 
@@ -161,10 +162,10 @@
             this.BtnMaximize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
             this.BtnMaximize.Image = global::FileManager.Properties.Resources.maximize;
-            this.BtnMaximize.Location = new System.Drawing.Point(70, 9);
-            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
+            this.BtnMaximize.Location = new System.Drawing.Point(52, 7);
+            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
             this.BtnMaximize.Name = "BtnMaximize";
-            this.BtnMaximize.Size = new System.Drawing.Size(21, 19);
+            this.BtnMaximize.Size = new System.Drawing.Size(16, 16);
             this.BtnMaximize.TabIndex = 2;
             this.BtnMaximize.UseVisualStyleBackColor = false;
             // 
@@ -173,9 +174,10 @@
             this.LbTitle.AutoSize = true;
             this.LbTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbTitle.Enabled = false;
-            this.LbTitle.Location = new System.Drawing.Point(97, 0);
+            this.LbTitle.Location = new System.Drawing.Point(72, 0);
+            this.LbTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(158, 37);
+            this.LbTitle.Size = new System.Drawing.Size(119, 30);
             this.LbTitle.TabIndex = 3;
             this.LbTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -184,10 +186,10 @@
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainPanel.Controls.Add(this.TablePanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 39);
+            this.MainPanel.Location = new System.Drawing.Point(0, 32);
             this.MainPanel.Margin = new System.Windows.Forms.Padding(0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(342, 354);
+            this.MainPanel.Size = new System.Drawing.Size(256, 287);
             this.MainPanel.TabIndex = 6;
             // 
             // TablePanel
@@ -203,7 +205,7 @@
             this.TablePanel.Controls.Add(this.BtnOk, 1, 3);
             this.TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TablePanel.Location = new System.Drawing.Point(0, 0);
-            this.TablePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TablePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TablePanel.Name = "TablePanel";
             this.TablePanel.RowCount = 5;
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -211,17 +213,17 @@
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.TablePanel.Size = new System.Drawing.Size(342, 354);
+            this.TablePanel.Size = new System.Drawing.Size(256, 287);
             this.TablePanel.TabIndex = 4;
             // 
             // BtnColor
             // 
             this.BtnColor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnColor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnColor.Location = new System.Drawing.Point(91, 160);
-            this.BtnColor.Margin = new System.Windows.Forms.Padding(40, 20, 40, 20);
+            this.BtnColor.Location = new System.Drawing.Point(68, 130);
+            this.BtnColor.Margin = new System.Windows.Forms.Padding(30, 16, 30, 16);
             this.BtnColor.Name = "BtnColor";
-            this.BtnColor.Size = new System.Drawing.Size(159, 30);
+            this.BtnColor.Size = new System.Drawing.Size(119, 25);
             this.BtnColor.TabIndex = 0;
             this.BtnColor.Text = "Choose Color";
             this.BtnColor.UseVisualStyleBackColor = true;
@@ -231,10 +233,10 @@
             // 
             this.TxtBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBoxName.Location = new System.Drawing.Point(80, 90);
-            this.TxtBoxName.Margin = new System.Windows.Forms.Padding(29, 20, 29, 20);
+            this.TxtBoxName.Location = new System.Drawing.Point(60, 73);
+            this.TxtBoxName.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.TxtBoxName.Name = "TxtBoxName";
-            this.TxtBoxName.Size = new System.Drawing.Size(181, 23);
+            this.TxtBoxName.Size = new System.Drawing.Size(135, 23);
             this.TxtBoxName.TabIndex = 1;
             // 
             // LblName
@@ -243,9 +245,10 @@
             this.LblName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblName.ForeColor = System.Drawing.Color.White;
-            this.LblName.Location = new System.Drawing.Point(54, 0);
+            this.LblName.Location = new System.Drawing.Point(40, 0);
+            this.LblName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblName.Name = "LblName";
-            this.LblName.Size = new System.Drawing.Size(233, 70);
+            this.LblName.Size = new System.Drawing.Size(175, 57);
             this.LblName.TabIndex = 2;
             this.LblName.Text = "Tag Name:";
             this.LblName.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -255,10 +258,10 @@
             this.BtnCancel.BackColor = System.Drawing.Color.Red;
             this.BtnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnCancel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnCancel.Location = new System.Drawing.Point(80, 300);
-            this.BtnCancel.Margin = new System.Windows.Forms.Padding(29, 20, 29, 20);
+            this.BtnCancel.Location = new System.Drawing.Point(60, 244);
+            this.BtnCancel.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(181, 34);
+            this.BtnCancel.Size = new System.Drawing.Size(135, 27);
             this.BtnCancel.TabIndex = 3;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
@@ -269,10 +272,10 @@
             this.BtnOk.BackColor = System.Drawing.Color.Lime;
             this.BtnOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnOk.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnOk.Location = new System.Drawing.Point(80, 230);
-            this.BtnOk.Margin = new System.Windows.Forms.Padding(29, 20, 29, 20);
+            this.BtnOk.Location = new System.Drawing.Point(60, 187);
+            this.BtnOk.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.BtnOk.Name = "BtnOk";
-            this.BtnOk.Size = new System.Drawing.Size(181, 30);
+            this.BtnOk.Size = new System.Drawing.Size(135, 25);
             this.BtnOk.TabIndex = 4;
             this.BtnOk.Text = "Create";
             this.BtnOk.UseVisualStyleBackColor = false;
@@ -284,25 +287,27 @@
             this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
             this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterLeftEdge.Name = "OuterLeftEdge";
-            this.OuterLeftEdge.Size = new System.Drawing.Size(5, 393);
+            this.OuterLeftEdge.Size = new System.Drawing.Size(4, 319);
             this.OuterLeftEdge.TabIndex = 1;
             // 
             // OuterBottomEdge
             // 
             this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterBottomEdge.Location = new System.Drawing.Point(5, 393);
+            this.OuterBottomEdge.Location = new System.Drawing.Point(4, 319);
             this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterBottomEdge.Name = "OuterBottomEdge";
-            this.OuterBottomEdge.Size = new System.Drawing.Size(342, 5);
+            this.OuterBottomEdge.Size = new System.Drawing.Size(256, 4);
             this.OuterBottomEdge.TabIndex = 2;
             // 
             // TagForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 398);
+            this.ClientSize = new System.Drawing.Size(264, 323);
             this.Controls.Add(this.OuterTablePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TagForm";
             this.Text = "TagForm";
             this.OuterTablePanel.ResumeLayout(false);

@@ -32,7 +32,7 @@ namespace FileManager
 
             currentTheme = dark;
             InitializeComponent();
-            this.MaximizedBounds = Screen.GetWorkingArea(this);
+            //this.MaximizedBounds = Screen.GetWorkingArea(this);
 
             HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
             LbTitle.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);

@@ -213,6 +213,10 @@
     <None Include="assets\icon\merge.png" />
     <None Include="assets\icon\Logout.png" />
     <None Include="assets\icon\Logo.png" />
+    <None Include="assets\icon\administrative_tools.ico" />
+    <None Include="assets\icon\Logo.ico" />
+    <None Include="assets\icon\star.ico" />
+    <None Include="assets\icon\user.ico" />
     <Content Include="Tag.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -28,18 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             this.OuterTablePanel = new FileManager.RoundedTablePanel();
             this.MainTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.HeaderTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnExit = new FileManager.RoundedButton();
-            this.BtnMinimize = new FileManager.RoundedButton();
-            this.BtnMaximize = new FileManager.RoundedButton();
             this.LbTitle = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnToggleAdmin = new System.Windows.Forms.Button();
-            this.BtnDelete = new System.Windows.Forms.Button();
             this.SplitView = new System.Windows.Forms.SplitContainer();
             this.LsViewUsers = new FileManager.CustomListView();
             this.ColUID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -51,6 +47,11 @@
             this.ColTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
+            this.BtnExit = new FileManager.RoundedButton();
+            this.BtnMinimize = new FileManager.RoundedButton();
+            this.BtnMaximize = new FileManager.RoundedButton();
+            this.BtnToggleAdmin = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.OuterTablePanel.SuspendLayout();
             this.MainTablePanel.SuspendLayout();
             this.HeaderTablePanel.SuspendLayout();
@@ -129,57 +130,6 @@
             this.HeaderTablePanel.Size = new System.Drawing.Size(1193, 30);
             this.HeaderTablePanel.TabIndex = 5;
             // 
-            // BtnExit
-            // 
-            this.BtnExit.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(77)))), ((int)(((byte)(71)))));
-            this.BtnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(87)))), ((int)(((byte)(84)))));
-            this.BtnExit.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(77)))), ((int)(((byte)(71)))));
-            this.BtnExit.BorderSize = 1F;
-            this.BtnExit.CornerRadius = 5;
-            this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnExit.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BtnExit.Image = global::FileManager.Properties.Resources.close;
-            this.BtnExit.Location = new System.Drawing.Point(12, 7);
-            this.BtnExit.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
-            this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(16, 16);
-            this.BtnExit.TabIndex = 0;
-            this.BtnExit.UseVisualStyleBackColor = false;
-            // 
-            // BtnMinimize
-            // 
-            this.BtnMinimize.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(161)))), ((int)(((byte)(69)))));
-            this.BtnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(187)))), ((int)(((byte)(64)))));
-            this.BtnMinimize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(161)))), ((int)(((byte)(69)))));
-            this.BtnMinimize.BorderSize = 1F;
-            this.BtnMinimize.CornerRadius = 5;
-            this.BtnMinimize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnMinimize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(0)))));
-            this.BtnMinimize.Image = global::FileManager.Properties.Resources.subtract;
-            this.BtnMinimize.Location = new System.Drawing.Point(32, 7);
-            this.BtnMinimize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
-            this.BtnMinimize.Name = "BtnMinimize";
-            this.BtnMinimize.Size = new System.Drawing.Size(16, 16);
-            this.BtnMinimize.TabIndex = 1;
-            this.BtnMinimize.UseVisualStyleBackColor = false;
-            // 
-            // BtnMaximize
-            // 
-            this.BtnMaximize.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(166)))), ((int)(((byte)(75)))));
-            this.BtnMaximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(199)))), ((int)(((byte)(71)))));
-            this.BtnMaximize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(166)))), ((int)(((byte)(75)))));
-            this.BtnMaximize.BorderSize = 1F;
-            this.BtnMaximize.CornerRadius = 5;
-            this.BtnMaximize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
-            this.BtnMaximize.Image = global::FileManager.Properties.Resources.maximize;
-            this.BtnMaximize.Location = new System.Drawing.Point(52, 7);
-            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
-            this.BtnMaximize.Name = "BtnMaximize";
-            this.BtnMaximize.Size = new System.Drawing.Size(16, 16);
-            this.BtnMaximize.TabIndex = 2;
-            this.BtnMaximize.UseVisualStyleBackColor = false;
-            // 
             // LbTitle
             // 
             this.LbTitle.AutoSize = true;
@@ -235,32 +185,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(40, 669);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // BtnToggleAdmin
-            // 
-            this.BtnToggleAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnToggleAdmin.FlatAppearance.BorderSize = 0;
-            this.BtnToggleAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnToggleAdmin.Image = global::FileManager.Properties.Resources.admin;
-            this.BtnToggleAdmin.Location = new System.Drawing.Point(0, 0);
-            this.BtnToggleAdmin.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnToggleAdmin.Name = "BtnToggleAdmin";
-            this.BtnToggleAdmin.Size = new System.Drawing.Size(40, 40);
-            this.BtnToggleAdmin.TabIndex = 11;
-            this.BtnToggleAdmin.UseVisualStyleBackColor = true;
-            // 
-            // BtnDelete
-            // 
-            this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnDelete.FlatAppearance.BorderSize = 0;
-            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDelete.Image = global::FileManager.Properties.Resources.trash;
-            this.BtnDelete.Location = new System.Drawing.Point(0, 40);
-            this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(40, 40);
-            this.BtnDelete.TabIndex = 12;
-            this.BtnDelete.UseVisualStyleBackColor = true;
             // 
             // SplitView
             // 
@@ -371,6 +295,83 @@
             this.OuterBottomEdge.Size = new System.Drawing.Size(1193, 4);
             this.OuterBottomEdge.TabIndex = 2;
             // 
+            // BtnExit
+            // 
+            this.BtnExit.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(77)))), ((int)(((byte)(71)))));
+            this.BtnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(87)))), ((int)(((byte)(84)))));
+            this.BtnExit.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(77)))), ((int)(((byte)(71)))));
+            this.BtnExit.BorderSize = 1F;
+            this.BtnExit.CornerRadius = 5;
+            this.BtnExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnExit.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnExit.Image = global::FileManager.Properties.Resources.close;
+            this.BtnExit.Location = new System.Drawing.Point(12, 7);
+            this.BtnExit.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.BtnExit.Name = "BtnExit";
+            this.BtnExit.Size = new System.Drawing.Size(16, 16);
+            this.BtnExit.TabIndex = 0;
+            this.BtnExit.UseVisualStyleBackColor = false;
+            // 
+            // BtnMinimize
+            // 
+            this.BtnMinimize.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(161)))), ((int)(((byte)(69)))));
+            this.BtnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(187)))), ((int)(((byte)(64)))));
+            this.BtnMinimize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(161)))), ((int)(((byte)(69)))));
+            this.BtnMinimize.BorderSize = 1F;
+            this.BtnMinimize.CornerRadius = 5;
+            this.BtnMinimize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnMinimize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(0)))));
+            this.BtnMinimize.Image = global::FileManager.Properties.Resources.subtract;
+            this.BtnMinimize.Location = new System.Drawing.Point(32, 7);
+            this.BtnMinimize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.BtnMinimize.Name = "BtnMinimize";
+            this.BtnMinimize.Size = new System.Drawing.Size(16, 16);
+            this.BtnMinimize.TabIndex = 1;
+            this.BtnMinimize.UseVisualStyleBackColor = false;
+            // 
+            // BtnMaximize
+            // 
+            this.BtnMaximize.ActivatedColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(166)))), ((int)(((byte)(75)))));
+            this.BtnMaximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(199)))), ((int)(((byte)(71)))));
+            this.BtnMaximize.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(166)))), ((int)(((byte)(75)))));
+            this.BtnMaximize.BorderSize = 1F;
+            this.BtnMaximize.CornerRadius = 5;
+            this.BtnMaximize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
+            this.BtnMaximize.Image = global::FileManager.Properties.Resources.maximize;
+            this.BtnMaximize.Location = new System.Drawing.Point(52, 7);
+            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
+            this.BtnMaximize.Name = "BtnMaximize";
+            this.BtnMaximize.Size = new System.Drawing.Size(16, 16);
+            this.BtnMaximize.TabIndex = 2;
+            this.BtnMaximize.UseVisualStyleBackColor = false;
+            // 
+            // BtnToggleAdmin
+            // 
+            this.BtnToggleAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnToggleAdmin.FlatAppearance.BorderSize = 0;
+            this.BtnToggleAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnToggleAdmin.Image = global::FileManager.Properties.Resources.admin;
+            this.BtnToggleAdmin.Location = new System.Drawing.Point(0, 0);
+            this.BtnToggleAdmin.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnToggleAdmin.Name = "BtnToggleAdmin";
+            this.BtnToggleAdmin.Size = new System.Drawing.Size(40, 40);
+            this.BtnToggleAdmin.TabIndex = 11;
+            this.BtnToggleAdmin.UseVisualStyleBackColor = true;
+            // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnDelete.FlatAppearance.BorderSize = 0;
+            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelete.Image = global::FileManager.Properties.Resources.trash;
+            this.BtnDelete.Location = new System.Drawing.Point(0, 40);
+            this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(40, 40);
+            this.BtnDelete.TabIndex = 12;
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +379,7 @@
             this.ClientSize = new System.Drawing.Size(1201, 715);
             this.Controls.Add(this.OuterTablePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
