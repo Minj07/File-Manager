@@ -67,7 +67,9 @@ namespace FileManager
                 i++;
             }
 
-            InsertUser(i, name, ComputeSha256Hash(password), i == 0);
+            
+
+            InsertUser(i, name, ComputeSha256Hash(password), !Users.Any(u => u.isAdministrator));
             return true;
         }
 
@@ -143,8 +145,8 @@ namespace FileManager
                 foreach (var user in Users.Where(user => user.uid == (int)Row["UID"]))
                 {
                     user.activities.Add(new User.Activity(
-                        (User.Activity.ActionType)int.Parse((string)Row["Action"]),
-                        SqlDateTime.Parse((string)Row["Time"]).Value,
+                        (User.Activity.ActionType)((int)((byte)Row["Action"])),
+                        (DateTime)Row["Time"],
                         (string)Row["Source"],
                         (string)Row["Destination"]
                     ));
@@ -247,7 +249,7 @@ namespace FileManager
                 {
                     connection.Open();
 
-                    SqlCommand command = new SqlCommand(("Update User set IsAdministrator=" + (isAdministrator?"true":"false") + " where UID=" + this.uid), connection);
+                    SqlCommand command = new SqlCommand(("Update [dbo].[User] set IsAdministrator=" + (isAdministrator?1:0) + " where UID=" + this.uid), connection);
                     adapter.UpdateCommand = command;
                     adapter.UpdateCommand.ExecuteNonQuery();
                     command.Dispose();
@@ -271,7 +273,7 @@ namespace FileManager
                     i++;
                 }
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                String query = "InsertItem into Activity (Id,UID,Action,Time,Source,Destination) values ("
+                String query = "Insert into Activity (Id,UID,Action,Time,Source,Destination) values ("
                                + i.ToString() + ","
                                + this.uid.ToString() + ","
                                + ((int) actionType).ToString() + ",'"
@@ -289,7 +291,7 @@ namespace FileManager
 
                     connection.Close();
                 }
-                UpdateTags();
+                UpdateUsers();
             }
 
             public void Delete()
@@ -299,8 +301,8 @@ namespace FileManager
                     tag.Delete();
                 }
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                String query = "Delete User where UID = " + uid.ToString();
-                String query1 = "Delete Activity where UID=" + uid.ToString();
+                String query = "Delete [User] where UID = " + uid.ToString();
+                String query1 = "Delete [Activity] where UID=" + uid.ToString();
                 using (connection)
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -318,7 +320,7 @@ namespace FileManager
 
                     connection.Close();
                 }
-                UpdateTags();
+                UpdateUsers();
             }
 
             public List<Tag> GetTags(string path)
@@ -355,7 +357,7 @@ namespace FileManager
 
                 connection.Close();
             }
-            UpdateDatabase();
+            UpdateUsers();
         }
 
         internal static User GetUser(int uid)

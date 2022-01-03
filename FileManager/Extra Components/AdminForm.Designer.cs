@@ -41,8 +41,14 @@
             this.BtnToggleAdmin = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.SplitView = new System.Windows.Forms.SplitContainer();
-            this.LsViewUesrs = new System.Windows.Forms.ListView();
-            this.LsViewActivites = new System.Windows.Forms.ListView();
+            this.LsViewUsers = new FileManager.CustomListView();
+            this.ColUID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColUsername = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LsViewActivites = new FileManager.CustomListView();
+            this.ColAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OuterLeftEdge = new System.Windows.Forms.Panel();
             this.OuterBottomEdge = new System.Windows.Forms.Panel();
             this.OuterTablePanel.SuspendLayout();
@@ -78,7 +84,7 @@
             this.OuterTablePanel.RowCount = 2;
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.OuterTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 4F));
-            this.OuterTablePanel.Size = new System.Drawing.Size(867, 496);
+            this.OuterTablePanel.Size = new System.Drawing.Size(1201, 715);
             this.OuterTablePanel.TabIndex = 3;
             this.OuterTablePanel.TrueBackColor = System.Drawing.SystemColors.Control;
             // 
@@ -98,7 +104,7 @@
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 2F));
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.MainTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTablePanel.Size = new System.Drawing.Size(859, 492);
+            this.MainTablePanel.Size = new System.Drawing.Size(1193, 711);
             this.MainTablePanel.TabIndex = 0;
             // 
             // HeaderTablePanel
@@ -120,7 +126,7 @@
             this.HeaderTablePanel.Name = "HeaderTablePanel";
             this.HeaderTablePanel.RowCount = 1;
             this.HeaderTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HeaderTablePanel.Size = new System.Drawing.Size(859, 30);
+            this.HeaderTablePanel.Size = new System.Drawing.Size(1193, 30);
             this.HeaderTablePanel.TabIndex = 5;
             // 
             // BtnExit
@@ -182,7 +188,7 @@
             this.LbTitle.Location = new System.Drawing.Point(72, 0);
             this.LbTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LbTitle.Name = "LbTitle";
-            this.LbTitle.Size = new System.Drawing.Size(722, 30);
+            this.LbTitle.Size = new System.Drawing.Size(1056, 30);
             this.LbTitle.TabIndex = 3;
             this.LbTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -194,7 +200,7 @@
             this.MainPanel.Location = new System.Drawing.Point(5, 37);
             this.MainPanel.Margin = new System.Windows.Forms.Padding(5);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(849, 450);
+            this.MainPanel.Size = new System.Drawing.Size(1183, 669);
             this.MainPanel.TabIndex = 6;
             // 
             // tableLayoutPanel1
@@ -210,7 +216,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(849, 450);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1183, 669);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -227,7 +233,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(40, 450);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(40, 669);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // BtnToggleAdmin
@@ -264,40 +270,88 @@
             // 
             // SplitView.Panel1
             // 
-            this.SplitView.Panel1.Controls.Add(this.LsViewUesrs);
+            this.SplitView.Panel1.Controls.Add(this.LsViewUsers);
             // 
             // SplitView.Panel2
             // 
             this.SplitView.Panel2.Controls.Add(this.LsViewActivites);
-            this.SplitView.Size = new System.Drawing.Size(803, 444);
-            this.SplitView.SplitterDistance = 365;
+            this.SplitView.Size = new System.Drawing.Size(1137, 663);
+            this.SplitView.SplitterDistance = 247;
             this.SplitView.TabIndex = 1;
             // 
-            // LsViewUesrs
+            // LsViewUsers
             // 
-            this.LsViewUesrs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LsViewUesrs.FullRowSelect = true;
-            this.LsViewUesrs.HideSelection = false;
-            this.LsViewUesrs.Location = new System.Drawing.Point(0, 0);
-            this.LsViewUesrs.MultiSelect = false;
-            this.LsViewUesrs.Name = "LsViewUesrs";
-            this.LsViewUesrs.Size = new System.Drawing.Size(365, 444);
-            this.LsViewUesrs.TabIndex = 0;
-            this.LsViewUesrs.UseCompatibleStateImageBehavior = false;
-            this.LsViewUesrs.View = System.Windows.Forms.View.Details;
+            this.LsViewUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColUID,
+            this.ColUsername});
+            this.LsViewUsers.DiskThreshold = 0.85F;
+            this.LsViewUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LsViewUsers.FullRowSelect = true;
+            this.LsViewUsers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.LsViewUsers.HideSelection = false;
+            this.LsViewUsers.HoverOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LsViewUsers.Location = new System.Drawing.Point(0, 0);
+            this.LsViewUsers.MultiSelect = false;
+            this.LsViewUsers.Name = "LsViewUsers";
+            this.LsViewUsers.OwnerDraw = true;
+            this.LsViewUsers.SelectedOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LsViewUsers.Size = new System.Drawing.Size(247, 663);
+            this.LsViewUsers.TabIndex = 0;
+            this.LsViewUsers.UseCompatibleStateImageBehavior = false;
+            this.LsViewUsers.View = System.Windows.Forms.View.Details;
+            this.LsViewUsers.ViewIndex = 0;
+            // 
+            // ColUID
+            // 
+            this.ColUID.Text = "UID";
+            this.ColUID.Width = 50;
+            // 
+            // ColUsername
+            // 
+            this.ColUsername.Text = "Username";
+            this.ColUsername.Width = 6000;
             // 
             // LsViewActivites
             // 
+            this.LsViewActivites.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColAction,
+            this.ColSource,
+            this.ColDestination,
+            this.ColTime});
+            this.LsViewActivites.DiskThreshold = 0.85F;
             this.LsViewActivites.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LsViewActivites.FullRowSelect = true;
             this.LsViewActivites.HideSelection = false;
+            this.LsViewActivites.HoverOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.LsViewActivites.Location = new System.Drawing.Point(0, 0);
             this.LsViewActivites.MultiSelect = false;
             this.LsViewActivites.Name = "LsViewActivites";
-            this.LsViewActivites.Size = new System.Drawing.Size(434, 444);
+            this.LsViewActivites.OwnerDraw = true;
+            this.LsViewActivites.SelectedOverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LsViewActivites.Size = new System.Drawing.Size(886, 663);
             this.LsViewActivites.TabIndex = 0;
             this.LsViewActivites.UseCompatibleStateImageBehavior = false;
             this.LsViewActivites.View = System.Windows.Forms.View.Details;
+            this.LsViewActivites.ViewIndex = 0;
+            // 
+            // ColAction
+            // 
+            this.ColAction.Text = "Action";
+            // 
+            // ColSource
+            // 
+            this.ColSource.Text = "Source";
+            this.ColSource.Width = 300;
+            // 
+            // ColDestination
+            // 
+            this.ColDestination.Text = "Destination";
+            this.ColDestination.Width = 300;
+            // 
+            // ColTime
+            // 
+            this.ColTime.Text = "Time";
+            this.ColTime.Width = 6000;
             // 
             // OuterLeftEdge
             // 
@@ -305,23 +359,23 @@
             this.OuterLeftEdge.Location = new System.Drawing.Point(0, 0);
             this.OuterLeftEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterLeftEdge.Name = "OuterLeftEdge";
-            this.OuterLeftEdge.Size = new System.Drawing.Size(4, 492);
+            this.OuterLeftEdge.Size = new System.Drawing.Size(4, 711);
             this.OuterLeftEdge.TabIndex = 1;
             // 
             // OuterBottomEdge
             // 
             this.OuterBottomEdge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OuterBottomEdge.Location = new System.Drawing.Point(4, 492);
+            this.OuterBottomEdge.Location = new System.Drawing.Point(4, 711);
             this.OuterBottomEdge.Margin = new System.Windows.Forms.Padding(0);
             this.OuterBottomEdge.Name = "OuterBottomEdge";
-            this.OuterBottomEdge.Size = new System.Drawing.Size(859, 4);
+            this.OuterBottomEdge.Size = new System.Drawing.Size(1193, 4);
             this.OuterBottomEdge.TabIndex = 2;
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(867, 496);
+            this.ClientSize = new System.Drawing.Size(1201, 715);
             this.Controls.Add(this.OuterTablePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -359,7 +413,13 @@
         private System.Windows.Forms.Button BtnToggleAdmin;
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.SplitContainer SplitView;
-        private System.Windows.Forms.ListView LsViewUesrs;
-        private System.Windows.Forms.ListView LsViewActivites;
+        private CustomListView LsViewUsers;
+        private CustomListView LsViewActivites;
+        private System.Windows.Forms.ColumnHeader ColUID;
+        private System.Windows.Forms.ColumnHeader ColUsername;
+        private System.Windows.Forms.ColumnHeader ColAction;
+        private System.Windows.Forms.ColumnHeader ColSource;
+        private System.Windows.Forms.ColumnHeader ColDestination;
+        private System.Windows.Forms.ColumnHeader ColTime;
     }
 }

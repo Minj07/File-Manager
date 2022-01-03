@@ -28,6 +28,7 @@ namespace FileManager
         {
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(50, 50, 50));
+            this.DialogResult = DialogResult.Abort;
 
             currentTheme = dark;
             InitializeComponent();
@@ -176,6 +177,7 @@ namespace FileManager
             this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);
             if (user != null)
             {
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
@@ -194,6 +196,7 @@ namespace FileManager
             if (Database.AddUser(TxtBxUsername.Text, TxtBxPassword.Text))
             {
                 this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else

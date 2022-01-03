@@ -336,6 +336,7 @@ namespace FileManager
                 #region Details
 
                 case View.Details:
+                    List<Rectangle> SubRect = new List<Rectangle>();
                     IconBounds = new Rectangle(new Point(e.Bounds.Left + 5,
                             e.Bounds.Top + 2),
                         new Size(16,
@@ -355,24 +356,16 @@ namespace FileManager
                                          .Width -
                                      LabelBounds.Location.X,
                                 16));
-                        Rectangle Date = new Rectangle(new Point(GetColumnLocation(1)
-                                    .X,
-                                LabelBounds.Y),
-                            new Size(this.Columns[1]
-                                    .Width,
-                                16));
-                        Rectangle Type = new Rectangle(new Point(GetColumnLocation(2)
-                                    .X,
-                                LabelBounds.Y),
-                            new Size(this.Columns[2]
-                                    .Width,
-                                16));
-                        Rectangle Size = new Rectangle(new Point(GetColumnLocation(3)
-                                    .X,
-                                LabelBounds.Y),
-                            new Size(this.Columns[3]
-                                    .Width,
-                                16));
+                        for (int i = 1; i < this.Columns.Count; i++)
+                        {
+                            Rectangle temp = new Rectangle(new Point(GetColumnLocation(i)
+                                        .X,
+                                    LabelBounds.Y),
+                                new Size(this.Columns[i]
+                                        .Width,
+                                    16));
+                            SubRect.Add(temp);
+                        }
 
                         string extraSpace = "";
                         if (!((ListViewItemTag) e.Item.Tag).isTag)
@@ -414,27 +407,16 @@ namespace FileManager
                             Name,
                             this.ForeColor,
                             flags);
-                        TextRenderer.DrawText(e.Graphics,
-                            e.Item.SubItems[1]
-                                .Text,
-                            this.Font,
-                            Date,
-                            this.ForeColor,
-                            flags);
-                        TextRenderer.DrawText(e.Graphics,
-                            e.Item.SubItems[2]
-                                .Text,
-                            this.Font,
-                            Type,
-                            this.ForeColor,
-                            flags);
-                        TextRenderer.DrawText(e.Graphics,
-                            e.Item.SubItems[3]
-                                .Text,
-                            this.Font,
-                            Size,
-                            this.ForeColor,
-                            flags);
+                        for (int i = 1; i < this.Columns.Count; i++)
+                        {
+                            TextRenderer.DrawText(e.Graphics,
+                                e.Item.SubItems[i]
+                                    .Text,
+                                this.Font,
+                                SubRect[i-1],
+                                this.ForeColor,
+                                flags);
+                        }
                     }
 
                     break;

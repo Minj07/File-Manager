@@ -47,7 +47,7 @@ namespace FileManager
         {
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(30,30,30));
-
+            this.DialogResult = DialogResult.Abort;
             currentTheme = dark;
             InitializeComponent();
             this.MaximizedBounds = Screen.GetWorkingArea(this);
@@ -64,6 +64,7 @@ namespace FileManager
             BtnTileView.Click += new EventHandler(BtnTileView_Click);
             BtnDetailView.Click += new EventHandler(BtnDetailView_Click);
             BtnLargeIconView.Click += new EventHandler(BtnLargeIconView_Click);
+            BtnLogOut.Click += BtnLogOut_Click;
             BtnAdminTool.Click += new EventHandler(BtnAdminTool_Click);
 
             this.listView.MouseHover += new EventHandler(ListView_MouseHover);
@@ -74,6 +75,8 @@ namespace FileManager
             currentAddr = "C:/";
             NormalSize = this.Size;
         }
+
+
 
         #endregion
 
@@ -100,7 +103,7 @@ namespace FileManager
         #region Control Buttons
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void BtnMinimize_Click(object sender, EventArgs e)
@@ -134,12 +137,22 @@ namespace FileManager
             this.listView.ViewIndex = 2;
         }
 
+        private void BtnLogOut_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
         private void BtnAdminTool_Click(object sender, EventArgs e)
         {
             using (AdminForm af = new AdminForm(user) {currentTheme = this.currentTheme})
             {
                 af.ReloadTheme();
                 af.ShowDialog();
+                if (!Database.Users.Any(u => u.uid == this.user.uid))
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
         }
         #endregion
@@ -167,7 +180,7 @@ namespace FileManager
             this.ToolTablePanel.BackColor = currentTheme.main;
             this.ToolbarSeparator.BackColor = currentTheme.lighterMain;
 
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnAdminTool })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnLogOut, BtnAdminTool })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
