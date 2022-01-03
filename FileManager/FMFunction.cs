@@ -397,8 +397,6 @@ namespace FileManager
                 frm.TxtBoxName.Text = tag.name;
                 frm.BtnColor.BackColor = tag.color;
                 frm.BtnOk.Text = "Apply";
-                frm.LblName.BackColor = frm.BackColor;
-                frm.LblName.ForeColor = this.ForeColor;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     tag.Modify(frm.TxtBoxName.Text, frm.color);

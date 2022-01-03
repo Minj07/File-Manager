@@ -186,10 +186,10 @@
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainPanel.Controls.Add(this.TablePanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 32);
-            this.MainPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.MainPanel.Location = new System.Drawing.Point(5, 32);
+            this.MainPanel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(256, 287);
+            this.MainPanel.Size = new System.Drawing.Size(246, 287);
             this.MainPanel.TabIndex = 6;
             // 
             // TablePanel
@@ -213,17 +213,17 @@
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.TablePanel.Size = new System.Drawing.Size(256, 287);
+            this.TablePanel.Size = new System.Drawing.Size(246, 287);
             this.TablePanel.TabIndex = 4;
             // 
             // BtnColor
             // 
             this.BtnColor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnColor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnColor.Location = new System.Drawing.Point(68, 130);
+            this.BtnColor.Location = new System.Drawing.Point(66, 130);
             this.BtnColor.Margin = new System.Windows.Forms.Padding(30, 16, 30, 16);
             this.BtnColor.Name = "BtnColor";
-            this.BtnColor.Size = new System.Drawing.Size(119, 25);
+            this.BtnColor.Size = new System.Drawing.Size(112, 25);
             this.BtnColor.TabIndex = 0;
             this.BtnColor.Text = "Choose Color";
             this.BtnColor.UseVisualStyleBackColor = true;
@@ -233,10 +233,10 @@
             // 
             this.TxtBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBoxName.Location = new System.Drawing.Point(60, 73);
+            this.TxtBoxName.Location = new System.Drawing.Point(58, 73);
             this.TxtBoxName.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.TxtBoxName.Name = "TxtBoxName";
-            this.TxtBoxName.Size = new System.Drawing.Size(135, 23);
+            this.TxtBoxName.Size = new System.Drawing.Size(128, 23);
             this.TxtBoxName.TabIndex = 1;
             // 
             // LblName
@@ -245,10 +245,10 @@
             this.LblName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblName.ForeColor = System.Drawing.Color.White;
-            this.LblName.Location = new System.Drawing.Point(40, 0);
+            this.LblName.Location = new System.Drawing.Point(38, 0);
             this.LblName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblName.Name = "LblName";
-            this.LblName.Size = new System.Drawing.Size(175, 57);
+            this.LblName.Size = new System.Drawing.Size(168, 57);
             this.LblName.TabIndex = 2;
             this.LblName.Text = "Tag Name:";
             this.LblName.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -258,10 +258,10 @@
             this.BtnCancel.BackColor = System.Drawing.Color.Red;
             this.BtnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnCancel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnCancel.Location = new System.Drawing.Point(60, 244);
+            this.BtnCancel.Location = new System.Drawing.Point(58, 244);
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(135, 27);
+            this.BtnCancel.Size = new System.Drawing.Size(128, 27);
             this.BtnCancel.TabIndex = 3;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
@@ -272,10 +272,10 @@
             this.BtnOk.BackColor = System.Drawing.Color.Lime;
             this.BtnOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnOk.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnOk.Location = new System.Drawing.Point(60, 187);
+            this.BtnOk.Location = new System.Drawing.Point(58, 187);
             this.BtnOk.Margin = new System.Windows.Forms.Padding(22, 16, 22, 16);
             this.BtnOk.Name = "BtnOk";
-            this.BtnOk.Size = new System.Drawing.Size(135, 25);
+            this.BtnOk.Size = new System.Drawing.Size(128, 25);
             this.BtnOk.TabIndex = 4;
             this.BtnOk.Text = "Create";
             this.BtnOk.UseVisualStyleBackColor = false;
