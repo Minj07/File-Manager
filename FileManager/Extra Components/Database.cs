@@ -305,14 +305,14 @@ namespace FileManager
                 String query1 = "Delete [Activity] where UID=" + uid.ToString();
                 using (connection)
                 {
-                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand(query1, connection);
                     connection.Open();
 
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
                     command.Dispose();
 
-                    command = new SqlCommand(query1, connection);
+                    command = new SqlCommand(query, connection);
 
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();

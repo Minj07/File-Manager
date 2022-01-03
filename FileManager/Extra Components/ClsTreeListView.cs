@@ -327,7 +327,6 @@ namespace FileManager
                     foreach (FileInfo file in directoryInfo.GetFiles())
                         listView.Items.Add(GetLVItems(file));
                 }
-                
                 return true;
             }
             catch (IOException)
