@@ -323,7 +323,7 @@ namespace FileManager
 
                 ToolStripMenuItem RemoveBtn = new ToolStripMenuItem()
                 {
-                    Text = "RemoveItem Tag",
+                    Text = "Remove Tag",
                     BackColor = tag.color,
                     ForeColor = this.ForeColor,
                     Tag = tag.id,
