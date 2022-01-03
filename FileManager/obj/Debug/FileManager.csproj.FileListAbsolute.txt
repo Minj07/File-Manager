@@ -22,7 +22,6 @@ D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManag
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.ResolveComReference.cache
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag.mdf
 D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\Tag_log.ldf
-D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.CreateTagForm.resources
 D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag.mdf
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\Tag_log.ldf
@@ -46,3 +45,11 @@ D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xsd
 D:\Projects\C#\File-Manager\FileManager\bin\Debug\TagDataSet.xss
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.csproj.AssemblyReference.cache
 D:\Projects\C#\File-Manager\FileManager\obj\Debug\FileManager.AdminForm.resources
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.AdminForm.resources
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.LoginForm.resources
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.TagForm.resources
+D:\Projects\Lập trình trực quan\FileManager\FileManager\obj\Debug\FileManager.CustomForm.resources
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.Designer.cs
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.xsc
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.xsd
+D:\Projects\Lập trình trực quan\FileManager\FileManager\bin\Debug\TagDataSet.xss
