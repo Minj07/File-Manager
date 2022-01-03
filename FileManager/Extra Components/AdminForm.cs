@@ -19,19 +19,34 @@ namespace FileManager
         private Size NormalSize;
         private Point mouseDownLocation; //Use for dragging the form
         public Theme currentTheme;
-        private Database.User user;
+        private Database.User activeUser;
         private Database database = new Database();
+        private Icon adminIcon;
+        private Icon userIcon;
+        private List<Icon> ActionIcons;
+
 
 
         #region Initialize
         public AdminForm(Database.User user)
         {
-            this.user = user;
+            this.activeUser = user;
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(30, 30, 30));
 
             currentTheme = dark;
             InitializeComponent();
+
+            adminIcon = Icon.FromHandle(Theme.ResizeImage(Resources.admin, 16, 16).GetHicon());
+            userIcon = Icon.FromHandle(Theme.ResizeImage(Resources.user, 16, 16).GetHicon());
+            ActionIcons = new List<Icon>();
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.cut, 16, 16).GetHicon()));
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.copy, 16, 16).GetHicon()));
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.rename, 16, 16).GetHicon()));
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.trash, 16, 16).GetHicon()));
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.merge, 16, 16).GetHicon()));
+            ActionIcons.Add(Icon.FromHandle(Theme.ResizeImage(Resources.new_file, 16, 16).GetHicon()));
+
             this.MaximizedBounds = Screen.GetWorkingArea(this);
 
             HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
@@ -42,11 +57,19 @@ namespace FileManager
             BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
             BtnMaximize.Click += new EventHandler(BtnMaximize_Click);
 
+            BtnToggleAdmin.Click += BtnToggleAdmin_Click;
+            BtnDelete.Click += BtnDelete_Click;
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
+
+            BtnToggleAdmin.Enabled = activeUser.isAdministrator;
+            this.LsViewUsers.ItemSelectionChanged += LsViewUsers_ItemSelectionChanged;
+
             ReloadTheme();
+            UpdateLsViewUsers();
             NormalSize = this.Size;
         }
+
 
 
 
@@ -114,12 +137,11 @@ namespace FileManager
                 btn.FlatAppearance.MouseOverBackColor = currentTheme.main;
             }
 
-            foreach (ListView ls in new ListView[] {LsViewUesrs, LsViewActivites} )
+            foreach (ListView ls in new ListView[] {LsViewUsers, LsViewActivites} )
             {
                 ls.BackColor = currentTheme.main;
                 ls.ForeColor = currentTheme.text;
             }
-
 
             this.Refresh();
 
@@ -163,6 +185,78 @@ namespace FileManager
 
         #endregion
 
+        #region Display
+
+        private void UpdateLsViewUsers()
+        {
+            if (LsViewUsers.Items.Count != 0)
+            {
+                LsViewUsers.Items.Clear();
+            }
+
+            foreach (Database.User user in Database.Users.Where(u => (this.activeUser.isAdministrator||u.uid==this.activeUser.uid) ))
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = user.uid.ToString();
+                item.SubItems.Add(user.username);
+                Icon icon = (user.isAdministrator ? adminIcon : userIcon);
+                item.Tag = new CustomListView.ListViewItemTag(null, icon, icon);
+                LsViewUsers.Items.Add(item);
+            }
+        }
+
+        private void LsViewUsers_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            Database.User user = Database.GetUser(int.Parse(e.Item.Text));
+            UpdateLsViewActivity(user);
+        }
+
+        private void UpdateLsViewActivity(Database.User user)
+        {
+            if (LsViewActivites.Items.Count != 0)
+            {
+                LsViewActivites.Items.Clear();
+            }
+
+            foreach (Database.User.Activity activity in user.activities)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = activity.actionType.ToString();
+                item.SubItems.Add(activity.source);
+                item.SubItems.Add(activity.destination);
+                item.SubItems.Add(activity.time.ToString("G"));
+                Icon icon = ActionIcons[(int) activity.actionType];
+                item.Tag = new CustomListView.ListViewItemTag(null, icon, icon);
+                LsViewActivites.Items.Add(item);
+            }
+        }
+
+        #endregion
+
+        #region Main Function
+        
+        private void BtnToggleAdmin_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in LsViewUsers.SelectedItems)
+            {
+                Database.User user = Database.GetUser(int.Parse(item.Text));
+                user.ChangePriviliege(!user.isAdministrator);
+            }
+            
+            UpdateLsViewUsers();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in LsViewUsers.SelectedItems)
+            {
+                Database.User user = Database.GetUser(int.Parse(item.Text));
+                user.Delete();
+            }
+            UpdateLsViewUsers();
+        }
+
+        #endregion
     }
 
 

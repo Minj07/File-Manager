@@ -65,6 +65,7 @@
             this.BtnMaximize = new FileManager.RoundedButton();
             this.LbTitle = new System.Windows.Forms.Label();
             this.ToolTablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnLogOut = new System.Windows.Forms.Button();
             this.BtnAdminTool = new System.Windows.Forms.Button();
             this.BtnCut = new System.Windows.Forms.Button();
             this.BtnCopy = new System.Windows.Forms.Button();
@@ -607,7 +608,7 @@
             // 
             // ToolTablePanel
             // 
-            this.ToolTablePanel.ColumnCount = 11;
+            this.ToolTablePanel.ColumnCount = 12;
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -619,7 +620,9 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.ToolTablePanel.Controls.Add(this.BtnAdminTool, 10, 0);
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.ToolTablePanel.Controls.Add(this.BtnLogOut, 10, 0);
+            this.ToolTablePanel.Controls.Add(this.BtnAdminTool, 11, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
@@ -637,6 +640,18 @@
             this.ToolTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ToolTablePanel.Size = new System.Drawing.Size(922, 40);
             this.ToolTablePanel.TabIndex = 6;
+            // 
+            // BtnLogOut
+            // 
+            this.BtnLogOut.FlatAppearance.BorderSize = 0;
+            this.BtnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogOut.Image = global::FileManager.Properties.Resources.Logout;
+            this.BtnLogOut.Location = new System.Drawing.Point(842, 0);
+            this.BtnLogOut.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnLogOut.Name = "BtnLogOut";
+            this.BtnLogOut.Size = new System.Drawing.Size(40, 40);
+            this.BtnLogOut.TabIndex = 11;
+            this.BtnLogOut.UseVisualStyleBackColor = true;
             // 
             // BtnAdminTool
             // 
@@ -941,6 +956,7 @@
         private System.Windows.Forms.Button BtnAdminTool;
         private System.Windows.Forms.SplitContainer SpliterView;
         private System.Windows.Forms.Label LbStatus;
+        private System.Windows.Forms.Button BtnLogOut;
     }
 }
 

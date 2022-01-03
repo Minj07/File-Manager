@@ -16,15 +16,28 @@ namespace FileManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            LoginForm loginForm = new LoginForm();
-            Application.Run(loginForm);
-            Database.User user = loginForm.user;
-            if (user != null)
-            {
-                Application.Run(new MainForm(user));
-            }
 
+            LoginForm loginForm;
+            MainForm mainForm;
+
+            DialogResult result;
+
+            do
+            {
+                loginForm = new LoginForm();
+                Application.Run(loginForm);
+                if (loginForm.DialogResult != DialogResult.OK)
+                {
+                    break;
+                }
+
+                Database.User user = loginForm.user;
+                mainForm = new MainForm(user);
+                Application.Run(mainForm);
+                result = mainForm.DialogResult;
+
+            } while (result == DialogResult.OK);
+            
 
         }
     }
