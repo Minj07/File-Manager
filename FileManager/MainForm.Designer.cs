@@ -63,6 +63,7 @@
             this.BtnMaximize = new FileManager.RoundedButton();
             this.LbTitle = new System.Windows.Forms.Label();
             this.ToolTablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnAdminTool = new System.Windows.Forms.Button();
             this.BtnCut = new System.Windows.Forms.Button();
             this.BtnCopy = new System.Windows.Forms.Button();
             this.BtnPaste = new System.Windows.Forms.Button();
@@ -570,7 +571,7 @@
             // 
             // ToolTablePanel
             // 
-            this.ToolTablePanel.ColumnCount = 10;
+            this.ToolTablePanel.ColumnCount = 11;
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -580,8 +581,9 @@
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.ToolTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.ToolTablePanel.Controls.Add(this.BtnAdminTool, 10, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCut, 1, 0);
             this.ToolTablePanel.Controls.Add(this.BtnCopy, 2, 0);
             this.ToolTablePanel.Controls.Add(this.BtnPaste, 3, 0);
@@ -593,12 +595,25 @@
             this.ToolTablePanel.Controls.Add(this.ToolbarSeparator, 7, 0);
             this.ToolTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTablePanel.Location = new System.Drawing.Point(0, 32);
-            this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.ToolTablePanel.Margin = new System.Windows.Forms.Padding(0);
             this.ToolTablePanel.Name = "ToolTablePanel";
             this.ToolTablePanel.RowCount = 1;
             this.ToolTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ToolTablePanel.Size = new System.Drawing.Size(922, 39);
+            this.ToolTablePanel.Size = new System.Drawing.Size(922, 40);
             this.ToolTablePanel.TabIndex = 6;
+            // 
+            // BtnAdminTool
+            // 
+            this.BtnAdminTool.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnAdminTool.FlatAppearance.BorderSize = 0;
+            this.BtnAdminTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdminTool.Image = global::FileManager.Properties.Resources.administrative_tools;
+            this.BtnAdminTool.Location = new System.Drawing.Point(882, 0);
+            this.BtnAdminTool.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnAdminTool.Name = "BtnAdminTool";
+            this.BtnAdminTool.Size = new System.Drawing.Size(40, 40);
+            this.BtnAdminTool.TabIndex = 10;
+            this.BtnAdminTool.UseVisualStyleBackColor = true;
             // 
             // BtnCut
             // 
@@ -610,7 +625,7 @@
             this.BtnCut.Location = new System.Drawing.Point(80, 0);
             this.BtnCut.Margin = new System.Windows.Forms.Padding(0);
             this.BtnCut.Name = "BtnCut";
-            this.BtnCut.Size = new System.Drawing.Size(40, 39);
+            this.BtnCut.Size = new System.Drawing.Size(40, 40);
             this.BtnCut.TabIndex = 1;
             this.BtnCut.UseVisualStyleBackColor = true;
             this.BtnCut.Click += new System.EventHandler(this.BtnCut_Click);
@@ -624,7 +639,7 @@
             this.BtnCopy.Location = new System.Drawing.Point(120, 0);
             this.BtnCopy.Margin = new System.Windows.Forms.Padding(0);
             this.BtnCopy.Name = "BtnCopy";
-            this.BtnCopy.Size = new System.Drawing.Size(40, 39);
+            this.BtnCopy.Size = new System.Drawing.Size(40, 40);
             this.BtnCopy.TabIndex = 2;
             this.BtnCopy.UseVisualStyleBackColor = true;
             this.BtnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
@@ -639,7 +654,7 @@
             this.BtnPaste.Location = new System.Drawing.Point(160, 0);
             this.BtnPaste.Margin = new System.Windows.Forms.Padding(0);
             this.BtnPaste.Name = "BtnPaste";
-            this.BtnPaste.Size = new System.Drawing.Size(40, 39);
+            this.BtnPaste.Size = new System.Drawing.Size(40, 40);
             this.BtnPaste.TabIndex = 3;
             this.BtnPaste.UseVisualStyleBackColor = true;
             this.BtnPaste.Click += new System.EventHandler(this.BtnPaste_Click);
@@ -653,7 +668,7 @@
             this.BtnRename.Location = new System.Drawing.Point(200, 0);
             this.BtnRename.Margin = new System.Windows.Forms.Padding(0);
             this.BtnRename.Name = "BtnRename";
-            this.BtnRename.Size = new System.Drawing.Size(40, 39);
+            this.BtnRename.Size = new System.Drawing.Size(40, 40);
             this.BtnRename.TabIndex = 4;
             this.BtnRename.UseVisualStyleBackColor = true;
             this.BtnRename.Click += new System.EventHandler(this.BtnRename_Click);
@@ -667,7 +682,7 @@
             this.BtnDelete.Location = new System.Drawing.Point(240, 0);
             this.BtnDelete.Margin = new System.Windows.Forms.Padding(0);
             this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(40, 39);
+            this.BtnDelete.Size = new System.Drawing.Size(40, 40);
             this.BtnDelete.TabIndex = 6;
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -683,7 +698,7 @@
             this.MenuNew.Name = "MenuNew";
             this.MenuNew.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.MenuNew.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.MenuNew.Size = new System.Drawing.Size(80, 39);
+            this.MenuNew.Size = new System.Drawing.Size(80, 40);
             this.MenuNew.TabIndex = 7;
             this.MenuNew.Text = "New";
             // 
@@ -694,7 +709,7 @@
             this.MenuItemNewTextFile});
             this.MenuNewItem.Image = global::FileManager.Properties.Resources.new_file;
             this.MenuNewItem.Name = "MenuNewItem";
-            this.MenuNewItem.Size = new System.Drawing.Size(66, 35);
+            this.MenuNewItem.Size = new System.Drawing.Size(66, 36);
             this.MenuNewItem.Text = "New ";
             // 
             // MenuItemNewFolder
@@ -725,7 +740,7 @@
             this.MenuTag.Name = "MenuTag";
             this.MenuTag.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.MenuTag.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.MenuTag.Size = new System.Drawing.Size(40, 39);
+            this.MenuTag.Size = new System.Drawing.Size(40, 40);
             this.MenuTag.TabIndex = 7;
             this.MenuTag.Text = "                            ";
             // 
@@ -738,7 +753,7 @@
             this.toolStripMenuItem3});
             this.MenuTagItem.ForeColor = System.Drawing.Color.Transparent;
             this.MenuTagItem.Name = "MenuTagItem";
-            this.MenuTagItem.Size = new System.Drawing.Size(34, 35);
+            this.MenuTagItem.Size = new System.Drawing.Size(34, 36);
             this.MenuTagItem.Text = "     ";
             this.MenuTagItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
@@ -752,18 +767,19 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(125, 35);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(125, 36);
             this.toolStripMenuItem2.Text = "toolStripMenuItem2";
             // 
             // BtnChangeTheme
             // 
+            this.BtnChangeTheme.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnChangeTheme.FlatAppearance.BorderSize = 0;
             this.BtnChangeTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnChangeTheme.Image = global::FileManager.Properties.Resources.color;
             this.BtnChangeTheme.Location = new System.Drawing.Point(321, 0);
             this.BtnChangeTheme.Margin = new System.Windows.Forms.Padding(0);
             this.BtnChangeTheme.Name = "BtnChangeTheme";
-            this.BtnChangeTheme.Size = new System.Drawing.Size(40, 39);
+            this.BtnChangeTheme.Size = new System.Drawing.Size(40, 40);
             this.BtnChangeTheme.TabIndex = 6;
             this.BtnChangeTheme.UseVisualStyleBackColor = true;
             this.BtnChangeTheme.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -774,7 +790,7 @@
             this.ToolbarSeparator.Location = new System.Drawing.Point(320, 4);
             this.ToolbarSeparator.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.ToolbarSeparator.Name = "ToolbarSeparator";
-            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 31);
+            this.ToolbarSeparator.Size = new System.Drawing.Size(1, 32);
             this.ToolbarSeparator.TabIndex = 9;
             // 
             // OuterLeftEdge
@@ -881,6 +897,7 @@
         private System.Windows.Forms.Button BtnLargeIconView;
         private System.Windows.Forms.Button BtnTileView;
         private System.Windows.Forms.Button BtnDetailView;
+        private System.Windows.Forms.Button BtnAdminTool;
     }
 }
 

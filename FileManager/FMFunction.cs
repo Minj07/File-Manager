@@ -46,6 +46,7 @@ namespace FileManager
             BtnTileView.Click += new EventHandler(BtnTileView_Click);
             BtnDetailView.Click += new EventHandler(BtnDetailView_Click);
             BtnLargeIconView.Click += new EventHandler(BtnLargeIconView_Click);
+            BtnAdminTool.Click += new EventHandler(BtnAdminTool_Click);
 
             this.listView.MouseHover += new EventHandler(ListView_MouseHover);
             this.CbAddress.TextChanged += CbAddress_TextChanged1;
@@ -108,15 +109,25 @@ namespace FileManager
         {
             this.listView.ViewIndex = 0;
         }
+
         private void BtnDetailView_Click(object sender, EventArgs e)
         {
             this.listView.ViewIndex = 1;
         }
+
         private void BtnLargeIconView_Click(object sender, EventArgs e)
         {
             this.listView.ViewIndex = 2;
         }
 
+        private void BtnAdminTool_Click(object sender, EventArgs e)
+        {
+            using (AdminForm af = new AdminForm(user) {currentTheme = this.currentTheme})
+            {
+                af.ReloadTheme();
+                af.ShowDialog();
+            }
+        }
         #endregion
 
         #region Theme
@@ -139,7 +150,7 @@ namespace FileManager
 
             this.ToolTablePanel.BackColor = currentTheme.darkerMain;
             this.ToolbarSeparator.BackColor = currentTheme.lighterMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnTileView, BtnDetailView, BtnLargeIconView })
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnAdminTool, BtnTileView, BtnDetailView, BtnLargeIconView })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;

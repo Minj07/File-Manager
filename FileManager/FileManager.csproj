@@ -207,6 +207,9 @@
     <None Include="Resources\LargeIconMode.png" />
     <None Include="Resources\ListMode.png" />
     <None Include="Resources\TileMode.png" />
+    <None Include="assets\icon\admin.png" />
+    <None Include="assets\icon\administrative_tools.png" />
+    <None Include="assets\icon\user.png" />
     <Content Include="Tag.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

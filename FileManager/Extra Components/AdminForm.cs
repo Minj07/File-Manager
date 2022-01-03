@@ -19,10 +19,14 @@ namespace FileManager
         private Size NormalSize;
         private Point mouseDownLocation; //Use for dragging the form
         public Theme currentTheme;
+        private Database.User user;
+        private Database database = new Database();
+
 
         #region Initialize
-        public AdminForm()
+        public AdminForm(Database.User user)
         {
+            this.user = user;
             this.DoubleBuffered = true;
             Theme dark = new Theme(Color.FromArgb(30, 30, 30));
 
@@ -88,7 +92,7 @@ namespace FileManager
         #endregion
 
         #region Theme
-        private void ReloadTheme()
+        public void ReloadTheme()
         {
             //Form
             this.BackColor = currentTheme.Unused;
@@ -102,6 +106,18 @@ namespace FileManager
             foreach (Control c in this.Controls)
             {
                 c.Font = this.Font;
+            }
+
+            foreach (Button btn in new Button[] {BtnToggleAdmin, BtnDelete})
+            {
+                btn.BackColor = currentTheme.lighterMain;
+                btn.FlatAppearance.MouseOverBackColor = currentTheme.main;
+            }
+
+            foreach (ListView ls in new ListView[] {LsViewUesrs, LsViewActivites} )
+            {
+                ls.BackColor = currentTheme.main;
+                ls.ForeColor = currentTheme.text;
             }
 
 

@@ -166,6 +166,7 @@
             this.BtnMaximize.BorderSize = 1F;
             this.BtnMaximize.CornerRadius = 5;
             this.BtnMaximize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnMaximize.Enabled = false;
             this.BtnMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
             this.BtnMaximize.Image = global::FileManager.Properties.Resources.maximize;
             this.BtnMaximize.Location = new System.Drawing.Point(52, 7);
@@ -174,6 +175,7 @@
             this.BtnMaximize.Size = new System.Drawing.Size(16, 16);
             this.BtnMaximize.TabIndex = 2;
             this.BtnMaximize.UseVisualStyleBackColor = false;
+            this.BtnMaximize.Visible = false;
             // 
             // LbTitle
             // 
@@ -192,10 +194,10 @@
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainPanel.Controls.Add(this.MainTable);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 32);
-            this.MainPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.MainPanel.Location = new System.Drawing.Point(5, 37);
+            this.MainPanel.Margin = new System.Windows.Forms.Padding(5);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(415, 331);
+            this.MainPanel.Size = new System.Drawing.Size(405, 321);
             this.MainPanel.TabIndex = 6;
             // 
             // MainTable
@@ -215,7 +217,7 @@
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.MainTable.Size = new System.Drawing.Size(415, 331);
+            this.MainTable.Size = new System.Drawing.Size(405, 321);
             this.MainTable.TabIndex = 0;
             // 
             // UsernameTable
@@ -226,13 +228,13 @@
             this.UsernameTable.Controls.Add(this.TxtBxUsername, 0, 1);
             this.UsernameTable.Controls.Add(this.LbUsername, 0, 0);
             this.UsernameTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UsernameTable.Location = new System.Drawing.Point(0, 82);
+            this.UsernameTable.Location = new System.Drawing.Point(0, 80);
             this.UsernameTable.Margin = new System.Windows.Forms.Padding(0);
             this.UsernameTable.Name = "UsernameTable";
             this.UsernameTable.RowCount = 2;
             this.UsernameTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.UsernameTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.UsernameTable.Size = new System.Drawing.Size(415, 82);
+            this.UsernameTable.Size = new System.Drawing.Size(405, 80);
             this.UsernameTable.TabIndex = 0;
             // 
             // TxtBxUsername
@@ -241,17 +243,17 @@
             this.TxtBxUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtBxUsername.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxUsername.Location = new System.Drawing.Point(22, 41);
+            this.TxtBxUsername.Location = new System.Drawing.Point(22, 40);
             this.TxtBxUsername.Margin = new System.Windows.Forms.Padding(22, 0, 22, 0);
             this.TxtBxUsername.Name = "TxtBxUsername";
-            this.TxtBxUsername.Size = new System.Drawing.Size(371, 19);
+            this.TxtBxUsername.Size = new System.Drawing.Size(361, 19);
             this.TxtBxUsername.TabIndex = 0;
             // 
             // LbUsername
             // 
             this.LbUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LbUsername.AutoSize = true;
-            this.LbUsername.Location = new System.Drawing.Point(22, 20);
+            this.LbUsername.Location = new System.Drawing.Point(22, 19);
             this.LbUsername.Margin = new System.Windows.Forms.Padding(22, 0, 22, 8);
             this.LbUsername.Name = "LbUsername";
             this.LbUsername.Size = new System.Drawing.Size(58, 13);
@@ -266,21 +268,21 @@
             this.PasswordTable.Controls.Add(this.LbPassword, 0, 0);
             this.PasswordTable.Controls.Add(this.TxtBxPassword, 0, 1);
             this.PasswordTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PasswordTable.Location = new System.Drawing.Point(0, 164);
+            this.PasswordTable.Location = new System.Drawing.Point(0, 160);
             this.PasswordTable.Margin = new System.Windows.Forms.Padding(0);
             this.PasswordTable.Name = "PasswordTable";
             this.PasswordTable.RowCount = 2;
             this.PasswordTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.PasswordTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.PasswordTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.PasswordTable.Size = new System.Drawing.Size(415, 82);
+            this.PasswordTable.Size = new System.Drawing.Size(405, 80);
             this.PasswordTable.TabIndex = 1;
             // 
             // LbPassword
             // 
             this.LbPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LbPassword.AutoSize = true;
-            this.LbPassword.Location = new System.Drawing.Point(22, 20);
+            this.LbPassword.Location = new System.Drawing.Point(22, 19);
             this.LbPassword.Margin = new System.Windows.Forms.Padding(22, 0, 22, 8);
             this.LbPassword.Name = "LbPassword";
             this.LbPassword.Size = new System.Drawing.Size(56, 13);
@@ -293,11 +295,11 @@
             this.TxtBxPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtBxPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TxtBxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBxPassword.Location = new System.Drawing.Point(22, 41);
+            this.TxtBxPassword.Location = new System.Drawing.Point(22, 40);
             this.TxtBxPassword.Margin = new System.Windows.Forms.Padding(22, 0, 22, 0);
             this.TxtBxPassword.Name = "TxtBxPassword";
             this.TxtBxPassword.PasswordChar = '*';
-            this.TxtBxPassword.Size = new System.Drawing.Size(371, 19);
+            this.TxtBxPassword.Size = new System.Drawing.Size(361, 19);
             this.TxtBxPassword.TabIndex = 1;
             // 
             // ButtonsTable
@@ -308,23 +310,23 @@
             this.ButtonsTable.Controls.Add(this.BtnSignUp, 1, 0);
             this.ButtonsTable.Controls.Add(this.BtnLogIn, 0, 0);
             this.ButtonsTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ButtonsTable.Location = new System.Drawing.Point(0, 246);
+            this.ButtonsTable.Location = new System.Drawing.Point(0, 240);
             this.ButtonsTable.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonsTable.Name = "ButtonsTable";
             this.ButtonsTable.RowCount = 1;
             this.ButtonsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ButtonsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.ButtonsTable.Size = new System.Drawing.Size(415, 85);
+            this.ButtonsTable.Size = new System.Drawing.Size(405, 81);
             this.ButtonsTable.TabIndex = 2;
             // 
             // BtnSignUp
             // 
             this.BtnSignUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnSignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSignUp.Location = new System.Drawing.Point(252, 16);
+            this.BtnSignUp.Location = new System.Drawing.Point(247, 16);
             this.BtnSignUp.Margin = new System.Windows.Forms.Padding(45, 16, 45, 16);
             this.BtnSignUp.Name = "BtnSignUp";
-            this.BtnSignUp.Size = new System.Drawing.Size(118, 53);
+            this.BtnSignUp.Size = new System.Drawing.Size(113, 49);
             this.BtnSignUp.TabIndex = 1;
             this.BtnSignUp.Text = "Make new account";
             this.BtnSignUp.UseVisualStyleBackColor = true;
@@ -337,7 +339,7 @@
             this.BtnLogIn.Location = new System.Drawing.Point(45, 16);
             this.BtnLogIn.Margin = new System.Windows.Forms.Padding(45, 16, 45, 16);
             this.BtnLogIn.Name = "BtnLogIn";
-            this.BtnLogIn.Size = new System.Drawing.Size(117, 53);
+            this.BtnLogIn.Size = new System.Drawing.Size(112, 49);
             this.BtnLogIn.TabIndex = 0;
             this.BtnLogIn.Text = "Log in";
             this.BtnLogIn.UseVisualStyleBackColor = true;

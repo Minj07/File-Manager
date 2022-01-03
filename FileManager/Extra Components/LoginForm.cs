@@ -168,6 +168,11 @@ namespace FileManager
 
         private void BtnLogIn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TxtBxUsername.Text) || string.IsNullOrWhiteSpace(TxtBxPassword.Text))
+            {
+                MessageBox.Show("Username and Password cannot be empty!");
+                return;
+            }
             this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);
             if (user != null)
             {
@@ -181,6 +186,11 @@ namespace FileManager
 
         private void BtnSignUp_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TxtBxUsername.Text) || string.IsNullOrWhiteSpace(TxtBxPassword.Text))
+            {
+                MessageBox.Show("Username and Password cannot be empty!");
+                return;
+            }
             if (Database.AddUser(TxtBxUsername.Text, TxtBxPassword.Text))
             {
                 this.user = Database.Login(TxtBxUsername.Text, TxtBxPassword.Text);

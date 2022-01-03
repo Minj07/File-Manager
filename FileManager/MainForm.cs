@@ -24,6 +24,8 @@ namespace FileManager
             this.user = user;
             clsTreeListView = new ClsTreeListView(user);
             FMInitialize();//Just like Initailize Components
+            BtnAdminTool.Enabled = user.isAdministrator;
+            BtnAdminTool.Visible = user.isAdministrator;
         }
 
 
