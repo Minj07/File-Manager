@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.IO;
 using FileManager.Properties;
 using System.Threading;
 
@@ -19,7 +20,23 @@ namespace FileManager
         private Database.User user;
         private Theme currentTheme;
         private Size NormalSize;
-        private string currentAddr;
+        private string CurrentAddr="This PC";
+
+        private string currentAddr
+        {
+            get
+            {
+                return CurrentAddr;
+            }
+            set
+            {
+                if (value != CurrentAddr)
+                {
+                    CurrentAddr = value;
+                    if (LbTitle != null) LbTitle.Text = (new DirectoryInfo(currentAddr)).Name;
+                }
+            }
+        }
         private bool changingAddress = false;
         private Point mouseDownLocation; //Use for dragging the form
         private Database database = new Database();
@@ -36,8 +53,9 @@ namespace FileManager
             this.MaximizedBounds = Screen.GetWorkingArea(this);
 
             HeaderTablePanel.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
-            LbTitle.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
             HeaderTablePanel.MouseMove += new MouseEventHandler(HeaderTablePanel_MouseMove);
+            LbTitle.MouseDown += new MouseEventHandler(HeaderTablePanel_MouseDown);
+            LbTitle.MouseMove += new MouseEventHandler(HeaderTablePanel_MouseMove);
 
             BtnExit.Click += new EventHandler(BtnExit_Click);
             BtnMinimize.Click += new EventHandler(BtnMinimize_Click);
@@ -49,8 +67,6 @@ namespace FileManager
             BtnAdminTool.Click += new EventHandler(BtnAdminTool_Click);
 
             this.listView.MouseHover += new EventHandler(ListView_MouseHover);
-            this.CbAddress.TextChanged += CbAddress_TextChanged1;
-
 
             this.Resize += new EventHandler(MainForm_SizeChanged);
             ReloadTheme();
@@ -58,8 +74,6 @@ namespace FileManager
             currentAddr = "C:/";
             NormalSize = this.Size;
         }
-
-
 
         #endregion
 
@@ -138,8 +152,10 @@ namespace FileManager
             OuterTablePanel.BackColor = currentTheme.Unused;
             this.TransparencyKey = currentTheme.Unused;
             OuterTablePanel.TrueBackColor = currentTheme.lighterMain;
-            this.LbTitle.ForeColor = currentTheme.text;
+
             this.LbTitle.Font = this.Font;
+            this.LbTitle.ForeColor = currentTheme.text;
+
 
             foreach (Control c in this.Controls)
             {
@@ -148,13 +164,15 @@ namespace FileManager
 
             //Toolbar
 
-            this.ToolTablePanel.BackColor = currentTheme.darkerMain;
+            this.ToolTablePanel.BackColor = currentTheme.main;
             this.ToolbarSeparator.BackColor = currentTheme.lighterMain;
-            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnAdminTool, BtnTileView, BtnDetailView, BtnLargeIconView })
+
+            foreach (Button b in new Button[] { BtnCut, BtnCopy, BtnPaste, BtnRename, BtnDelete, BtnChangeTheme, BtnAdminTool })
             {
                 b.BackColor = currentTheme.main;
                 b.FlatAppearance.MouseOverBackColor = currentTheme.lighterMain;
             }
+
             this.MenuNew.BackColor = currentTheme.main;
             this.MenuNew.ForeColor = currentTheme.text;
             this.MenuNewItem.BackColor = currentTheme.main;
@@ -186,12 +204,22 @@ namespace FileManager
             }
 
 
-
             //Display
             this.listView.BackColor = currentTheme.main;
             this.listView.ForeColor = currentTheme.text;
             this.treeView.BackColor = currentTheme.main;
             this.treeView.ForeColor = currentTheme.text;
+
+            //StatusBar
+            LbStatus.Font = this.Font;
+            LbStatus.ForeColor = currentTheme.text;
+
+            foreach (Button b in new Button[] { BtnTileView, BtnDetailView, BtnLargeIconView })
+            {
+                b.BackColor = currentTheme.lighterMain;
+                b.FlatAppearance.MouseOverBackColor = currentTheme.main;
+            }
+
 
             this.Refresh();
 
@@ -378,12 +406,7 @@ namespace FileManager
         #endregion
 
         #region Extra
-
-        private void CbAddress_TextChanged1(object sender, EventArgs e)
-        {
-            LbTitle.Text = currentAddr;
-        }
-
+        
         public void UpdateViews()
         {
             if (this.treeView.Nodes.Count == 0) return;

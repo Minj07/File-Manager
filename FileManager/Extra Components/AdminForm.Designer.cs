@@ -276,22 +276,28 @@
             // LsViewUesrs
             // 
             this.LsViewUesrs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LsViewUesrs.FullRowSelect = true;
             this.LsViewUesrs.HideSelection = false;
             this.LsViewUesrs.Location = new System.Drawing.Point(0, 0);
+            this.LsViewUesrs.MultiSelect = false;
             this.LsViewUesrs.Name = "LsViewUesrs";
             this.LsViewUesrs.Size = new System.Drawing.Size(365, 444);
             this.LsViewUesrs.TabIndex = 0;
             this.LsViewUesrs.UseCompatibleStateImageBehavior = false;
+            this.LsViewUesrs.View = System.Windows.Forms.View.Details;
             // 
             // LsViewActivites
             // 
             this.LsViewActivites.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LsViewActivites.FullRowSelect = true;
             this.LsViewActivites.HideSelection = false;
             this.LsViewActivites.Location = new System.Drawing.Point(0, 0);
+            this.LsViewActivites.MultiSelect = false;
             this.LsViewActivites.Name = "LsViewActivites";
             this.LsViewActivites.Size = new System.Drawing.Size(434, 444);
             this.LsViewActivites.TabIndex = 0;
             this.LsViewActivites.UseCompatibleStateImageBehavior = false;
+            this.LsViewActivites.View = System.Windows.Forms.View.Details;
             // 
             // OuterLeftEdge
             // 
